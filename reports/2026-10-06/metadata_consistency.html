@@ -1,19 +1,72 @@
 <!doctype html>
-<html><head><meta charset="utf-8"><title>metadata_consistency — 2026-10-06</title>
+<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>metadata_consistency — 2026-10-06</title>
 <style>
-body { font-family: sans-serif; margin: 2rem; }
-table { border-collapse: collapse; width: 100%; }
-th, td { border: 1px solid #ccc; padding: 4px 8px; text-align: left; font-size: 0.9em; }
-th { background: #eee; }
-.sev-error { color: #b00; font-weight: bold; }
-.sev-warning { color: #a60; }
+:root { --bg:#f6f7f9; --card:#fff; --ink:#14181f; --muted:#5d6675; --line:#e3e6eb;
+  --head:#f1f3f6; --hover:#f5f8ff; --accent:#2557d6; --accent-soft:#e8eefc;
+  --err:#b00020; --err-soft:#fbe9e9; --warn:#9a6400; --warn-soft:#fff4e0;
+  --shadow:0 1px 2px rgba(16,24,40,.06), 0 1px 3px rgba(16,24,40,.08); }
+@media (prefers-color-scheme: dark) { :root { --bg:#0e1116; --card:#161b22; --ink:#e6e9ee;
+  --muted:#9aa4b2; --line:#262d38; --head:#1b212b; --hover:#1a2230; --accent:#7aa2ff;
+  --accent-soft:#1b2842; --err:#ff6b6b; --err-soft:#3a1f1f; --warn:#ffb86b; --warn-soft:#3a2e1a;
+  --shadow:none; } }
+* { box-sizing:border-box; }
+body { margin:0; background:var(--bg); color:var(--ink);
+  font:14px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,sans-serif;
+  -webkit-font-smoothing:antialiased; }
+a { color:var(--accent); text-decoration:none; } a:hover { text-decoration:underline; }
+.wrap { max-width:1400px; margin:0 auto; padding:28px 24px 56px; }
+.nav { margin-bottom:18px; }
+h1 { margin:0 0 4px; font-size:24px; font-weight:700; letter-spacing:-.02em; }
+.sub { color:var(--muted); margin:0 0 24px; }
+.card { background:var(--card); border:1px solid var(--line); border-radius:12px; box-shadow:var(--shadow); }
+.scroll { overflow:auto; max-height:75vh; border-radius:12px; }
+table { border-collapse:separate; border-spacing:0; width:100%; }
+th, td { padding:10px 14px; text-align:left; border-bottom:1px solid var(--line); white-space:nowrap; }
+th { position:sticky; top:0; z-index:1; background:var(--head); color:var(--muted);
+  font-size:12px; font-weight:600; letter-spacing:.02em; cursor:pointer; user-select:none; }
+th:hover { color:var(--ink); }
+th.asc::after { content:" \25B2"; font-size:9px; }
+th.desc::after { content:" \25BC"; font-size:9px; }
+tbody tr:hover td { background:var(--hover); }
+tbody tr:last-child td { border-bottom:0; }
+.chip { display:inline-block; padding:2px 9px; border-radius:999px; font-size:12px; font-weight:600; }
+.chip.error { color:var(--err); background:var(--err-soft); }
+.chip.warning { color:var(--warn); background:var(--warn-soft); }
+ul.list { list-style:none; margin:0; padding:0; display:grid; gap:10px; }
+ul.list li { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:12px 16px; }
+ul.list .count { color:var(--muted); font-size:12.5px; }
+.empty { color:var(--muted); padding:16px; }
 </style></head>
-<body>
-<p><a href="index.html">&larr; 2026-10-06</a></p>
+<body><div class="wrap">
+<p class="nav"><a href="index.html">&larr; 2026-10-06</a></p>
 <h1>metadata_consistency</h1>
-<p>2 finding(s) on 2026-10-06.</p>
-<table><tr><th>Dataset</th><th>Path</th><th>Field</th><th>Actual</th><th>Expected</th><th>Severity</th><th>Suggested fix</th></tr>
-<tr><td>em-human-H01-cortex</td><td>em-human-H01-cortex/crop-001.zarr/labels/auto_pred-cells-c2_seg/zarr.json</td><td>label_class_mismatch</td><td>dir=&#x27;cells&#x27; vs metadata=&#x27;cell&#x27;</td><td>directory name and stored metadata agree</td><td class=sev-error>error</td><td>determine which is correct and fix the other (don&#x27;t assume either side)</td></tr>
-<tr><td>em-human-H01-cortex</td><td>em-human-H01-cortex/crop-001.zarr/labels/auto_pred-cells-c3_seg/zarr.json</td><td>label_class_mismatch</td><td>dir=&#x27;cells&#x27; vs metadata=&#x27;cell&#x27;</td><td>directory name and stored metadata agree</td><td class=sev-error>error</td><td>determine which is correct and fix the other (don&#x27;t assume either side)</td></tr>
-</table>
+<p class="sub">2 finding(s) on 2026-10-06.</p>
+<div class="card scroll">
+<table class="sortable"><thead><tr><th>Dataset</th><th>Path</th><th>Field</th><th>Actual</th>
+<th>Expected</th><th>Severity</th><th>Suggested fix</th></tr></thead>
+<tbody>
+<tr><td>em-human-H01-cortex</td><td>em-human-H01-cortex/crop-001.zarr/labels/auto_pred-cells-c2_seg/zarr.json</td><td>label_class_mismatch</td><td>dir=&#x27;cells&#x27; vs metadata=&#x27;cell&#x27;</td><td>directory name and stored metadata agree</td><td><span class="chip error">error</span></td><td>determine which is correct and fix the other (don&#x27;t assume either side)</td></tr>
+<tr><td>em-human-H01-cortex</td><td>em-human-H01-cortex/crop-001.zarr/labels/auto_pred-cells-c3_seg/zarr.json</td><td>label_class_mismatch</td><td>dir=&#x27;cells&#x27; vs metadata=&#x27;cell&#x27;</td><td>directory name and stored metadata agree</td><td><span class="chip error">error</span></td><td>determine which is correct and fix the other (don&#x27;t assume either side)</td></tr>
+</tbody></table></div>
+</div>
+<script>
+document.querySelectorAll('table.sortable').forEach(function (table) {
+  table.querySelectorAll('th').forEach(function (th, idx) {
+    th.addEventListener('click', function () {
+      var tbody = table.querySelector('tbody');
+      var rows = Array.prototype.slice.call(tbody.querySelectorAll('tr'));
+      var asc = !th.classList.contains('asc');
+      table.querySelectorAll('th').forEach(function (h) { h.classList.remove('asc', 'desc'); });
+      th.classList.add(asc ? 'asc' : 'desc');
+      rows.sort(function (a, b) {
+        var av = a.children[idx].innerText, bv = b.children[idx].innerText;
+        return asc ? av.localeCompare(bv, undefined, {numeric: true})
+                    : bv.localeCompare(av, undefined, {numeric: true});
+      });
+      rows.forEach(function (r) { tbody.appendChild(r); });
+    });
+  });
+});
+</script>
 </body></html>

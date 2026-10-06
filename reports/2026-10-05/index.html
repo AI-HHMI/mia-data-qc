@@ -1,9 +1,47 @@
 <!doctype html>
-<html><head><meta charset="utf-8"><title>QC reports — 2026-10-05</title></head>
-<body>
-<p><a href="../../qc_dashboard.html">&larr; all dates</a></p>
+<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>QC reports — 2026-10-05</title>
+<style>
+:root { --bg:#f6f7f9; --card:#fff; --ink:#14181f; --muted:#5d6675; --line:#e3e6eb;
+  --head:#f1f3f6; --hover:#f5f8ff; --accent:#2557d6; --accent-soft:#e8eefc;
+  --err:#b00020; --err-soft:#fbe9e9; --warn:#9a6400; --warn-soft:#fff4e0;
+  --shadow:0 1px 2px rgba(16,24,40,.06), 0 1px 3px rgba(16,24,40,.08); }
+@media (prefers-color-scheme: dark) { :root { --bg:#0e1116; --card:#161b22; --ink:#e6e9ee;
+  --muted:#9aa4b2; --line:#262d38; --head:#1b212b; --hover:#1a2230; --accent:#7aa2ff;
+  --accent-soft:#1b2842; --err:#ff6b6b; --err-soft:#3a1f1f; --warn:#ffb86b; --warn-soft:#3a2e1a;
+  --shadow:none; } }
+* { box-sizing:border-box; }
+body { margin:0; background:var(--bg); color:var(--ink);
+  font:14px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,sans-serif;
+  -webkit-font-smoothing:antialiased; }
+a { color:var(--accent); text-decoration:none; } a:hover { text-decoration:underline; }
+.wrap { max-width:1400px; margin:0 auto; padding:28px 24px 56px; }
+.nav { margin-bottom:18px; }
+h1 { margin:0 0 4px; font-size:24px; font-weight:700; letter-spacing:-.02em; }
+.sub { color:var(--muted); margin:0 0 24px; }
+.card { background:var(--card); border:1px solid var(--line); border-radius:12px; box-shadow:var(--shadow); }
+.scroll { overflow:auto; max-height:75vh; border-radius:12px; }
+table { border-collapse:separate; border-spacing:0; width:100%; }
+th, td { padding:10px 14px; text-align:left; border-bottom:1px solid var(--line); white-space:nowrap; }
+th { position:sticky; top:0; z-index:1; background:var(--head); color:var(--muted);
+  font-size:12px; font-weight:600; letter-spacing:.02em; cursor:pointer; user-select:none; }
+th:hover { color:var(--ink); }
+th.asc::after { content:" \25B2"; font-size:9px; }
+th.desc::after { content:" \25BC"; font-size:9px; }
+tbody tr:hover td { background:var(--hover); }
+tbody tr:last-child td { border-bottom:0; }
+.chip { display:inline-block; padding:2px 9px; border-radius:999px; font-size:12px; font-weight:600; }
+.chip.error { color:var(--err); background:var(--err-soft); }
+.chip.warning { color:var(--warn); background:var(--warn-soft); }
+ul.list { list-style:none; margin:0; padding:0; display:grid; gap:10px; }
+ul.list li { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:12px 16px; }
+ul.list .count { color:var(--muted); font-size:12.5px; }
+.empty { color:var(--muted); padding:16px; }
+</style></head>
+<body><div class="wrap">
+<p class="nav"><a href="../../qc_dashboard.html">&larr; all dates</a></p>
 <h1>QC reports — 2026-10-05</h1>
-<ul>
-<li><a href="ownership_permissions.html">ownership_permissions</a> — 0 finding(s)</li>
+<ul class="list">
+<li><a href="ownership_permissions.html">ownership_permissions</a> <span class="count">— 0 finding(s)</span></li>
 </ul>
-</body></html>
+</div></body></html>
