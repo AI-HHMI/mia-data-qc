@@ -1,37 +1,34 @@
 #!/usr/bin/env python3
-"""Check: a label's stored segmentation_type/proofreading_status/coverage
-metadata match their canonical enums (semantic/instance/point;
-unreviewed/partial/full/expert_reviewed; dense_volume/full_volume/
-sparse_crop/sparse_points). Only checks a field when it's present -- a label
-missing one entirely is checks/metadata_completeness.py's job, not this one's.
+"""Check: every label's zarr.json has all 12 required metadata fields present
+(label_class, segmentation_type, provenance, proofreading_status, coverage,
+bbox, source, created, parent_raw, dataset, publication, notes). Presence
+only -- a field with an explicit null value (e.g. publication: null, meaning
+"no publication") counts as present; this check is about fields that are
+entirely missing, not about whether their values pass vocab/consistency
+checks (label_naming.py, metadata_consistency.py, metadata_vocab.py,
+voxel_size.py already cover that for the fields they're each scoped to).
 
-label_class/provenance are checked elsewhere (label_naming.py for the
-directory-name convention, metadata_consistency.py for directory-vs-metadata
-agreement) -- this check covers the other 3 of the 5 controlled-vocab fields.
+Real corpus survey before building this (Oct 6 2026): every one of these 12
+fields has real gaps on disk, from 10 to 102 missing labels -- no field was
+dropped from scope for being already-clean.
 """
 import argparse
 import datetime
-import difflib
 import json
 import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from common.report import write_check_report
-from common.vocab import COVERAGES, NON_DATASET_DIRS, PROOFREADING_STATUSES, SEGMENTATION_TYPES
+from common.vocab import NON_DATASET_DIRS
 
-CHECK_NAME = "metadata_vocab"
+CHECK_NAME = "metadata_completeness"
 
-FIELDS = {
-    "segmentation_type": SEGMENTATION_TYPES,
-    "proofreading_status": PROOFREADING_STATUSES,
-    "coverage": COVERAGES,
-}
-
-
-def _close_match(value: str, vocab: set):
-    matches = difflib.get_close_matches(value, vocab, n=1, cutoff=0.75)
-    return matches[0] if matches else None
+REQUIRED_FIELDS = [
+    "label_class", "segmentation_type", "provenance", "proofreading_status",
+    "coverage", "bbox", "source", "created", "parent_raw", "dataset",
+    "publication", "notes",
+]
 
 
 def check_label(label_dir: Path, root: Path, dataset: str) -> list[dict]:
@@ -44,27 +41,18 @@ def check_label(label_dir: Path, root: Path, dataset: str) -> list[dict]:
     rel = str(zarr_json_path.relative_to(root))
     findings = []
 
-    for field, vocab in FIELDS.items():
-        value = attrs.get(field)
-        if value is None or value in vocab:
-            continue
-        close = _close_match(value, vocab)
-        severity = "error" if close else "warning"
-        fix = (
-            f"rename to match existing '{close}' (looks like a spelling variant)"
-            if close else
-            f"confirm '{value}' is a genuinely new {field}, not a typo, then add to common/vocab.py"
-        )
-        findings.append({
-            "check": CHECK_NAME,
-            "dataset": dataset,
-            "path": rel,
-            "field": field,
-            "actual": value,
-            "expected": "/".join(sorted(vocab)),
-            "severity": severity,
-            "suggested_fix": fix,
-        })
+    for field in REQUIRED_FIELDS:
+        if field not in attrs:
+            findings.append({
+                "check": CHECK_NAME,
+                "dataset": dataset,
+                "path": rel,
+                "field": field,
+                "actual": "missing",
+                "expected": "present (value may be null, but the key must exist)",
+                "severity": "error",
+                "suggested_fix": f"add the '{field}' field to this label's zarr.json attributes",
+            })
 
     return findings
 

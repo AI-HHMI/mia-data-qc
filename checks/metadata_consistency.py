@@ -2,9 +2,9 @@
 """Check: a label's directory-name-derived provenance/label_class agrees with
 what's actually stored in its own zarr.json attributes. Flags disagreement
 either way -- never assumes the directory name or the stored metadata is the
-one that's correct (lmvd_quality_control.md's Goal 1 checklist). Only compares
-when both sides are present; a label missing the metadata field entirely is a
-different check's job (metadata completeness), not this one's.
+one that's correct. Only compares when both sides are present; a label
+missing the metadata field entirely is metadata_completeness.py's job, not
+this one's.
 """
 import argparse
 import datetime

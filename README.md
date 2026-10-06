@@ -10,8 +10,9 @@ the Janelia cluster and published as a static-HTML report site.
 - `checks/` — one script per check, plus its `bsub` submit wrapper. Each check is independently
   runnable for development/testing against a scratch directory or a single dataset.
 - `common/` — shared code: `report.py` (JSON+HTML report writer, dated index pages),
-  `vocab.py` (controlled vocabularies from `lmvd_structure_guideline.md`, single source of truth),
-  `deep_walk.py` (shared single-pass corpus traversal for checks that need to visit every file).
+  `vocab.py` (controlled vocabularies for dataset/organism/label-class naming, single source of
+  truth), `deep_walk.py` (shared single-pass corpus traversal for checks that need to visit every
+  file).
 - `reports/` — `reports/<date>/` per run; `qc_dashboard.html` at the repo root lists dates
   newest-first with finding counts.
 
@@ -28,9 +29,9 @@ the Janelia cluster and published as a static-HTML report site.
 | `metadata_consistency.py` | A label's directory-name-derived provenance/label_class agrees with its own stored metadata |
 | `metadata_vocab.py` | A label's segmentation_type/proofreading_status/coverage match the canonical enums |
 | `voxel_size.py` | Raw's voxel size isn't a placeholder; each label's voxel size aligns with raw's pyramid |
+| `metadata_completeness.py` | Every label's zarr.json has all 12 required metadata fields present (label_class, segmentation_type, provenance, proofreading_status, coverage, bbox, source, created, parent_raw, dataset, publication, notes) |
 
-Full incident-by-incident history and the original design proposal: see `lmvd_quality_control.md`
-in the `MIAAI/Jakob` worklog, and [issue #1](https://github.com/AI-HHMI/mia-data-qc/issues/1).
+The original design proposal and open questions: [issue #1](https://github.com/AI-HHMI/mia-data-qc/issues/1).
 
 ## Running a check
 

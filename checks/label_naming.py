@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 """Check: every label directory under data/{dataset}/crop-*.zarr/labels/ matches
-{provenance}-{label_class}-{specific_info} (lmvd_structure_guideline.md §3).
+{provenance}-{label_class}-{specific_info} -- provenance is one of the 4
+controlled values (manual_gt/auto_pred/proofread/public_gt), label_class is
+checked against the canonical set in common/vocab.py.
 
 Only directories that look like real labels are checked (has a rung subdir like
 s0/) -- a stray non-label file/dir in labels/ (leftover scripts, logs) is a

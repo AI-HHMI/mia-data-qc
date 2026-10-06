@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Check: every crop store directly under a dataset dir matches crop-NNN.zarr
-or crop-NNN_descriptor.zarr (lmvd_structure_guideline.md §1) -- the descriptor
-suffix is optional, either form is valid.
+or crop-NNN_descriptor.zarr -- a 3-digit crop number is required, the
+descriptor suffix is optional, and either form is valid.
 """
 import argparse
 import datetime

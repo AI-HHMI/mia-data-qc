@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 """Check: every dataset directory under --root (default data/) matches
-{modality}-{organism}-{dataset} (lmvd_structure_guideline.md §1) -- modality and
-organism against the canonical vocab, plus the PyTC-casing rule. Crop naming
-(crop-NNN_descriptor.zarr) is a separate check, not this one.
+{modality}-{organism}-{dataset} -- modality and organism against the canonical
+vocab, plus the rule that any PyTC-bundle dataset must carry the exact-case
+token 'PyTC' somewhere in its name. Crop naming (crop-NNN_descriptor.zarr) is
+a separate check, not this one.
 """
 import argparse
 import datetime
