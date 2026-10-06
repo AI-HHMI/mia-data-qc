@@ -3,6 +3,13 @@
 Every check script calls write_check_report() with its findings; this keeps
 the per-date index and the root index (dated links, newest first) in sync
 without each check having to know about report layout.
+
+Two files per check: {check}.json (the real artifact -- what an LLM triage
+pass reads directly) and {check}.html (a rendered view of the same data, for
+browsing in the repo). Counts are read straight from each check's own JSON --
+cheap now that a check surfacing a huge findings list gets its root cause
+fixed instead of needing a special-cased summary path (see ownership_permissions,
+Oct 5-6 2026).
 """
 import datetime
 import html
@@ -20,8 +27,6 @@ def write_check_report(check_name: str, findings: list[dict], reports_dir: Path 
 
     json_path = date_dir / f"{check_name}.json"
     json_path.write_text(json.dumps({"check": check_name, "date": date, "findings": findings}, indent=2))
-    # Sidecar count, so the index pages never need to re-parse a (possibly huge) findings file.
-    (date_dir / f"{check_name}.count").write_text(str(len(findings)))
 
     html_path = date_dir / f"{check_name}.html"
     html_path.write_text(_render_check_html(check_name, date, findings))
@@ -66,10 +71,10 @@ th {{ background: #eee; }}
 """
 
 
-def _read_count(count_path: Path) -> int:
+def _count_findings(json_path: Path) -> int:
     try:
-        return int(count_path.read_text().strip())
-    except (OSError, ValueError):
+        return len(json.loads(json_path.read_text()).get("findings", []))
+    except (OSError, json.JSONDecodeError):
         return 0
 
 
@@ -79,7 +84,7 @@ def _update_date_index(date_dir: Path, date: str) -> None:
         '<li><a href="{page}">{name}</a> — {count} finding(s)</li>'.format(
             page=html.escape(p),
             name=html.escape(p[:-5]),
-            count=_read_count(date_dir / f"{p[:-5]}.count"),
+            count=_count_findings(date_dir / f"{p[:-5]}.json"),
         )
         for p in check_pages
     )
@@ -101,7 +106,7 @@ def _update_root_index(reports_dir: Path) -> None:
     items = []
     for d in dates:
         date_dir = reports_dir / d
-        total = sum(_read_count(p) for p in date_dir.glob("*.count"))
+        total = sum(_count_findings(p) for p in date_dir.glob("*.json"))
         items.append(
             '<li><a href="{reports}/{date}/index.html">{date}</a> — {total} finding(s) total</li>'.format(
                 reports=html.escape(reports_dirname), date=html.escape(d), total=total,
