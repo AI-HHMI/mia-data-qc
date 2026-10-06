@@ -45,3 +45,11 @@ LABEL_CLASS_OTHER = {"all_organelles"}
 LABEL_CLASSES = (
     LABEL_CLASS_CORE | LABEL_CLASS_CELLMAP | LABEL_CLASS_CELLMAP_TB | LABEL_CLASS_OTHER
 )
+
+# §4: Label Metadata Schema -- stored zarr.json attributes, not directory-name
+# components. Confirmed against real corpus usage Oct 6, 2026: segmentation_type
+# and coverage match the doc's vocab exactly; proofreading_status has 3 real,
+# undocumented values in use (n/a, complete, none) the doc's 4-value list misses.
+SEGMENTATION_TYPES = {"semantic", "instance", "point"}
+PROOFREADING_STATUSES = {"unreviewed", "partial", "full", "expert_reviewed"}
+COVERAGES = {"dense_volume", "full_volume", "sparse_crop", "sparse_points"}

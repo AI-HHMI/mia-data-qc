@@ -30,6 +30,7 @@ CHECK_DESCRIPTIONS = {
     "stray_files": ".DS_Store anywhere, job-output junk leftover in labels/.",
     "pyramid_consistency": "Each zarr.json's multiscales.datasets list matches pyramid levels that exist on disk.",
     "metadata_consistency": "A label's directory-name-derived provenance/label_class agrees with its stored metadata.",
+    "metadata_vocab": "A label's segmentation_type/proofreading_status/coverage match the canonical enums.",
 }
 
 _STYLE = """

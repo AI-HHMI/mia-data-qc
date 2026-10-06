@@ -26,6 +26,7 @@ the Janelia cluster and published as a static-HTML report site.
 | `stray_files.py` | `.DS_Store` anywhere, job-output junk leftover in `labels/` |
 | `pyramid_consistency.py` | Each zarr.json's `multiscales.datasets` list matches what pyramid levels actually exist on disk |
 | `metadata_consistency.py` | A label's directory-name-derived provenance/label_class agrees with its own stored metadata |
+| `metadata_vocab.py` | A label's segmentation_type/proofreading_status/coverage match the canonical enums |
 
 Full incident-by-incident history and the original design proposal: see `lmvd_quality_control.md`
 in the `MIAAI/Jakob` worklog, and [issue #1](https://github.com/AI-HHMI/mia-data-qc/issues/1).
