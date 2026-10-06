@@ -4,6 +4,7 @@ and group permissions are read+execute but not write — for the root itself
 and every file/folder nested under it, however deep.
 """
 import argparse
+import datetime
 import grp
 import os
 import stat
@@ -145,6 +146,9 @@ def main():
 
     total = sum(1 for p in root.iterdir() if p.is_dir())
     reports_dir = Path(args.reports_dir)
+    # Pinned once so a run spanning midnight doesn't split its own report across two
+    # date folders -- every write_check_report() call below uses this same date.
+    run_date = datetime.date.today().isoformat()
 
     findings = []
     done = 0
@@ -156,9 +160,9 @@ def main():
         else:
             print(f"{CHECK_NAME}: {name} — {len(findings)} finding(s) so far", flush=True)
         if done % args.flush_every == 0:
-            write_check_report(CHECK_NAME, findings, reports_dir=reports_dir)
+            write_check_report(CHECK_NAME, findings, reports_dir=reports_dir, date=run_date)
 
-    write_check_report(CHECK_NAME, findings, reports_dir=reports_dir)
+    write_check_report(CHECK_NAME, findings, reports_dir=reports_dir, date=run_date)
 
     print(f"{CHECK_NAME}: done — {len(findings)} violation(s) under {root}")
     if findings:
