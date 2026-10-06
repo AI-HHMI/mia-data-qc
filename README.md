@@ -14,8 +14,6 @@ the Janelia cluster and published as a static-HTML report site.
   `deep_walk.py` (shared single-pass corpus traversal for checks that need to visit every file).
 - `reports/` — `reports/<date>/` per run; `qc_dashboard.html` at the repo root lists dates
   newest-first with finding counts.
-- `fixes/` — **local-only, gitignored**. One-time remediation scripts (e.g. bulk permission
-  fixes) are deliberately kept out of the repo, since they're not part of the standing QC system.
 
 ## Checks implemented so far
 
