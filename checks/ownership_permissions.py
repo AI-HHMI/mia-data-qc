@@ -6,7 +6,6 @@ and every file/folder nested under it, however deep.
 import argparse
 import datetime
 import grp
-import os
 import stat
 import sys
 from concurrent.futures import ThreadPoolExecutor, as_completed
@@ -14,6 +13,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from common.report import write_check_report
+from common.deep_walk import walk_dataset
 
 CHECK_NAME = "ownership_permissions"
 
@@ -79,17 +79,12 @@ def _check_entry(entry: Path, root: Path, expected_gid: int, expected_group: str
 
 
 def _walk_subtree(subtree: Path, root: Path, expected_gid: int, expected_group: str) -> list[dict]:
-    """Walk one directory (e.g. one dataset dir under data/) and check every entry in it."""
-    findings = _check_entry(subtree, root, expected_gid, expected_group)
-    for dirpath, dirnames, filenames in os.walk(subtree):
-        dirpath = Path(dirpath)
-        for name in dirnames + filenames:
-            entry = dirpath / name
-            try:
-                findings.extend(_check_entry(entry, root, expected_gid, expected_group))
-            except OSError:
-                continue
-    return findings
+    """Walk one dataset dir and return just this check's slice of the shared
+    deep walk (common.deep_walk.walk_dataset also computes stray_files findings
+    in the same pass -- checks/run_deep_walk_checks.py uses both from one walk;
+    this standalone script only keeps its own).
+    """
+    return walk_dataset(subtree, root, expected_gid, expected_group)[CHECK_NAME]
 
 
 def iter_dataset_findings(root: Path, expected_group: str, workers: int = 1):
