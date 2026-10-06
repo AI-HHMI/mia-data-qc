@@ -1,0 +1,216 @@
+{
+  "check": "voxel_size",
+  "date": "2026-10-06",
+  "findings": [
+    {
+      "check": "voxel_size",
+      "dataset": "em-drosophila-FANC-vnc",
+      "path": "em-drosophila-FANC-vnc/crop-001.zarr/labels/auto_pred-nucleus-seg_mar2022_verified/zarr.json",
+      "field": "voxel_size_mismatch",
+      "actual": {
+        "x": 68.8,
+        "y": 68.8,
+        "z": 45.0
+      },
+      "expected": "one of raw's pyramid levels: [{'x': 4.3, 'y': 4.3, 'z': 45.0}, {'x': 8.6, 'y': 8.6, 'z': 45.0}, {'x': 17.2, 'y': 17.2, 'z': 45.0}, {'x': 34.4, 'y': 34.4, 'z': 45.0}, {'x': 68.8, 'y': 68.8, 'z': 90.0}, {'x': 137.6, 'y': 137.6, 'z': 180.0}, {'x': 275.2, 'y': 275.2, 'z': 360.0}, {'z': 45.0, 'y': 2.15, 'x': 2.15}]",
+      "severity": "error",
+      "suggested_fix": "doesn't align with raw's pyramid on a consistent per-axis basis -- verify against the original source whether this label's declared voxel size is wrong, or different axes are drifting onto different pyramid levels (the documented anisotropic-mismatch bug class)"
+    },
+    {
+      "check": "voxel_size",
+      "dataset": "em-drosophila-FANC-vnc",
+      "path": "em-drosophila-FANC-vnc/crop-002.zarr/labels/auto_pred-nucleus-seg_mar2022_verified/zarr.json",
+      "field": "voxel_size_mismatch",
+      "actual": {
+        "x": 68.8,
+        "y": 68.8,
+        "z": 45.0
+      },
+      "expected": "one of raw's pyramid levels: [{'x': 4.3, 'y': 4.3, 'z': 45.0}, {'x': 8.6, 'y': 8.6, 'z': 45.0}, {'x': 17.2, 'y': 17.2, 'z': 45.0}, {'x': 34.4, 'y': 34.4, 'z': 45.0}, {'x': 68.8, 'y': 68.8, 'z': 90.0}, {'x': 137.6, 'y': 137.6, 'z': 180.0}, {'x': 275.2, 'y': 275.2, 'z': 360.0}, {'z': 45.0, 'y': 2.15, 'x': 2.15}]",
+      "severity": "error",
+      "suggested_fix": "doesn't align with raw's pyramid on a consistent per-axis basis -- verify against the original source whether this label's declared voxel size is wrong, or different axes are drifting onto different pyramid levels (the documented anisotropic-mismatch bug class)"
+    },
+    {
+      "check": "voxel_size",
+      "dataset": "em-drosophila-banc",
+      "path": "em-drosophila-banc/crop-001_centralbrain.zarr/labels/auto_pred-nucleus-v1/zarr.json",
+      "field": "voxel_size_mismatch",
+      "actual": {
+        "x": 64.0,
+        "y": 64.0,
+        "z": 45.0
+      },
+      "expected": "one of raw's pyramid levels: [{'x': 8.0, 'y': 8.0, 'z': 45.0}, {'x': 16.0, 'y': 16.0, 'z': 45.0}, {'x': 32.0, 'y': 32.0, 'z': 45.0}, {'x': 64.0, 'y': 64.0, 'z': 90.0}, {'x': 128.0, 'y': 128.0, 'z': 180.0}, {'x': 256.0, 'y': 256.0, 'z': 360.0}, {'z': 45.0, 'y': 4.0, 'x': 4.0}]",
+      "severity": "error",
+      "suggested_fix": "doesn't align with raw's pyramid on a consistent per-axis basis -- verify against the original source whether this label's declared voxel size is wrong, or different axes are drifting onto different pyramid levels (the documented anisotropic-mismatch bug class)"
+    },
+    {
+      "check": "voxel_size",
+      "dataset": "em-drosophila-banc",
+      "path": "em-drosophila-banc/crop-002_centralbrain.zarr/labels/auto_pred-nucleus-v1/zarr.json",
+      "field": "voxel_size_mismatch",
+      "actual": {
+        "x": 64.0,
+        "y": 64.0,
+        "z": 45.0
+      },
+      "expected": "one of raw's pyramid levels: [{'x': 8.0, 'y': 8.0, 'z': 45.0}, {'x': 16.0, 'y': 16.0, 'z': 45.0}, {'x': 32.0, 'y': 32.0, 'z': 45.0}, {'x': 64.0, 'y': 64.0, 'z': 90.0}, {'x': 128.0, 'y': 128.0, 'z': 180.0}, {'x': 256.0, 'y': 256.0, 'z': 360.0}, {'z': 45.0, 'y': 4.0, 'x': 4.0}]",
+      "severity": "error",
+      "suggested_fix": "doesn't align with raw's pyramid on a consistent per-axis basis -- verify against the original source whether this label's declared voxel size is wrong, or different axes are drifting onto different pyramid levels (the documented anisotropic-mismatch bug class)"
+    },
+    {
+      "check": "voxel_size",
+      "dataset": "em-drosophila-banc",
+      "path": "em-drosophila-banc/crop-003_vnc.zarr/labels/auto_pred-nucleus-v1/zarr.json",
+      "field": "voxel_size_mismatch",
+      "actual": {
+        "x": 64.0,
+        "y": 64.0,
+        "z": 45.0
+      },
+      "expected": "one of raw's pyramid levels: [{'x': 8.0, 'y': 8.0, 'z': 45.0}, {'x': 16.0, 'y': 16.0, 'z': 45.0}, {'x': 32.0, 'y': 32.0, 'z': 45.0}, {'x': 64.0, 'y': 64.0, 'z': 90.0}, {'x': 128.0, 'y': 128.0, 'z': 180.0}, {'x': 256.0, 'y': 256.0, 'z': 360.0}, {'z': 45.0, 'y': 4.0, 'x': 4.0}]",
+      "severity": "error",
+      "suggested_fix": "doesn't align with raw's pyramid on a consistent per-axis basis -- verify against the original source whether this label's declared voxel size is wrong, or different axes are drifting onto different pyramid levels (the documented anisotropic-mismatch bug class)"
+    },
+    {
+      "check": "voxel_size",
+      "dataset": "em-drosophila-banc",
+      "path": "em-drosophila-banc/crop-004_vnc.zarr/labels/auto_pred-nucleus-v1/zarr.json",
+      "field": "voxel_size_mismatch",
+      "actual": {
+        "x": 64.0,
+        "y": 64.0,
+        "z": 45.0
+      },
+      "expected": "one of raw's pyramid levels: [{'x': 8.0, 'y': 8.0, 'z': 45.0}, {'x': 16.0, 'y': 16.0, 'z': 45.0}, {'x': 32.0, 'y': 32.0, 'z': 45.0}, {'x': 64.0, 'y': 64.0, 'z': 90.0}, {'x': 128.0, 'y': 128.0, 'z': 180.0}, {'x': 256.0, 'y': 256.0, 'z': 360.0}, {'z': 45.0, 'y': 4.0, 'x': 4.0}]",
+      "severity": "error",
+      "suggested_fix": "doesn't align with raw's pyramid on a consistent per-axis basis -- verify against the original source whether this label's declared voxel size is wrong, or different axes are drifting onto different pyramid levels (the documented anisotropic-mismatch bug class)"
+    },
+    {
+      "check": "voxel_size",
+      "dataset": "em-mouse-PYR-ca3-hippocampus",
+      "path": "em-mouse-PYR-ca3-hippocampus/crop-001_ca3.zarr/labels/auto_pred-nucleus-instance/zarr.json",
+      "field": "voxel_size_mismatch",
+      "actual": {
+        "z": 45.0,
+        "y": 72.0,
+        "x": 72.0
+      },
+      "expected": "one of raw's pyramid levels: [{'z': 45.0, 'y': 18.0, 'x': 18.0}, {'z': 45.0, 'y': 36.0, 'x': 36.0}, {'z': 90.0, 'y': 72.0, 'x': 72.0}, {'z': 180.0, 'y': 144.0, 'x': 144.0}, {'z': 360.0, 'y': 288.0, 'x': 288.0}, {'z': 720.0, 'y': 576.0, 'x': 576.0}, {'z': 45.0, 'y': 9.0, 'x': 9.0}]",
+      "severity": "error",
+      "suggested_fix": "doesn't align with raw's pyramid on a consistent per-axis basis -- verify against the original source whether this label's declared voxel size is wrong, or different axes are drifting onto different pyramid levels (the documented anisotropic-mismatch bug class)"
+    },
+    {
+      "check": "voxel_size",
+      "dataset": "em-mouse-PYR-ca3-hippocampus",
+      "path": "em-mouse-PYR-ca3-hippocampus/crop-002_ca3.zarr/labels/auto_pred-nucleus-instance/zarr.json",
+      "field": "voxel_size_mismatch",
+      "actual": {
+        "z": 45.0,
+        "y": 72.0,
+        "x": 72.0
+      },
+      "expected": "one of raw's pyramid levels: [{'z': 45.0, 'y': 18.0, 'x': 18.0}, {'z': 45.0, 'y': 36.0, 'x': 36.0}, {'z': 90.0, 'y': 72.0, 'x': 72.0}, {'z': 180.0, 'y': 144.0, 'x': 144.0}, {'z': 360.0, 'y': 288.0, 'x': 288.0}, {'z': 720.0, 'y': 576.0, 'x': 576.0}, {'z': 45.0, 'y': 9.0, 'x': 9.0}]",
+      "severity": "error",
+      "suggested_fix": "doesn't align with raw's pyramid on a consistent per-axis basis -- verify against the original source whether this label's declared voxel size is wrong, or different axes are drifting onto different pyramid levels (the documented anisotropic-mismatch bug class)"
+    },
+    {
+      "check": "voxel_size",
+      "dataset": "em-mouse-PYR-ca3-hippocampus",
+      "path": "em-mouse-PYR-ca3-hippocampus/crop-003_ca3.zarr/labels/auto_pred-nucleus-instance/zarr.json",
+      "field": "voxel_size_mismatch",
+      "actual": {
+        "z": 45.0,
+        "y": 72.0,
+        "x": 72.0
+      },
+      "expected": "one of raw's pyramid levels: [{'z': 45.0, 'y': 18.0, 'x': 18.0}, {'z': 45.0, 'y': 36.0, 'x': 36.0}, {'z': 90.0, 'y': 72.0, 'x': 72.0}, {'z': 180.0, 'y': 144.0, 'x': 144.0}, {'z': 360.0, 'y': 288.0, 'x': 288.0}, {'z': 720.0, 'y': 576.0, 'x': 576.0}, {'z': 45.0, 'y': 9.0, 'x': 9.0}]",
+      "severity": "error",
+      "suggested_fix": "doesn't align with raw's pyramid on a consistent per-axis basis -- verify against the original source whether this label's declared voxel size is wrong, or different axes are drifting onto different pyramid levels (the documented anisotropic-mismatch bug class)"
+    },
+    {
+      "check": "voxel_size",
+      "dataset": "em-zebrafish-fish2",
+      "path": "em-zebrafish-fish2/crop-001_doublecube1_x52000_y42500_z0.zarr/labels/proofread-cell-seg230927/zarr.json",
+      "field": "voxel_size_mismatch",
+      "actual": {
+        "x": 16.0,
+        "y": 16.0,
+        "z": 30.0
+      },
+      "expected": "one of raw's pyramid levels: [{'x': 8.0, 'y': 8.0, 'z': 7.5}, {'x': 16.0, 'y': 16.0, 'z': 15.0}, {'x': 32.0, 'y': 32.0, 'z': 30.0}, {'x': 64.0, 'y': 64.0, 'z': 60.0}, {'z': 3.75, 'y': 4.0, 'x': 4.0}]",
+      "severity": "error",
+      "suggested_fix": "doesn't align with raw's pyramid on a consistent per-axis basis -- verify against the original source whether this label's declared voxel size is wrong, or different axes are drifting onto different pyramid levels (the documented anisotropic-mismatch bug class)"
+    },
+    {
+      "check": "voxel_size",
+      "dataset": "em-zebrafish-fish2",
+      "path": "em-zebrafish-fish2/crop-002_doublecube2_x120000_y45500_z0.zarr/labels/proofread-cell-seg230927/zarr.json",
+      "field": "voxel_size_mismatch",
+      "actual": {
+        "x": 16.0,
+        "y": 16.0,
+        "z": 30.0
+      },
+      "expected": "one of raw's pyramid levels: [{'x': 8.0, 'y': 8.0, 'z': 7.5}, {'x': 16.0, 'y': 16.0, 'z': 15.0}, {'x': 32.0, 'y': 32.0, 'z': 30.0}, {'x': 64.0, 'y': 64.0, 'z': 60.0}, {'z': 3.75, 'y': 4.0, 'x': 4.0}]",
+      "severity": "error",
+      "suggested_fix": "doesn't align with raw's pyramid on a consistent per-axis basis -- verify against the original source whether this label's declared voxel size is wrong, or different axes are drifting onto different pyramid levels (the documented anisotropic-mismatch bug class)"
+    },
+    {
+      "check": "voxel_size",
+      "dataset": "em-zebrafish-fish2",
+      "path": "em-zebrafish-fish2/crop-003_quadcube1_x23908_y18314_z0.zarr/labels/proofread-cell-seg230927/zarr.json",
+      "field": "voxel_size_mismatch",
+      "actual": {
+        "x": 16.0,
+        "y": 16.0,
+        "z": 30.0
+      },
+      "expected": "one of raw's pyramid levels: [{'x': 8.0, 'y': 8.0, 'z': 7.5}, {'x': 16.0, 'y': 16.0, 'z': 15.0}, {'x': 32.0, 'y': 32.0, 'z': 30.0}, {'x': 64.0, 'y': 64.0, 'z': 60.0}, {'z': 3.75, 'y': 4.0, 'x': 4.0}]",
+      "severity": "error",
+      "suggested_fix": "doesn't align with raw's pyramid on a consistent per-axis basis -- verify against the original source whether this label's declared voxel size is wrong, or different axes are drifting onto different pyramid levels (the documented anisotropic-mismatch bug class)"
+    },
+    {
+      "check": "voxel_size",
+      "dataset": "em-zebrafish-fish2",
+      "path": "em-zebrafish-fish2/crop-004_quadcube2_x15114_y10046_z0.zarr/labels/proofread-cell-seg230927/zarr.json",
+      "field": "voxel_size_mismatch",
+      "actual": {
+        "x": 16.0,
+        "y": 16.0,
+        "z": 30.0
+      },
+      "expected": "one of raw's pyramid levels: [{'x': 8.0, 'y': 8.0, 'z': 7.5}, {'x': 16.0, 'y': 16.0, 'z': 15.0}, {'x': 32.0, 'y': 32.0, 'z': 30.0}, {'x': 64.0, 'y': 64.0, 'z': 60.0}, {'z': 3.75, 'y': 4.0, 'x': 4.0}]",
+      "severity": "error",
+      "suggested_fix": "doesn't align with raw's pyramid on a consistent per-axis basis -- verify against the original source whether this label's declared voxel size is wrong, or different axes are drifting onto different pyramid levels (the documented anisotropic-mismatch bug class)"
+    },
+    {
+      "check": "voxel_size",
+      "dataset": "em-zebrafish-fish2",
+      "path": "em-zebrafish-fish2/crop-005_quadcube3_x9638_y10314_z0.zarr/labels/proofread-cell-seg230927/zarr.json",
+      "field": "voxel_size_mismatch",
+      "actual": {
+        "x": 16.0,
+        "y": 16.0,
+        "z": 30.0
+      },
+      "expected": "one of raw's pyramid levels: [{'x': 8.0, 'y': 8.0, 'z': 7.5}, {'x': 16.0, 'y': 16.0, 'z': 15.0}, {'x': 32.0, 'y': 32.0, 'z': 30.0}, {'x': 64.0, 'y': 64.0, 'z': 60.0}, {'z': 3.75, 'y': 4.0, 'x': 4.0}]",
+      "severity": "error",
+      "suggested_fix": "doesn't align with raw's pyramid on a consistent per-axis basis -- verify against the original source whether this label's declared voxel size is wrong, or different axes are drifting onto different pyramid levels (the documented anisotropic-mismatch bug class)"
+    },
+    {
+      "check": "voxel_size",
+      "dataset": "em-zebrafish-fish2",
+      "path": "em-zebrafish-fish2/crop-006_quadcube4_x48294_y6026_z0.zarr/labels/proofread-cell-seg230927/zarr.json",
+      "field": "voxel_size_mismatch",
+      "actual": {
+        "x": 16.0,
+        "y": 16.0,
+        "z": 30.0
+      },
+      "expected": "one of raw's pyramid levels: [{'x': 8.0, 'y': 8.0, 'z': 7.5}, {'x': 16.0, 'y': 16.0, 'z': 15.0}, {'x': 32.0, 'y': 32.0, 'z': 30.0}, {'x': 64.0, 'y': 64.0, 'z': 60.0}, {'z': 3.75, 'y': 4.0, 'x': 4.0}]",
+      "severity": "error",
+      "suggested_fix": "doesn't align with raw's pyramid on a consistent per-axis basis -- verify against the original source whether this label's declared voxel size is wrong, or different axes are drifting onto different pyramid levels (the documented anisotropic-mismatch bug class)"
+    }
+  ]
+}
