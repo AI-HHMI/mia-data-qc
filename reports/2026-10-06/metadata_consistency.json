@@ -1,0 +1,26 @@
+{
+  "check": "metadata_consistency",
+  "date": "2026-10-06",
+  "findings": [
+    {
+      "check": "metadata_consistency",
+      "dataset": "em-human-H01-cortex",
+      "path": "em-human-H01-cortex/crop-001.zarr/labels/auto_pred-cells-c2_seg/zarr.json",
+      "field": "label_class_mismatch",
+      "actual": "dir='cells' vs metadata='cell'",
+      "expected": "directory name and stored metadata agree",
+      "severity": "error",
+      "suggested_fix": "determine which is correct and fix the other (don't assume either side)"
+    },
+    {
+      "check": "metadata_consistency",
+      "dataset": "em-human-H01-cortex",
+      "path": "em-human-H01-cortex/crop-001.zarr/labels/auto_pred-cells-c3_seg/zarr.json",
+      "field": "label_class_mismatch",
+      "actual": "dir='cells' vs metadata='cell'",
+      "expected": "directory name and stored metadata agree",
+      "severity": "error",
+      "suggested_fix": "determine which is correct and fix the other (don't assume either side)"
+    }
+  ]
+}
