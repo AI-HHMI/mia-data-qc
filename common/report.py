@@ -12,12 +12,25 @@ check's own JSON -- cheap now that a check surfacing a huge findings list gets
 its root cause fixed instead of needing a special-cased summary path (see
 ownership_permissions, Oct 5-6 2026).
 """
+import collections
 import datetime
 import html
 import json
 from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
+
+# One-line description per check, shown on the dashboard, date index, and the
+# check's own page. Missing entries just show no description -- never required.
+CHECK_DESCRIPTIONS = {
+    "ownership_permissions": "Every file/dir under data/ is group miaai, group-read, group-execute, no group-write.",
+    "dataset_naming": "{modality}-{organism}-{dataset} against the canonical vocab, PyTC-casing rule.",
+    "label_naming": "{provenance}-{label_class}-{specific_info} for every label directory.",
+    "crop_naming": "crop-NNN.zarr or crop-NNN_descriptor.zarr for every crop store.",
+    "stray_files": ".DS_Store anywhere, job-output junk leftover in labels/.",
+    "pyramid_consistency": "Each zarr.json's multiscales.datasets list matches pyramid levels that exist on disk.",
+    "metadata_consistency": "A label's directory-name-derived provenance/label_class agrees with its stored metadata.",
+}
 
 _STYLE = """
 :root { --bg:#f6f7f9; --card:#fff; --ink:#14181f; --muted:#5d6675; --line:#e3e6eb;
@@ -33,10 +46,23 @@ body { margin:0; background:var(--bg); color:var(--ink);
   font:14px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,sans-serif;
   -webkit-font-smoothing:antialiased; }
 a { color:var(--accent); text-decoration:none; } a:hover { text-decoration:underline; }
-.wrap { max-width:1400px; margin:0 auto; padding:28px 24px 56px; }
-.nav { margin-bottom:18px; }
+.wrap { max-width:1400px; margin:0 auto; padding:0 24px; }
+header.site { background:var(--card); border-bottom:1px solid var(--line); margin-bottom:28px; }
+header.site .wrap { padding:16px 24px; display:flex; align-items:center; justify-content:space-between; }
+header.site .brand { font-weight:700; font-size:15px; letter-spacing:-.01em; }
+header.site nav a { margin-left:16px; color:var(--muted); font-size:13px; }
+header.site nav a:hover { color:var(--accent); }
+main.wrap { padding-bottom:56px; }
+.nav-back { margin-bottom:14px; display:inline-block; font-size:13px; }
 h1 { margin:0 0 4px; font-size:24px; font-weight:700; letter-spacing:-.02em; }
-.sub { color:var(--muted); margin:0 0 24px; }
+.sub { color:var(--muted); margin:0 0 24px; max-width:70ch; }
+.summary { display:flex; gap:10px; margin-bottom:20px; }
+.stat { background:var(--card); border:1px solid var(--line); border-radius:10px;
+  padding:10px 16px; box-shadow:var(--shadow); }
+.stat .n { font-size:20px; font-weight:700; }
+.stat .l { color:var(--muted); font-size:12px; }
+.stat.error .n { color:var(--err); }
+.stat.warning .n { color:var(--warn); }
 .card { background:var(--card); border:1px solid var(--line); border-radius:12px; box-shadow:var(--shadow); }
 .scroll { overflow:auto; max-height:75vh; border-radius:12px; }
 table { border-collapse:separate; border-spacing:0; width:100%; }
@@ -51,10 +77,15 @@ tbody tr:last-child td { border-bottom:0; }
 .chip { display:inline-block; padding:2px 9px; border-radius:999px; font-size:12px; font-weight:600; }
 .chip.error { color:var(--err); background:var(--err-soft); }
 .chip.warning { color:var(--warn); background:var(--warn-soft); }
-ul.list { list-style:none; margin:0; padding:0; display:grid; gap:10px; }
-ul.list li { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:12px 16px; }
-ul.list .count { color:var(--muted); font-size:12.5px; }
+.grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(280px, 1fr)); gap:12px; margin-bottom:20px; }
+.grid a.tile { display:flex; flex-direction:column; gap:6px; padding:14px 16px; border:1px solid var(--line);
+  border-radius:12px; background:var(--card); color:var(--ink); box-shadow:var(--shadow); }
+.grid a.tile:hover { border-color:var(--accent); text-decoration:none; }
+.grid a.tile .name { font-weight:650; font-size:14.5px; }
+.grid a.tile .desc { color:var(--muted); font-size:12.5px; }
+.grid a.tile .badge { align-self:flex-start; }
 .empty { color:var(--muted); padding:16px; }
+footer.site { color:var(--muted); font-size:12px; padding:24px 0 40px; text-align:center; }
 """
 
 _SORT_JS = """
@@ -78,6 +109,25 @@ document.querySelectorAll('table.sortable').forEach(function (table) {
 """
 
 
+def _page(title: str, home_href: str, body: str, script: str = "") -> str:
+    return f"""<!doctype html>
+<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{html.escape(title)}</title>
+<style>{_STYLE}</style></head>
+<body>
+<header class="site"><div class="wrap">
+<a class="brand" href="{home_href}">mia-data-qc</a>
+<nav><a href="https://github.com/AI-HHMI/mia-data-qc">GitHub</a></nav>
+</div></header>
+<main class="wrap">
+{body}
+</main>
+<footer class="site">mia-data-qc &middot; automated QC for the LMVD corpus</footer>
+<script>{script}</script>
+</body></html>
+"""
+
+
 def write_check_report(check_name: str, findings: list[dict], reports_dir: Path = None, date: str = None) -> Path:
     reports_dir = (reports_dir or REPO_ROOT / "reports").resolve()
     date = date or datetime.date.today().isoformat()
@@ -96,6 +146,12 @@ def write_check_report(check_name: str, findings: list[dict], reports_dir: Path 
 
 
 def _render_check_html(check_name: str, date: str, findings: list[dict]) -> str:
+    counts = collections.Counter(f.get("severity", "error") for f in findings)
+    summary = "".join(
+        f'<div class="stat {sev}"><div class="n">{counts[sev]}</div><div class="l">{sev}</div></div>'
+        for sev in ("error", "warning") if counts[sev]
+    ) or '<div class="stat"><div class="n">0</div><div class="l">findings</div></div>'
+
     if findings:
         rows = "\n".join(
             "<tr><td>{dataset}</td><td>{path}</td><td>{field}</td><td>{actual}</td>"
@@ -110,28 +166,22 @@ def _render_check_html(check_name: str, date: str, findings: list[dict]) -> str:
             )
             for f in findings
         )
-        body = f"""<div class="card scroll">
+        table = f"""<div class="card scroll">
 <table class="sortable"><thead><tr><th>Dataset</th><th>Path</th><th>Field</th><th>Actual</th>
 <th>Expected</th><th>Severity</th><th>Suggested fix</th></tr></thead>
 <tbody>
 {rows}
 </tbody></table></div>"""
     else:
-        body = '<div class="card empty">No findings.</div>'
+        table = '<div class="card empty">No findings.</div>'
 
-    return f"""<!doctype html>
-<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>{html.escape(check_name)} — {date}</title>
-<style>{_STYLE}</style></head>
-<body><div class="wrap">
-<p class="nav"><a href="index.html">&larr; {date}</a></p>
+    description = CHECK_DESCRIPTIONS.get(check_name, "")
+    body = f"""<a class="nav-back" href="index.html">&larr; {date}</a>
 <h1>{html.escape(check_name)}</h1>
-<p class="sub">{len(findings)} finding(s) on {date}.</p>
-{body}
-</div>
-<script>{_SORT_JS}</script>
-</body></html>
-"""
+<p class="sub">{html.escape(description)}</p>
+<div class="summary">{summary}</div>
+{table}"""
+    return _page(f"{check_name} — {date}", "../../qc_dashboard.html", body, _SORT_JS)
 
 
 def _count_findings(json_path: Path) -> int:
@@ -143,49 +193,47 @@ def _count_findings(json_path: Path) -> int:
 
 def _update_date_index(date_dir: Path, date: str) -> None:
     check_names = sorted(p.stem for p in date_dir.glob("*.html") if p.stem != "index")
-    items = "\n".join(
-        '<li><a href="{name}.html">{name}</a> <span class="count">— {count} finding(s)</span></li>'.format(
-            name=html.escape(name), count=_count_findings(date_dir / f"{name}.json"),
+    tiles = "\n".join(
+        '<a class="tile" href="{name}.html"><span class="name">{name}</span>'
+        '<span class="desc">{desc}</span>'
+        '<span class="badge chip {sev}">{count} finding(s)</span></a>'.format(
+            name=html.escape(name),
+            desc=html.escape(CHECK_DESCRIPTIONS.get(name, "")),
+            count=(count := _count_findings(date_dir / f"{name}.json")),
+            sev="error" if count else "",
         )
         for name in check_names
     )
-    (date_dir / "index.html").write_text(f"""<!doctype html>
-<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>QC reports — {date}</title>
-<style>{_STYLE}</style></head>
-<body><div class="wrap">
-<p class="nav"><a href="../../qc_dashboard.html">&larr; all dates</a></p>
+    body = f"""<a class="nav-back" href="../../qc_dashboard.html">&larr; all dates</a>
 <h1>QC reports — {date}</h1>
-<ul class="list">
-{items}
-</ul>
-</div></body></html>
-""")
+<p class="sub">One tile per check that ran this date.</p>
+<div class="grid">
+{tiles}
+</div>"""
+    (date_dir / "index.html").write_text(_page(f"QC reports — {date}", "../../qc_dashboard.html", body))
 
 
 def _update_root_index(reports_dir: Path) -> None:
     dates = sorted((p.name for p in reports_dir.iterdir() if p.is_dir()), reverse=True)
     reports_dirname = reports_dir.name
-    items = []
+    tiles = []
     for d in dates:
         date_dir = reports_dir / d
         total = sum(_count_findings(p) for p in date_dir.glob("*.json"))
-        items.append(
-            '<li><a href="{reports}/{date}/index.html">{date}</a> '
-            '<span class="count">— {total} finding(s) total</span></li>'.format(
-                reports=html.escape(reports_dirname), date=html.escape(d), total=total,
+        n_checks = len(list(date_dir.glob("*.json")))
+        tiles.append(
+            '<a class="tile" href="{reports}/{date}/index.html"><span class="name">{date}</span>'
+            '<span class="desc">{n_checks} check(s) run</span>'
+            '<span class="badge chip {sev}">{total} finding(s)</span></a>'.format(
+                reports=html.escape(reports_dirname), date=html.escape(d), n_checks=n_checks,
+                total=total, sev="error" if total else "",
             )
         )
-    items_html = "\n".join(items)
-    (reports_dir.parent / "qc_dashboard.html").write_text(f"""<!doctype html>
-<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>mia-data-qc reports</title>
-<style>{_STYLE}</style></head>
-<body><div class="wrap">
-<h1>mia-data-qc — QC reports</h1>
-<p class="sub">Latest run first.</p>
-<ul class="list">
-{items_html}
-</ul>
-</div></body></html>
-""")
+    tiles_html = "\n".join(tiles)
+    body = f"""<h1>mia-data-qc</h1>
+<p class="sub">Automated QC checks over the LMVD data corpus
+(<code>/groups/miaai/miaai/lmd-v0.0.1/data</code>), run on the Janelia cluster. Latest run first.</p>
+<div class="grid">
+{tiles_html}
+</div>"""
+    (reports_dir.parent / "qc_dashboard.html").write_text(_page("mia-data-qc reports", "qc_dashboard.html", body))
