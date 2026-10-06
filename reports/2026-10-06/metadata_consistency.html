@@ -53,6 +53,11 @@ tbody tr:last-child td { border-bottom:0; }
 .grid a.tile .name { font-weight:650; font-size:14.5px; }
 .grid a.tile .desc { color:var(--muted); font-size:12.5px; }
 .grid a.tile .badge { align-self:flex-start; }
+.tabs { display:grid; grid-template-columns:repeat(auto-fill, minmax(260px, 1fr)); gap:10px; margin-bottom:20px; }
+.tabs a.tile { border-color:var(--line); }
+.tabs a.tile.on { border-color:var(--accent); background:var(--accent-soft); box-shadow:0 0 0 1px var(--accent); }
+.panel[hidden] { display:none; }
+.panel h2 { margin:0 0 4px; font-size:18px; }
 .empty { color:var(--muted); padding:16px; }
 footer.site { color:var(--muted); font-size:12px; padding:24px 0 40px; text-align:center; }
 </style></head>
@@ -74,7 +79,7 @@ footer.site { color:var(--muted); font-size:12px; padding:24px 0 40px; text-alig
 <tr><td>em-human-H01-cortex</td><td>em-human-H01-cortex/crop-001.zarr/labels/auto_pred-cells-c3_seg/zarr.json</td><td>label_class_mismatch</td><td>dir=&#x27;cells&#x27; vs metadata=&#x27;cell&#x27;</td><td>directory name and stored metadata agree</td><td><span class="chip error">error</span></td><td>determine which is correct and fix the other (don&#x27;t assume either side)</td></tr>
 </tbody></table></div>
 </main>
-<footer class="site">mia-data-qc &middot; automated QC for the LMVD corpus</footer>
+<footer class="site">mia-data-qc &middot; automated QC for the LMD corpus</footer>
 <script>
 document.querySelectorAll('table.sortable').forEach(function (table) {
   table.querySelectorAll('th').forEach(function (th, idx) {

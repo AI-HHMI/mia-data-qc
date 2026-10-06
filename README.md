@@ -1,6 +1,6 @@
 # mia-data-qc
 
-Automated QC checks over the LMVD `data/` corpus (`/groups/miaai/miaai/lmd-v0.0.1/data`), run on
+Automated QC checks over the LMD `data/` corpus (`/groups/miaai/miaai/lmd-v0.0.1/data`), run on
 the Janelia cluster and published as a static-HTML report site.
 
 **Live reports: https://ai-hhmi.github.io/mia-data-qc/qc_dashboard.html**

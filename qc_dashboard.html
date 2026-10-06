@@ -53,6 +53,11 @@ tbody tr:last-child td { border-bottom:0; }
 .grid a.tile .name { font-weight:650; font-size:14.5px; }
 .grid a.tile .desc { color:var(--muted); font-size:12.5px; }
 .grid a.tile .badge { align-self:flex-start; }
+.tabs { display:grid; grid-template-columns:repeat(auto-fill, minmax(260px, 1fr)); gap:10px; margin-bottom:20px; }
+.tabs a.tile { border-color:var(--line); }
+.tabs a.tile.on { border-color:var(--accent); background:var(--accent-soft); box-shadow:0 0 0 1px var(--accent); }
+.panel[hidden] { display:none; }
+.panel h2 { margin:0 0 4px; font-size:18px; }
 .empty { color:var(--muted); padding:16px; }
 footer.site { color:var(--muted); font-size:12px; padding:24px 0 40px; text-align:center; }
 </style></head>
@@ -63,13 +68,13 @@ footer.site { color:var(--muted); font-size:12px; padding:24px 0 40px; text-alig
 </div></header>
 <main class="wrap">
 <h1>mia-data-qc</h1>
-<p class="sub">Automated QC checks over the LMVD data corpus
+<p class="sub">Automated QC checks over the LMD data corpus
 (<code>/groups/miaai/miaai/lmd-v0.0.1/data</code>), run on the Janelia cluster. Latest run first.</p>
 <div class="grid">
 <a class="tile" href="reports/2026-10-06/index.html"><span class="name">2026-10-06</span><span class="desc">6 check(s) run</span><span class="badge chip error">62 finding(s)</span></a>
 <a class="tile" href="reports/2026-10-05/index.html"><span class="name">2026-10-05</span><span class="desc">1 check(s) run</span><span class="badge chip ">0 finding(s)</span></a>
 </div>
 </main>
-<footer class="site">mia-data-qc &middot; automated QC for the LMVD corpus</footer>
+<footer class="site">mia-data-qc &middot; automated QC for the LMD corpus</footer>
 <script></script>
 </body></html>

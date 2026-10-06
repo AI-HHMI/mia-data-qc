@@ -84,6 +84,11 @@ tbody tr:last-child td { border-bottom:0; }
 .grid a.tile .name { font-weight:650; font-size:14.5px; }
 .grid a.tile .desc { color:var(--muted); font-size:12.5px; }
 .grid a.tile .badge { align-self:flex-start; }
+.tabs { display:grid; grid-template-columns:repeat(auto-fill, minmax(260px, 1fr)); gap:10px; margin-bottom:20px; }
+.tabs a.tile { border-color:var(--line); }
+.tabs a.tile.on { border-color:var(--accent); background:var(--accent-soft); box-shadow:0 0 0 1px var(--accent); }
+.panel[hidden] { display:none; }
+.panel h2 { margin:0 0 4px; font-size:18px; }
 .empty { color:var(--muted); padding:16px; }
 footer.site { color:var(--muted); font-size:12px; padding:24px 0 40px; text-align:center; }
 """
@@ -108,6 +113,29 @@ document.querySelectorAll('table.sortable').forEach(function (table) {
 });
 """
 
+_TABS_JS = """
+function mdqSelectTab(id) {
+  document.querySelectorAll('.tabs a.tile').forEach(function (t) {
+    t.classList.toggle('on', t.getAttribute('href') === '#' + id);
+  });
+  document.querySelectorAll('.panel').forEach(function (p) { p.hidden = (p.id !== id); });
+}
+document.querySelectorAll('.tabs a.tile').forEach(function (tab) {
+  tab.addEventListener('click', function (e) {
+    e.preventDefault();
+    var id = tab.getAttribute('href').slice(1);
+    mdqSelectTab(id);
+    history.replaceState(null, '', '#' + id);
+  });
+});
+(function () {
+  var first = document.querySelector('.panel');
+  var id = (location.hash || '').slice(1);
+  if (!document.getElementById(id)) { id = first ? first.id : ''; }
+  if (id) { mdqSelectTab(id); }
+})();
+"""
+
 
 def _page(title: str, home_href: str, body: str, script: str = "") -> str:
     return f"""<!doctype html>
@@ -122,7 +150,7 @@ def _page(title: str, home_href: str, body: str, script: str = "") -> str:
 <main class="wrap">
 {body}
 </main>
-<footer class="site">mia-data-qc &middot; automated QC for the LMVD corpus</footer>
+<footer class="site">mia-data-qc &middot; automated QC for the LMD corpus</footer>
 <script>{script}</script>
 </body></html>
 """
@@ -145,7 +173,10 @@ def write_check_report(check_name: str, findings: list[dict], reports_dir: Path 
     return html_path
 
 
-def _render_check_html(check_name: str, date: str, findings: list[dict]) -> str:
+def _render_check_section(check_name: str, findings: list[dict]) -> str:
+    """The summary stats + table for one check -- shared by the standalone
+    per-check page and the tabbed panel embedded in the date index.
+    """
     counts = collections.Counter(f.get("severity", "error") for f in findings)
     summary = "".join(
         f'<div class="stat {sev}"><div class="n">{counts[sev]}</div><div class="l">{sev}</div></div>'
@@ -175,42 +206,65 @@ def _render_check_html(check_name: str, date: str, findings: list[dict]) -> str:
     else:
         table = '<div class="card empty">No findings.</div>'
 
+    return f'<div class="summary">{summary}</div>\n{table}'
+
+
+def _render_check_html(check_name: str, date: str, findings: list[dict]) -> str:
     description = CHECK_DESCRIPTIONS.get(check_name, "")
+    section = _render_check_section(check_name, findings)
     body = f"""<a class="nav-back" href="index.html">&larr; {date}</a>
 <h1>{html.escape(check_name)}</h1>
 <p class="sub">{html.escape(description)}</p>
-<div class="summary">{summary}</div>
-{table}"""
+{section}"""
     return _page(f"{check_name} — {date}", "../../qc_dashboard.html", body, _SORT_JS)
 
 
-def _count_findings(json_path: Path) -> int:
+def _load_findings(json_path: Path) -> list[dict]:
     try:
-        return len(json.loads(json_path.read_text()).get("findings", []))
+        return json.loads(json_path.read_text()).get("findings", [])
     except (OSError, json.JSONDecodeError):
-        return 0
+        return []
+
+
+def _count_findings(json_path: Path) -> int:
+    return len(_load_findings(json_path))
 
 
 def _update_date_index(date_dir: Path, date: str) -> None:
-    check_names = sorted(p.stem for p in date_dir.glob("*.html") if p.stem != "index")
-    tiles = "\n".join(
-        '<a class="tile" href="{name}.html"><span class="name">{name}</span>'
-        '<span class="desc">{desc}</span>'
-        '<span class="badge chip {sev}">{count} finding(s)</span></a>'.format(
-            name=html.escape(name),
-            desc=html.escape(CHECK_DESCRIPTIONS.get(name, "")),
-            count=(count := _count_findings(date_dir / f"{name}.json")),
-            sev="error" if count else "",
+    check_names = sorted(p.stem for p in date_dir.glob("*.json"))
+
+    tabs = []
+    panels = []
+    for i, name in enumerate(check_names):
+        findings = _load_findings(date_dir / f"{name}.json")
+        count = len(findings)
+        tabs.append(
+            '<a class="tile" href="#{name}"><span class="name">{name}</span>'
+            '<span class="desc">{desc}</span>'
+            '<span class="badge chip {sev}">{count} finding(s)</span></a>'.format(
+                name=html.escape(name), desc=html.escape(CHECK_DESCRIPTIONS.get(name, "")),
+                count=count, sev="error" if count else "",
+            )
         )
-        for name in check_names
-    )
+        panels.append(
+            '<section id="{name}" class="panel"{hidden}><h2>{name}</h2>'
+            '<p class="sub">{desc}</p>{section}</section>'.format(
+                name=html.escape(name), hidden="" if i == 0 else " hidden",
+                desc=html.escape(CHECK_DESCRIPTIONS.get(name, "")),
+                section=_render_check_section(name, findings),
+            )
+        )
+
     body = f"""<a class="nav-back" href="../../qc_dashboard.html">&larr; all dates</a>
 <h1>QC reports — {date}</h1>
-<p class="sub">One tile per check that ran this date.</p>
-<div class="grid">
-{tiles}
-</div>"""
-    (date_dir / "index.html").write_text(_page(f"QC reports — {date}", "../../qc_dashboard.html", body))
+<p class="sub">Click a check to see its findings below.</p>
+<div class="tabs">
+{chr(10).join(tabs)}
+</div>
+{chr(10).join(panels)}"""
+    (date_dir / "index.html").write_text(
+        _page(f"QC reports — {date}", "../../qc_dashboard.html", body, _SORT_JS + _TABS_JS)
+    )
 
 
 def _update_root_index(reports_dir: Path) -> None:
@@ -231,7 +285,7 @@ def _update_root_index(reports_dir: Path) -> None:
         )
     tiles_html = "\n".join(tiles)
     body = f"""<h1>mia-data-qc</h1>
-<p class="sub">Automated QC checks over the LMVD data corpus
+<p class="sub">Automated QC checks over the LMD data corpus
 (<code>/groups/miaai/miaai/lmd-v0.0.1/data</code>), run on the Janelia cluster. Latest run first.</p>
 <div class="grid">
 {tiles_html}

@@ -53,6 +53,11 @@ tbody tr:last-child td { border-bottom:0; }
 .grid a.tile .name { font-weight:650; font-size:14.5px; }
 .grid a.tile .desc { color:var(--muted); font-size:12.5px; }
 .grid a.tile .badge { align-self:flex-start; }
+.tabs { display:grid; grid-template-columns:repeat(auto-fill, minmax(260px, 1fr)); gap:10px; margin-bottom:20px; }
+.tabs a.tile { border-color:var(--line); }
+.tabs a.tile.on { border-color:var(--accent); background:var(--accent-soft); box-shadow:0 0 0 1px var(--accent); }
+.panel[hidden] { display:none; }
+.panel h2 { margin:0 0 4px; font-size:18px; }
 .empty { color:var(--muted); padding:16px; }
 footer.site { color:var(--muted); font-size:12px; padding:24px 0 40px; text-align:center; }
 </style></head>
@@ -64,11 +69,52 @@ footer.site { color:var(--muted); font-size:12px; padding:24px 0 40px; text-alig
 <main class="wrap">
 <a class="nav-back" href="../../qc_dashboard.html">&larr; all dates</a>
 <h1>QC reports — 2026-10-05</h1>
-<p class="sub">One tile per check that ran this date.</p>
-<div class="grid">
-<a class="tile" href="ownership_permissions.html"><span class="name">ownership_permissions</span><span class="desc">Every file/dir under data/ is group miaai, group-read, group-execute, no group-write.</span><span class="badge chip ">0 finding(s)</span></a>
+<p class="sub">Click a check to see its findings below.</p>
+<div class="tabs">
+<a class="tile" href="#ownership_permissions"><span class="name">ownership_permissions</span><span class="desc">Every file/dir under data/ is group miaai, group-read, group-execute, no group-write.</span><span class="badge chip ">0 finding(s)</span></a>
 </div>
+<section id="ownership_permissions" class="panel"><h2>ownership_permissions</h2><p class="sub">Every file/dir under data/ is group miaai, group-read, group-execute, no group-write.</p><div class="summary"><div class="stat"><div class="n">0</div><div class="l">findings</div></div></div>
+<div class="card empty">No findings.</div></section>
 </main>
-<footer class="site">mia-data-qc &middot; automated QC for the LMVD corpus</footer>
-<script></script>
+<footer class="site">mia-data-qc &middot; automated QC for the LMD corpus</footer>
+<script>
+document.querySelectorAll('table.sortable').forEach(function (table) {
+  table.querySelectorAll('th').forEach(function (th, idx) {
+    th.addEventListener('click', function () {
+      var tbody = table.querySelector('tbody');
+      var rows = Array.prototype.slice.call(tbody.querySelectorAll('tr'));
+      var asc = !th.classList.contains('asc');
+      table.querySelectorAll('th').forEach(function (h) { h.classList.remove('asc', 'desc'); });
+      th.classList.add(asc ? 'asc' : 'desc');
+      rows.sort(function (a, b) {
+        var av = a.children[idx].innerText, bv = b.children[idx].innerText;
+        return asc ? av.localeCompare(bv, undefined, {numeric: true})
+                    : bv.localeCompare(av, undefined, {numeric: true});
+      });
+      rows.forEach(function (r) { tbody.appendChild(r); });
+    });
+  });
+});
+
+function mdqSelectTab(id) {
+  document.querySelectorAll('.tabs a.tile').forEach(function (t) {
+    t.classList.toggle('on', t.getAttribute('href') === '#' + id);
+  });
+  document.querySelectorAll('.panel').forEach(function (p) { p.hidden = (p.id !== id); });
+}
+document.querySelectorAll('.tabs a.tile').forEach(function (tab) {
+  tab.addEventListener('click', function (e) {
+    e.preventDefault();
+    var id = tab.getAttribute('href').slice(1);
+    mdqSelectTab(id);
+    history.replaceState(null, '', '#' + id);
+  });
+});
+(function () {
+  var first = document.querySelector('.panel');
+  var id = (location.hash || '').slice(1);
+  if (!document.getElementById(id)) { id = first ? first.id : ''; }
+  if (id) { mdqSelectTab(id); }
+})();
+</script>
 </body></html>
