@@ -82,8 +82,8 @@ tbody tr:last-child td { border-bottom:0; }
 a.tile { display:flex; flex-direction:column; gap:6px; padding:14px 16px; border:1px solid var(--line);
   border-radius:12px; background:var(--card); color:var(--ink); box-shadow:var(--shadow); }
 a.tile:hover { border-color:var(--accent); text-decoration:none; }
-a.tile .name { font-weight:650; font-size:14.5px; }
-a.tile .desc { color:var(--muted); font-size:12.5px; }
+a.tile .name { font-weight:650; font-size:14.5px; overflow-wrap:anywhere; }
+a.tile .desc { color:var(--muted); font-size:12.5px; overflow-wrap:anywhere; }
 a.tile .badge { align-self:flex-start; }
 .tabs a.tile.on { border-color:var(--accent); background:var(--accent-soft); box-shadow:0 0 0 1px var(--accent); }
 .panel[hidden] { display:none; }
