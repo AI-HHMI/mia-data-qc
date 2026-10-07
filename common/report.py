@@ -32,7 +32,8 @@ CHECK_DESCRIPTIONS = {
     "metadata_consistency": "A label's directory-name-derived provenance/label_class agrees with its stored metadata.",
     "metadata_vocab": "A label's segmentation_type/proofreading_status/coverage match the canonical enums.",
     "voxel_size": "Raw's voxel size isn't a placeholder; each label's voxel size aligns with raw's pyramid.",
-    "metadata_completeness": "Every label's zarr.json has all 12 required §4 metadata fields present.",
+    "metadata_completeness": "Every label's zarr.json has all 12 required metadata fields present.",
+    "bbox_sanity": "A label's bbox has a valid coordinate_order/unit and a structurally sane offset/size.",
 }
 
 _STYLE = """

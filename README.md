@@ -30,6 +30,7 @@ the Janelia cluster and published as a static-HTML report site.
 | `metadata_vocab.py` | A label's segmentation_type/proofreading_status/coverage match the canonical enums |
 | `voxel_size.py` | Raw's voxel size isn't a placeholder; each label's voxel size aligns with raw's pyramid |
 | `metadata_completeness.py` | Every label's zarr.json has all 12 required metadata fields present (label_class, segmentation_type, provenance, proofreading_status, coverage, bbox, source, created, parent_raw, dataset, publication, notes) |
+| `bbox_sanity.py` | A label's bbox has a valid coordinate_order/unit and a structurally sane offset/size |
 
 The original design proposal and open questions: [issue #1](https://github.com/AI-HHMI/mia-data-qc/issues/1).
 
