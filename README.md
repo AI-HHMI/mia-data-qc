@@ -33,6 +33,7 @@ the Janelia cluster and published as a static-HTML report site.
 | `bbox_sanity.py` | A label's bbox has a valid coordinate_order/unit and a structurally sane offset/size |
 | `chunk_shard_sanity.py` | Every sharded array's shard shape is an exact multiple of its own chunk shape |
 | `license_fields.py` | Every crop has a `license` field present on both its root `zarr.json` and `raw/zarr.json` |
+| `multitc_naming.py` | A crop with more than one timepoint/channel in its raw array encodes that as `{N}t_{M}c` in its descriptor |
 
 The original design proposal and open questions: [issue #1](https://github.com/AI-HHMI/mia-data-qc/issues/1).
 
