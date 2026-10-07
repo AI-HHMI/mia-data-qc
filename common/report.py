@@ -37,6 +37,7 @@ CHECK_DESCRIPTIONS = {
     "chunk_shard_sanity": "Every sharded array's shard shape is an exact multiple of its own chunk shape.",
     "license_fields": "Every crop has a license field present on both its root zarr.json and raw/zarr.json.",
     "multitc_naming": "A crop with more than one timepoint/channel in its raw array encodes that as {N}t_{M}c in its descriptor.",
+    "parent_raw_validity": "A label's parent_raw field (when present) points to a directory that actually exists.",
 }
 
 _STYLE = """
