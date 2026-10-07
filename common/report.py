@@ -34,6 +34,7 @@ CHECK_DESCRIPTIONS = {
     "voxel_size": "Raw's voxel size isn't a placeholder; each label's voxel size aligns with raw's pyramid.",
     "metadata_completeness": "Every label's zarr.json has all 12 required metadata fields present.",
     "bbox_sanity": "A label's bbox has a valid coordinate_order/unit and a structurally sane offset/size.",
+    "chunk_shard_sanity": "Every sharded array's shard shape is an exact multiple of its own chunk shape.",
 }
 
 _STYLE = """
