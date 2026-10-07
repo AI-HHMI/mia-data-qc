@@ -71,7 +71,7 @@ footer.site { color:var(--muted); font-size:12px; padding:24px 0 40px; text-alig
 <div class="tabs">
 <a class="tile" href="#bbox_sanity"><span class="name">bbox_sanity</span><span class="desc">A label&#x27;s bbox has a valid coordinate_order/unit and a structurally sane offset/size.</span><span class="badge chip error">6 finding(s)</span></a>
 <a class="tile" href="#chunk_shard_sanity"><span class="name">chunk_shard_sanity</span><span class="desc">Every sharded array&#x27;s shard shape is an exact multiple of its own chunk shape.</span><span class="badge chip ">0 finding(s)</span></a>
-<a class="tile" href="#license_fields"><span class="name">license_fields</span><span class="desc"></span><span class="badge chip error">1412 finding(s)</span></a>
+<a class="tile" href="#license_fields"><span class="name">license_fields</span><span class="desc">Every crop has a license field present on both its root zarr.json and raw/zarr.json.</span><span class="badge chip error">1412 finding(s)</span></a>
 </div>
 <section id="bbox_sanity" class="panel"><h2>bbox_sanity</h2><p class="sub">A label&#x27;s bbox has a valid coordinate_order/unit and a structurally sane offset/size.</p><div class="summary"><div class="stat error"><div class="n">6</div><div class="l">error</div></div></div>
 <div class="card scroll">
@@ -87,7 +87,7 @@ footer.site { color:var(--muted); font-size:12px; padding:24px 0 40px; text-alig
 </tbody></table></div></section>
 <section id="chunk_shard_sanity" class="panel" hidden><h2>chunk_shard_sanity</h2><p class="sub">Every sharded array&#x27;s shard shape is an exact multiple of its own chunk shape.</p><div class="summary"><div class="stat"><div class="n">0</div><div class="l">findings</div></div></div>
 <div class="card empty">No findings.</div></section>
-<section id="license_fields" class="panel" hidden><h2>license_fields</h2><p class="sub"></p><div class="summary"><div class="stat error"><div class="n">1412</div><div class="l">error</div></div></div>
+<section id="license_fields" class="panel" hidden><h2>license_fields</h2><p class="sub">Every crop has a license field present on both its root zarr.json and raw/zarr.json.</p><div class="summary"><div class="stat error"><div class="n">1412</div><div class="l">error</div></div></div>
 <div class="card scroll">
 <table class="sortable"><thead><tr><th>Dataset</th><th>Path</th><th>Field</th><th>Actual</th>
 <th>Expected</th><th>Severity</th><th>Suggested fix</th></tr></thead>
