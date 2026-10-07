@@ -35,6 +35,7 @@ CHECK_DESCRIPTIONS = {
     "metadata_completeness": "Every label's zarr.json has all 12 required metadata fields present.",
     "bbox_sanity": "A label's bbox has a valid coordinate_order/unit and a structurally sane offset/size.",
     "chunk_shard_sanity": "Every sharded array's shard shape is an exact multiple of its own chunk shape.",
+    "license_fields": "Every crop has a license field present on both its root zarr.json and raw/zarr.json.",
 }
 
 _STYLE = """
