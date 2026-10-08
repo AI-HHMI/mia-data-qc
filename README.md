@@ -35,6 +35,7 @@ the Janelia cluster and published as a static-HTML report site.
 | `license_fields.py` | Every crop has a `license` field present on both its root `zarr.json` and `raw/zarr.json` |
 | `multitc_naming.py` | A crop with more than one timepoint/channel in its raw array encodes that as `{N}t_{M}c` in its descriptor |
 | `parent_raw_validity.py` | A label's `parent_raw` field (when present) points to a directory that actually exists |
+| `channel_index_consistency.py` | A label derived from one channel of a multi-channel raw records a valid `source.channel_index` |
 
 The original design proposal and open questions: [issue #1](https://github.com/AI-HHMI/mia-data-qc/issues/1).
 

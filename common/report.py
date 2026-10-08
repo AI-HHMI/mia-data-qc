@@ -38,6 +38,7 @@ CHECK_DESCRIPTIONS = {
     "license_fields": "Every crop has a license field present on both its root zarr.json and raw/zarr.json.",
     "multitc_naming": "A crop with more than one timepoint/channel in its raw array encodes that as {N}t_{M}c in its descriptor.",
     "parent_raw_validity": "A label's parent_raw field (when present) points to a directory that actually exists.",
+    "channel_index_consistency": "A label derived from one channel of a multi-channel raw records a valid source.channel_index.",
 }
 
 _STYLE = """

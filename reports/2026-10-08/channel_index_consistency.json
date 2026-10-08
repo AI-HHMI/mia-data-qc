@@ -1,0 +1,46 @@
+{
+  "check": "channel_index_consistency",
+  "date": "2026-10-08",
+  "findings": [
+    {
+      "check": "channel_index_consistency",
+      "dataset": "lm-zebrafish-Betzig-mosaic-example_annotations_Thayer",
+      "path": "lm-zebrafish-Betzig-mosaic-example_annotations_Thayer/crop-002_example_annotations_Thayer_2channels.zarr/labels/initial_labels/zarr.json",
+      "field": "source.channel_index",
+      "actual": "missing",
+      "expected": "an integer in [0, 2)",
+      "severity": "error",
+      "suggested_fix": "record which raw channel this label was derived from in source.channel_index"
+    },
+    {
+      "check": "channel_index_consistency",
+      "dataset": "lm-zebrafish-Betzig-mosaic-example_annotations_Thayer",
+      "path": "lm-zebrafish-Betzig-mosaic-example_annotations_Thayer/crop-002_example_annotations_Thayer_2channels.zarr/labels/postprocessed_labels/zarr.json",
+      "field": "source.channel_index",
+      "actual": "missing",
+      "expected": "an integer in [0, 2)",
+      "severity": "error",
+      "suggested_fix": "record which raw channel this label was derived from in source.channel_index"
+    },
+    {
+      "check": "channel_index_consistency",
+      "dataset": "lm-zebrafish-Betzig-mosaic-example_annotations_Thayer",
+      "path": "lm-zebrafish-Betzig-mosaic-example_annotations_Thayer/crop-002_example_annotations_Thayer_2channels.zarr/labels/proofread_refined_labels/zarr.json",
+      "field": "source.channel_index",
+      "actual": "missing",
+      "expected": "an integer in [0, 2)",
+      "severity": "error",
+      "suggested_fix": "record which raw channel this label was derived from in source.channel_index"
+    },
+    {
+      "check": "channel_index_consistency",
+      "dataset": "lm-zebrafish-Betzig-mosaic-example_annotations_Thayer",
+      "path": "lm-zebrafish-Betzig-mosaic-example_annotations_Thayer/crop-002_example_annotations_Thayer_2channels.zarr/labels/refined_labels/zarr.json",
+      "field": "source.channel_index",
+      "actual": "missing",
+      "expected": "an integer in [0, 2)",
+      "severity": "error",
+      "suggested_fix": "record which raw channel this label was derived from in source.channel_index"
+    }
+  ]
+}

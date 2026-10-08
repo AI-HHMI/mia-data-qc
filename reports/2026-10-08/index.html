@@ -1,0 +1,126 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>QC reports — 2026-10-08</title>
+<style>
+:root { --bg:#f6f7f9; --card:#fff; --ink:#14181f; --muted:#5d6675; --line:#e3e6eb;
+  --head:#f1f3f6; --hover:#f5f8ff; --accent:#2557d6; --accent-soft:#e8eefc;
+  --err:#b00020; --err-soft:#fbe9e9; --warn:#9a6400; --warn-soft:#fff4e0;
+  --shadow:0 1px 2px rgba(16,24,40,.06), 0 1px 3px rgba(16,24,40,.08); }
+@media (prefers-color-scheme: dark) { :root { --bg:#0e1116; --card:#161b22; --ink:#e6e9ee;
+  --muted:#9aa4b2; --line:#262d38; --head:#1b212b; --hover:#1a2230; --accent:#7aa2ff;
+  --accent-soft:#1b2842; --err:#ff6b6b; --err-soft:#3a1f1f; --warn:#ffb86b; --warn-soft:#3a2e1a;
+  --shadow:none; } }
+* { box-sizing:border-box; }
+body { margin:0; background:var(--bg); color:var(--ink);
+  font:14px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,sans-serif;
+  -webkit-font-smoothing:antialiased; }
+a { color:var(--accent); text-decoration:none; } a:hover { text-decoration:underline; }
+.wrap { max-width:1400px; margin:0 auto; padding:0 24px; }
+header.site { background:var(--card); border-bottom:1px solid var(--line); margin-bottom:28px; }
+header.site .wrap { padding:16px 24px; display:flex; align-items:center; justify-content:space-between; }
+header.site .brand { font-weight:700; font-size:15px; letter-spacing:-.01em; }
+header.site nav a { margin-left:16px; color:var(--muted); font-size:13px; }
+header.site nav a:hover { color:var(--accent); }
+main.wrap { padding-bottom:56px; }
+.nav-back { margin-bottom:14px; display:inline-block; font-size:13px; }
+h1 { margin:0 0 4px; font-size:24px; font-weight:700; letter-spacing:-.02em; }
+.sub { color:var(--muted); margin:0 0 24px; max-width:70ch; }
+.summary { display:flex; gap:10px; margin-bottom:20px; }
+.stat { background:var(--card); border:1px solid var(--line); border-radius:10px;
+  padding:10px 16px; box-shadow:var(--shadow); }
+.stat .n { font-size:20px; font-weight:700; }
+.stat .l { color:var(--muted); font-size:12px; }
+.stat.error .n { color:var(--err); }
+.stat.warning .n { color:var(--warn); }
+.card { background:var(--card); border:1px solid var(--line); border-radius:12px; box-shadow:var(--shadow); }
+.scroll { overflow:auto; max-height:75vh; border-radius:12px; }
+table { border-collapse:separate; border-spacing:0; width:100%; }
+th, td { padding:10px 14px; text-align:left; border-bottom:1px solid var(--line); white-space:nowrap; }
+th { position:sticky; top:0; z-index:1; background:var(--head); color:var(--muted);
+  font-size:12px; font-weight:600; letter-spacing:.02em; cursor:pointer; user-select:none; }
+th:hover { color:var(--ink); }
+th.asc::after { content:" \25B2"; font-size:9px; }
+th.desc::after { content:" \25BC"; font-size:9px; }
+tbody tr:hover td { background:var(--hover); }
+tbody tr:last-child td { border-bottom:0; }
+.chip { display:inline-block; padding:2px 9px; border-radius:999px; font-size:12px; font-weight:600; }
+.chip.error { color:var(--err); background:var(--err-soft); }
+.chip.warning { color:var(--warn); background:var(--warn-soft); }
+.grid, .tabs { display:grid; grid-template-columns:repeat(auto-fill, minmax(260px, 1fr)); gap:12px; margin-bottom:20px; }
+a.tile { display:flex; flex-direction:column; gap:6px; padding:14px 16px; border:1px solid var(--line);
+  border-radius:12px; background:var(--card); color:var(--ink); box-shadow:var(--shadow); }
+a.tile:hover { border-color:var(--accent); text-decoration:none; }
+a.tile .name { font-weight:650; font-size:14.5px; overflow-wrap:anywhere; }
+a.tile .desc { color:var(--muted); font-size:12.5px; overflow-wrap:anywhere; }
+a.tile .badge { align-self:flex-start; }
+.tabs a.tile.on { border-color:var(--accent); background:var(--accent-soft); box-shadow:0 0 0 1px var(--accent); }
+.panel[hidden] { display:none; }
+.panel h2 { margin:0 0 4px; font-size:18px; }
+.empty { color:var(--muted); padding:16px; }
+footer.site { color:var(--muted); font-size:12px; padding:24px 0 40px; text-align:center; }
+</style></head>
+<body>
+<header class="site"><div class="wrap">
+<a class="brand" href="../../qc_dashboard.html">mia-data-qc</a>
+<nav><a href="https://github.com/AI-HHMI/mia-data-qc">GitHub</a></nav>
+</div></header>
+<main class="wrap">
+<a class="nav-back" href="../../qc_dashboard.html">&larr; all dates</a>
+<h1>QC reports — 2026-10-08</h1>
+<p class="sub">Click a check to see its findings below.</p>
+<div class="tabs">
+<a class="tile" href="#channel_index_consistency"><span class="name">channel_index_consistency</span><span class="desc">A label derived from one channel of a multi-channel raw records a valid source.channel_index.</span><span class="badge chip error">4 finding(s)</span></a>
+</div>
+<section id="channel_index_consistency" class="panel"><h2>channel_index_consistency</h2><p class="sub">A label derived from one channel of a multi-channel raw records a valid source.channel_index.</p><div class="summary"><div class="stat error"><div class="n">4</div><div class="l">error</div></div></div>
+<div class="card scroll">
+<table class="sortable"><thead><tr><th>Dataset</th><th>Path</th><th>Field</th><th>Actual</th>
+<th>Expected</th><th>Severity</th><th>Suggested fix</th></tr></thead>
+<tbody>
+<tr><td>lm-zebrafish-Betzig-mosaic-example_annotations_Thayer</td><td>lm-zebrafish-Betzig-mosaic-example_annotations_Thayer/crop-002_example_annotations_Thayer_2channels.zarr/labels/initial_labels/zarr.json</td><td>source.channel_index</td><td>missing</td><td>an integer in [0, 2)</td><td><span class="chip error">error</span></td><td>record which raw channel this label was derived from in source.channel_index</td></tr>
+<tr><td>lm-zebrafish-Betzig-mosaic-example_annotations_Thayer</td><td>lm-zebrafish-Betzig-mosaic-example_annotations_Thayer/crop-002_example_annotations_Thayer_2channels.zarr/labels/postprocessed_labels/zarr.json</td><td>source.channel_index</td><td>missing</td><td>an integer in [0, 2)</td><td><span class="chip error">error</span></td><td>record which raw channel this label was derived from in source.channel_index</td></tr>
+<tr><td>lm-zebrafish-Betzig-mosaic-example_annotations_Thayer</td><td>lm-zebrafish-Betzig-mosaic-example_annotations_Thayer/crop-002_example_annotations_Thayer_2channels.zarr/labels/proofread_refined_labels/zarr.json</td><td>source.channel_index</td><td>missing</td><td>an integer in [0, 2)</td><td><span class="chip error">error</span></td><td>record which raw channel this label was derived from in source.channel_index</td></tr>
+<tr><td>lm-zebrafish-Betzig-mosaic-example_annotations_Thayer</td><td>lm-zebrafish-Betzig-mosaic-example_annotations_Thayer/crop-002_example_annotations_Thayer_2channels.zarr/labels/refined_labels/zarr.json</td><td>source.channel_index</td><td>missing</td><td>an integer in [0, 2)</td><td><span class="chip error">error</span></td><td>record which raw channel this label was derived from in source.channel_index</td></tr>
+</tbody></table></div></section>
+</main>
+<footer class="site">mia-data-qc &middot; automated QC for the LMD corpus</footer>
+<script>
+document.querySelectorAll('table.sortable').forEach(function (table) {
+  table.querySelectorAll('th').forEach(function (th, idx) {
+    th.addEventListener('click', function () {
+      var tbody = table.querySelector('tbody');
+      var rows = Array.prototype.slice.call(tbody.querySelectorAll('tr'));
+      var asc = !th.classList.contains('asc');
+      table.querySelectorAll('th').forEach(function (h) { h.classList.remove('asc', 'desc'); });
+      th.classList.add(asc ? 'asc' : 'desc');
+      rows.sort(function (a, b) {
+        var av = a.children[idx].innerText, bv = b.children[idx].innerText;
+        return asc ? av.localeCompare(bv, undefined, {numeric: true})
+                    : bv.localeCompare(av, undefined, {numeric: true});
+      });
+      rows.forEach(function (r) { tbody.appendChild(r); });
+    });
+  });
+});
+
+function mdqSelectTab(id) {
+  document.querySelectorAll('.tabs a.tile').forEach(function (t) {
+    t.classList.toggle('on', t.getAttribute('href') === '#' + id);
+  });
+  document.querySelectorAll('.panel').forEach(function (p) { p.hidden = (p.id !== id); });
+}
+document.querySelectorAll('.tabs a.tile').forEach(function (tab) {
+  tab.addEventListener('click', function (e) {
+    e.preventDefault();
+    var id = tab.getAttribute('href').slice(1);
+    mdqSelectTab(id);
+    history.replaceState(null, '', '#' + id);
+  });
+});
+(function () {
+  var first = document.querySelector('.panel');
+  var id = (location.hash || '').slice(1);
+  if (!document.getElementById(id)) { id = first ? first.id : ''; }
+  if (id) { mdqSelectTab(id); }
+})();
+</script>
+</body></html>
