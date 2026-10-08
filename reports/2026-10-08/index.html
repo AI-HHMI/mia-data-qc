@@ -70,6 +70,7 @@ footer.site { color:var(--muted); font-size:12px; padding:24px 0 40px; text-alig
 <p class="sub">Click a check to see its findings below.</p>
 <div class="tabs">
 <a class="tile" href="#channel_index_consistency"><span class="name">channel_index_consistency</span><span class="desc">A label derived from one channel of a multi-channel raw records a valid source.channel_index.</span><span class="badge chip error">4 finding(s)</span></a>
+<a class="tile" href="#multitimepoint_label_sparsity"><span class="name">multitimepoint_label_sparsity</span><span class="desc">A label tied to one timepoint is full-T shaped and has real data only at that timepoint.</span><span class="badge chip ">0 finding(s)</span></a>
 </div>
 <section id="channel_index_consistency" class="panel"><h2>channel_index_consistency</h2><p class="sub">A label derived from one channel of a multi-channel raw records a valid source.channel_index.</p><div class="summary"><div class="stat error"><div class="n">4</div><div class="l">error</div></div></div>
 <div class="card scroll">
@@ -81,6 +82,8 @@ footer.site { color:var(--muted); font-size:12px; padding:24px 0 40px; text-alig
 <tr><td>lm-zebrafish-Betzig-mosaic-example_annotations_Thayer</td><td>lm-zebrafish-Betzig-mosaic-example_annotations_Thayer/crop-002_example_annotations_Thayer_2channels.zarr/labels/proofread_refined_labels/zarr.json</td><td>source.channel_index</td><td>missing</td><td>an integer in [0, 2)</td><td><span class="chip error">error</span></td><td>record which raw channel this label was derived from in source.channel_index</td></tr>
 <tr><td>lm-zebrafish-Betzig-mosaic-example_annotations_Thayer</td><td>lm-zebrafish-Betzig-mosaic-example_annotations_Thayer/crop-002_example_annotations_Thayer_2channels.zarr/labels/refined_labels/zarr.json</td><td>source.channel_index</td><td>missing</td><td>an integer in [0, 2)</td><td><span class="chip error">error</span></td><td>record which raw channel this label was derived from in source.channel_index</td></tr>
 </tbody></table></div></section>
+<section id="multitimepoint_label_sparsity" class="panel" hidden><h2>multitimepoint_label_sparsity</h2><p class="sub">A label tied to one timepoint is full-T shaped and has real data only at that timepoint.</p><div class="summary"><div class="stat"><div class="n">0</div><div class="l">findings</div></div></div>
+<div class="card empty">No findings.</div></section>
 </main>
 <footer class="site">mia-data-qc &middot; automated QC for the LMD corpus</footer>
 <script>
