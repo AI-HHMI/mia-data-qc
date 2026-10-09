@@ -1,0 +1,686 @@
+{
+  "check": "parent_raw_validity",
+  "date": "2026-10-08",
+  "findings": [
+    {
+      "check": "parent_raw_validity",
+      "dataset": "em-human-CellMap-jrc-ut21-1413-003",
+      "path": "em-human-CellMap-jrc-ut21-1413-003/crop-001_fullvol_tissuecrop.zarr/labels/manual_gt-all_organelles-crop190",
+      "field": "parent_raw",
+      "actual": "/groups/miaai/miaai/lmd-v0.0.1/data/em-human-CellMap-jrc-ut21-1413-003/crop-001_fullvol.zarr/raw",
+      "expected": "an existing directory",
+      "severity": "error",
+      "suggested_fix": "update parent_raw to the raw store's current path (likely renamed)"
+    },
+    {
+      "check": "parent_raw_validity",
+      "dataset": "em-human-CellMap-jrc-ut21-1413-003",
+      "path": "em-human-CellMap-jrc-ut21-1413-003/crop-001_fullvol_tissuecrop.zarr/labels/manual_gt-all_organelles-crop191",
+      "field": "parent_raw",
+      "actual": "/groups/miaai/miaai/lmd-v0.0.1/data/em-human-CellMap-jrc-ut21-1413-003/crop-001_fullvol.zarr/raw",
+      "expected": "an existing directory",
+      "severity": "error",
+      "suggested_fix": "update parent_raw to the raw store's current path (likely renamed)"
+    },
+    {
+      "check": "parent_raw_validity",
+      "dataset": "em-human-CellMap-jrc-ut21-1413-003",
+      "path": "em-human-CellMap-jrc-ut21-1413-003/crop-001_fullvol_tissuecrop.zarr/labels/manual_gt-all_organelles-crop192",
+      "field": "parent_raw",
+      "actual": "/groups/miaai/miaai/lmd-v0.0.1/data/em-human-CellMap-jrc-ut21-1413-003/crop-001_fullvol.zarr/raw",
+      "expected": "an existing directory",
+      "severity": "error",
+      "suggested_fix": "update parent_raw to the raw store's current path (likely renamed)"
+    },
+    {
+      "check": "parent_raw_validity",
+      "dataset": "em-human-CellMap-jrc-ut21-1413-003",
+      "path": "em-human-CellMap-jrc-ut21-1413-003/crop-001_fullvol_tissuecrop.zarr/labels/manual_gt-all_organelles-crop193",
+      "field": "parent_raw",
+      "actual": "/groups/miaai/miaai/lmd-v0.0.1/data/em-human-CellMap-jrc-ut21-1413-003/crop-001_fullvol.zarr/raw",
+      "expected": "an existing directory",
+      "severity": "error",
+      "suggested_fix": "update parent_raw to the raw store's current path (likely renamed)"
+    },
+    {
+      "check": "parent_raw_validity",
+      "dataset": "em-human-CellMap-jrc-ut21-1413-003",
+      "path": "em-human-CellMap-jrc-ut21-1413-003/crop-001_fullvol_tissuecrop.zarr/labels/manual_gt-all_organelles-crop195",
+      "field": "parent_raw",
+      "actual": "/groups/miaai/miaai/lmd-v0.0.1/data/em-human-CellMap-jrc-ut21-1413-003/crop-001_fullvol.zarr/raw",
+      "expected": "an existing directory",
+      "severity": "error",
+      "suggested_fix": "update parent_raw to the raw store's current path (likely renamed)"
+    },
+    {
+      "check": "parent_raw_validity",
+      "dataset": "em-human-CellMap-jrc-ut21-1413-003",
+      "path": "em-human-CellMap-jrc-ut21-1413-003/crop-001_fullvol_tissuecrop.zarr/labels/manual_gt-all_organelles-crop196",
+      "field": "parent_raw",
+      "actual": "/groups/miaai/miaai/lmd-v0.0.1/data/em-human-CellMap-jrc-ut21-1413-003/crop-001_fullvol.zarr/raw",
+      "expected": "an existing directory",
+      "severity": "error",
+      "suggested_fix": "update parent_raw to the raw store's current path (likely renamed)"
+    },
+    {
+      "check": "parent_raw_validity",
+      "dataset": "em-human-CellMap-jrc-ut21-1413-003",
+      "path": "em-human-CellMap-jrc-ut21-1413-003/crop-001_fullvol_tissuecrop.zarr/labels/manual_gt-all_organelles-crop197",
+      "field": "parent_raw",
+      "actual": "/groups/miaai/miaai/lmd-v0.0.1/data/em-human-CellMap-jrc-ut21-1413-003/crop-001_fullvol.zarr/raw",
+      "expected": "an existing directory",
+      "severity": "error",
+      "suggested_fix": "update parent_raw to the raw store's current path (likely renamed)"
+    },
+    {
+      "check": "parent_raw_validity",
+      "dataset": "em-human-CellMap-jrc-ut21-1413-003",
+      "path": "em-human-CellMap-jrc-ut21-1413-003/crop-001_fullvol_tissuecrop.zarr/labels/manual_gt-all_organelles-crop198",
+      "field": "parent_raw",
+      "actual": "/groups/miaai/miaai/lmd-v0.0.1/data/em-human-CellMap-jrc-ut21-1413-003/crop-001_fullvol.zarr/raw",
+      "expected": "an existing directory",
+      "severity": "error",
+      "suggested_fix": "update parent_raw to the raw store's current path (likely renamed)"
+    },
+    {
+      "check": "parent_raw_validity",
+      "dataset": "em-human-CellMap-jrc-ut21-1413-003",
+      "path": "em-human-CellMap-jrc-ut21-1413-003/crop-001_fullvol_tissuecrop.zarr/labels/manual_gt-all_organelles-crop199",
+      "field": "parent_raw",
+      "actual": "/groups/miaai/miaai/lmd-v0.0.1/data/em-human-CellMap-jrc-ut21-1413-003/crop-001_fullvol.zarr/raw",
+      "expected": "an existing directory",
+      "severity": "error",
+      "suggested_fix": "update parent_raw to the raw store's current path (likely renamed)"
+    },
+    {
+      "check": "parent_raw_validity",
+      "dataset": "em-human-CellMap-jrc-ut21-1413-003",
+      "path": "em-human-CellMap-jrc-ut21-1413-003/crop-001_fullvol_tissuecrop.zarr/labels/manual_gt-all_organelles-crop200",
+      "field": "parent_raw",
+      "actual": "/groups/miaai/miaai/lmd-v0.0.1/data/em-human-CellMap-jrc-ut21-1413-003/crop-001_fullvol.zarr/raw",
+      "expected": "an existing directory",
+      "severity": "error",
+      "suggested_fix": "update parent_raw to the raw store's current path (likely renamed)"
+    },
+    {
+      "check": "parent_raw_validity",
+      "dataset": "em-human-CellMap-jrc-ut21-1413-003",
+      "path": "em-human-CellMap-jrc-ut21-1413-003/crop-001_fullvol_tissuecrop.zarr/labels/manual_gt-all_organelles-crop214",
+      "field": "parent_raw",
+      "actual": "/groups/miaai/miaai/lmd-v0.0.1/data/em-human-CellMap-jrc-ut21-1413-003/crop-001_fullvol.zarr/raw",
+      "expected": "an existing directory",
+      "severity": "error",
+      "suggested_fix": "update parent_raw to the raw store's current path (likely renamed)"
+    },
+    {
+      "check": "parent_raw_validity",
+      "dataset": "em-human-CellMap-jrc-ut21-1413-003",
+      "path": "em-human-CellMap-jrc-ut21-1413-003/crop-001_fullvol_tissuecrop.zarr/labels/manual_gt-all_organelles-crop220",
+      "field": "parent_raw",
+      "actual": "/groups/miaai/miaai/lmd-v0.0.1/data/em-human-CellMap-jrc-ut21-1413-003/crop-001_fullvol.zarr/raw",
+      "expected": "an existing directory",
+      "severity": "error",
+      "suggested_fix": "update parent_raw to the raw store's current path (likely renamed)"
+    },
+    {
+      "check": "parent_raw_validity",
+      "dataset": "em-human-CellMap-jrc-ut21-1413-003",
+      "path": "em-human-CellMap-jrc-ut21-1413-003/crop-001_fullvol_tissuecrop.zarr/labels/manual_gt-all_organelles-crop222",
+      "field": "parent_raw",
+      "actual": "/groups/miaai/miaai/lmd-v0.0.1/data/em-human-CellMap-jrc-ut21-1413-003/crop-001_fullvol.zarr/raw",
+      "expected": "an existing directory",
+      "severity": "error",
+      "suggested_fix": "update parent_raw to the raw store's current path (likely renamed)"
+    },
+    {
+      "check": "parent_raw_validity",
+      "dataset": "em-human-CellMap-jrc-ut21-1413-003",
+      "path": "em-human-CellMap-jrc-ut21-1413-003/crop-001_fullvol_tissuecrop.zarr/labels/manual_gt-all_organelles-crop224",
+      "field": "parent_raw",
+      "actual": "/groups/miaai/miaai/lmd-v0.0.1/data/em-human-CellMap-jrc-ut21-1413-003/crop-001_fullvol.zarr/raw",
+      "expected": "an existing directory",
+      "severity": "error",
+      "suggested_fix": "update parent_raw to the raw store's current path (likely renamed)"
+    },
+    {
+      "check": "parent_raw_validity",
+      "dataset": "em-human-CellMap-jrc-ut21-1413-003",
+      "path": "em-human-CellMap-jrc-ut21-1413-003/crop-001_fullvol_tissuecrop.zarr/labels/manual_gt-all_organelles-crop225",
+      "field": "parent_raw",
+      "actual": "/groups/miaai/miaai/lmd-v0.0.1/data/em-human-CellMap-jrc-ut21-1413-003/crop-001_fullvol.zarr/raw",
+      "expected": "an existing directory",
+      "severity": "error",
+      "suggested_fix": "update parent_raw to the raw store's current path (likely renamed)"
+    },
+    {
+      "check": "parent_raw_validity",
+      "dataset": "em-human-CellMap-jrc-ut21-1413-003",
+      "path": "em-human-CellMap-jrc-ut21-1413-003/crop-001_fullvol_tissuecrop.zarr/labels/manual_gt-all_organelles-crop226",
+      "field": "parent_raw",
+      "actual": "/groups/miaai/miaai/lmd-v0.0.1/data/em-human-CellMap-jrc-ut21-1413-003/crop-001_fullvol.zarr/raw",
+      "expected": "an existing directory",
+      "severity": "error",
+      "suggested_fix": "update parent_raw to the raw store's current path (likely renamed)"
+    },
+    {
+      "check": "parent_raw_validity",
+      "dataset": "em-human-CellMap-jrc-ut21-1413-003",
+      "path": "em-human-CellMap-jrc-ut21-1413-003/crop-001_fullvol_tissuecrop.zarr/labels/manual_gt-all_organelles-crop227",
+      "field": "parent_raw",
+      "actual": "/groups/miaai/miaai/lmd-v0.0.1/data/em-human-CellMap-jrc-ut21-1413-003/crop-001_fullvol.zarr/raw",
+      "expected": "an existing directory",
+      "severity": "error",
+      "suggested_fix": "update parent_raw to the raw store's current path (likely renamed)"
+    },
+    {
+      "check": "parent_raw_validity",
+      "dataset": "em-human-CellMap-jrc-ut21-1413-003",
+      "path": "em-human-CellMap-jrc-ut21-1413-003/crop-001_fullvol_tissuecrop.zarr/labels/manual_gt-all_organelles-crop228",
+      "field": "parent_raw",
+      "actual": "/groups/miaai/miaai/lmd-v0.0.1/data/em-human-CellMap-jrc-ut21-1413-003/crop-001_fullvol.zarr/raw",
+      "expected": "an existing directory",
+      "severity": "error",
+      "suggested_fix": "update parent_raw to the raw store's current path (likely renamed)"
+    },
+    {
+      "check": "parent_raw_validity",
+      "dataset": "em-mouse-CellMap-jrc-mus-heart-1",
+      "path": "em-mouse-CellMap-jrc-mus-heart-1/crop-001_fullvol_tissuecrop.zarr/labels/manual_gt-all_organelles-crop423",
+      "field": "parent_raw",
+      "actual": "/groups/miaai/miaai/lmd-v0.0.1/data/em-mouse-CellMap-jrc-mus-heart-1/crop-001_fullvol.zarr/raw",
+      "expected": "an existing directory",
+      "severity": "error",
+      "suggested_fix": "update parent_raw to the raw store's current path (likely renamed)"
+    },
+    {
+      "check": "parent_raw_validity",
+      "dataset": "em-mouse-CellMap-jrc-mus-heart-1",
+      "path": "em-mouse-CellMap-jrc-mus-heart-1/crop-001_fullvol_tissuecrop.zarr/labels/manual_gt-all_organelles-crop452",
+      "field": "parent_raw",
+      "actual": "/groups/miaai/miaai/lmd-v0.0.1/data/em-mouse-CellMap-jrc-mus-heart-1/crop-001_fullvol.zarr/raw",
+      "expected": "an existing directory",
+      "severity": "error",
+      "suggested_fix": "update parent_raw to the raw store's current path (likely renamed)"
+    },
+    {
+      "check": "parent_raw_validity",
+      "dataset": "em-mouse-CellMap-jrc-mus-kidney",
+      "path": "em-mouse-CellMap-jrc-mus-kidney/crop-001_fullvol_tissuecrop.zarr/labels/manual_gt-all_organelles-crop129",
+      "field": "parent_raw",
+      "actual": "/groups/miaai/miaai/lmd-v0.0.1/data/em-mouse-CellMap-jrc-mus-kidney/crop-001_fullvol.zarr/raw",
+      "expected": "an existing directory",
+      "severity": "error",
+      "suggested_fix": "update parent_raw to the raw store's current path (likely renamed)"
+    },
+    {
+      "check": "parent_raw_validity",
+      "dataset": "em-mouse-CellMap-jrc-mus-kidney",
+      "path": "em-mouse-CellMap-jrc-mus-kidney/crop-001_fullvol_tissuecrop.zarr/labels/manual_gt-all_organelles-crop140",
+      "field": "parent_raw",
+      "actual": "/groups/miaai/miaai/lmd-v0.0.1/data/em-mouse-CellMap-jrc-mus-kidney/crop-001_fullvol.zarr/raw",
+      "expected": "an existing directory",
+      "severity": "error",
+      "suggested_fix": "update parent_raw to the raw store's current path (likely renamed)"
+    },
+    {
+      "check": "parent_raw_validity",
+      "dataset": "em-mouse-CellMap-jrc-mus-kidney",
+      "path": "em-mouse-CellMap-jrc-mus-kidney/crop-001_fullvol_tissuecrop.zarr/labels/manual_gt-all_organelles-crop141",
+      "field": "parent_raw",
+      "actual": "/groups/miaai/miaai/lmd-v0.0.1/data/em-mouse-CellMap-jrc-mus-kidney/crop-001_fullvol.zarr/raw",
+      "expected": "an existing directory",
+      "severity": "error",
+      "suggested_fix": "update parent_raw to the raw store's current path (likely renamed)"
+    },
+    {
+      "check": "parent_raw_validity",
+      "dataset": "em-mouse-CellMap-jrc-mus-kidney",
+      "path": "em-mouse-CellMap-jrc-mus-kidney/crop-001_fullvol_tissuecrop.zarr/labels/manual_gt-all_organelles-crop146",
+      "field": "parent_raw",
+      "actual": "/groups/miaai/miaai/lmd-v0.0.1/data/em-mouse-CellMap-jrc-mus-kidney/crop-001_fullvol.zarr/raw",
+      "expected": "an existing directory",
+      "severity": "error",
+      "suggested_fix": "update parent_raw to the raw store's current path (likely renamed)"
+    },
+    {
+      "check": "parent_raw_validity",
+      "dataset": "em-mouse-CellMap-jrc-mus-kidney",
+      "path": "em-mouse-CellMap-jrc-mus-kidney/crop-001_fullvol_tissuecrop.zarr/labels/manual_gt-all_organelles-crop147",
+      "field": "parent_raw",
+      "actual": "/groups/miaai/miaai/lmd-v0.0.1/data/em-mouse-CellMap-jrc-mus-kidney/crop-001_fullvol.zarr/raw",
+      "expected": "an existing directory",
+      "severity": "error",
+      "suggested_fix": "update parent_raw to the raw store's current path (likely renamed)"
+    },
+    {
+      "check": "parent_raw_validity",
+      "dataset": "em-mouse-CellMap-jrc-mus-kidney",
+      "path": "em-mouse-CellMap-jrc-mus-kidney/crop-001_fullvol_tissuecrop.zarr/labels/manual_gt-all_organelles-crop148",
+      "field": "parent_raw",
+      "actual": "/groups/miaai/miaai/lmd-v0.0.1/data/em-mouse-CellMap-jrc-mus-kidney/crop-001_fullvol.zarr/raw",
+      "expected": "an existing directory",
+      "severity": "error",
+      "suggested_fix": "update parent_raw to the raw store's current path (likely renamed)"
+    },
+    {
+      "check": "parent_raw_validity",
+      "dataset": "em-mouse-CellMap-jrc-mus-kidney",
+      "path": "em-mouse-CellMap-jrc-mus-kidney/crop-001_fullvol_tissuecrop.zarr/labels/manual_gt-all_organelles-crop149",
+      "field": "parent_raw",
+      "actual": "/groups/miaai/miaai/lmd-v0.0.1/data/em-mouse-CellMap-jrc-mus-kidney/crop-001_fullvol.zarr/raw",
+      "expected": "an existing directory",
+      "severity": "error",
+      "suggested_fix": "update parent_raw to the raw store's current path (likely renamed)"
+    },
+    {
+      "check": "parent_raw_validity",
+      "dataset": "em-mouse-CellMap-jrc-mus-kidney",
+      "path": "em-mouse-CellMap-jrc-mus-kidney/crop-001_fullvol_tissuecrop.zarr/labels/manual_gt-all_organelles-crop156",
+      "field": "parent_raw",
+      "actual": "/groups/miaai/miaai/lmd-v0.0.1/data/em-mouse-CellMap-jrc-mus-kidney/crop-001_fullvol.zarr/raw",
+      "expected": "an existing directory",
+      "severity": "error",
+      "suggested_fix": "update parent_raw to the raw store's current path (likely renamed)"
+    },
+    {
+      "check": "parent_raw_validity",
+      "dataset": "em-mouse-CellMap-jrc-mus-kidney",
+      "path": "em-mouse-CellMap-jrc-mus-kidney/crop-001_fullvol_tissuecrop.zarr/labels/manual_gt-all_organelles-crop158",
+      "field": "parent_raw",
+      "actual": "/groups/miaai/miaai/lmd-v0.0.1/data/em-mouse-CellMap-jrc-mus-kidney/crop-001_fullvol.zarr/raw",
+      "expected": "an existing directory",
+      "severity": "error",
+      "suggested_fix": "update parent_raw to the raw store's current path (likely renamed)"
+    },
+    {
+      "check": "parent_raw_validity",
+      "dataset": "em-mouse-CellMap-jrc-mus-kidney",
+      "path": "em-mouse-CellMap-jrc-mus-kidney/crop-001_fullvol_tissuecrop.zarr/labels/manual_gt-all_organelles-crop159",
+      "field": "parent_raw",
+      "actual": "/groups/miaai/miaai/lmd-v0.0.1/data/em-mouse-CellMap-jrc-mus-kidney/crop-001_fullvol.zarr/raw",
+      "expected": "an existing directory",
+      "severity": "error",
+      "suggested_fix": "update parent_raw to the raw store's current path (likely renamed)"
+    },
+    {
+      "check": "parent_raw_validity",
+      "dataset": "em-mouse-CellMap-jrc-mus-kidney",
+      "path": "em-mouse-CellMap-jrc-mus-kidney/crop-001_fullvol_tissuecrop.zarr/labels/manual_gt-all_organelles-crop160",
+      "field": "parent_raw",
+      "actual": "/groups/miaai/miaai/lmd-v0.0.1/data/em-mouse-CellMap-jrc-mus-kidney/crop-001_fullvol.zarr/raw",
+      "expected": "an existing directory",
+      "severity": "error",
+      "suggested_fix": "update parent_raw to the raw store's current path (likely renamed)"
+    },
+    {
+      "check": "parent_raw_validity",
+      "dataset": "em-mouse-CellMap-jrc-mus-kidney",
+      "path": "em-mouse-CellMap-jrc-mus-kidney/crop-001_fullvol_tissuecrop.zarr/labels/manual_gt-all_organelles-crop161",
+      "field": "parent_raw",
+      "actual": "/groups/miaai/miaai/lmd-v0.0.1/data/em-mouse-CellMap-jrc-mus-kidney/crop-001_fullvol.zarr/raw",
+      "expected": "an existing directory",
+      "severity": "error",
+      "suggested_fix": "update parent_raw to the raw store's current path (likely renamed)"
+    },
+    {
+      "check": "parent_raw_validity",
+      "dataset": "em-mouse-CellMap-jrc-mus-kidney",
+      "path": "em-mouse-CellMap-jrc-mus-kidney/crop-001_fullvol_tissuecrop.zarr/labels/manual_gt-all_organelles-crop162",
+      "field": "parent_raw",
+      "actual": "/groups/miaai/miaai/lmd-v0.0.1/data/em-mouse-CellMap-jrc-mus-kidney/crop-001_fullvol.zarr/raw",
+      "expected": "an existing directory",
+      "severity": "error",
+      "suggested_fix": "update parent_raw to the raw store's current path (likely renamed)"
+    },
+    {
+      "check": "parent_raw_validity",
+      "dataset": "em-mouse-CellMap-jrc-mus-kidney",
+      "path": "em-mouse-CellMap-jrc-mus-kidney/crop-001_fullvol_tissuecrop.zarr/labels/manual_gt-all_organelles-crop163",
+      "field": "parent_raw",
+      "actual": "/groups/miaai/miaai/lmd-v0.0.1/data/em-mouse-CellMap-jrc-mus-kidney/crop-001_fullvol.zarr/raw",
+      "expected": "an existing directory",
+      "severity": "error",
+      "suggested_fix": "update parent_raw to the raw store's current path (likely renamed)"
+    },
+    {
+      "check": "parent_raw_validity",
+      "dataset": "em-mouse-CellMap-jrc-mus-kidney",
+      "path": "em-mouse-CellMap-jrc-mus-kidney/crop-001_fullvol_tissuecrop.zarr/labels/manual_gt-all_organelles-crop164",
+      "field": "parent_raw",
+      "actual": "/groups/miaai/miaai/lmd-v0.0.1/data/em-mouse-CellMap-jrc-mus-kidney/crop-001_fullvol.zarr/raw",
+      "expected": "an existing directory",
+      "severity": "error",
+      "suggested_fix": "update parent_raw to the raw store's current path (likely renamed)"
+    },
+    {
+      "check": "parent_raw_validity",
+      "dataset": "em-mouse-CellMap-jrc-mus-kidney",
+      "path": "em-mouse-CellMap-jrc-mus-kidney/crop-001_fullvol_tissuecrop.zarr/labels/manual_gt-all_organelles-crop165",
+      "field": "parent_raw",
+      "actual": "/groups/miaai/miaai/lmd-v0.0.1/data/em-mouse-CellMap-jrc-mus-kidney/crop-001_fullvol.zarr/raw",
+      "expected": "an existing directory",
+      "severity": "error",
+      "suggested_fix": "update parent_raw to the raw store's current path (likely renamed)"
+    },
+    {
+      "check": "parent_raw_validity",
+      "dataset": "em-mouse-CellMap-jrc-mus-kidney",
+      "path": "em-mouse-CellMap-jrc-mus-kidney/crop-001_fullvol_tissuecrop.zarr/labels/manual_gt-all_organelles-crop166",
+      "field": "parent_raw",
+      "actual": "/groups/miaai/miaai/lmd-v0.0.1/data/em-mouse-CellMap-jrc-mus-kidney/crop-001_fullvol.zarr/raw",
+      "expected": "an existing directory",
+      "severity": "error",
+      "suggested_fix": "update parent_raw to the raw store's current path (likely renamed)"
+    },
+    {
+      "check": "parent_raw_validity",
+      "dataset": "em-mouse-CellMap-jrc-mus-kidney",
+      "path": "em-mouse-CellMap-jrc-mus-kidney/crop-001_fullvol_tissuecrop.zarr/labels/manual_gt-all_organelles-crop179",
+      "field": "parent_raw",
+      "actual": "/groups/miaai/miaai/lmd-v0.0.1/data/em-mouse-CellMap-jrc-mus-kidney/crop-001_fullvol.zarr/raw",
+      "expected": "an existing directory",
+      "severity": "error",
+      "suggested_fix": "update parent_raw to the raw store's current path (likely renamed)"
+    },
+    {
+      "check": "parent_raw_validity",
+      "dataset": "em-mouse-CellMap-jrc-mus-kidney",
+      "path": "em-mouse-CellMap-jrc-mus-kidney/crop-001_fullvol_tissuecrop.zarr/labels/manual_gt-all_organelles-crop184",
+      "field": "parent_raw",
+      "actual": "/groups/miaai/miaai/lmd-v0.0.1/data/em-mouse-CellMap-jrc-mus-kidney/crop-001_fullvol.zarr/raw",
+      "expected": "an existing directory",
+      "severity": "error",
+      "suggested_fix": "update parent_raw to the raw store's current path (likely renamed)"
+    },
+    {
+      "check": "parent_raw_validity",
+      "dataset": "em-mouse-CellMap-jrc-mus-kidney",
+      "path": "em-mouse-CellMap-jrc-mus-kidney/crop-001_fullvol_tissuecrop.zarr/labels/manual_gt-all_organelles-crop221",
+      "field": "parent_raw",
+      "actual": "/groups/miaai/miaai/lmd-v0.0.1/data/em-mouse-CellMap-jrc-mus-kidney/crop-001_fullvol.zarr/raw",
+      "expected": "an existing directory",
+      "severity": "error",
+      "suggested_fix": "update parent_raw to the raw store's current path (likely renamed)"
+    },
+    {
+      "check": "parent_raw_validity",
+      "dataset": "em-mouse-CellMap-jrc-mus-kidney",
+      "path": "em-mouse-CellMap-jrc-mus-kidney/crop-001_fullvol_tissuecrop.zarr/labels/manual_gt-all_organelles-crop229",
+      "field": "parent_raw",
+      "actual": "/groups/miaai/miaai/lmd-v0.0.1/data/em-mouse-CellMap-jrc-mus-kidney/crop-001_fullvol.zarr/raw",
+      "expected": "an existing directory",
+      "severity": "error",
+      "suggested_fix": "update parent_raw to the raw store's current path (likely renamed)"
+    },
+    {
+      "check": "parent_raw_validity",
+      "dataset": "em-mouse-CellMap-jrc-mus-kidney",
+      "path": "em-mouse-CellMap-jrc-mus-kidney/crop-001_fullvol_tissuecrop.zarr/labels/manual_gt-all_organelles-crop230",
+      "field": "parent_raw",
+      "actual": "/groups/miaai/miaai/lmd-v0.0.1/data/em-mouse-CellMap-jrc-mus-kidney/crop-001_fullvol.zarr/raw",
+      "expected": "an existing directory",
+      "severity": "error",
+      "suggested_fix": "update parent_raw to the raw store's current path (likely renamed)"
+    },
+    {
+      "check": "parent_raw_validity",
+      "dataset": "em-mouse-CellMap-jrc-mus-kidney",
+      "path": "em-mouse-CellMap-jrc-mus-kidney/crop-001_fullvol_tissuecrop.zarr/labels/manual_gt-all_organelles-crop231",
+      "field": "parent_raw",
+      "actual": "/groups/miaai/miaai/lmd-v0.0.1/data/em-mouse-CellMap-jrc-mus-kidney/crop-001_fullvol.zarr/raw",
+      "expected": "an existing directory",
+      "severity": "error",
+      "suggested_fix": "update parent_raw to the raw store's current path (likely renamed)"
+    },
+    {
+      "check": "parent_raw_validity",
+      "dataset": "em-mouse-CellMap-jrc-mus-liver",
+      "path": "em-mouse-CellMap-jrc-mus-liver/crop-001_fullvol_tissuecrop.zarr/labels/manual_gt-all_organelles-crop124",
+      "field": "parent_raw",
+      "actual": "/groups/miaai/miaai/lmd-v0.0.1/data/em-mouse-CellMap-jrc-mus-liver/crop-001_fullvol.zarr/raw",
+      "expected": "an existing directory",
+      "severity": "error",
+      "suggested_fix": "update parent_raw to the raw store's current path (likely renamed)"
+    },
+    {
+      "check": "parent_raw_validity",
+      "dataset": "em-mouse-CellMap-jrc-mus-liver",
+      "path": "em-mouse-CellMap-jrc-mus-liver/crop-001_fullvol_tissuecrop.zarr/labels/manual_gt-all_organelles-crop125",
+      "field": "parent_raw",
+      "actual": "/groups/miaai/miaai/lmd-v0.0.1/data/em-mouse-CellMap-jrc-mus-liver/crop-001_fullvol.zarr/raw",
+      "expected": "an existing directory",
+      "severity": "error",
+      "suggested_fix": "update parent_raw to the raw store's current path (likely renamed)"
+    },
+    {
+      "check": "parent_raw_validity",
+      "dataset": "em-mouse-CellMap-jrc-mus-liver",
+      "path": "em-mouse-CellMap-jrc-mus-liver/crop-001_fullvol_tissuecrop.zarr/labels/manual_gt-all_organelles-crop131",
+      "field": "parent_raw",
+      "actual": "/groups/miaai/miaai/lmd-v0.0.1/data/em-mouse-CellMap-jrc-mus-liver/crop-001_fullvol.zarr/raw",
+      "expected": "an existing directory",
+      "severity": "error",
+      "suggested_fix": "update parent_raw to the raw store's current path (likely renamed)"
+    },
+    {
+      "check": "parent_raw_validity",
+      "dataset": "em-mouse-CellMap-jrc-mus-liver",
+      "path": "em-mouse-CellMap-jrc-mus-liver/crop-001_fullvol_tissuecrop.zarr/labels/manual_gt-all_organelles-crop132",
+      "field": "parent_raw",
+      "actual": "/groups/miaai/miaai/lmd-v0.0.1/data/em-mouse-CellMap-jrc-mus-liver/crop-001_fullvol.zarr/raw",
+      "expected": "an existing directory",
+      "severity": "error",
+      "suggested_fix": "update parent_raw to the raw store's current path (likely renamed)"
+    },
+    {
+      "check": "parent_raw_validity",
+      "dataset": "em-mouse-CellMap-jrc-mus-liver",
+      "path": "em-mouse-CellMap-jrc-mus-liver/crop-001_fullvol_tissuecrop.zarr/labels/manual_gt-all_organelles-crop133",
+      "field": "parent_raw",
+      "actual": "/groups/miaai/miaai/lmd-v0.0.1/data/em-mouse-CellMap-jrc-mus-liver/crop-001_fullvol.zarr/raw",
+      "expected": "an existing directory",
+      "severity": "error",
+      "suggested_fix": "update parent_raw to the raw store's current path (likely renamed)"
+    },
+    {
+      "check": "parent_raw_validity",
+      "dataset": "em-mouse-CellMap-jrc-mus-liver",
+      "path": "em-mouse-CellMap-jrc-mus-liver/crop-001_fullvol_tissuecrop.zarr/labels/manual_gt-all_organelles-crop135",
+      "field": "parent_raw",
+      "actual": "/groups/miaai/miaai/lmd-v0.0.1/data/em-mouse-CellMap-jrc-mus-liver/crop-001_fullvol.zarr/raw",
+      "expected": "an existing directory",
+      "severity": "error",
+      "suggested_fix": "update parent_raw to the raw store's current path (likely renamed)"
+    },
+    {
+      "check": "parent_raw_validity",
+      "dataset": "em-mouse-CellMap-jrc-mus-liver",
+      "path": "em-mouse-CellMap-jrc-mus-liver/crop-001_fullvol_tissuecrop.zarr/labels/manual_gt-all_organelles-crop136",
+      "field": "parent_raw",
+      "actual": "/groups/miaai/miaai/lmd-v0.0.1/data/em-mouse-CellMap-jrc-mus-liver/crop-001_fullvol.zarr/raw",
+      "expected": "an existing directory",
+      "severity": "error",
+      "suggested_fix": "update parent_raw to the raw store's current path (likely renamed)"
+    },
+    {
+      "check": "parent_raw_validity",
+      "dataset": "em-mouse-CellMap-jrc-mus-liver",
+      "path": "em-mouse-CellMap-jrc-mus-liver/crop-001_fullvol_tissuecrop.zarr/labels/manual_gt-all_organelles-crop137",
+      "field": "parent_raw",
+      "actual": "/groups/miaai/miaai/lmd-v0.0.1/data/em-mouse-CellMap-jrc-mus-liver/crop-001_fullvol.zarr/raw",
+      "expected": "an existing directory",
+      "severity": "error",
+      "suggested_fix": "update parent_raw to the raw store's current path (likely renamed)"
+    },
+    {
+      "check": "parent_raw_validity",
+      "dataset": "em-mouse-CellMap-jrc-mus-liver",
+      "path": "em-mouse-CellMap-jrc-mus-liver/crop-001_fullvol_tissuecrop.zarr/labels/manual_gt-all_organelles-crop138",
+      "field": "parent_raw",
+      "actual": "/groups/miaai/miaai/lmd-v0.0.1/data/em-mouse-CellMap-jrc-mus-liver/crop-001_fullvol.zarr/raw",
+      "expected": "an existing directory",
+      "severity": "error",
+      "suggested_fix": "update parent_raw to the raw store's current path (likely renamed)"
+    },
+    {
+      "check": "parent_raw_validity",
+      "dataset": "em-mouse-CellMap-jrc-mus-liver",
+      "path": "em-mouse-CellMap-jrc-mus-liver/crop-001_fullvol_tissuecrop.zarr/labels/manual_gt-all_organelles-crop139",
+      "field": "parent_raw",
+      "actual": "/groups/miaai/miaai/lmd-v0.0.1/data/em-mouse-CellMap-jrc-mus-liver/crop-001_fullvol.zarr/raw",
+      "expected": "an existing directory",
+      "severity": "error",
+      "suggested_fix": "update parent_raw to the raw store's current path (likely renamed)"
+    },
+    {
+      "check": "parent_raw_validity",
+      "dataset": "em-mouse-CellMap-jrc-mus-liver",
+      "path": "em-mouse-CellMap-jrc-mus-liver/crop-001_fullvol_tissuecrop.zarr/labels/manual_gt-all_organelles-crop142",
+      "field": "parent_raw",
+      "actual": "/groups/miaai/miaai/lmd-v0.0.1/data/em-mouse-CellMap-jrc-mus-liver/crop-001_fullvol.zarr/raw",
+      "expected": "an existing directory",
+      "severity": "error",
+      "suggested_fix": "update parent_raw to the raw store's current path (likely renamed)"
+    },
+    {
+      "check": "parent_raw_validity",
+      "dataset": "em-mouse-CellMap-jrc-mus-liver",
+      "path": "em-mouse-CellMap-jrc-mus-liver/crop-001_fullvol_tissuecrop.zarr/labels/manual_gt-all_organelles-crop143",
+      "field": "parent_raw",
+      "actual": "/groups/miaai/miaai/lmd-v0.0.1/data/em-mouse-CellMap-jrc-mus-liver/crop-001_fullvol.zarr/raw",
+      "expected": "an existing directory",
+      "severity": "error",
+      "suggested_fix": "update parent_raw to the raw store's current path (likely renamed)"
+    },
+    {
+      "check": "parent_raw_validity",
+      "dataset": "em-mouse-CellMap-jrc-mus-liver",
+      "path": "em-mouse-CellMap-jrc-mus-liver/crop-001_fullvol_tissuecrop.zarr/labels/manual_gt-all_organelles-crop144",
+      "field": "parent_raw",
+      "actual": "/groups/miaai/miaai/lmd-v0.0.1/data/em-mouse-CellMap-jrc-mus-liver/crop-001_fullvol.zarr/raw",
+      "expected": "an existing directory",
+      "severity": "error",
+      "suggested_fix": "update parent_raw to the raw store's current path (likely renamed)"
+    },
+    {
+      "check": "parent_raw_validity",
+      "dataset": "em-mouse-CellMap-jrc-mus-liver",
+      "path": "em-mouse-CellMap-jrc-mus-liver/crop-001_fullvol_tissuecrop.zarr/labels/manual_gt-all_organelles-crop145",
+      "field": "parent_raw",
+      "actual": "/groups/miaai/miaai/lmd-v0.0.1/data/em-mouse-CellMap-jrc-mus-liver/crop-001_fullvol.zarr/raw",
+      "expected": "an existing directory",
+      "severity": "error",
+      "suggested_fix": "update parent_raw to the raw store's current path (likely renamed)"
+    },
+    {
+      "check": "parent_raw_validity",
+      "dataset": "em-mouse-CellMap-jrc-mus-liver",
+      "path": "em-mouse-CellMap-jrc-mus-liver/crop-001_fullvol_tissuecrop.zarr/labels/manual_gt-all_organelles-crop150",
+      "field": "parent_raw",
+      "actual": "/groups/miaai/miaai/lmd-v0.0.1/data/em-mouse-CellMap-jrc-mus-liver/crop-001_fullvol.zarr/raw",
+      "expected": "an existing directory",
+      "severity": "error",
+      "suggested_fix": "update parent_raw to the raw store's current path (likely renamed)"
+    },
+    {
+      "check": "parent_raw_validity",
+      "dataset": "em-mouse-CellMap-jrc-mus-liver",
+      "path": "em-mouse-CellMap-jrc-mus-liver/crop-001_fullvol_tissuecrop.zarr/labels/manual_gt-all_organelles-crop151",
+      "field": "parent_raw",
+      "actual": "/groups/miaai/miaai/lmd-v0.0.1/data/em-mouse-CellMap-jrc-mus-liver/crop-001_fullvol.zarr/raw",
+      "expected": "an existing directory",
+      "severity": "error",
+      "suggested_fix": "update parent_raw to the raw store's current path (likely renamed)"
+    },
+    {
+      "check": "parent_raw_validity",
+      "dataset": "em-mouse-CellMap-jrc-mus-liver",
+      "path": "em-mouse-CellMap-jrc-mus-liver/crop-001_fullvol_tissuecrop.zarr/labels/manual_gt-all_organelles-crop157",
+      "field": "parent_raw",
+      "actual": "/groups/miaai/miaai/lmd-v0.0.1/data/em-mouse-CellMap-jrc-mus-liver/crop-001_fullvol.zarr/raw",
+      "expected": "an existing directory",
+      "severity": "error",
+      "suggested_fix": "update parent_raw to the raw store's current path (likely renamed)"
+    },
+    {
+      "check": "parent_raw_validity",
+      "dataset": "em-mouse-CellMap-jrc-mus-liver",
+      "path": "em-mouse-CellMap-jrc-mus-liver/crop-001_fullvol_tissuecrop.zarr/labels/manual_gt-all_organelles-crop171",
+      "field": "parent_raw",
+      "actual": "/groups/miaai/miaai/lmd-v0.0.1/data/em-mouse-CellMap-jrc-mus-liver/crop-001_fullvol.zarr/raw",
+      "expected": "an existing directory",
+      "severity": "error",
+      "suggested_fix": "update parent_raw to the raw store's current path (likely renamed)"
+    },
+    {
+      "check": "parent_raw_validity",
+      "dataset": "em-mouse-CellMap-jrc-mus-liver",
+      "path": "em-mouse-CellMap-jrc-mus-liver/crop-001_fullvol_tissuecrop.zarr/labels/manual_gt-all_organelles-crop172",
+      "field": "parent_raw",
+      "actual": "/groups/miaai/miaai/lmd-v0.0.1/data/em-mouse-CellMap-jrc-mus-liver/crop-001_fullvol.zarr/raw",
+      "expected": "an existing directory",
+      "severity": "error",
+      "suggested_fix": "update parent_raw to the raw store's current path (likely renamed)"
+    },
+    {
+      "check": "parent_raw_validity",
+      "dataset": "em-mouse-CellMap-jrc-mus-liver",
+      "path": "em-mouse-CellMap-jrc-mus-liver/crop-001_fullvol_tissuecrop.zarr/labels/manual_gt-all_organelles-crop175",
+      "field": "parent_raw",
+      "actual": "/groups/miaai/miaai/lmd-v0.0.1/data/em-mouse-CellMap-jrc-mus-liver/crop-001_fullvol.zarr/raw",
+      "expected": "an existing directory",
+      "severity": "error",
+      "suggested_fix": "update parent_raw to the raw store's current path (likely renamed)"
+    },
+    {
+      "check": "parent_raw_validity",
+      "dataset": "em-mouse-CellMap-jrc-mus-liver",
+      "path": "em-mouse-CellMap-jrc-mus-liver/crop-001_fullvol_tissuecrop.zarr/labels/manual_gt-all_organelles-crop177",
+      "field": "parent_raw",
+      "actual": "/groups/miaai/miaai/lmd-v0.0.1/data/em-mouse-CellMap-jrc-mus-liver/crop-001_fullvol.zarr/raw",
+      "expected": "an existing directory",
+      "severity": "error",
+      "suggested_fix": "update parent_raw to the raw store's current path (likely renamed)"
+    },
+    {
+      "check": "parent_raw_validity",
+      "dataset": "em-mouse-CellMap-jrc-mus-liver",
+      "path": "em-mouse-CellMap-jrc-mus-liver/crop-001_fullvol_tissuecrop.zarr/labels/manual_gt-all_organelles-crop183",
+      "field": "parent_raw",
+      "actual": "/groups/miaai/miaai/lmd-v0.0.1/data/em-mouse-CellMap-jrc-mus-liver/crop-001_fullvol.zarr/raw",
+      "expected": "an existing directory",
+      "severity": "error",
+      "suggested_fix": "update parent_raw to the raw store's current path (likely renamed)"
+    },
+    {
+      "check": "parent_raw_validity",
+      "dataset": "em-mouse-CellMap-jrc-mus-liver",
+      "path": "em-mouse-CellMap-jrc-mus-liver/crop-001_fullvol_tissuecrop.zarr/labels/manual_gt-all_organelles-crop416",
+      "field": "parent_raw",
+      "actual": "/groups/miaai/miaai/lmd-v0.0.1/data/em-mouse-CellMap-jrc-mus-liver/crop-001_fullvol.zarr/raw",
+      "expected": "an existing directory",
+      "severity": "error",
+      "suggested_fix": "update parent_raw to the raw store's current path (likely renamed)"
+    },
+    {
+      "check": "parent_raw_validity",
+      "dataset": "em-mouse-CellMap-jrc-mus-liver",
+      "path": "em-mouse-CellMap-jrc-mus-liver/crop-001_fullvol_tissuecrop.zarr/labels/manual_gt-all_organelles-crop417",
+      "field": "parent_raw",
+      "actual": "/groups/miaai/miaai/lmd-v0.0.1/data/em-mouse-CellMap-jrc-mus-liver/crop-001_fullvol.zarr/raw",
+      "expected": "an existing directory",
+      "severity": "error",
+      "suggested_fix": "update parent_raw to the raw store's current path (likely renamed)"
+    },
+    {
+      "check": "parent_raw_validity",
+      "dataset": "em-mouse-CellMap-jrc-mus-liver-3",
+      "path": "em-mouse-CellMap-jrc-mus-liver-3/crop-001_fullvol_tissuecrop.zarr/labels/manual_gt-all_organelles-crop473",
+      "field": "parent_raw",
+      "actual": "/groups/miaai/miaai/lmd-v0.0.1/data/em-mouse-CellMap-jrc-mus-liver-3/crop-001_fullvol.zarr/raw",
+      "expected": "an existing directory",
+      "severity": "error",
+      "suggested_fix": "update parent_raw to the raw store's current path (likely renamed)"
+    }
+  ]
+}

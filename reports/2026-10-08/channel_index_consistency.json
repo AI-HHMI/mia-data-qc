@@ -5,7 +5,7 @@
     {
       "check": "channel_index_consistency",
       "dataset": "lm-zebrafish-Betzig-mosaic-example_annotations_Thayer",
-      "path": "lm-zebrafish-Betzig-mosaic-example_annotations_Thayer/crop-002_example_annotations_Thayer_2channels.zarr/labels/initial_labels/zarr.json",
+      "path": "lm-zebrafish-Betzig-mosaic-example_annotations_Thayer/crop-002_example_annotations_Thayer_2channels.zarr/labels/initial_labels",
       "field": "source.channel_index",
       "actual": "missing",
       "expected": "an integer in [0, 2)",
@@ -15,7 +15,7 @@
     {
       "check": "channel_index_consistency",
       "dataset": "lm-zebrafish-Betzig-mosaic-example_annotations_Thayer",
-      "path": "lm-zebrafish-Betzig-mosaic-example_annotations_Thayer/crop-002_example_annotations_Thayer_2channels.zarr/labels/postprocessed_labels/zarr.json",
+      "path": "lm-zebrafish-Betzig-mosaic-example_annotations_Thayer/crop-002_example_annotations_Thayer_2channels.zarr/labels/postprocessed_labels",
       "field": "source.channel_index",
       "actual": "missing",
       "expected": "an integer in [0, 2)",
@@ -25,7 +25,7 @@
     {
       "check": "channel_index_consistency",
       "dataset": "lm-zebrafish-Betzig-mosaic-example_annotations_Thayer",
-      "path": "lm-zebrafish-Betzig-mosaic-example_annotations_Thayer/crop-002_example_annotations_Thayer_2channels.zarr/labels/proofread_refined_labels/zarr.json",
+      "path": "lm-zebrafish-Betzig-mosaic-example_annotations_Thayer/crop-002_example_annotations_Thayer_2channels.zarr/labels/proofread_refined_labels",
       "field": "source.channel_index",
       "actual": "missing",
       "expected": "an integer in [0, 2)",
@@ -35,7 +35,7 @@
     {
       "check": "channel_index_consistency",
       "dataset": "lm-zebrafish-Betzig-mosaic-example_annotations_Thayer",
-      "path": "lm-zebrafish-Betzig-mosaic-example_annotations_Thayer/crop-002_example_annotations_Thayer_2channels.zarr/labels/refined_labels/zarr.json",
+      "path": "lm-zebrafish-Betzig-mosaic-example_annotations_Thayer/crop-002_example_annotations_Thayer_2channels.zarr/labels/refined_labels",
       "field": "source.channel_index",
       "actual": "missing",
       "expected": "an integer in [0, 2)",

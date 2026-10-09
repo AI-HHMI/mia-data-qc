@@ -1,0 +1,916 @@
+{
+  "check": "multitc_naming",
+  "date": "2026-10-08",
+  "findings": [
+    {
+      "check": "multitc_naming",
+      "dataset": "exm-drosophila-flyliconn-FlyID45-1-flybrain-synapse-2ch-20260624",
+      "path": "exm-drosophila-flyliconn-FlyID45-1-flybrain-synapse-2ch-20260624/crop-001_2ndgel_3C11_40XW_2c.zarr",
+      "field": "crop_name",
+      "actual": "crop-001_2ndgel_3C11_40XW_2c.zarr",
+      "expected": "crop descriptor contains `1t_2c` (real raw shape: 1 timepoint(s), 2 channel(s))",
+      "severity": "error",
+      "suggested_fix": "rename crop directory to include `1t_2c` in its descriptor"
+    },
+    {
+      "check": "multitc_naming",
+      "dataset": "exm-drosophila-flyliconn-FlyID45-1-flybrain-synapse-2ch-20260624",
+      "path": "exm-drosophila-flyliconn-FlyID45-1-flybrain-synapse-2ch-20260624/crop-002_2ndgel_3C11_40XW001_2c.zarr",
+      "field": "crop_name",
+      "actual": "crop-002_2ndgel_3C11_40XW001_2c.zarr",
+      "expected": "crop descriptor contains `1t_2c` (real raw shape: 1 timepoint(s), 2 channel(s))",
+      "severity": "error",
+      "suggested_fix": "rename crop directory to include `1t_2c` in its descriptor"
+    },
+    {
+      "check": "multitc_naming",
+      "dataset": "exm-drosophila-flyliconn-FlyID45-1-flybrain-synapse-2ch-20260624",
+      "path": "exm-drosophila-flyliconn-FlyID45-1-flybrain-synapse-2ch-20260624/crop-003_2ndgel_3C11_40XW003_2c.zarr",
+      "field": "crop_name",
+      "actual": "crop-003_2ndgel_3C11_40XW003_2c.zarr",
+      "expected": "crop descriptor contains `1t_2c` (real raw shape: 1 timepoint(s), 2 channel(s))",
+      "severity": "error",
+      "suggested_fix": "rename crop directory to include `1t_2c` in its descriptor"
+    },
+    {
+      "check": "multitc_naming",
+      "dataset": "exm-drosophila-flyliconn-FlyID45-1-flybrain-synapse-2ch-20260624",
+      "path": "exm-drosophila-flyliconn-FlyID45-1-flybrain-synapse-2ch-20260624/crop-004_2ndgel_3C11_40XW005_2c.zarr",
+      "field": "crop_name",
+      "actual": "crop-004_2ndgel_3C11_40XW005_2c.zarr",
+      "expected": "crop descriptor contains `1t_2c` (real raw shape: 1 timepoint(s), 2 channel(s))",
+      "severity": "error",
+      "suggested_fix": "rename crop directory to include `1t_2c` in its descriptor"
+    },
+    {
+      "check": "multitc_naming",
+      "dataset": "exm-mouse-liconn-ExPID71-synapse-20260407_GFAP_CnX43_Pan",
+      "path": "exm-mouse-liconn-ExPID71-synapse-20260407_GFAP_CnX43_Pan/crop-001_40XW001.zarr",
+      "field": "crop_name",
+      "actual": "crop-001_40XW001.zarr",
+      "expected": "crop descriptor contains `1t_3c` (real raw shape: 1 timepoint(s), 3 channel(s))",
+      "severity": "error",
+      "suggested_fix": "rename crop directory to include `1t_3c` in its descriptor"
+    },
+    {
+      "check": "multitc_naming",
+      "dataset": "exm-mouse-liconn-ExPID71-synapse-20260407_GFAP_CnX43_Pan",
+      "path": "exm-mouse-liconn-ExPID71-synapse-20260407_GFAP_CnX43_Pan/crop-002_40XW002.zarr",
+      "field": "crop_name",
+      "actual": "crop-002_40XW002.zarr",
+      "expected": "crop descriptor contains `1t_3c` (real raw shape: 1 timepoint(s), 3 channel(s))",
+      "severity": "error",
+      "suggested_fix": "rename crop directory to include `1t_3c` in its descriptor"
+    },
+    {
+      "check": "multitc_naming",
+      "dataset": "exm-mouse-liconn-ExPID72-synapse-20260407_RIM12_Homer1_Pan",
+      "path": "exm-mouse-liconn-ExPID72-synapse-20260407_RIM12_Homer1_Pan/crop-001_40XW008.zarr",
+      "field": "crop_name",
+      "actual": "crop-001_40XW008.zarr",
+      "expected": "crop descriptor contains `1t_3c` (real raw shape: 1 timepoint(s), 3 channel(s))",
+      "severity": "error",
+      "suggested_fix": "rename crop directory to include `1t_3c` in its descriptor"
+    },
+    {
+      "check": "multitc_naming",
+      "dataset": "exm-mouse-liconn-ExPID72-synapse-20260407_RIM12_Homer1_Pan",
+      "path": "exm-mouse-liconn-ExPID72-synapse-20260407_RIM12_Homer1_Pan/crop-002_40XW009.zarr",
+      "field": "crop_name",
+      "actual": "crop-002_40XW009.zarr",
+      "expected": "crop descriptor contains `1t_3c` (real raw shape: 1 timepoint(s), 3 channel(s))",
+      "severity": "error",
+      "suggested_fix": "rename crop directory to include `1t_3c` in its descriptor"
+    },
+    {
+      "check": "multitc_naming",
+      "dataset": "exm-mouse-liconn-ExPID72-synapse-20260407_RIM12_Homer1_Pan",
+      "path": "exm-mouse-liconn-ExPID72-synapse-20260407_RIM12_Homer1_Pan/crop-003_40XW010.zarr",
+      "field": "crop_name",
+      "actual": "crop-003_40XW010.zarr",
+      "expected": "crop descriptor contains `1t_3c` (real raw shape: 1 timepoint(s), 3 channel(s))",
+      "severity": "error",
+      "suggested_fix": "rename crop directory to include `1t_3c` in its descriptor"
+    },
+    {
+      "check": "multitc_naming",
+      "dataset": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched",
+      "path": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched/crop-001_setup196.zarr",
+      "field": "crop_name",
+      "actual": "crop-001_setup196.zarr",
+      "expected": "crop descriptor contains `1t_3c` (real raw shape: 1 timepoint(s), 3 channel(s))",
+      "severity": "error",
+      "suggested_fix": "rename crop directory to include `1t_3c` in its descriptor"
+    },
+    {
+      "check": "multitc_naming",
+      "dataset": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched",
+      "path": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched/crop-002_setup197.zarr",
+      "field": "crop_name",
+      "actual": "crop-002_setup197.zarr",
+      "expected": "crop descriptor contains `1t_3c` (real raw shape: 1 timepoint(s), 3 channel(s))",
+      "severity": "error",
+      "suggested_fix": "rename crop directory to include `1t_3c` in its descriptor"
+    },
+    {
+      "check": "multitc_naming",
+      "dataset": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched",
+      "path": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched/crop-003_setup198.zarr",
+      "field": "crop_name",
+      "actual": "crop-003_setup198.zarr",
+      "expected": "crop descriptor contains `1t_3c` (real raw shape: 1 timepoint(s), 3 channel(s))",
+      "severity": "error",
+      "suggested_fix": "rename crop directory to include `1t_3c` in its descriptor"
+    },
+    {
+      "check": "multitc_naming",
+      "dataset": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched",
+      "path": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched/crop-004_setup199.zarr",
+      "field": "crop_name",
+      "actual": "crop-004_setup199.zarr",
+      "expected": "crop descriptor contains `1t_3c` (real raw shape: 1 timepoint(s), 3 channel(s))",
+      "severity": "error",
+      "suggested_fix": "rename crop directory to include `1t_3c` in its descriptor"
+    },
+    {
+      "check": "multitc_naming",
+      "dataset": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched",
+      "path": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched/crop-005_setup200.zarr",
+      "field": "crop_name",
+      "actual": "crop-005_setup200.zarr",
+      "expected": "crop descriptor contains `1t_3c` (real raw shape: 1 timepoint(s), 3 channel(s))",
+      "severity": "error",
+      "suggested_fix": "rename crop directory to include `1t_3c` in its descriptor"
+    },
+    {
+      "check": "multitc_naming",
+      "dataset": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched",
+      "path": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched/crop-006_setup201.zarr",
+      "field": "crop_name",
+      "actual": "crop-006_setup201.zarr",
+      "expected": "crop descriptor contains `1t_3c` (real raw shape: 1 timepoint(s), 3 channel(s))",
+      "severity": "error",
+      "suggested_fix": "rename crop directory to include `1t_3c` in its descriptor"
+    },
+    {
+      "check": "multitc_naming",
+      "dataset": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched",
+      "path": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched/crop-007_setup202.zarr",
+      "field": "crop_name",
+      "actual": "crop-007_setup202.zarr",
+      "expected": "crop descriptor contains `1t_3c` (real raw shape: 1 timepoint(s), 3 channel(s))",
+      "severity": "error",
+      "suggested_fix": "rename crop directory to include `1t_3c` in its descriptor"
+    },
+    {
+      "check": "multitc_naming",
+      "dataset": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched",
+      "path": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched/crop-008_setup203.zarr",
+      "field": "crop_name",
+      "actual": "crop-008_setup203.zarr",
+      "expected": "crop descriptor contains `1t_3c` (real raw shape: 1 timepoint(s), 3 channel(s))",
+      "severity": "error",
+      "suggested_fix": "rename crop directory to include `1t_3c` in its descriptor"
+    },
+    {
+      "check": "multitc_naming",
+      "dataset": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched",
+      "path": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched/crop-009_setup204.zarr",
+      "field": "crop_name",
+      "actual": "crop-009_setup204.zarr",
+      "expected": "crop descriptor contains `1t_3c` (real raw shape: 1 timepoint(s), 3 channel(s))",
+      "severity": "error",
+      "suggested_fix": "rename crop directory to include `1t_3c` in its descriptor"
+    },
+    {
+      "check": "multitc_naming",
+      "dataset": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched",
+      "path": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched/crop-010_setup205.zarr",
+      "field": "crop_name",
+      "actual": "crop-010_setup205.zarr",
+      "expected": "crop descriptor contains `1t_3c` (real raw shape: 1 timepoint(s), 3 channel(s))",
+      "severity": "error",
+      "suggested_fix": "rename crop directory to include `1t_3c` in its descriptor"
+    },
+    {
+      "check": "multitc_naming",
+      "dataset": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched",
+      "path": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched/crop-011_setup206.zarr",
+      "field": "crop_name",
+      "actual": "crop-011_setup206.zarr",
+      "expected": "crop descriptor contains `1t_3c` (real raw shape: 1 timepoint(s), 3 channel(s))",
+      "severity": "error",
+      "suggested_fix": "rename crop directory to include `1t_3c` in its descriptor"
+    },
+    {
+      "check": "multitc_naming",
+      "dataset": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched",
+      "path": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched/crop-012_setup207.zarr",
+      "field": "crop_name",
+      "actual": "crop-012_setup207.zarr",
+      "expected": "crop descriptor contains `1t_3c` (real raw shape: 1 timepoint(s), 3 channel(s))",
+      "severity": "error",
+      "suggested_fix": "rename crop directory to include `1t_3c` in its descriptor"
+    },
+    {
+      "check": "multitc_naming",
+      "dataset": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched",
+      "path": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched/crop-013_setup208.zarr",
+      "field": "crop_name",
+      "actual": "crop-013_setup208.zarr",
+      "expected": "crop descriptor contains `1t_3c` (real raw shape: 1 timepoint(s), 3 channel(s))",
+      "severity": "error",
+      "suggested_fix": "rename crop directory to include `1t_3c` in its descriptor"
+    },
+    {
+      "check": "multitc_naming",
+      "dataset": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched",
+      "path": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched/crop-014_setup209.zarr",
+      "field": "crop_name",
+      "actual": "crop-014_setup209.zarr",
+      "expected": "crop descriptor contains `1t_3c` (real raw shape: 1 timepoint(s), 3 channel(s))",
+      "severity": "error",
+      "suggested_fix": "rename crop directory to include `1t_3c` in its descriptor"
+    },
+    {
+      "check": "multitc_naming",
+      "dataset": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched",
+      "path": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched/crop-015_setup210.zarr",
+      "field": "crop_name",
+      "actual": "crop-015_setup210.zarr",
+      "expected": "crop descriptor contains `1t_3c` (real raw shape: 1 timepoint(s), 3 channel(s))",
+      "severity": "error",
+      "suggested_fix": "rename crop directory to include `1t_3c` in its descriptor"
+    },
+    {
+      "check": "multitc_naming",
+      "dataset": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched",
+      "path": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched/crop-016_setup211.zarr",
+      "field": "crop_name",
+      "actual": "crop-016_setup211.zarr",
+      "expected": "crop descriptor contains `1t_3c` (real raw shape: 1 timepoint(s), 3 channel(s))",
+      "severity": "error",
+      "suggested_fix": "rename crop directory to include `1t_3c` in its descriptor"
+    },
+    {
+      "check": "multitc_naming",
+      "dataset": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched",
+      "path": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched/crop-017_setup212.zarr",
+      "field": "crop_name",
+      "actual": "crop-017_setup212.zarr",
+      "expected": "crop descriptor contains `1t_3c` (real raw shape: 1 timepoint(s), 3 channel(s))",
+      "severity": "error",
+      "suggested_fix": "rename crop directory to include `1t_3c` in its descriptor"
+    },
+    {
+      "check": "multitc_naming",
+      "dataset": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched",
+      "path": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched/crop-018_setup213.zarr",
+      "field": "crop_name",
+      "actual": "crop-018_setup213.zarr",
+      "expected": "crop descriptor contains `1t_3c` (real raw shape: 1 timepoint(s), 3 channel(s))",
+      "severity": "error",
+      "suggested_fix": "rename crop directory to include `1t_3c` in its descriptor"
+    },
+    {
+      "check": "multitc_naming",
+      "dataset": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched",
+      "path": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched/crop-019_setup214.zarr",
+      "field": "crop_name",
+      "actual": "crop-019_setup214.zarr",
+      "expected": "crop descriptor contains `1t_3c` (real raw shape: 1 timepoint(s), 3 channel(s))",
+      "severity": "error",
+      "suggested_fix": "rename crop directory to include `1t_3c` in its descriptor"
+    },
+    {
+      "check": "multitc_naming",
+      "dataset": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched",
+      "path": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched/crop-020_setup215.zarr",
+      "field": "crop_name",
+      "actual": "crop-020_setup215.zarr",
+      "expected": "crop descriptor contains `1t_3c` (real raw shape: 1 timepoint(s), 3 channel(s))",
+      "severity": "error",
+      "suggested_fix": "rename crop directory to include `1t_3c` in its descriptor"
+    },
+    {
+      "check": "multitc_naming",
+      "dataset": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched",
+      "path": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched/crop-021_setup216.zarr",
+      "field": "crop_name",
+      "actual": "crop-021_setup216.zarr",
+      "expected": "crop descriptor contains `1t_3c` (real raw shape: 1 timepoint(s), 3 channel(s))",
+      "severity": "error",
+      "suggested_fix": "rename crop directory to include `1t_3c` in its descriptor"
+    },
+    {
+      "check": "multitc_naming",
+      "dataset": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched",
+      "path": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched/crop-022_setup217.zarr",
+      "field": "crop_name",
+      "actual": "crop-022_setup217.zarr",
+      "expected": "crop descriptor contains `1t_3c` (real raw shape: 1 timepoint(s), 3 channel(s))",
+      "severity": "error",
+      "suggested_fix": "rename crop directory to include `1t_3c` in its descriptor"
+    },
+    {
+      "check": "multitc_naming",
+      "dataset": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched",
+      "path": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched/crop-023_setup218.zarr",
+      "field": "crop_name",
+      "actual": "crop-023_setup218.zarr",
+      "expected": "crop descriptor contains `1t_3c` (real raw shape: 1 timepoint(s), 3 channel(s))",
+      "severity": "error",
+      "suggested_fix": "rename crop directory to include `1t_3c` in its descriptor"
+    },
+    {
+      "check": "multitc_naming",
+      "dataset": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched",
+      "path": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched/crop-024_setup219.zarr",
+      "field": "crop_name",
+      "actual": "crop-024_setup219.zarr",
+      "expected": "crop descriptor contains `1t_3c` (real raw shape: 1 timepoint(s), 3 channel(s))",
+      "severity": "error",
+      "suggested_fix": "rename crop directory to include `1t_3c` in its descriptor"
+    },
+    {
+      "check": "multitc_naming",
+      "dataset": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched",
+      "path": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched/crop-025_setup220.zarr",
+      "field": "crop_name",
+      "actual": "crop-025_setup220.zarr",
+      "expected": "crop descriptor contains `1t_3c` (real raw shape: 1 timepoint(s), 3 channel(s))",
+      "severity": "error",
+      "suggested_fix": "rename crop directory to include `1t_3c` in its descriptor"
+    },
+    {
+      "check": "multitc_naming",
+      "dataset": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched",
+      "path": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched/crop-026_setup221.zarr",
+      "field": "crop_name",
+      "actual": "crop-026_setup221.zarr",
+      "expected": "crop descriptor contains `1t_3c` (real raw shape: 1 timepoint(s), 3 channel(s))",
+      "severity": "error",
+      "suggested_fix": "rename crop directory to include `1t_3c` in its descriptor"
+    },
+    {
+      "check": "multitc_naming",
+      "dataset": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched",
+      "path": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched/crop-027_setup222.zarr",
+      "field": "crop_name",
+      "actual": "crop-027_setup222.zarr",
+      "expected": "crop descriptor contains `1t_3c` (real raw shape: 1 timepoint(s), 3 channel(s))",
+      "severity": "error",
+      "suggested_fix": "rename crop directory to include `1t_3c` in its descriptor"
+    },
+    {
+      "check": "multitc_naming",
+      "dataset": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched",
+      "path": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched/crop-028_setup223.zarr",
+      "field": "crop_name",
+      "actual": "crop-028_setup223.zarr",
+      "expected": "crop descriptor contains `1t_3c` (real raw shape: 1 timepoint(s), 3 channel(s))",
+      "severity": "error",
+      "suggested_fix": "rename crop directory to include `1t_3c` in its descriptor"
+    },
+    {
+      "check": "multitc_naming",
+      "dataset": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched",
+      "path": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched/crop-029_setup224.zarr",
+      "field": "crop_name",
+      "actual": "crop-029_setup224.zarr",
+      "expected": "crop descriptor contains `1t_3c` (real raw shape: 1 timepoint(s), 3 channel(s))",
+      "severity": "error",
+      "suggested_fix": "rename crop directory to include `1t_3c` in its descriptor"
+    },
+    {
+      "check": "multitc_naming",
+      "dataset": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched",
+      "path": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched/crop-030_setup225.zarr",
+      "field": "crop_name",
+      "actual": "crop-030_setup225.zarr",
+      "expected": "crop descriptor contains `1t_3c` (real raw shape: 1 timepoint(s), 3 channel(s))",
+      "severity": "error",
+      "suggested_fix": "rename crop directory to include `1t_3c` in its descriptor"
+    },
+    {
+      "check": "multitc_naming",
+      "dataset": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched",
+      "path": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched/crop-031_setup226.zarr",
+      "field": "crop_name",
+      "actual": "crop-031_setup226.zarr",
+      "expected": "crop descriptor contains `1t_3c` (real raw shape: 1 timepoint(s), 3 channel(s))",
+      "severity": "error",
+      "suggested_fix": "rename crop directory to include `1t_3c` in its descriptor"
+    },
+    {
+      "check": "multitc_naming",
+      "dataset": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched",
+      "path": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched/crop-032_setup227.zarr",
+      "field": "crop_name",
+      "actual": "crop-032_setup227.zarr",
+      "expected": "crop descriptor contains `1t_3c` (real raw shape: 1 timepoint(s), 3 channel(s))",
+      "severity": "error",
+      "suggested_fix": "rename crop directory to include `1t_3c` in its descriptor"
+    },
+    {
+      "check": "multitc_naming",
+      "dataset": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched",
+      "path": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched/crop-033_setup228.zarr",
+      "field": "crop_name",
+      "actual": "crop-033_setup228.zarr",
+      "expected": "crop descriptor contains `1t_3c` (real raw shape: 1 timepoint(s), 3 channel(s))",
+      "severity": "error",
+      "suggested_fix": "rename crop directory to include `1t_3c` in its descriptor"
+    },
+    {
+      "check": "multitc_naming",
+      "dataset": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched",
+      "path": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched/crop-034_setup229.zarr",
+      "field": "crop_name",
+      "actual": "crop-034_setup229.zarr",
+      "expected": "crop descriptor contains `1t_3c` (real raw shape: 1 timepoint(s), 3 channel(s))",
+      "severity": "error",
+      "suggested_fix": "rename crop directory to include `1t_3c` in its descriptor"
+    },
+    {
+      "check": "multitc_naming",
+      "dataset": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched",
+      "path": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched/crop-035_setup230.zarr",
+      "field": "crop_name",
+      "actual": "crop-035_setup230.zarr",
+      "expected": "crop descriptor contains `1t_3c` (real raw shape: 1 timepoint(s), 3 channel(s))",
+      "severity": "error",
+      "suggested_fix": "rename crop directory to include `1t_3c` in its descriptor"
+    },
+    {
+      "check": "multitc_naming",
+      "dataset": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched",
+      "path": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched/crop-036_setup231.zarr",
+      "field": "crop_name",
+      "actual": "crop-036_setup231.zarr",
+      "expected": "crop descriptor contains `1t_3c` (real raw shape: 1 timepoint(s), 3 channel(s))",
+      "severity": "error",
+      "suggested_fix": "rename crop directory to include `1t_3c` in its descriptor"
+    },
+    {
+      "check": "multitc_naming",
+      "dataset": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched",
+      "path": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched/crop-037_setup232.zarr",
+      "field": "crop_name",
+      "actual": "crop-037_setup232.zarr",
+      "expected": "crop descriptor contains `1t_3c` (real raw shape: 1 timepoint(s), 3 channel(s))",
+      "severity": "error",
+      "suggested_fix": "rename crop directory to include `1t_3c` in its descriptor"
+    },
+    {
+      "check": "multitc_naming",
+      "dataset": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched",
+      "path": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched/crop-038_setup233.zarr",
+      "field": "crop_name",
+      "actual": "crop-038_setup233.zarr",
+      "expected": "crop descriptor contains `1t_3c` (real raw shape: 1 timepoint(s), 3 channel(s))",
+      "severity": "error",
+      "suggested_fix": "rename crop directory to include `1t_3c` in its descriptor"
+    },
+    {
+      "check": "multitc_naming",
+      "dataset": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched",
+      "path": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched/crop-039_setup234.zarr",
+      "field": "crop_name",
+      "actual": "crop-039_setup234.zarr",
+      "expected": "crop descriptor contains `1t_3c` (real raw shape: 1 timepoint(s), 3 channel(s))",
+      "severity": "error",
+      "suggested_fix": "rename crop directory to include `1t_3c` in its descriptor"
+    },
+    {
+      "check": "multitc_naming",
+      "dataset": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched",
+      "path": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched/crop-040_setup235.zarr",
+      "field": "crop_name",
+      "actual": "crop-040_setup235.zarr",
+      "expected": "crop descriptor contains `1t_3c` (real raw shape: 1 timepoint(s), 3 channel(s))",
+      "severity": "error",
+      "suggested_fix": "rename crop directory to include `1t_3c` in its descriptor"
+    },
+    {
+      "check": "multitc_naming",
+      "dataset": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched",
+      "path": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched/crop-041_setup236.zarr",
+      "field": "crop_name",
+      "actual": "crop-041_setup236.zarr",
+      "expected": "crop descriptor contains `1t_3c` (real raw shape: 1 timepoint(s), 3 channel(s))",
+      "severity": "error",
+      "suggested_fix": "rename crop directory to include `1t_3c` in its descriptor"
+    },
+    {
+      "check": "multitc_naming",
+      "dataset": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched",
+      "path": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched/crop-042_setup294.zarr",
+      "field": "crop_name",
+      "actual": "crop-042_setup294.zarr",
+      "expected": "crop descriptor contains `1t_3c` (real raw shape: 1 timepoint(s), 3 channel(s))",
+      "severity": "error",
+      "suggested_fix": "rename crop directory to include `1t_3c` in its descriptor"
+    },
+    {
+      "check": "multitc_naming",
+      "dataset": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched",
+      "path": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched/crop-043_setup295.zarr",
+      "field": "crop_name",
+      "actual": "crop-043_setup295.zarr",
+      "expected": "crop descriptor contains `1t_3c` (real raw shape: 1 timepoint(s), 3 channel(s))",
+      "severity": "error",
+      "suggested_fix": "rename crop directory to include `1t_3c` in its descriptor"
+    },
+    {
+      "check": "multitc_naming",
+      "dataset": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched",
+      "path": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched/crop-044_setup296.zarr",
+      "field": "crop_name",
+      "actual": "crop-044_setup296.zarr",
+      "expected": "crop descriptor contains `1t_3c` (real raw shape: 1 timepoint(s), 3 channel(s))",
+      "severity": "error",
+      "suggested_fix": "rename crop directory to include `1t_3c` in its descriptor"
+    },
+    {
+      "check": "multitc_naming",
+      "dataset": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched",
+      "path": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched/crop-045_setup297.zarr",
+      "field": "crop_name",
+      "actual": "crop-045_setup297.zarr",
+      "expected": "crop descriptor contains `1t_3c` (real raw shape: 1 timepoint(s), 3 channel(s))",
+      "severity": "error",
+      "suggested_fix": "rename crop directory to include `1t_3c` in its descriptor"
+    },
+    {
+      "check": "multitc_naming",
+      "dataset": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched",
+      "path": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched/crop-046_setup298.zarr",
+      "field": "crop_name",
+      "actual": "crop-046_setup298.zarr",
+      "expected": "crop descriptor contains `1t_3c` (real raw shape: 1 timepoint(s), 3 channel(s))",
+      "severity": "error",
+      "suggested_fix": "rename crop directory to include `1t_3c` in its descriptor"
+    },
+    {
+      "check": "multitc_naming",
+      "dataset": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched",
+      "path": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched/crop-047_setup299.zarr",
+      "field": "crop_name",
+      "actual": "crop-047_setup299.zarr",
+      "expected": "crop descriptor contains `1t_3c` (real raw shape: 1 timepoint(s), 3 channel(s))",
+      "severity": "error",
+      "suggested_fix": "rename crop directory to include `1t_3c` in its descriptor"
+    },
+    {
+      "check": "multitc_naming",
+      "dataset": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched",
+      "path": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched/crop-048_setup300.zarr",
+      "field": "crop_name",
+      "actual": "crop-048_setup300.zarr",
+      "expected": "crop descriptor contains `1t_3c` (real raw shape: 1 timepoint(s), 3 channel(s))",
+      "severity": "error",
+      "suggested_fix": "rename crop directory to include `1t_3c` in its descriptor"
+    },
+    {
+      "check": "multitc_naming",
+      "dataset": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched",
+      "path": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched/crop-049_setup301.zarr",
+      "field": "crop_name",
+      "actual": "crop-049_setup301.zarr",
+      "expected": "crop descriptor contains `1t_3c` (real raw shape: 1 timepoint(s), 3 channel(s))",
+      "severity": "error",
+      "suggested_fix": "rename crop directory to include `1t_3c` in its descriptor"
+    },
+    {
+      "check": "multitc_naming",
+      "dataset": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched",
+      "path": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched/crop-050_setup302.zarr",
+      "field": "crop_name",
+      "actual": "crop-050_setup302.zarr",
+      "expected": "crop descriptor contains `1t_3c` (real raw shape: 1 timepoint(s), 3 channel(s))",
+      "severity": "error",
+      "suggested_fix": "rename crop directory to include `1t_3c` in its descriptor"
+    },
+    {
+      "check": "multitc_naming",
+      "dataset": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched",
+      "path": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched/crop-051_setup303.zarr",
+      "field": "crop_name",
+      "actual": "crop-051_setup303.zarr",
+      "expected": "crop descriptor contains `1t_3c` (real raw shape: 1 timepoint(s), 3 channel(s))",
+      "severity": "error",
+      "suggested_fix": "rename crop directory to include `1t_3c` in its descriptor"
+    },
+    {
+      "check": "multitc_naming",
+      "dataset": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched",
+      "path": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched/crop-052_setup304.zarr",
+      "field": "crop_name",
+      "actual": "crop-052_setup304.zarr",
+      "expected": "crop descriptor contains `1t_3c` (real raw shape: 1 timepoint(s), 3 channel(s))",
+      "severity": "error",
+      "suggested_fix": "rename crop directory to include `1t_3c` in its descriptor"
+    },
+    {
+      "check": "multitc_naming",
+      "dataset": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched",
+      "path": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched/crop-053_setup305.zarr",
+      "field": "crop_name",
+      "actual": "crop-053_setup305.zarr",
+      "expected": "crop descriptor contains `1t_3c` (real raw shape: 1 timepoint(s), 3 channel(s))",
+      "severity": "error",
+      "suggested_fix": "rename crop directory to include `1t_3c` in its descriptor"
+    },
+    {
+      "check": "multitc_naming",
+      "dataset": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched",
+      "path": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched/crop-054_setup306.zarr",
+      "field": "crop_name",
+      "actual": "crop-054_setup306.zarr",
+      "expected": "crop descriptor contains `1t_3c` (real raw shape: 1 timepoint(s), 3 channel(s))",
+      "severity": "error",
+      "suggested_fix": "rename crop directory to include `1t_3c` in its descriptor"
+    },
+    {
+      "check": "multitc_naming",
+      "dataset": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched",
+      "path": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched/crop-055_setup307.zarr",
+      "field": "crop_name",
+      "actual": "crop-055_setup307.zarr",
+      "expected": "crop descriptor contains `1t_3c` (real raw shape: 1 timepoint(s), 3 channel(s))",
+      "severity": "error",
+      "suggested_fix": "rename crop directory to include `1t_3c` in its descriptor"
+    },
+    {
+      "check": "multitc_naming",
+      "dataset": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched",
+      "path": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched/crop-056_setup308.zarr",
+      "field": "crop_name",
+      "actual": "crop-056_setup308.zarr",
+      "expected": "crop descriptor contains `1t_3c` (real raw shape: 1 timepoint(s), 3 channel(s))",
+      "severity": "error",
+      "suggested_fix": "rename crop directory to include `1t_3c` in its descriptor"
+    },
+    {
+      "check": "multitc_naming",
+      "dataset": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched",
+      "path": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched/crop-057_setup309.zarr",
+      "field": "crop_name",
+      "actual": "crop-057_setup309.zarr",
+      "expected": "crop descriptor contains `1t_3c` (real raw shape: 1 timepoint(s), 3 channel(s))",
+      "severity": "error",
+      "suggested_fix": "rename crop directory to include `1t_3c` in its descriptor"
+    },
+    {
+      "check": "multitc_naming",
+      "dataset": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched",
+      "path": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched/crop-058_setup310.zarr",
+      "field": "crop_name",
+      "actual": "crop-058_setup310.zarr",
+      "expected": "crop descriptor contains `1t_3c` (real raw shape: 1 timepoint(s), 3 channel(s))",
+      "severity": "error",
+      "suggested_fix": "rename crop directory to include `1t_3c` in its descriptor"
+    },
+    {
+      "check": "multitc_naming",
+      "dataset": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched",
+      "path": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched/crop-059_setup311.zarr",
+      "field": "crop_name",
+      "actual": "crop-059_setup311.zarr",
+      "expected": "crop descriptor contains `1t_3c` (real raw shape: 1 timepoint(s), 3 channel(s))",
+      "severity": "error",
+      "suggested_fix": "rename crop directory to include `1t_3c` in its descriptor"
+    },
+    {
+      "check": "multitc_naming",
+      "dataset": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched",
+      "path": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched/crop-060_setup312.zarr",
+      "field": "crop_name",
+      "actual": "crop-060_setup312.zarr",
+      "expected": "crop descriptor contains `1t_3c` (real raw shape: 1 timepoint(s), 3 channel(s))",
+      "severity": "error",
+      "suggested_fix": "rename crop directory to include `1t_3c` in its descriptor"
+    },
+    {
+      "check": "multitc_naming",
+      "dataset": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched",
+      "path": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched/crop-061_setup313.zarr",
+      "field": "crop_name",
+      "actual": "crop-061_setup313.zarr",
+      "expected": "crop descriptor contains `1t_3c` (real raw shape: 1 timepoint(s), 3 channel(s))",
+      "severity": "error",
+      "suggested_fix": "rename crop directory to include `1t_3c` in its descriptor"
+    },
+    {
+      "check": "multitc_naming",
+      "dataset": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched",
+      "path": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched/crop-062_setup314.zarr",
+      "field": "crop_name",
+      "actual": "crop-062_setup314.zarr",
+      "expected": "crop descriptor contains `1t_3c` (real raw shape: 1 timepoint(s), 3 channel(s))",
+      "severity": "error",
+      "suggested_fix": "rename crop directory to include `1t_3c` in its descriptor"
+    },
+    {
+      "check": "multitc_naming",
+      "dataset": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched",
+      "path": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched/crop-063_setup315.zarr",
+      "field": "crop_name",
+      "actual": "crop-063_setup315.zarr",
+      "expected": "crop descriptor contains `1t_3c` (real raw shape: 1 timepoint(s), 3 channel(s))",
+      "severity": "error",
+      "suggested_fix": "rename crop directory to include `1t_3c` in its descriptor"
+    },
+    {
+      "check": "multitc_naming",
+      "dataset": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched",
+      "path": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched/crop-064_setup316.zarr",
+      "field": "crop_name",
+      "actual": "crop-064_setup316.zarr",
+      "expected": "crop descriptor contains `1t_3c` (real raw shape: 1 timepoint(s), 3 channel(s))",
+      "severity": "error",
+      "suggested_fix": "rename crop directory to include `1t_3c` in its descriptor"
+    },
+    {
+      "check": "multitc_naming",
+      "dataset": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched",
+      "path": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched/crop-065_setup317.zarr",
+      "field": "crop_name",
+      "actual": "crop-065_setup317.zarr",
+      "expected": "crop descriptor contains `1t_3c` (real raw shape: 1 timepoint(s), 3 channel(s))",
+      "severity": "error",
+      "suggested_fix": "rename crop directory to include `1t_3c` in its descriptor"
+    },
+    {
+      "check": "multitc_naming",
+      "dataset": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched",
+      "path": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched/crop-066_setup318.zarr",
+      "field": "crop_name",
+      "actual": "crop-066_setup318.zarr",
+      "expected": "crop descriptor contains `1t_3c` (real raw shape: 1 timepoint(s), 3 channel(s))",
+      "severity": "error",
+      "suggested_fix": "rename crop directory to include `1t_3c` in its descriptor"
+    },
+    {
+      "check": "multitc_naming",
+      "dataset": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched",
+      "path": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched/crop-067_setup319.zarr",
+      "field": "crop_name",
+      "actual": "crop-067_setup319.zarr",
+      "expected": "crop descriptor contains `1t_3c` (real raw shape: 1 timepoint(s), 3 channel(s))",
+      "severity": "error",
+      "suggested_fix": "rename crop directory to include `1t_3c` in its descriptor"
+    },
+    {
+      "check": "multitc_naming",
+      "dataset": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched",
+      "path": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched/crop-068_setup320.zarr",
+      "field": "crop_name",
+      "actual": "crop-068_setup320.zarr",
+      "expected": "crop descriptor contains `1t_3c` (real raw shape: 1 timepoint(s), 3 channel(s))",
+      "severity": "error",
+      "suggested_fix": "rename crop directory to include `1t_3c` in its descriptor"
+    },
+    {
+      "check": "multitc_naming",
+      "dataset": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched",
+      "path": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched/crop-069_setup321.zarr",
+      "field": "crop_name",
+      "actual": "crop-069_setup321.zarr",
+      "expected": "crop descriptor contains `1t_3c` (real raw shape: 1 timepoint(s), 3 channel(s))",
+      "severity": "error",
+      "suggested_fix": "rename crop directory to include `1t_3c` in its descriptor"
+    },
+    {
+      "check": "multitc_naming",
+      "dataset": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched",
+      "path": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched/crop-070_setup322.zarr",
+      "field": "crop_name",
+      "actual": "crop-070_setup322.zarr",
+      "expected": "crop descriptor contains `1t_3c` (real raw shape: 1 timepoint(s), 3 channel(s))",
+      "severity": "error",
+      "suggested_fix": "rename crop directory to include `1t_3c` in its descriptor"
+    },
+    {
+      "check": "multitc_naming",
+      "dataset": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched",
+      "path": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched/crop-071_setup323.zarr",
+      "field": "crop_name",
+      "actual": "crop-071_setup323.zarr",
+      "expected": "crop descriptor contains `1t_3c` (real raw shape: 1 timepoint(s), 3 channel(s))",
+      "severity": "error",
+      "suggested_fix": "rename crop directory to include `1t_3c` in its descriptor"
+    },
+    {
+      "check": "multitc_naming",
+      "dataset": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched",
+      "path": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched/crop-072_setup324.zarr",
+      "field": "crop_name",
+      "actual": "crop-072_setup324.zarr",
+      "expected": "crop descriptor contains `1t_3c` (real raw shape: 1 timepoint(s), 3 channel(s))",
+      "severity": "error",
+      "suggested_fix": "rename crop directory to include `1t_3c` in its descriptor"
+    },
+    {
+      "check": "multitc_naming",
+      "dataset": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched",
+      "path": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched/crop-073_setup325.zarr",
+      "field": "crop_name",
+      "actual": "crop-073_setup325.zarr",
+      "expected": "crop descriptor contains `1t_3c` (real raw shape: 1 timepoint(s), 3 channel(s))",
+      "severity": "error",
+      "suggested_fix": "rename crop directory to include `1t_3c` in its descriptor"
+    },
+    {
+      "check": "multitc_naming",
+      "dataset": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched",
+      "path": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched/crop-074_setup326.zarr",
+      "field": "crop_name",
+      "actual": "crop-074_setup326.zarr",
+      "expected": "crop descriptor contains `1t_3c` (real raw shape: 1 timepoint(s), 3 channel(s))",
+      "severity": "error",
+      "suggested_fix": "rename crop directory to include `1t_3c` in its descriptor"
+    },
+    {
+      "check": "multitc_naming",
+      "dataset": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched",
+      "path": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched/crop-075_setup327.zarr",
+      "field": "crop_name",
+      "actual": "crop-075_setup327.zarr",
+      "expected": "crop descriptor contains `1t_3c` (real raw shape: 1 timepoint(s), 3 channel(s))",
+      "severity": "error",
+      "suggested_fix": "rename crop directory to include `1t_3c` in its descriptor"
+    },
+    {
+      "check": "multitc_naming",
+      "dataset": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched",
+      "path": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched/crop-076_setup328.zarr",
+      "field": "crop_name",
+      "actual": "crop-076_setup328.zarr",
+      "expected": "crop descriptor contains `1t_3c` (real raw shape: 1 timepoint(s), 3 channel(s))",
+      "severity": "error",
+      "suggested_fix": "rename crop directory to include `1t_3c` in its descriptor"
+    },
+    {
+      "check": "multitc_naming",
+      "dataset": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched",
+      "path": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched/crop-077_setup329.zarr",
+      "field": "crop_name",
+      "actual": "crop-077_setup329.zarr",
+      "expected": "crop descriptor contains `1t_3c` (real raw shape: 1 timepoint(s), 3 channel(s))",
+      "severity": "error",
+      "suggested_fix": "rename crop directory to include `1t_3c` in its descriptor"
+    },
+    {
+      "check": "multitc_naming",
+      "dataset": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched",
+      "path": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched/crop-078_setup330.zarr",
+      "field": "crop_name",
+      "actual": "crop-078_setup330.zarr",
+      "expected": "crop descriptor contains `1t_3c` (real raw shape: 1 timepoint(s), 3 channel(s))",
+      "severity": "error",
+      "suggested_fix": "rename crop directory to include `1t_3c` in its descriptor"
+    },
+    {
+      "check": "multitc_naming",
+      "dataset": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched",
+      "path": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched/crop-079_setup331.zarr",
+      "field": "crop_name",
+      "actual": "crop-079_setup331.zarr",
+      "expected": "crop descriptor contains `1t_3c` (real raw shape: 1 timepoint(s), 3 channel(s))",
+      "severity": "error",
+      "suggested_fix": "rename crop directory to include `1t_3c` in its descriptor"
+    },
+    {
+      "check": "multitc_naming",
+      "dataset": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched",
+      "path": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched/crop-080_setup332.zarr",
+      "field": "crop_name",
+      "actual": "crop-080_setup332.zarr",
+      "expected": "crop descriptor contains `1t_3c` (real raw shape: 1 timepoint(s), 3 channel(s))",
+      "severity": "error",
+      "suggested_fix": "rename crop directory to include `1t_3c` in its descriptor"
+    },
+    {
+      "check": "multitc_naming",
+      "dataset": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched",
+      "path": "exm-mouse-mirrorscope-hippocampus-3ch-20250902-unstitched/crop-081_setup333.zarr",
+      "field": "crop_name",
+      "actual": "crop-081_setup333.zarr",
+      "expected": "crop descriptor contains `1t_3c` (real raw shape: 1 timepoint(s), 3 channel(s))",
+      "severity": "error",
+      "suggested_fix": "rename crop directory to include `1t_3c` in its descriptor"
+    },
+    {
+      "check": "multitc_naming",
+      "dataset": "lm-zebrafish-Betzig-mosaic-example_annotations_Thayer",
+      "path": "lm-zebrafish-Betzig-mosaic-example_annotations_Thayer/crop-002_example_annotations_Thayer_2channels.zarr",
+      "field": "crop_name",
+      "actual": "crop-002_example_annotations_Thayer_2channels.zarr",
+      "expected": "crop descriptor contains `1t_2c` (real raw shape: 1 timepoint(s), 2 channel(s))",
+      "severity": "error",
+      "suggested_fix": "rename crop directory to include `1t_2c` in its descriptor"
+    }
+  ]
+}

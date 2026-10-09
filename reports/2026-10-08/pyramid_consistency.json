@@ -1,0 +1,66 @@
+{
+  "check": "pyramid_consistency",
+  "date": "2026-10-08",
+  "findings": [
+    {
+      "check": "pyramid_consistency",
+      "dataset": "exm-drosophila-flyliconn-FlyID41-mirrorscope-S1-20260605-unstitched",
+      "path": "exm-drosophila-flyliconn-FlyID41-mirrorscope-S1-20260605-unstitched/crop-046_setup216.zarr/raw",
+      "field": "orphaned_pyramid_level",
+      "actual": "s1",
+      "expected": "every on-disk level listed in multiscales.datasets",
+      "severity": "error",
+      "suggested_fix": "add 's1' to multiscales.datasets, or remove it if it's stale"
+    },
+    {
+      "check": "pyramid_consistency",
+      "dataset": "exm-drosophila-flyliconn-FlyID41-mirrorscope-S1-20260605-unstitched",
+      "path": "exm-drosophila-flyliconn-FlyID41-mirrorscope-S1-20260605-unstitched/crop-046_setup216.zarr/raw",
+      "field": "orphaned_pyramid_level",
+      "actual": "s2",
+      "expected": "every on-disk level listed in multiscales.datasets",
+      "severity": "error",
+      "suggested_fix": "add 's2' to multiscales.datasets, or remove it if it's stale"
+    },
+    {
+      "check": "pyramid_consistency",
+      "dataset": "exm-drosophila-flyliconn-FlyID41-mirrorscope-S1-20260605-unstitched",
+      "path": "exm-drosophila-flyliconn-FlyID41-mirrorscope-S1-20260605-unstitched/crop-046_setup216.zarr/raw",
+      "field": "orphaned_pyramid_level",
+      "actual": "s3",
+      "expected": "every on-disk level listed in multiscales.datasets",
+      "severity": "error",
+      "suggested_fix": "add 's3' to multiscales.datasets, or remove it if it's stale"
+    },
+    {
+      "check": "pyramid_consistency",
+      "dataset": "exm-drosophila-flyliconn-FlyID41-mirrorscope-S1-20260605-unstitched",
+      "path": "exm-drosophila-flyliconn-FlyID41-mirrorscope-S1-20260605-unstitched/crop-046_setup216.zarr/raw",
+      "field": "orphaned_pyramid_level",
+      "actual": "s4",
+      "expected": "every on-disk level listed in multiscales.datasets",
+      "severity": "error",
+      "suggested_fix": "add 's4' to multiscales.datasets, or remove it if it's stale"
+    },
+    {
+      "check": "pyramid_consistency",
+      "dataset": "exm-drosophila-flyliconn-FlyID41-mirrorscope-S1-20260605-unstitched",
+      "path": "exm-drosophila-flyliconn-FlyID41-mirrorscope-S1-20260605-unstitched/crop-046_setup216.zarr/raw",
+      "field": "orphaned_pyramid_level",
+      "actual": "s5",
+      "expected": "every on-disk level listed in multiscales.datasets",
+      "severity": "error",
+      "suggested_fix": "add 's5' to multiscales.datasets, or remove it if it's stale"
+    },
+    {
+      "check": "pyramid_consistency",
+      "dataset": "exm-drosophila-flyliconn-FlyID41-mirrorscope-S1-20260605-unstitched",
+      "path": "exm-drosophila-flyliconn-FlyID41-mirrorscope-S1-20260605-unstitched/crop-046_setup216.zarr/raw",
+      "field": "orphaned_pyramid_level",
+      "actual": "s6",
+      "expected": "every on-disk level listed in multiscales.datasets",
+      "severity": "error",
+      "suggested_fix": "add 's6' to multiscales.datasets, or remove it if it's stale"
+    }
+  ]
+}
