@@ -11,10 +11,12 @@ size that doesn't correspond to any real resolution at all.
 
 Same no-raw-subgroup layout handling as pyramid_consistency.py: some crops
 keep pyramid levels directly under the crop root with no raw/ subgroup.
+
+Checks zarr v2 crops/labels (`.zattrs`) as well as zarr v3 (`zarr.json`) --
+retrofitted Oct 8 2026, see metadata_completeness.py's docstring for why.
 """
 import argparse
 import datetime
-import json
 import math
 import sys
 from pathlib import Path
@@ -22,6 +24,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from common.report import write_check_report
 from common.vocab import NON_DATASET_DIRS
+from common.zarr_meta import get_multiscale, read_group_attrs
 
 CHECK_NAME = "voxel_size"
 
@@ -36,13 +39,8 @@ def _spatial_scale(multiscales_entry: dict, level_index: int) -> dict:
     return {ax["name"]: s for ax, s in zip(axes, scale) if ax.get("type") == "space"}
 
 
-def _load_multiscales(zarr_json_path: Path):
-    try:
-        data = json.loads(zarr_json_path.read_text())
-    except (OSError, json.JSONDecodeError):
-        return None
-    multiscales = data.get("attributes", {}).get("ome", {}).get("multiscales")
-    return multiscales[0] if multiscales else None
+def _load_multiscales(group_dir: Path):
+    return get_multiscale(read_group_attrs(group_dir))
 
 
 def _matches(a: dict, b: dict, rel_tol: float = 1e-6) -> bool:
@@ -57,8 +55,8 @@ def _matches(a: dict, b: dict, rel_tol: float = 1e-6) -> bool:
 def check_crop(crop_dir: Path, root: Path, dataset: str) -> list[dict]:
     findings = []
 
-    raw_zj = crop_dir / "raw" / "zarr.json" if (crop_dir / "raw").is_dir() else crop_dir / "zarr.json"
-    raw_ms = _load_multiscales(raw_zj)
+    raw_dir = crop_dir / "raw" if (crop_dir / "raw").is_dir() else crop_dir
+    raw_ms = _load_multiscales(raw_dir)
     if raw_ms is None:
         return findings
 
@@ -82,7 +80,7 @@ def check_crop(crop_dir: Path, root: Path, dataset: str) -> list[dict]:
         findings.append({
             "check": CHECK_NAME,
             "dataset": dataset,
-            "path": str(raw_zj.relative_to(root)),
+            "path": str(raw_dir.relative_to(root)),
             "field": "voxel_size_placeholder",
             "actual": s0,
             "expected": "a real, non-1.0 voxel size",
@@ -95,8 +93,7 @@ def check_crop(crop_dir: Path, root: Path, dataset: str) -> list[dict]:
         return findings
 
     for label_dir in sorted(p for p in labels_dir.iterdir() if p.is_dir()):
-        label_zj = label_dir / "zarr.json"
-        label_ms = _load_multiscales(label_zj)
+        label_ms = _load_multiscales(label_dir)
         if label_ms is None:
             continue
         label_s0 = _spatial_scale(label_ms, 0)
@@ -106,7 +103,7 @@ def check_crop(crop_dir: Path, root: Path, dataset: str) -> list[dict]:
             findings.append({
                 "check": CHECK_NAME,
                 "dataset": dataset,
-                "path": str(label_zj.relative_to(root)),
+                "path": str(label_dir.relative_to(root)),
                 "field": "voxel_size_mismatch",
                 "actual": label_s0,
                 "expected": f"one of raw's pyramid levels: {raw_levels}",

@@ -18,81 +18,89 @@ lowercase "xyz" coordinate_order bug). Only 3 real multi-timepoint examples
 exist, all under `lm-zebrafish-Betzig-mosaic-example_annotations_Thayer
 /crop-001_dsr_timeseries_48t_1c.zarr` (raw T=48) -- all 3 already comply:
 full-T shape, chunk_shape's T-axis is 1 (one chunk folder per timepoint), and
-only the declared timepoint's chunk folder exists on disk. This check mostly
+only the declared timepoint's chunk folder exists on disk. Retrofitting zarr
+v2 support (below) surfaced 5 more real examples missed before -- 1 Betzig
+zarr v2 label with `timepoint_index: null` (not applicable, correctly
+skipped) and 4 genuine `manual_gt-cell-t0`/`t9`/`t31` timepoint-specific
+labels across 2 more Betzig crops, all already compliant. This check mostly
 validates the rule going forward, per the original proposal.
+
+Checks zarr v2 crops/labels (`.zattrs`/`.zarray`) as well as zarr v3
+(`zarr.json`) -- retrofitted Oct 8 2026, see metadata_completeness.py's
+docstring for why. zarr v2 has no `c/` chunk-key prefix (chunks live as
+`s0/<t_index>/...` directly); zarr v3's default chunk-key encoding prefixes
+every chunk path with `c/`. Both are handled.
 """
 import argparse
 import datetime
-import json
 import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from common.report import write_check_report
 from common.vocab import NON_DATASET_DIRS
+from common.zarr_meta import get_multiscale, group_exists, read_array_meta, read_group_attrs
 
 CHECK_NAME = "multitimepoint_label_sparsity"
 
 
 def _raw_t_count(crop_dir: Path):
     raw_dir = crop_dir / "raw" if (crop_dir / "raw").is_dir() else crop_dir
-    try:
-        data = json.loads((raw_dir / "zarr.json").read_text())
-    except (OSError, json.JSONDecodeError):
+    attrs = read_group_attrs(raw_dir)
+    multiscale = get_multiscale(attrs)
+    if multiscale is None:
         return None
-    multiscales = data.get("attributes", {}).get("ome", {}).get("multiscales", [])
-    if not multiscales:
-        return None
-    axes = [a.get("name") for a in multiscales[0].get("axes", [])]
-    datasets = multiscales[0].get("datasets", [])
+    axes = [a.get("name") for a in multiscale.get("axes", [])]
+    datasets = multiscale.get("datasets", [])
     if not datasets or "t" not in axes:
         return None
     s0_path = datasets[0].get("path", "s0")
-    try:
-        shape = json.loads((raw_dir / s0_path / "zarr.json").read_text()).get("shape")
-    except (OSError, json.JSONDecodeError):
+    array_meta = read_array_meta(raw_dir / s0_path)
+    if array_meta is None:
         return None
+    shape = array_meta["shape"]
     if shape is None or len(shape) != len(axes):
         return None
     return shape[axes.index("t")]
 
 
 def check_label(label_dir: Path, root: Path, dataset: str, raw_t_count: int) -> list[dict]:
-    zarr_json_path = label_dir / "zarr.json"
-    try:
-        attrs = json.loads(zarr_json_path.read_text()).get("attributes", {})
-    except (OSError, json.JSONDecodeError):
+    attrs = read_group_attrs(label_dir)
+    if attrs is None:
         return []
 
-    timepoint_index = attrs.get("bbox", {}).get("timepoint_index")
+    timepoint_index = (attrs.get("bbox") or {}).get("timepoint_index")
     if timepoint_index is None:
         return []
 
-    multiscales = attrs.get("ome", {}).get("multiscales", [])
-    if not multiscales:
+    multiscale = get_multiscale(attrs)
+    if multiscale is None:
         return []
-    axes = [a.get("name") for a in multiscales[0].get("axes", [])]
-    datasets = multiscales[0].get("datasets", [])
+    axes = [a.get("name") for a in multiscale.get("axes", [])]
+    datasets = multiscale.get("datasets", [])
     if not datasets or not axes or axes[0] != "t":
         return []  # 't' not the first axis (or absent) -- not the shape this check handles
 
     s0_path = datasets[0].get("path", "s0")
     s0_dir = label_dir / s0_path
-    try:
-        s0_attrs = json.loads((s0_dir / "zarr.json").read_text())
-    except (OSError, json.JSONDecodeError):
+    array_meta = read_array_meta(s0_dir)
+    if array_meta is None:
         return []
 
-    shape = s0_attrs.get("shape")
+    shape = array_meta["shape"]
     if shape is None or len(shape) != len(axes):
         return []
-    if any(c.get("name") == "sharding_indexed" for c in s0_attrs.get("codecs", [])):
+    if array_meta["shard_shape"] is not None:
         return []  # sharded layout -- chunk-dir semantics differ, not handled here
-    chunk_shape = s0_attrs.get("chunk_grid", {}).get("configuration", {}).get("chunk_shape")
+    chunk_shape = array_meta["chunk_shape"]
     if not chunk_shape:
         return []
 
-    rel = str(zarr_json_path.relative_to(root))
+    is_zarr_v3 = (s0_dir / "zarr.json").is_file()
+    if not is_zarr_v3 and array_meta.get("dimension_separator") != "/":
+        return []  # flat chunk-key files (e.g. "0.0.1.2.3"), not nested dirs -- not handled here
+
+    rel = str(label_dir.relative_to(root))
     findings = []
 
     if shape[0] != raw_t_count:
@@ -109,10 +117,13 @@ def check_label(label_dir: Path, root: Path, dataset: str, raw_t_count: int) -> 
     chunk_t_size = chunk_shape[0]
     expected_chunk_idx = timepoint_index // chunk_t_size
 
-    c_dir = s0_dir / "c"
+    # zarr v3's default chunk-key encoding prefixes every chunk path with "c/";
+    # zarr v2 has no such prefix -- the t-chunk index is the array dir's own
+    # first-level subdirectory.
+    t_chunk_parent = (s0_dir / "c") if is_zarr_v3 else s0_dir
     present = set()
-    if c_dir.is_dir():
-        for p in c_dir.iterdir():
+    if t_chunk_parent.is_dir():
+        for p in t_chunk_parent.iterdir():
             if p.is_dir() and p.name.isdigit():
                 present.add(int(p.name))
 
@@ -147,7 +158,7 @@ def iter_label_dirs(root: Path):
             if not labels_dir.is_dir():
                 continue
             for label_dir in sorted(p for p in labels_dir.iterdir() if p.is_dir()):
-                if (label_dir / "zarr.json").is_file():
+                if group_exists(label_dir):
                     yield dataset_dir.name, crop_dir, label_dir
 
 

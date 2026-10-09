@@ -9,10 +9,12 @@ not listed (orphaned -- never registered, e.g. a pyramid job that half-finished)
 Root zarr.json's paths are prefixed ("raw/s0"); raw/zarr.json's and each label's
 own paths are bare ("s0") relative to themselves -- root is checked for dangling
 entries only, since it doesn't own sN dirs directly, only raw/ and each label do.
+
+Checks zarr v2 crops/labels (`.zattrs`) as well as zarr v3 (`zarr.json`) --
+retrofitted Oct 8 2026, see metadata_completeness.py's docstring for why.
 """
 import argparse
 import datetime
-import json
 import re
 import sys
 from pathlib import Path
@@ -20,31 +22,28 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from common.report import write_check_report
 from common.vocab import NON_DATASET_DIRS
+from common.zarr_meta import get_multiscale, group_exists, read_group_attrs
 
 CHECK_NAME = "pyramid_consistency"
 _RUNG_RE = re.compile(r"^s\d+$")
 
 
-def _multiscale_dataset_paths(zarr_json_path: Path):
-    try:
-        data = json.loads(zarr_json_path.read_text())
-    except (OSError, json.JSONDecodeError):
+def _multiscale_dataset_paths(group_dir: Path):
+    multiscale = get_multiscale(read_group_attrs(group_dir))
+    if multiscale is None:
         return None
-    multiscales = data.get("attributes", {}).get("ome", {}).get("multiscales")
-    if not multiscales:
-        return None
-    return [d["path"] for d in multiscales[0].get("datasets", []) if d.get("path")]
+    return [d["path"] for d in multiscale.get("datasets", []) if d.get("path")]
 
 
-def check_zarr_json(zarr_json_path: Path, root: Path, dataset: str, check_orphans: bool,
-                     required_prefix: str = None) -> list[dict]:
+def check_group(group_dir: Path, root: Path, dataset: str, check_orphans: bool,
+                required_prefix: str = None) -> list[dict]:
     findings = []
-    paths = _multiscale_dataset_paths(zarr_json_path)
+    paths = _multiscale_dataset_paths(group_dir)
     if paths is None:
         return findings
 
-    base_dir = zarr_json_path.parent
-    rel = str(zarr_json_path.relative_to(root))
+    base_dir = group_dir
+    rel = str(group_dir.relative_to(root))
 
     for p in paths:
         # A path that resolves to a real directory can still be WRONG -- the
@@ -96,14 +95,14 @@ def check_zarr_json(zarr_json_path: Path, root: Path, dataset: str, check_orphan
     return findings
 
 
-def iter_zarr_jsons(root: Path):
-    """Yield (dataset_name, zarr_json_path, check_orphans, required_prefix) for
-    every zarr.json worth checking: a crop's root, its raw/ (if present), and
+def iter_groups(root: Path):
+    """Yield (dataset_name, group_dir, check_orphans, required_prefix) for
+    every group worth checking: a crop's root, its raw/ (if present), and
     every label under it (orphan check).
 
     Most crops wrap their image pyramid in a raw/ subgroup -- there, root must
     only reference raw/'s levels (required_prefix="raw/", no orphan check: root
-    doesn't own sN dirs directly) and raw/zarr.json itself gets the orphan check.
+    doesn't own sN dirs directly) and raw/ itself gets the orphan check.
     Some crops (confirmed on disk, Oct 6 2026 -- a pre-convention Betzig demo
     dataset) have no raw/ at all and keep s0.. directly under the crop root --
     there root IS the image level, so it gets the orphan check instead and no
@@ -111,24 +110,22 @@ def iter_zarr_jsons(root: Path):
     """
     for dataset_dir in sorted(p for p in root.iterdir() if p.is_dir() and p.name not in NON_DATASET_DIRS):
         for crop_dir in sorted(p for p in dataset_dir.iterdir() if p.is_dir() and p.name.endswith(".zarr")):
-            root_zj = crop_dir / "zarr.json"
             has_raw = (crop_dir / "raw").is_dir()
-            if root_zj.is_file():
+            if group_exists(crop_dir):
                 if has_raw:
-                    yield dataset_dir.name, root_zj, False, "raw/"
+                    yield dataset_dir.name, crop_dir, False, "raw/"
                 else:
-                    yield dataset_dir.name, root_zj, True, None
+                    yield dataset_dir.name, crop_dir, True, None
 
-            raw_zj = crop_dir / "raw" / "zarr.json"
-            if raw_zj.is_file():
-                yield dataset_dir.name, raw_zj, True, None
+            raw_dir = crop_dir / "raw"
+            if group_exists(raw_dir):
+                yield dataset_dir.name, raw_dir, True, None
 
             labels_dir = crop_dir / "labels"
             if labels_dir.is_dir():
                 for label_dir in sorted(p for p in labels_dir.iterdir() if p.is_dir()):
-                    label_zj = label_dir / "zarr.json"
-                    if label_zj.is_file():
-                        yield dataset_dir.name, label_zj, True, None
+                    if group_exists(label_dir):
+                        yield dataset_dir.name, label_dir, True, None
 
 
 def main():
@@ -143,14 +140,14 @@ def main():
 
     findings = []
     n_checked = 0
-    for dataset_name, zarr_json_path, check_orphans, required_prefix in iter_zarr_jsons(root):
+    for dataset_name, group_dir, check_orphans, required_prefix in iter_groups(root):
         n_checked += 1
-        findings.extend(check_zarr_json(zarr_json_path, root, dataset_name, check_orphans, required_prefix))
+        findings.extend(check_group(group_dir, root, dataset_name, check_orphans, required_prefix))
 
     run_date = datetime.date.today().isoformat()
     write_check_report(CHECK_NAME, findings, reports_dir=Path(args.reports_dir), date=run_date)
 
-    print(f"{CHECK_NAME}: {len(findings)} finding(s) across {n_checked} zarr.json file(s) under {root}")
+    print(f"{CHECK_NAME}: {len(findings)} finding(s) across {n_checked} group(s) under {root}")
     if findings:
         sys.exit(1)
 

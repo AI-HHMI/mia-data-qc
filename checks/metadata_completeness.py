@@ -11,16 +11,21 @@ voxel_size.py already cover that for the fields they're each scoped to).
 Real corpus survey before building this (Oct 6 2026): every one of these 12
 fields has real gaps on disk, from 10 to 102 missing labels -- no field was
 dropped from scope for being already-clean.
+
+Checks zarr v2 labels (`.zattrs`) as well as zarr v3 (`zarr.json`) -- retrofitted
+Oct 8 2026 after discovering the 9 zarr v2 labels on this corpus had been
+silently skipped by every check's `zarr.json`-only discovery filter, 4 of
+them with real missing-field violations never surfaced.
 """
 import argparse
 import datetime
-import json
 import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from common.report import write_check_report
 from common.vocab import NON_DATASET_DIRS
+from common.zarr_meta import group_exists, read_group_attrs
 
 CHECK_NAME = "metadata_completeness"
 
@@ -32,13 +37,11 @@ REQUIRED_FIELDS = [
 
 
 def check_label(label_dir: Path, root: Path, dataset: str) -> list[dict]:
-    zarr_json_path = label_dir / "zarr.json"
-    try:
-        attrs = json.loads(zarr_json_path.read_text()).get("attributes", {})
-    except (OSError, json.JSONDecodeError):
+    attrs = read_group_attrs(label_dir)
+    if attrs is None:
         return []
 
-    rel = str(zarr_json_path.relative_to(root))
+    rel = str(label_dir.relative_to(root))
     findings = []
 
     for field in REQUIRED_FIELDS:
@@ -64,7 +67,7 @@ def iter_label_dirs(root: Path):
             if not labels_dir.is_dir():
                 continue
             for label_dir in sorted(p for p in labels_dir.iterdir() if p.is_dir()):
-                if (label_dir / "zarr.json").is_file():
+                if group_exists(label_dir):
                     yield dataset_dir.name, label_dir
 
 

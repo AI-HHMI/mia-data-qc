@@ -17,10 +17,16 @@ at all (one dataset puts the channel count in the *dataset* directory name
 instead). This was already known and called a gap, not yet remediated, before
 this check existed -- the check formalizes it as a standing rule going
 forward rather than surfacing a surprise.
+
+Retrofitting zarr v2 support (Oct 8 2026) added 3 more real multi-T/C crops
+(the same Betzig zarr v2 crops `multitimepoint_label_sparsity.py` found),
+all already correctly named -- 0 new findings.
+
+Checks zarr v2 crops (`.zattrs`) as well as zarr v3 (`zarr.json`) -- retrofitted
+Oct 8 2026, see metadata_completeness.py's docstring for why.
 """
 import argparse
 import datetime
-import json
 import re
 import sys
 from pathlib import Path
@@ -28,6 +34,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from common.report import write_check_report
 from common.vocab import NON_DATASET_DIRS
+from common.zarr_meta import get_multiscale, read_array_meta, read_group_attrs
 
 CHECK_NAME = "multitc_naming"
 
@@ -36,28 +43,20 @@ _SHORTHAND_RE = re.compile(r"(?:^|_)(\d+)t_(\d+)c(?:_|\.|$)")
 
 def _real_t_c_counts(crop_dir: Path):
     raw_dir = crop_dir / "raw" if (crop_dir / "raw").is_dir() else crop_dir
-    zj_path = raw_dir / "zarr.json"
-    try:
-        data = json.loads(zj_path.read_text())
-    except (OSError, json.JSONDecodeError):
+    attrs = read_group_attrs(raw_dir)
+    multiscale = get_multiscale(attrs)
+    if multiscale is None:
         return None
-
-    multiscales = data.get("attributes", {}).get("ome", {}).get("multiscales", [])
-    if not multiscales:
-        return None
-    axes = multiscales[0].get("axes", [])
-    axis_names = [a.get("name") for a in axes]
-    datasets = multiscales[0].get("datasets", [])
+    axis_names = [a.get("name") for a in multiscale.get("axes", [])]
+    datasets = multiscale.get("datasets", [])
     if not datasets:
         return None
 
     s0_path = datasets[0].get("path", "s0")
-    try:
-        s0_data = json.loads((raw_dir / s0_path / "zarr.json").read_text())
-    except (OSError, json.JSONDecodeError):
+    array_meta = read_array_meta(raw_dir / s0_path)
+    if array_meta is None:
         return None
-
-    shape = s0_data.get("shape")
+    shape = array_meta["shape"]
     if shape is None or len(shape) != len(axis_names):
         return None
 

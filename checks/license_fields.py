@@ -6,61 +6,62 @@ values here are free-text legal-research notes, not a short enum, so no
 vocab/consistency check applies. A field with an explicit null value still
 counts as present; this check is about the key being entirely missing.
 
-Real corpus survey (Oct 7 2026): root zarr.json has the field present on 233
-crops and missing on 727; raw/zarr.json has it present on 274 crops and
-missing on 686 (counts don't need to add to the same total -- a crop can be
-missing one or both files entirely). Some stored values are
+Real corpus survey (Oct 7 2026, zarr v3 only): root has the field present on
+233 crops and missing on 727; raw has it present on 274 crops and missing on
+686 (counts don't need to add to the same total -- a crop can be missing one
+or both files entirely). Retrofitting zarr v2 support (Oct 8 2026) added 117
+more crops, all missing `license` on both root and raw -- 844/802 missing
+totals. Some stored values are
 themselves warnings about license status (e.g. explicit "DO NOT REDISTRIBUTE",
 "RESTRICTED -- HOLD", "UNKNOWN -- NO LICENCE IS STATED ANYWHERE" notes) --
 this check only flags the field missing outright, not those cases, since
 distinguishing "stated as unknown" from "a real license string" is a human
 judgment call, not a structural one.
+
+Checks zarr v2 crops (`.zattrs`) as well as zarr v3 (`zarr.json`) -- retrofitted
+Oct 8 2026, see metadata_completeness.py's docstring for why (117 whole crops
+on this corpus are zarr v2, previously entirely unscanned by this check).
 """
 import argparse
 import datetime
-import json
 import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from common.report import write_check_report
 from common.vocab import NON_DATASET_DIRS
+from common.zarr_meta import group_exists, read_group_attrs
 
 CHECK_NAME = "license_fields"
 
 
-def _check_zarr_json(zarr_json_path: Path, root: Path, dataset: str, label: str) -> list[dict]:
-    try:
-        attrs = json.loads(zarr_json_path.read_text()).get("attributes", {})
-    except (OSError, json.JSONDecodeError):
+def _check_group(group_dir: Path, root: Path, dataset: str, label: str) -> list[dict]:
+    attrs = read_group_attrs(group_dir)
+    if attrs is None or "license" in attrs:
         return []
 
-    if "license" in attrs:
-        return []
-
-    rel = str(zarr_json_path.relative_to(root))
+    rel = str(group_dir.relative_to(root))
     return [{
         "check": CHECK_NAME,
         "dataset": dataset,
         "path": rel,
         "field": "license",
         "actual": "missing",
-        "expected": f"present on {label} zarr.json (value may be null, but the key must exist)",
+        "expected": f"present on {label}'s own metadata (value may be null, but the key must exist)",
         "severity": "error",
-        "suggested_fix": f"add the 'license' field to this crop's {label} zarr.json attributes",
+        "suggested_fix": f"add the 'license' field to this crop's {label} metadata attributes",
     }]
 
 
 def check_crop(crop_dir: Path, root: Path, dataset: str) -> list[dict]:
     findings = []
 
-    root_zj = crop_dir / "zarr.json"
-    if root_zj.is_file():
-        findings.extend(_check_zarr_json(root_zj, root, dataset, "root"))
+    if group_exists(crop_dir):
+        findings.extend(_check_group(crop_dir, root, dataset, "root"))
 
-    raw_zj = crop_dir / "raw" / "zarr.json"
-    if raw_zj.is_file():
-        findings.extend(_check_zarr_json(raw_zj, root, dataset, "raw"))
+    raw_dir = crop_dir / "raw"
+    if group_exists(raw_dir):
+        findings.extend(_check_group(raw_dir, root, dataset, "raw"))
 
     return findings
 
