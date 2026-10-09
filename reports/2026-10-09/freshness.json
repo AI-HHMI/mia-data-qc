@@ -1,0 +1,16 @@
+{
+  "check": "freshness",
+  "date": "2026-10-09",
+  "findings": [
+    {
+      "check": "freshness",
+      "dataset": "exm-mouse-liconn-DG-20250809_ExPID19-02_2ndGel_C5_Atto488_40XW_002",
+      "path": "exm-mouse-liconn-DG-20250809_ExPID19-02_2ndGel_C5_Atto488_40XW_002/crop-001.zarr/labels/manual_gt-cell-final",
+      "field": "malformed_created",
+      "actual": "ell-final-gt--c",
+      "expected": "a year (YYYY) or full date (YYYY-MM-DD)",
+      "severity": "error",
+      "suggested_fix": "fix this label's created field -- it doesn't parse as any valid date"
+    }
+  ]
+}

@@ -70,10 +70,18 @@ footer.site { color:var(--muted); font-size:12px; padding:24px 0 40px; text-alig
 <p class="sub">Click a check to see its findings below.</p>
 <div class="tabs">
 <a class="tile" href="#empty_label_data"><span class="name">empty_label_data</span><span class="desc">A label with complete metadata actually has chunk data written at its finest pyramid level.</span><span class="badge chip ">0 finding(s)</span></a>
+<a class="tile" href="#freshness"><span class="name">freshness</span><span class="desc">A label&#x27;s created field parses as a valid date, and superseded-snapshot ranking matches real timestamps.</span><span class="badge chip error">1 finding(s)</span></a>
 <a class="tile" href="#orphaned_ingest"><span class="name">orphaned_ingest</span><span class="desc">Every real label has a tracking issue and every terminal issue has a real label, in both directions.</span><span class="badge chip error">61 finding(s)</span></a>
 </div>
 <section id="empty_label_data" class="panel"><h2>empty_label_data</h2><p class="sub">A label with complete metadata actually has chunk data written at its finest pyramid level.</p><div class="summary"><div class="stat"><div class="n">0</div><div class="l">findings</div></div></div>
 <div class="card empty">No findings.</div></section>
+<section id="freshness" class="panel" hidden><h2>freshness</h2><p class="sub">A label&#x27;s created field parses as a valid date, and superseded-snapshot ranking matches real timestamps.</p><div class="summary"><div class="stat error"><div class="n">1</div><div class="l">error</div></div></div>
+<div class="card scroll">
+<table class="sortable"><thead><tr><th>Dataset</th><th>Path</th><th>Field</th><th>Actual</th>
+<th>Expected</th><th>Severity</th><th>Suggested fix</th></tr></thead>
+<tbody>
+<tr><td>exm-mouse-liconn-DG-20250809_ExPID19-02_2ndGel_C5_Atto488_40XW_002</td><td>exm-mouse-liconn-DG-20250809_ExPID19-02_2ndGel_C5_Atto488_40XW_002/crop-001.zarr/labels/manual_gt-cell-final</td><td>malformed_created</td><td>ell-final-gt--c</td><td>a year (YYYY) or full date (YYYY-MM-DD)</td><td><span class="chip error">error</span></td><td>fix this label&#x27;s created field -- it doesn&#x27;t parse as any valid date</td></tr>
+</tbody></table></div></section>
 <section id="orphaned_ingest" class="panel" hidden><h2>orphaned_ingest</h2><p class="sub">Every real label has a tracking issue and every terminal issue has a real label, in both directions.</p><div class="summary"><div class="stat error"><div class="n">15</div><div class="l">error</div></div><div class="stat warning"><div class="n">46</div><div class="l">warning</div></div></div>
 <div class="card scroll">
 <table class="sortable"><thead><tr><th>Dataset</th><th>Path</th><th>Field</th><th>Actual</th>

@@ -1,6 +1,6 @@
 <!doctype html>
 <html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>mia-data-qc reports</title>
+<title>freshness — 2026-10-09</title>
 <style>
 :root { --bg:#f6f7f9; --card:#fff; --ink:#14181f; --muted:#5d6675; --line:#e3e6eb;
   --head:#f1f3f6; --hover:#f5f8ff; --accent:#2557d6; --accent-soft:#e8eefc;
@@ -61,21 +61,39 @@ footer.site { color:var(--muted); font-size:12px; padding:24px 0 40px; text-alig
 </style></head>
 <body>
 <header class="site"><div class="wrap">
-<a class="brand" href="qc_dashboard.html">mia-data-qc</a>
+<a class="brand" href="../../qc_dashboard.html">mia-data-qc</a>
 <nav><a href="https://github.com/AI-HHMI/mia-data-qc">GitHub</a></nav>
 </div></header>
 <main class="wrap">
-<h1>mia-data-qc</h1>
-<p class="sub">Automated QC checks over the LMD data corpus
-(<code>/groups/miaai/miaai/lmd-v0.0.1/data</code>), run on the Janelia cluster. Latest run first.</p>
-<div class="grid">
-<a class="tile" href="reports/2026-10-09/index.html"><span class="name">2026-10-09</span><span class="desc">3 check(s) run</span><span class="badge chip error">62 finding(s)</span></a>
-<a class="tile" href="reports/2026-10-08/index.html"><span class="name">2026-10-08</span><span class="desc">18 check(s) run</span><span class="badge chip error">90099 finding(s)</span></a>
-<a class="tile" href="reports/2026-10-07/index.html"><span class="name">2026-10-07</span><span class="desc">5 check(s) run</span><span class="badge chip error">1577 finding(s)</span></a>
-<a class="tile" href="reports/2026-10-06/index.html"><span class="name">2026-10-06</span><span class="desc">9 check(s) run</span><span class="badge chip error">516 finding(s)</span></a>
-<a class="tile" href="reports/2026-10-05/index.html"><span class="name">2026-10-05</span><span class="desc">1 check(s) run</span><span class="badge chip ">0 finding(s)</span></a>
-</div>
+<a class="nav-back" href="index.html">&larr; 2026-10-09</a>
+<h1>freshness</h1>
+<p class="sub">A label&#x27;s created field parses as a valid date, and superseded-snapshot ranking matches real timestamps.</p>
+<div class="summary"><div class="stat error"><div class="n">1</div><div class="l">error</div></div></div>
+<div class="card scroll">
+<table class="sortable"><thead><tr><th>Dataset</th><th>Path</th><th>Field</th><th>Actual</th>
+<th>Expected</th><th>Severity</th><th>Suggested fix</th></tr></thead>
+<tbody>
+<tr><td>exm-mouse-liconn-DG-20250809_ExPID19-02_2ndGel_C5_Atto488_40XW_002</td><td>exm-mouse-liconn-DG-20250809_ExPID19-02_2ndGel_C5_Atto488_40XW_002/crop-001.zarr/labels/manual_gt-cell-final</td><td>malformed_created</td><td>ell-final-gt--c</td><td>a year (YYYY) or full date (YYYY-MM-DD)</td><td><span class="chip error">error</span></td><td>fix this label&#x27;s created field -- it doesn&#x27;t parse as any valid date</td></tr>
+</tbody></table></div>
 </main>
 <footer class="site">mia-data-qc &middot; automated QC for the LMD corpus</footer>
-<script></script>
+<script>
+document.querySelectorAll('table.sortable').forEach(function (table) {
+  table.querySelectorAll('th').forEach(function (th, idx) {
+    th.addEventListener('click', function () {
+      var tbody = table.querySelector('tbody');
+      var rows = Array.prototype.slice.call(tbody.querySelectorAll('tr'));
+      var asc = !th.classList.contains('asc');
+      table.querySelectorAll('th').forEach(function (h) { h.classList.remove('asc', 'desc'); });
+      th.classList.add(asc ? 'asc' : 'desc');
+      rows.sort(function (a, b) {
+        var av = a.children[idx].innerText, bv = b.children[idx].innerText;
+        return asc ? av.localeCompare(bv, undefined, {numeric: true})
+                    : bv.localeCompare(av, undefined, {numeric: true});
+      });
+      rows.forEach(function (r) { tbody.appendChild(r); });
+    });
+  });
+});
+</script>
 </body></html>
