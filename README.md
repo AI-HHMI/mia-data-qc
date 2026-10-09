@@ -37,6 +37,7 @@ the Janelia cluster and published as a static-HTML report site.
 | `parent_raw_validity.py` | A label's `parent_raw` field (when present) points to a directory that actually exists |
 | `channel_index_consistency.py` | A label derived from one channel of a multi-channel raw records a valid `source.channel_index` |
 | `multitimepoint_label_sparsity.py` | A label tied to one timepoint is full-T shaped and has real data only at that timepoint |
+| `label_field_drift.py` | A `mia_annotation` label issue's board fields agree with that label's own on-disk metadata (warning only — either side can be stale) |
 
 The original design proposal and open questions: [issue #1](https://github.com/AI-HHMI/mia-data-qc/issues/1).
 
@@ -52,6 +53,13 @@ submitted as an LSF job, never run on a login node — use the matching `submit_
 `submit_deep_walk_checks.sh` to run both from a single corpus walk (the real production entry
 point for those two — `run_deep_walk_checks.py`). Shallow checks (naming, pyramid consistency,
 metadata consistency) run in seconds and don't need a cluster job.
+
+**New-check convention**: if a new check needs a deep, file-level walk (visiting every chunk, not
+just dataset/crop/label directories), pair it with the existing deep-walk checks in
+`run_deep_walk_checks.py` so the corpus is only walked once — a second independent deep walk would
+double the actual expensive cost. Shallow checks don't need this: each one listing
+dataset→crop→label directories independently (as `checks/run_all_checks.py` does when running
+everything) costs seconds in aggregate, not worth merging into a shared traversal.
 
 Cluster convention: `bsub -q local -P miaai`, no host pinned (let LSF's scheduler pick), `-n`
 matched to `--workers`, memory `cores * 15GB` per the cluster's per-core memory policy.
