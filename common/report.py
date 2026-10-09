@@ -41,6 +41,7 @@ CHECK_DESCRIPTIONS = {
     "channel_index_consistency": "A label derived from one channel of a multi-channel raw records a valid source.channel_index.",
     "multitimepoint_label_sparsity": "A label tied to one timepoint is full-T shaped and has real data only at that timepoint.",
     "label_field_drift": "A mia_annotation label issue's board fields agree with that label's own on-disk metadata.",
+    "orphaned_ingest": "Every real label has a tracking issue and every terminal issue has a real label, in both directions.",
 }
 
 _STYLE = """

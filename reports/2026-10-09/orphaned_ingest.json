@@ -1,0 +1,616 @@
+{
+  "check": "orphaned_ingest",
+  "date": "2026-10-09",
+  "findings": [
+    {
+      "check": "orphaned_ingest",
+      "dataset": "lm-zebrafish-Betzig-mosaic-example_annotations_Thayer",
+      "path": "mia_annotation issue https://github.com/AI-HHMI/mia_annotation/issues/22",
+      "field": "title_format_mismatch",
+      "actual": "lm-zebrafish-Betzig-mosaic-example_annotations_Thayer/crop-001/manual_gt-cell-t10_postproofread",
+      "expected": "the current {dataset-dir}_{crop}_{label-name} title convention",
+      "severity": "error",
+      "suggested_fix": "rename this issue's title to the current 3-component convention"
+    },
+    {
+      "check": "orphaned_ingest",
+      "dataset": "lm-zebrafish-Betzig-mosaic-example_annotations_Thayer",
+      "path": "mia_annotation issue https://github.com/AI-HHMI/mia_annotation/issues/23",
+      "field": "title_format_mismatch",
+      "actual": "lm-zebrafish-Betzig-mosaic-example_annotations_Thayer/crop-001/manual_gt-cell-t25_postproofread",
+      "expected": "the current {dataset-dir}_{crop}_{label-name} title convention",
+      "severity": "error",
+      "suggested_fix": "rename this issue's title to the current 3-component convention"
+    },
+    {
+      "check": "orphaned_ingest",
+      "dataset": "exm-drosophila-flyliconn-FlyID49-2ndgel-DUP-BIS-40XW005-20260625",
+      "path": "exm-drosophila-flyliconn-FlyID49-2ndgel-DUP-BIS-40XW005-20260625/crop-001.zarr/labels/manual_gt-cell-snap_09042026",
+      "field": "untracked_snapshot",
+      "actual": "no mia_annotation issue references this label",
+      "expected": "expected for a superseded snapshot in a weekly-export series (informational)",
+      "severity": "warning",
+      "suggested_fix": "no action needed unless this snapshot should have its own issue"
+    },
+    {
+      "check": "orphaned_ingest",
+      "dataset": "exm-drosophila-flyliconn-FlyID49-2ndgel-DUP-BIS-40XW005-20260625",
+      "path": "exm-drosophila-flyliconn-FlyID49-2ndgel-DUP-BIS-40XW005-20260625/crop-001.zarr/labels/manual_gt-cell-snap_09142026",
+      "field": "untracked_snapshot",
+      "actual": "no mia_annotation issue references this label",
+      "expected": "expected for a superseded snapshot in a weekly-export series (informational)",
+      "severity": "warning",
+      "suggested_fix": "no action needed unless this snapshot should have its own issue"
+    },
+    {
+      "check": "orphaned_ingest",
+      "dataset": "exm-drosophila-flyliconn-FlyID49-2ndgel-DUP-BIS-40XW005-20260625",
+      "path": "exm-drosophila-flyliconn-FlyID49-2ndgel-DUP-BIS-40XW005-20260625/crop-001.zarr/labels/manual_gt-cell-snap_09182026",
+      "field": "untracked_snapshot",
+      "actual": "no mia_annotation issue references this label",
+      "expected": "expected for a superseded snapshot in a weekly-export series (informational)",
+      "severity": "warning",
+      "suggested_fix": "no action needed unless this snapshot should have its own issue"
+    },
+    {
+      "check": "orphaned_ingest",
+      "dataset": "exm-drosophila-flyliconn-FlyID49-2ndgel-DUP-BIS-40XW005-20260625",
+      "path": "exm-drosophila-flyliconn-FlyID49-2ndgel-DUP-BIS-40XW005-20260625/crop-001.zarr/labels/manual_gt-cell-snap_10022026",
+      "field": "untracked_snapshot",
+      "actual": "no mia_annotation issue references this label",
+      "expected": "expected for a superseded snapshot in a weekly-export series (informational)",
+      "severity": "warning",
+      "suggested_fix": "no action needed unless this snapshot should have its own issue"
+    },
+    {
+      "check": "orphaned_ingest",
+      "dataset": "exm-drosophila-flyliconn-FlyID49-2ndgel-DUP-BIS-40XW006-20260625",
+      "path": "exm-drosophila-flyliconn-FlyID49-2ndgel-DUP-BIS-40XW006-20260625/crop-001.zarr/labels/manual_gt-cell-snap_09042026",
+      "field": "untracked_snapshot",
+      "actual": "no mia_annotation issue references this label",
+      "expected": "expected for a superseded snapshot in a weekly-export series (informational)",
+      "severity": "warning",
+      "suggested_fix": "no action needed unless this snapshot should have its own issue"
+    },
+    {
+      "check": "orphaned_ingest",
+      "dataset": "exm-drosophila-flyliconn-FlyID49-2ndgel-DUP-BIS-40XW006-20260625",
+      "path": "exm-drosophila-flyliconn-FlyID49-2ndgel-DUP-BIS-40XW006-20260625/crop-001.zarr/labels/manual_gt-cell-snap_09142026",
+      "field": "untracked_snapshot",
+      "actual": "no mia_annotation issue references this label",
+      "expected": "expected for a superseded snapshot in a weekly-export series (informational)",
+      "severity": "warning",
+      "suggested_fix": "no action needed unless this snapshot should have its own issue"
+    },
+    {
+      "check": "orphaned_ingest",
+      "dataset": "exm-drosophila-flyliconn-FlyID49-2ndgel-DUP-BIS-40XW006-20260625",
+      "path": "exm-drosophila-flyliconn-FlyID49-2ndgel-DUP-BIS-40XW006-20260625/crop-001.zarr/labels/manual_gt-cell-snap_09182026",
+      "field": "untracked_snapshot",
+      "actual": "no mia_annotation issue references this label",
+      "expected": "expected for a superseded snapshot in a weekly-export series (informational)",
+      "severity": "warning",
+      "suggested_fix": "no action needed unless this snapshot should have its own issue"
+    },
+    {
+      "check": "orphaned_ingest",
+      "dataset": "exm-drosophila-flyliconn-FlyID49-2ndgel-DUP-BIS-40XW006-20260625",
+      "path": "exm-drosophila-flyliconn-FlyID49-2ndgel-DUP-BIS-40XW006-20260625/crop-001.zarr/labels/manual_gt-cell-snap_10022026",
+      "field": "untracked_snapshot",
+      "actual": "no mia_annotation issue references this label",
+      "expected": "expected for a superseded snapshot in a weekly-export series (informational)",
+      "severity": "warning",
+      "suggested_fix": "no action needed unless this snapshot should have its own issue"
+    },
+    {
+      "check": "orphaned_ingest",
+      "dataset": "exm-drosophila-flyliconn-FlyID49-mirrorscope-central-20260702",
+      "path": "exm-drosophila-flyliconn-FlyID49-mirrorscope-central-20260702/crop-001_central.zarr/labels/manual_gt-cell-snap_09042026",
+      "field": "untracked_snapshot",
+      "actual": "no mia_annotation issue references this label",
+      "expected": "expected for a superseded snapshot in a weekly-export series (informational)",
+      "severity": "warning",
+      "suggested_fix": "no action needed unless this snapshot should have its own issue"
+    },
+    {
+      "check": "orphaned_ingest",
+      "dataset": "exm-drosophila-flyliconn-FlyID49-mirrorscope-central-20260702",
+      "path": "exm-drosophila-flyliconn-FlyID49-mirrorscope-central-20260702/crop-001_central.zarr/labels/manual_gt-cell-snap_09142026",
+      "field": "untracked_snapshot",
+      "actual": "no mia_annotation issue references this label",
+      "expected": "expected for a superseded snapshot in a weekly-export series (informational)",
+      "severity": "warning",
+      "suggested_fix": "no action needed unless this snapshot should have its own issue"
+    },
+    {
+      "check": "orphaned_ingest",
+      "dataset": "exm-drosophila-flyliconn-FlyID49-mirrorscope-central-20260702",
+      "path": "exm-drosophila-flyliconn-FlyID49-mirrorscope-central-20260702/crop-001_central.zarr/labels/manual_gt-cell-snap_10022026",
+      "field": "untracked_snapshot",
+      "actual": "no mia_annotation issue references this label",
+      "expected": "expected for a superseded snapshot in a weekly-export series (informational)",
+      "severity": "warning",
+      "suggested_fix": "no action needed unless this snapshot should have its own issue"
+    },
+    {
+      "check": "orphaned_ingest",
+      "dataset": "exm-drosophila-rubinlab-30X_lobeTm1_NHS546_687um_lower-laser_n2",
+      "path": "exm-drosophila-rubinlab-30X_lobeTm1_NHS546_687um_lower-laser_n2/crop-001_fullvol.zarr/labels/manual_gt-cell-assessment_Cat",
+      "field": "untracked_label",
+      "actual": "no mia_annotation issue references this label",
+      "expected": "a mia_annotation issue tracking this label",
+      "severity": "error",
+      "suggested_fix": "create a mia_annotation issue for this label (not automated -- flag only)"
+    },
+    {
+      "check": "orphaned_ingest",
+      "dataset": "exm-drosophila-rubinlab-30X_lobeTm1_NHS546_687um_lower-laser_n2",
+      "path": "exm-drosophila-rubinlab-30X_lobeTm1_NHS546_687um_lower-laser_n2/crop-001_fullvol.zarr/labels/manual_gt-cell-assessment_Tiff",
+      "field": "untracked_label",
+      "actual": "no mia_annotation issue references this label",
+      "expected": "a mia_annotation issue tracking this label",
+      "severity": "error",
+      "suggested_fix": "create a mia_annotation issue for this label (not automated -- flag only)"
+    },
+    {
+      "check": "orphaned_ingest",
+      "dataset": "exm-mouse-liconn-DG-20250809_ExPID19-02_2ndGel_C5_Atto488_40XW_002",
+      "path": "exm-mouse-liconn-DG-20250809_ExPID19-02_2ndGel_C5_Atto488_40XW_002/crop-001.zarr/labels/manual_gt-cell-snap_04142026",
+      "field": "untracked_snapshot",
+      "actual": "no mia_annotation issue references this label",
+      "expected": "expected for a superseded snapshot in a weekly-export series (informational)",
+      "severity": "warning",
+      "suggested_fix": "no action needed unless this snapshot should have its own issue"
+    },
+    {
+      "check": "orphaned_ingest",
+      "dataset": "exm-mouse-liconn-DG-20250809_ExPID19-02_2ndGel_C5_Atto488_40XW_002",
+      "path": "exm-mouse-liconn-DG-20250809_ExPID19-02_2ndGel_C5_Atto488_40XW_002/crop-001.zarr/labels/manual_gt-cell-snap_04202026",
+      "field": "untracked_snapshot",
+      "actual": "no mia_annotation issue references this label",
+      "expected": "expected for a superseded snapshot in a weekly-export series (informational)",
+      "severity": "warning",
+      "suggested_fix": "no action needed unless this snapshot should have its own issue"
+    },
+    {
+      "check": "orphaned_ingest",
+      "dataset": "exm-mouse-liconn-DG-20250809_ExPID19-02_2ndGel_C5_Atto488_40XW_002",
+      "path": "exm-mouse-liconn-DG-20250809_ExPID19-02_2ndGel_C5_Atto488_40XW_002/crop-001.zarr/labels/manual_gt-cell-snap_04272026",
+      "field": "untracked_snapshot",
+      "actual": "no mia_annotation issue references this label",
+      "expected": "expected for a superseded snapshot in a weekly-export series (informational)",
+      "severity": "warning",
+      "suggested_fix": "no action needed unless this snapshot should have its own issue"
+    },
+    {
+      "check": "orphaned_ingest",
+      "dataset": "exm-mouse-liconn-DG-20250809_ExPID19-02_2ndGel_C5_Atto488_40XW_002",
+      "path": "exm-mouse-liconn-DG-20250809_ExPID19-02_2ndGel_C5_Atto488_40XW_002/crop-001.zarr/labels/manual_gt-cell-snap_05052026",
+      "field": "untracked_snapshot",
+      "actual": "no mia_annotation issue references this label",
+      "expected": "expected for a superseded snapshot in a weekly-export series (informational)",
+      "severity": "warning",
+      "suggested_fix": "no action needed unless this snapshot should have its own issue"
+    },
+    {
+      "check": "orphaned_ingest",
+      "dataset": "exm-mouse-liconn-DG-20250809_ExPID19-02_2ndGel_C5_Atto488_40XW_002",
+      "path": "exm-mouse-liconn-DG-20250809_ExPID19-02_2ndGel_C5_Atto488_40XW_002/crop-001.zarr/labels/manual_gt-cell-snap_05112026",
+      "field": "untracked_snapshot",
+      "actual": "no mia_annotation issue references this label",
+      "expected": "expected for a superseded snapshot in a weekly-export series (informational)",
+      "severity": "warning",
+      "suggested_fix": "no action needed unless this snapshot should have its own issue"
+    },
+    {
+      "check": "orphaned_ingest",
+      "dataset": "exm-mouse-liconn-DG-20250809_ExPID19-02_2ndGel_C5_Atto488_40XW_002",
+      "path": "exm-mouse-liconn-DG-20250809_ExPID19-02_2ndGel_C5_Atto488_40XW_002/crop-001.zarr/labels/manual_gt-cell-snap_05182026",
+      "field": "untracked_snapshot",
+      "actual": "no mia_annotation issue references this label",
+      "expected": "expected for a superseded snapshot in a weekly-export series (informational)",
+      "severity": "warning",
+      "suggested_fix": "no action needed unless this snapshot should have its own issue"
+    },
+    {
+      "check": "orphaned_ingest",
+      "dataset": "exm-mouse-liconn-DG-20250809_ExPID19-02_2ndGel_C5_Atto488_40XW_002",
+      "path": "exm-mouse-liconn-DG-20250809_ExPID19-02_2ndGel_C5_Atto488_40XW_002/crop-001.zarr/labels/manual_gt-cell-snap_06012026",
+      "field": "untracked_snapshot",
+      "actual": "no mia_annotation issue references this label",
+      "expected": "expected for a superseded snapshot in a weekly-export series (informational)",
+      "severity": "warning",
+      "suggested_fix": "no action needed unless this snapshot should have its own issue"
+    },
+    {
+      "check": "orphaned_ingest",
+      "dataset": "exm-mouse-liconn-DG-20250809_ExPID19-02_2ndGel_C5_Atto488_40XW_002",
+      "path": "exm-mouse-liconn-DG-20250809_ExPID19-02_2ndGel_C5_Atto488_40XW_002/crop-001.zarr/labels/manual_gt-cell-snap_06082026",
+      "field": "untracked_snapshot",
+      "actual": "no mia_annotation issue references this label",
+      "expected": "expected for a superseded snapshot in a weekly-export series (informational)",
+      "severity": "warning",
+      "suggested_fix": "no action needed unless this snapshot should have its own issue"
+    },
+    {
+      "check": "orphaned_ingest",
+      "dataset": "exm-mouse-liconn-DG-20250809_ExPID19-02_2ndGel_C5_Atto488_40XW_002",
+      "path": "exm-mouse-liconn-DG-20250809_ExPID19-02_2ndGel_C5_Atto488_40XW_002/crop-001.zarr/labels/manual_gt-cell-snap_06152026",
+      "field": "untracked_snapshot",
+      "actual": "no mia_annotation issue references this label",
+      "expected": "expected for a superseded snapshot in a weekly-export series (informational)",
+      "severity": "warning",
+      "suggested_fix": "no action needed unless this snapshot should have its own issue"
+    },
+    {
+      "check": "orphaned_ingest",
+      "dataset": "exm-mouse-liconn-DG-20250809_ExPID19-02_2ndGel_C5_Atto488_40XW_002",
+      "path": "exm-mouse-liconn-DG-20250809_ExPID19-02_2ndGel_C5_Atto488_40XW_002/crop-001.zarr/labels/manual_gt-cell-snap_06232026",
+      "field": "untracked_snapshot",
+      "actual": "no mia_annotation issue references this label",
+      "expected": "expected for a superseded snapshot in a weekly-export series (informational)",
+      "severity": "warning",
+      "suggested_fix": "no action needed unless this snapshot should have its own issue"
+    },
+    {
+      "check": "orphaned_ingest",
+      "dataset": "exm-mouse-liconn-DG-20250809_ExPID19-02_2ndGel_C5_Atto488_40XW_002",
+      "path": "exm-mouse-liconn-DG-20250809_ExPID19-02_2ndGel_C5_Atto488_40XW_002/crop-001.zarr/labels/manual_gt-cell-snap_07072026",
+      "field": "untracked_snapshot",
+      "actual": "no mia_annotation issue references this label",
+      "expected": "expected for a superseded snapshot in a weekly-export series (informational)",
+      "severity": "warning",
+      "suggested_fix": "no action needed unless this snapshot should have its own issue"
+    },
+    {
+      "check": "orphaned_ingest",
+      "dataset": "exm-mouse-liconn-cortex-20250822_ExPID09_2ndGel_30percentSucrose-Glycerol_40XW_003",
+      "path": "exm-mouse-liconn-cortex-20250822_ExPID09_2ndGel_30percentSucrose-Glycerol_40XW_003/crop-001.zarr/labels/manual_gt-cell-snap_04142026",
+      "field": "untracked_snapshot",
+      "actual": "no mia_annotation issue references this label",
+      "expected": "expected for a superseded snapshot in a weekly-export series (informational)",
+      "severity": "warning",
+      "suggested_fix": "no action needed unless this snapshot should have its own issue"
+    },
+    {
+      "check": "orphaned_ingest",
+      "dataset": "exm-mouse-liconn-cortex-20250822_ExPID09_2ndGel_30percentSucrose-Glycerol_40XW_003",
+      "path": "exm-mouse-liconn-cortex-20250822_ExPID09_2ndGel_30percentSucrose-Glycerol_40XW_003/crop-001.zarr/labels/manual_gt-cell-snap_04202026",
+      "field": "untracked_snapshot",
+      "actual": "no mia_annotation issue references this label",
+      "expected": "expected for a superseded snapshot in a weekly-export series (informational)",
+      "severity": "warning",
+      "suggested_fix": "no action needed unless this snapshot should have its own issue"
+    },
+    {
+      "check": "orphaned_ingest",
+      "dataset": "exm-mouse-liconn-cortex-20250822_ExPID09_2ndGel_30percentSucrose-Glycerol_40XW_003",
+      "path": "exm-mouse-liconn-cortex-20250822_ExPID09_2ndGel_30percentSucrose-Glycerol_40XW_003/crop-001.zarr/labels/manual_gt-cell-snap_04272026",
+      "field": "untracked_snapshot",
+      "actual": "no mia_annotation issue references this label",
+      "expected": "expected for a superseded snapshot in a weekly-export series (informational)",
+      "severity": "warning",
+      "suggested_fix": "no action needed unless this snapshot should have its own issue"
+    },
+    {
+      "check": "orphaned_ingest",
+      "dataset": "exm-mouse-liconn-cortex-20250822_ExPID09_2ndGel_30percentSucrose-Glycerol_40XW_003",
+      "path": "exm-mouse-liconn-cortex-20250822_ExPID09_2ndGel_30percentSucrose-Glycerol_40XW_003/crop-001.zarr/labels/manual_gt-cell-snap_05052026",
+      "field": "untracked_snapshot",
+      "actual": "no mia_annotation issue references this label",
+      "expected": "expected for a superseded snapshot in a weekly-export series (informational)",
+      "severity": "warning",
+      "suggested_fix": "no action needed unless this snapshot should have its own issue"
+    },
+    {
+      "check": "orphaned_ingest",
+      "dataset": "exm-mouse-liconn-cortex-20250822_ExPID09_2ndGel_30percentSucrose-Glycerol_40XW_003",
+      "path": "exm-mouse-liconn-cortex-20250822_ExPID09_2ndGel_30percentSucrose-Glycerol_40XW_003/crop-001.zarr/labels/manual_gt-cell-snap_05112026",
+      "field": "untracked_snapshot",
+      "actual": "no mia_annotation issue references this label",
+      "expected": "expected for a superseded snapshot in a weekly-export series (informational)",
+      "severity": "warning",
+      "suggested_fix": "no action needed unless this snapshot should have its own issue"
+    },
+    {
+      "check": "orphaned_ingest",
+      "dataset": "exm-mouse-liconn-cortex-20250822_ExPID09_2ndGel_30percentSucrose-Glycerol_40XW_003",
+      "path": "exm-mouse-liconn-cortex-20250822_ExPID09_2ndGel_30percentSucrose-Glycerol_40XW_003/crop-001.zarr/labels/manual_gt-cell-snap_05182026",
+      "field": "untracked_snapshot",
+      "actual": "no mia_annotation issue references this label",
+      "expected": "expected for a superseded snapshot in a weekly-export series (informational)",
+      "severity": "warning",
+      "suggested_fix": "no action needed unless this snapshot should have its own issue"
+    },
+    {
+      "check": "orphaned_ingest",
+      "dataset": "exm-mouse-liconn-cortex-20250822_ExPID09_2ndGel_30percentSucrose-Glycerol_40XW_003",
+      "path": "exm-mouse-liconn-cortex-20250822_ExPID09_2ndGel_30percentSucrose-Glycerol_40XW_003/crop-001.zarr/labels/manual_gt-cell-snap_06012026",
+      "field": "untracked_snapshot",
+      "actual": "no mia_annotation issue references this label",
+      "expected": "expected for a superseded snapshot in a weekly-export series (informational)",
+      "severity": "warning",
+      "suggested_fix": "no action needed unless this snapshot should have its own issue"
+    },
+    {
+      "check": "orphaned_ingest",
+      "dataset": "exm-mouse-liconn-cortex-20250822_ExPID09_2ndGel_30percentSucrose-Glycerol_40XW_003",
+      "path": "exm-mouse-liconn-cortex-20250822_ExPID09_2ndGel_30percentSucrose-Glycerol_40XW_003/crop-001.zarr/labels/manual_gt-cell-snap_06082026",
+      "field": "untracked_snapshot",
+      "actual": "no mia_annotation issue references this label",
+      "expected": "expected for a superseded snapshot in a weekly-export series (informational)",
+      "severity": "warning",
+      "suggested_fix": "no action needed unless this snapshot should have its own issue"
+    },
+    {
+      "check": "orphaned_ingest",
+      "dataset": "exm-mouse-liconn-cortex-20250822_ExPID09_2ndGel_30percentSucrose-Glycerol_40XW_003",
+      "path": "exm-mouse-liconn-cortex-20250822_ExPID09_2ndGel_30percentSucrose-Glycerol_40XW_003/crop-001.zarr/labels/manual_gt-cell-snap_06152026",
+      "field": "untracked_snapshot",
+      "actual": "no mia_annotation issue references this label",
+      "expected": "expected for a superseded snapshot in a weekly-export series (informational)",
+      "severity": "warning",
+      "suggested_fix": "no action needed unless this snapshot should have its own issue"
+    },
+    {
+      "check": "orphaned_ingest",
+      "dataset": "exm-mouse-liconn-cortex-20250822_ExPID09_2ndGel_30percentSucrose-Glycerol_40XW_003",
+      "path": "exm-mouse-liconn-cortex-20250822_ExPID09_2ndGel_30percentSucrose-Glycerol_40XW_003/crop-001.zarr/labels/manual_gt-cell-snap_06232026",
+      "field": "untracked_snapshot",
+      "actual": "no mia_annotation issue references this label",
+      "expected": "expected for a superseded snapshot in a weekly-export series (informational)",
+      "severity": "warning",
+      "suggested_fix": "no action needed unless this snapshot should have its own issue"
+    },
+    {
+      "check": "orphaned_ingest",
+      "dataset": "exm-mouse-liconn-cortex-20250822_ExPID09_2ndGel_30percentSucrose-Glycerol_40XW_003",
+      "path": "exm-mouse-liconn-cortex-20250822_ExPID09_2ndGel_30percentSucrose-Glycerol_40XW_003/crop-001.zarr/labels/manual_gt-cell-snap_06292026",
+      "field": "untracked_snapshot",
+      "actual": "no mia_annotation issue references this label",
+      "expected": "expected for a superseded snapshot in a weekly-export series (informational)",
+      "severity": "warning",
+      "suggested_fix": "no action needed unless this snapshot should have its own issue"
+    },
+    {
+      "check": "orphaned_ingest",
+      "dataset": "exm-mouse-liconn-cortex-20250822_ExPID09_2ndGel_30percentSucrose-Glycerol_40XW_003",
+      "path": "exm-mouse-liconn-cortex-20250822_ExPID09_2ndGel_30percentSucrose-Glycerol_40XW_003/crop-001.zarr/labels/manual_gt-cell-snap_07072026",
+      "field": "untracked_snapshot",
+      "actual": "no mia_annotation issue references this label",
+      "expected": "expected for a superseded snapshot in a weekly-export series (informational)",
+      "severity": "warning",
+      "suggested_fix": "no action needed unless this snapshot should have its own issue"
+    },
+    {
+      "check": "orphaned_ingest",
+      "dataset": "exm-mouse-liconn-hippocampus-202507013_ExPID10-02_2percentAA_S2_Atto488_40XW_004",
+      "path": "exm-mouse-liconn-hippocampus-202507013_ExPID10-02_2percentAA_S2_Atto488_40XW_004/crop-001.zarr/labels/manual_gt-cell-snap_04142026",
+      "field": "untracked_snapshot",
+      "actual": "no mia_annotation issue references this label",
+      "expected": "expected for a superseded snapshot in a weekly-export series (informational)",
+      "severity": "warning",
+      "suggested_fix": "no action needed unless this snapshot should have its own issue"
+    },
+    {
+      "check": "orphaned_ingest",
+      "dataset": "exm-mouse-liconn-hippocampus-202507013_ExPID10-02_2percentAA_S2_Atto488_40XW_004",
+      "path": "exm-mouse-liconn-hippocampus-202507013_ExPID10-02_2percentAA_S2_Atto488_40XW_004/crop-001.zarr/labels/manual_gt-cell-snap_04202026",
+      "field": "untracked_snapshot",
+      "actual": "no mia_annotation issue references this label",
+      "expected": "expected for a superseded snapshot in a weekly-export series (informational)",
+      "severity": "warning",
+      "suggested_fix": "no action needed unless this snapshot should have its own issue"
+    },
+    {
+      "check": "orphaned_ingest",
+      "dataset": "exm-mouse-liconn-hippocampus-202507013_ExPID10-02_2percentAA_S2_Atto488_40XW_004",
+      "path": "exm-mouse-liconn-hippocampus-202507013_ExPID10-02_2percentAA_S2_Atto488_40XW_004/crop-001.zarr/labels/manual_gt-cell-snap_04272026",
+      "field": "untracked_snapshot",
+      "actual": "no mia_annotation issue references this label",
+      "expected": "expected for a superseded snapshot in a weekly-export series (informational)",
+      "severity": "warning",
+      "suggested_fix": "no action needed unless this snapshot should have its own issue"
+    },
+    {
+      "check": "orphaned_ingest",
+      "dataset": "exm-mouse-liconn-hippocampus-202507013_ExPID10-02_2percentAA_S2_Atto488_40XW_004",
+      "path": "exm-mouse-liconn-hippocampus-202507013_ExPID10-02_2percentAA_S2_Atto488_40XW_004/crop-001.zarr/labels/manual_gt-cell-snap_05052026",
+      "field": "untracked_snapshot",
+      "actual": "no mia_annotation issue references this label",
+      "expected": "expected for a superseded snapshot in a weekly-export series (informational)",
+      "severity": "warning",
+      "suggested_fix": "no action needed unless this snapshot should have its own issue"
+    },
+    {
+      "check": "orphaned_ingest",
+      "dataset": "exm-mouse-liconn-hippocampus-202507013_ExPID10-02_2percentAA_S2_Atto488_40XW_004",
+      "path": "exm-mouse-liconn-hippocampus-202507013_ExPID10-02_2percentAA_S2_Atto488_40XW_004/crop-001.zarr/labels/manual_gt-cell-snap_05112026",
+      "field": "untracked_snapshot",
+      "actual": "no mia_annotation issue references this label",
+      "expected": "expected for a superseded snapshot in a weekly-export series (informational)",
+      "severity": "warning",
+      "suggested_fix": "no action needed unless this snapshot should have its own issue"
+    },
+    {
+      "check": "orphaned_ingest",
+      "dataset": "exm-mouse-liconn-hippocampus-202507013_ExPID10-02_2percentAA_S2_Atto488_40XW_004",
+      "path": "exm-mouse-liconn-hippocampus-202507013_ExPID10-02_2percentAA_S2_Atto488_40XW_004/crop-001.zarr/labels/manual_gt-cell-snap_05182026",
+      "field": "untracked_snapshot",
+      "actual": "no mia_annotation issue references this label",
+      "expected": "expected for a superseded snapshot in a weekly-export series (informational)",
+      "severity": "warning",
+      "suggested_fix": "no action needed unless this snapshot should have its own issue"
+    },
+    {
+      "check": "orphaned_ingest",
+      "dataset": "exm-mouse-liconn-hippocampus-202507013_ExPID10-02_2percentAA_S2_Atto488_40XW_004",
+      "path": "exm-mouse-liconn-hippocampus-202507013_ExPID10-02_2percentAA_S2_Atto488_40XW_004/crop-001.zarr/labels/manual_gt-cell-snap_06012026",
+      "field": "untracked_snapshot",
+      "actual": "no mia_annotation issue references this label",
+      "expected": "expected for a superseded snapshot in a weekly-export series (informational)",
+      "severity": "warning",
+      "suggested_fix": "no action needed unless this snapshot should have its own issue"
+    },
+    {
+      "check": "orphaned_ingest",
+      "dataset": "exm-mouse-liconn-hippocampus-202507013_ExPID10-02_2percentAA_S2_Atto488_40XW_004",
+      "path": "exm-mouse-liconn-hippocampus-202507013_ExPID10-02_2percentAA_S2_Atto488_40XW_004/crop-001.zarr/labels/manual_gt-cell-snap_06082026",
+      "field": "untracked_snapshot",
+      "actual": "no mia_annotation issue references this label",
+      "expected": "expected for a superseded snapshot in a weekly-export series (informational)",
+      "severity": "warning",
+      "suggested_fix": "no action needed unless this snapshot should have its own issue"
+    },
+    {
+      "check": "orphaned_ingest",
+      "dataset": "exm-mouse-liconn-hippocampus-202507013_ExPID10-02_2percentAA_S2_Atto488_40XW_004",
+      "path": "exm-mouse-liconn-hippocampus-202507013_ExPID10-02_2percentAA_S2_Atto488_40XW_004/crop-001.zarr/labels/manual_gt-cell-snap_06152026",
+      "field": "untracked_snapshot",
+      "actual": "no mia_annotation issue references this label",
+      "expected": "expected for a superseded snapshot in a weekly-export series (informational)",
+      "severity": "warning",
+      "suggested_fix": "no action needed unless this snapshot should have its own issue"
+    },
+    {
+      "check": "orphaned_ingest",
+      "dataset": "exm-mouse-liconn-hippocampus-202507013_ExPID10-02_2percentAA_S2_Atto488_40XW_004",
+      "path": "exm-mouse-liconn-hippocampus-202507013_ExPID10-02_2percentAA_S2_Atto488_40XW_004/crop-001.zarr/labels/manual_gt-cell-snap_06232026",
+      "field": "untracked_snapshot",
+      "actual": "no mia_annotation issue references this label",
+      "expected": "expected for a superseded snapshot in a weekly-export series (informational)",
+      "severity": "warning",
+      "suggested_fix": "no action needed unless this snapshot should have its own issue"
+    },
+    {
+      "check": "orphaned_ingest",
+      "dataset": "exm-mouse-liconn-hippocampus-202507013_ExPID10-02_2percentAA_S2_Atto488_40XW_004",
+      "path": "exm-mouse-liconn-hippocampus-202507013_ExPID10-02_2percentAA_S2_Atto488_40XW_004/crop-001.zarr/labels/manual_gt-cell-snap_06292026",
+      "field": "untracked_snapshot",
+      "actual": "no mia_annotation issue references this label",
+      "expected": "expected for a superseded snapshot in a weekly-export series (informational)",
+      "severity": "warning",
+      "suggested_fix": "no action needed unless this snapshot should have its own issue"
+    },
+    {
+      "check": "orphaned_ingest",
+      "dataset": "exm-mouse-liconn-hippocampus-202507013_ExPID10-02_2percentAA_S2_Atto488_40XW_004",
+      "path": "exm-mouse-liconn-hippocampus-202507013_ExPID10-02_2percentAA_S2_Atto488_40XW_004/crop-001.zarr/labels/manual_gt-cell-snap_07072026",
+      "field": "untracked_snapshot",
+      "actual": "no mia_annotation issue references this label",
+      "expected": "expected for a superseded snapshot in a weekly-export series (informational)",
+      "severity": "warning",
+      "suggested_fix": "no action needed unless this snapshot should have its own issue"
+    },
+    {
+      "check": "orphaned_ingest",
+      "dataset": "lm-zebrafish-Betzig-mosaic-20260213_Korra_Foundation_20250616_mem-histone_fish1_24hpf_brain",
+      "path": "lm-zebrafish-Betzig-mosaic-20260213_Korra_Foundation_20250616_mem-histone_fish1_24hpf_brain/crop-010_000x_003y_000z_32t_2c.zarr/labels/auto_pred-cell-ch0_cellpose_denseEX_pp",
+      "field": "untracked_label",
+      "actual": "no mia_annotation issue references this label",
+      "expected": "a mia_annotation issue tracking this label",
+      "severity": "error",
+      "suggested_fix": "create a mia_annotation issue for this label (not automated -- flag only)"
+    },
+    {
+      "check": "orphaned_ingest",
+      "dataset": "lm-zebrafish-Betzig-mosaic-example_annotations_Thayer",
+      "path": "lm-zebrafish-Betzig-mosaic-example_annotations_Thayer/crop-001_dsr_timeseries_48t_1c.zarr/labels/cellpose_t10_denseEX_pp",
+      "field": "untracked_label",
+      "actual": "no mia_annotation issue references this label",
+      "expected": "a mia_annotation issue tracking this label",
+      "severity": "error",
+      "suggested_fix": "create a mia_annotation issue for this label (not automated -- flag only)"
+    },
+    {
+      "check": "orphaned_ingest",
+      "dataset": "lm-zebrafish-Betzig-mosaic-example_annotations_Thayer",
+      "path": "lm-zebrafish-Betzig-mosaic-example_annotations_Thayer/crop-001_dsr_timeseries_48t_1c.zarr/labels/cellpose_t25_denseEX_pp",
+      "field": "untracked_label",
+      "actual": "no mia_annotation issue references this label",
+      "expected": "a mia_annotation issue tracking this label",
+      "severity": "error",
+      "suggested_fix": "create a mia_annotation issue for this label (not automated -- flag only)"
+    },
+    {
+      "check": "orphaned_ingest",
+      "dataset": "lm-zebrafish-Betzig-mosaic-example_annotations_Thayer",
+      "path": "lm-zebrafish-Betzig-mosaic-example_annotations_Thayer/crop-001_dsr_timeseries_48t_1c.zarr/labels/cellpose_t40_denseEX_pp",
+      "field": "untracked_label",
+      "actual": "no mia_annotation issue references this label",
+      "expected": "a mia_annotation issue tracking this label",
+      "severity": "error",
+      "suggested_fix": "create a mia_annotation issue for this label (not automated -- flag only)"
+    },
+    {
+      "check": "orphaned_ingest",
+      "dataset": "lm-zebrafish-Betzig-mosaic-example_annotations_Thayer",
+      "path": "lm-zebrafish-Betzig-mosaic-example_annotations_Thayer/crop-001_dsr_timeseries_48t_1c.zarr/labels/postprocessed_labels_t01",
+      "field": "untracked_label",
+      "actual": "no mia_annotation issue references this label",
+      "expected": "a mia_annotation issue tracking this label",
+      "severity": "error",
+      "suggested_fix": "create a mia_annotation issue for this label (not automated -- flag only)"
+    },
+    {
+      "check": "orphaned_ingest",
+      "dataset": "lm-zebrafish-Betzig-mosaic-example_annotations_Thayer",
+      "path": "lm-zebrafish-Betzig-mosaic-example_annotations_Thayer/crop-001_dsr_timeseries_48t_1c.zarr/labels/t10_y151x870_variability_alannah",
+      "field": "untracked_label",
+      "actual": "no mia_annotation issue references this label",
+      "expected": "a mia_annotation issue tracking this label",
+      "severity": "error",
+      "suggested_fix": "create a mia_annotation issue for this label (not automated -- flag only)"
+    },
+    {
+      "check": "orphaned_ingest",
+      "dataset": "lm-zebrafish-Betzig-mosaic-example_annotations_Thayer",
+      "path": "lm-zebrafish-Betzig-mosaic-example_annotations_Thayer/crop-001_dsr_timeseries_48t_1c.zarr/labels/t10_y151x870_variability_diana",
+      "field": "untracked_label",
+      "actual": "no mia_annotation issue references this label",
+      "expected": "a mia_annotation issue tracking this label",
+      "severity": "error",
+      "suggested_fix": "create a mia_annotation issue for this label (not automated -- flag only)"
+    },
+    {
+      "check": "orphaned_ingest",
+      "dataset": "lm-zebrafish-Betzig-mosaic-example_annotations_Thayer",
+      "path": "lm-zebrafish-Betzig-mosaic-example_annotations_Thayer/crop-002_example_annotations_Thayer_2channels.zarr/labels/initial_labels",
+      "field": "untracked_label",
+      "actual": "no mia_annotation issue references this label",
+      "expected": "a mia_annotation issue tracking this label",
+      "severity": "error",
+      "suggested_fix": "create a mia_annotation issue for this label (not automated -- flag only)"
+    },
+    {
+      "check": "orphaned_ingest",
+      "dataset": "lm-zebrafish-Betzig-mosaic-example_annotations_Thayer",
+      "path": "lm-zebrafish-Betzig-mosaic-example_annotations_Thayer/crop-002_example_annotations_Thayer_2channels.zarr/labels/postprocessed_labels",
+      "field": "untracked_label",
+      "actual": "no mia_annotation issue references this label",
+      "expected": "a mia_annotation issue tracking this label",
+      "severity": "error",
+      "suggested_fix": "create a mia_annotation issue for this label (not automated -- flag only)"
+    },
+    {
+      "check": "orphaned_ingest",
+      "dataset": "lm-zebrafish-Betzig-mosaic-example_annotations_Thayer",
+      "path": "lm-zebrafish-Betzig-mosaic-example_annotations_Thayer/crop-002_example_annotations_Thayer_2channels.zarr/labels/proofread_refined_labels",
+      "field": "untracked_label",
+      "actual": "no mia_annotation issue references this label",
+      "expected": "a mia_annotation issue tracking this label",
+      "severity": "error",
+      "suggested_fix": "create a mia_annotation issue for this label (not automated -- flag only)"
+    },
+    {
+      "check": "orphaned_ingest",
+      "dataset": "lm-zebrafish-Betzig-mosaic-example_annotations_Thayer",
+      "path": "lm-zebrafish-Betzig-mosaic-example_annotations_Thayer/crop-002_example_annotations_Thayer_2channels.zarr/labels/refined_labels",
+      "field": "untracked_label",
+      "actual": "no mia_annotation issue references this label",
+      "expected": "a mia_annotation issue tracking this label",
+      "severity": "error",
+      "suggested_fix": "create a mia_annotation issue for this label (not automated -- flag only)"
+    }
+  ]
+}

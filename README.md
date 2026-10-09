@@ -38,6 +38,7 @@ the Janelia cluster and published as a static-HTML report site.
 | `channel_index_consistency.py` | A label derived from one channel of a multi-channel raw records a valid `source.channel_index` |
 | `multitimepoint_label_sparsity.py` | A label tied to one timepoint is full-T shaped and has real data only at that timepoint |
 | `label_field_drift.py` | A `mia_annotation` label issue's board fields agree with that label's own on-disk metadata (warning only — either side can be stale) |
+| `orphaned_ingest.py` | Every real label has a tracking issue and every terminal issue has a real label, in both directions |
 
 The original design proposal and open questions: [issue #1](https://github.com/AI-HHMI/mia-data-qc/issues/1).
 
