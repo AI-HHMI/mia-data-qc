@@ -42,6 +42,7 @@ CHECK_DESCRIPTIONS = {
     "multitimepoint_label_sparsity": "A label tied to one timepoint is full-T shaped and has real data only at that timepoint.",
     "label_field_drift": "A mia_annotation label issue's board fields agree with that label's own on-disk metadata.",
     "orphaned_ingest": "Every real label has a tracking issue and every terminal issue has a real label, in both directions.",
+    "empty_label_data": "A label with complete metadata actually has chunk data written at its finest pyramid level.",
 }
 
 _STYLE = """
