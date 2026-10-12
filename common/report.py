@@ -45,6 +45,7 @@ CHECK_DESCRIPTIONS = {
     "empty_label_data": "A label with complete metadata actually has chunk data written at its finest pyramid level.",
     "freshness": "A label's created field parses as a valid date, and superseded-snapshot ranking matches real timestamps.",
     "dataset_field_drift": "A mia_pretraining issue's Axis_Order and Dtype fields agree with the crop's own on-disk metadata.",
+    "dataset_orphaned_ingest": "Every real dataset has at least one mia_pretraining issue referencing it.",
 }
 
 _STYLE = """
