@@ -41,6 +41,7 @@ the Janelia cluster and published as a static-HTML report site.
 | `orphaned_ingest.py` | Every real label has a tracking issue and every terminal issue has a real label, in both directions |
 | `empty_label_data.py` | A label with complete metadata actually has chunk data written at its finest pyramid level |
 | `freshness.py` | A label's `created` field parses as a valid date, and superseded-snapshot ranking matches real timestamps |
+| `dataset_field_drift.py` | A `mia_pretraining` issue's `Axis_Order` and `Dtype` fields agree with the crop's own on-disk metadata |
 
 The original design proposal and open questions: [issue #1](https://github.com/AI-HHMI/mia-data-qc/issues/1).
 
