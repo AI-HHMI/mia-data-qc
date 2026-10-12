@@ -10,6 +10,7 @@ attributes are the bare contents of `.zattrs` -- no wrapper, and
 `multiscales` sits at the top level, not under `"ome"`.
 """
 import json
+import os
 from pathlib import Path
 
 
@@ -89,3 +90,65 @@ def read_array_meta(array_dir: Path):
             "dimension_separator": data.get("dimension_separator", "."),
         }
     return None
+
+
+def written_chunk_bounds(array_dir: Path):
+    """Ported from `measure_labels.py`'s `written_extent()` (worklog repo,
+    `scripts/lmvd_plots/`) -- same algorithm, not reimplemented differently.
+    Determines the bounding box of chunks actually written on disk *without
+    reading a single pixel*, just by listing chunk file names: zarr never
+    writes an all-empty chunk, so the declared array shape can vastly
+    overstate where real data lives (a label's shape routinely spans the
+    whole parent volume while only a small sub-box carries annotation).
+
+    Walks every file under `array_dir`, strips a leading `"c"` path segment
+    (zarr v3's default chunk-key prefix) if present, and reads the chunk
+    index either from nested path segments (zarr v3, or zarr v2 with
+    `dimension_separator: "/"`) or from a single dot-joined filename (zarr
+    v2 with `dimension_separator: "."`) -- both conventions are detected
+    automatically from the path shape, not assumed up front.
+
+    The index granularity is the *file* granularity -- for a sharded zarr v3
+    array that's the shard shape (one shard is one file), not the finer
+    inner chunk shape `read_array_meta()` reports separately.
+
+    Returns `{"elem_bounds": [(lo, hi), ...]}` (per-axis element-space
+    bounds, already clipped to the declared shape) or None if the array
+    metadata is missing/unreadable or no chunks have been written at all.
+    """
+    meta = read_array_meta(array_dir)
+    if meta is None:
+        return None
+    shape = meta.get("shape")
+    file_chunk_shape = meta.get("shard_shape") or meta.get("chunk_shape")
+    if not shape or not file_chunk_shape or len(shape) != len(file_chunk_shape):
+        return None
+    ndim = len(shape)
+
+    indices = []
+    for dirpath, _dirnames, filenames in os.walk(array_dir):
+        for name in filenames:
+            if name in ("zarr.json", ".zarray", ".zattrs", ".zgroup"):
+                continue
+            rel = os.path.relpath(os.path.join(dirpath, name), array_dir)
+            parts = rel.replace(os.sep, "/").split("/")
+            if parts and parts[0] == "c":
+                parts = parts[1:]
+            if len(parts) == 1:
+                parts = parts[0].split(".")
+            if len(parts) != ndim:
+                continue
+            try:
+                indices.append(tuple(int(p) for p in parts))
+            except ValueError:
+                continue
+
+    if not indices:
+        return None
+
+    elem_bounds = []
+    for d in range(ndim):
+        lo = min(i[d] for i in indices) * file_chunk_shape[d]
+        hi = min(max(i[d] for i in indices) * file_chunk_shape[d] + file_chunk_shape[d], shape[d])
+        elem_bounds.append((lo, hi))
+    return {"elem_bounds": elem_bounds}
