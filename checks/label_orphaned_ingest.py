@@ -50,7 +50,7 @@ from common.report import write_check_report
 from common.vocab import NON_DATASET_DIRS
 from common.zarr_meta import group_exists
 
-CHECK_NAME = "orphaned_ingest"
+CHECK_NAME = "label_orphaned_ingest"
 
 TERMINAL_STATUSES = {
     "manual_gt_ingested", "public_gt_ingested", "proofread_ingested", "auto_pred_ingested",

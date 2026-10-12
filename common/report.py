@@ -41,7 +41,7 @@ CHECK_DESCRIPTIONS = {
     "channel_index_consistency": "A label derived from one channel of a multi-channel raw records a valid source.channel_index.",
     "multitimepoint_label_sparsity": "A label tied to one timepoint is full-T shaped and has real data only at that timepoint.",
     "label_field_drift": "A mia_annotation label issue's board fields agree with that label's own on-disk metadata.",
-    "orphaned_ingest": "Every real label has a tracking issue and every terminal issue has a real label, in both directions.",
+    "label_orphaned_ingest": "Every real label has a tracking issue and every terminal issue has a real label, in both directions.",
     "empty_label_data": "A label with complete metadata actually has chunk data written at its finest pyramid level.",
     "freshness": "A label's created field parses as a valid date, and superseded-snapshot ranking matches real timestamps.",
     "dataset_field_drift": "A mia_pretraining issue's Axis_Order and Dtype fields agree with the crop's own on-disk metadata.",

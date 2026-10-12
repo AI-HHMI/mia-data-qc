@@ -38,7 +38,7 @@ the Janelia cluster and published as a static-HTML report site.
 | `channel_index_consistency.py` | A label derived from one channel of a multi-channel raw records a valid `source.channel_index` |
 | `multitimepoint_label_sparsity.py` | A label tied to one timepoint is full-T shaped and has real data only at that timepoint |
 | `label_field_drift.py` | A `mia_annotation` label issue's board fields agree with that label's own on-disk metadata (warning only — either side can be stale) |
-| `orphaned_ingest.py` | Every real label has a tracking issue and every terminal issue has a real label, in both directions |
+| `label_orphaned_ingest.py` | Every real label has a tracking issue and every terminal issue has a real label, in both directions (`mia_annotation`) |
 | `empty_label_data.py` | A label with complete metadata actually has chunk data written at its finest pyramid level |
 | `freshness.py` | A label's `created` field parses as a valid date, and superseded-snapshot ranking matches real timestamps |
 | `dataset_field_drift.py` | A `mia_pretraining` issue's `Axis_Order` and `Dtype` fields agree with the crop's own on-disk metadata |
