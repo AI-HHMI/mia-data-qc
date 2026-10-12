@@ -5,3 +5,6 @@ __pycache__/
 .DS_Store
 /fixes/
 Screenshot*.png
+# pixi environments
+.pixi/*
+!.pixi/config.toml

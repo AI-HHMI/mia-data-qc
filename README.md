@@ -12,7 +12,8 @@ the Janelia cluster and published as a static-HTML report site.
 - `common/` — shared code: `report.py` (JSON+HTML report writer, dated index pages),
   `vocab.py` (controlled vocabularies for dataset/organism/label-class naming, single source of
   truth), `deep_walk.py` (shared single-pass corpus traversal for checks that need to visit every
-  file).
+  file), `zarr_meta.py` (zarr v2/v3-transparent metadata reads, no dependency beyond stdlib),
+  `github.py` (read-only GitHub Projects v2 board fetch via the `gh` CLI).
 - `reports/` — `reports/<date>/` per run; `qc_dashboard.html` at the repo root lists dates
   newest-first with finding counts.
 
@@ -52,6 +53,11 @@ Each check runs standalone, e.g.:
 ```bash
 python3 checks/dataset_naming.py --root /groups/miaai/miaai/lmd-v0.0.1/data
 ```
+
+Every check above is pure stdlib — no setup beyond Python itself. A small number of checks that
+need to decode real pixel data (not just metadata) need `zarr`/`numpy`, pinned in `pixi.toml`
+(same `zarr>=3.1.1,<4` TensorSwitch uses, since zarr-python 2.x can't open this corpus's zarr v3
+stores). Run those via `pixi run python3 checks/<name>.py ...` instead of bare `python3`.
 
 Checks that walk every file under `data/` (`ownership_permissions.py`, `stray_files.py`) should be
 submitted as an LSF job, never run on a login node — use the matching `submit_*.sh` script, or
