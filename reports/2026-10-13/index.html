@@ -69,9 +69,12 @@ footer.site { color:var(--muted); font-size:12px; padding:24px 0 40px; text-alig
 <h1>QC reports — 2026-10-13</h1>
 <p class="sub">Click a check to see its findings below.</p>
 <div class="tabs">
-<a class="tile" href="#divergent_voxel_counts"><span class="name">divergent_voxel_counts</span><span class="desc">Two labels of the same class on the same crop have non-zero voxel counts within 10x of each other.</span><span class="badge chip error">2 finding(s)</span></a>
+<a class="tile" href="#annotated_voxels_sanity"><span class="name">annotated_voxels_sanity</span><span class="desc">A label&#x27;s exact non-zero voxel count does not exceed its own declared array shape.</span><span class="badge chip ">0 finding(s)</span></a>
+<a class="tile" href="#divergent_voxel_counts"><span class="name">divergent_voxel_counts</span><span class="desc">Two labels of the same class and crop, but different provenance, have non-zero voxel counts within 10x of each other.</span><span class="badge chip error">2 finding(s)</span></a>
 </div>
-<section id="divergent_voxel_counts" class="panel"><h2>divergent_voxel_counts</h2><p class="sub">Two labels of the same class on the same crop have non-zero voxel counts within 10x of each other.</p><div class="summary"><div class="stat error"><div class="n">2</div><div class="l">error</div></div></div>
+<section id="annotated_voxels_sanity" class="panel"><h2>annotated_voxels_sanity</h2><p class="sub">A label&#x27;s exact non-zero voxel count does not exceed its own declared array shape.</p><div class="summary"><div class="stat"><div class="n">0</div><div class="l">findings</div></div></div>
+<div class="card empty">No findings.</div></section>
+<section id="divergent_voxel_counts" class="panel" hidden><h2>divergent_voxel_counts</h2><p class="sub">Two labels of the same class and crop, but different provenance, have non-zero voxel counts within 10x of each other.</p><div class="summary"><div class="stat error"><div class="n">2</div><div class="l">error</div></div></div>
 <div class="card scroll">
 <table class="sortable"><thead><tr><th>Dataset</th><th>Path</th><th>Field</th><th>Actual</th>
 <th>Expected</th><th>Severity</th><th>Suggested fix</th></tr></thead>

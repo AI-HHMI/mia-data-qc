@@ -47,6 +47,7 @@ CHECK_DESCRIPTIONS = {
     "dataset_field_drift": "A mia_pretraining issue's Axis_Order and Dtype fields agree with the crop's own on-disk metadata.",
     "dataset_orphaned_ingest": "Every real dataset has at least one mia_pretraining issue referencing it.",
     "divergent_voxel_counts": "Two labels of the same class and crop, but different provenance, have non-zero voxel counts within 10x of each other.",
+    "annotated_voxels_sanity": "A label's exact non-zero voxel count does not exceed its own declared array shape.",
 }
 
 _STYLE = """
