@@ -44,6 +44,7 @@ the Janelia cluster and published as a static-HTML report site.
 | `freshness.py` | A label's `created` field parses as a valid date, and superseded-snapshot ranking matches real timestamps |
 | `dataset_field_drift.py` | A `mia_pretraining` issue's `Axis_Order` and `Dtype` fields agree with the crop's own on-disk metadata |
 | `dataset_orphaned_ingest.py` | Every real dataset has at least one `mia_pretraining` issue referencing it |
+| `divergent_voxel_counts.py` | Two labels of the same class and crop, but different provenance (e.g. `manual_gt` vs `proofread`), have non-zero voxel counts within 10x of each other |
 
 The original design proposal and open questions: [issue #1](https://github.com/AI-HHMI/mia-data-qc/issues/1).
 
