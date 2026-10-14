@@ -1,13 +1,15 @@
 """Shared single-pass corpus traversal for "deep-walk" checks -- checks that need
 to visit every file/directory under a dataset, not just a top-level listing
-(today: ownership_permissions, stray_files). walk_dataset() does ONE os.walk per
-dataset dir and returns every registered check's findings from that one pass, so
-adding another deep-walk check later doesn't cost the corpus another full walk.
+(today: ownership_permissions, stray_files, label_disk_usage_sanity,
+dataset_disk_usage_sanity). walk_dataset() does ONE os.walk per dataset dir and
+returns every registered check's findings from that one pass, so adding another
+deep-walk check later doesn't cost the corpus another full walk.
 
-Each individual check script (checks/ownership_permissions.py, checks/stray_files.py)
-still runs standalone by calling this same function and keeping only its own slice
-of the result -- useful for the synthetic/single-dataset testing each check gets
-before being trusted. The actual corpus-wide production run should go through
+Each individual check script (checks/ownership_permissions.py, checks/stray_files.py,
+checks/label_disk_usage_sanity.py, checks/dataset_disk_usage_sanity.py) still runs
+standalone by calling this same function and keeping only its own slice of the
+result -- useful for the synthetic/single-dataset testing each check gets before
+being trusted. The actual corpus-wide production run should go through
 checks/run_deep_walk_checks.py instead, which writes every check's report from one
 walk per dataset.
 """
@@ -19,6 +21,16 @@ from pathlib import Path
 
 CHECK_PERMISSIONS = "ownership_permissions"
 CHECK_STRAY = "stray_files"
+CHECK_LABEL_DISK_USAGE = "label_disk_usage_sanity"
+CHECK_DATASET_DISK_USAGE = "dataset_disk_usage_sanity"
+
+# Every one of the corpus's 7,483,957 directories (surveyed Oct 13, 2026, across
+# all 139 datasets including the largest Betzig fullvol crops) has exactly this
+# apparent size -- `du -sb --apparent-size` is `sum(file st_size) + sum(dir
+# st_size)` exactly (verified directly against real `du` output), so this is
+# really a check that no directory's own inode size has drifted from every
+# other directory on the corpus, not a guess at what "normal" looks like.
+EXPECTED_DIR_SIZE = 4096
 
 _RUNG_RE = re.compile(r"^s\d+$")
 JUNK_FILE_SUFFIXES = {".log", ".err", ".sh"}
@@ -79,6 +91,37 @@ def _is_job_output_junk(entry_path: Path, filenames_by_path: dict) -> bool:
     return any(Path(f).suffix in JUNK_FILE_SUFFIXES for f in child_filenames)
 
 
+def _owning_label_root(dir_path: Path, dataset_dir: Path):
+    """If dir_path is a label dir or sits somewhere under one
+    (`.../labels/<name>/...`), return that label dir's own path; else None."""
+    rel_parts = dir_path.relative_to(dataset_dir).parts
+    if "labels" in rel_parts:
+        idx = rel_parts.index("labels")
+        if len(rel_parts) > idx + 1:
+            return dataset_dir.joinpath(*rel_parts[: idx + 2])
+    return None
+
+
+def _disk_usage_finding(check_name: str, dataset_name: str, context_path: Path, root: Path,
+                         anomalies: list) -> list[dict]:
+    if not anomalies:
+        return []
+    sample = "; ".join(f"{p.relative_to(root)}={sz}B" for p, sz in anomalies[:5])
+    more = f" (+{len(anomalies) - 5} more)" if len(anomalies) > 5 else ""
+    return [{
+        "check": check_name, "dataset": dataset_name, "path": str(context_path.relative_to(root)),
+        "field": "directory_apparent_size",
+        "actual": f"{len(anomalies)} director{'y' if len(anomalies) == 1 else 'ies'} with non-4096B "
+                  f"apparent size: {sample}{more}",
+        "expected": f"every directory's own apparent size is {EXPECTED_DIR_SIZE} bytes "
+                    "(true for all 7.48M directories surveyed corpus-wide, Oct 13 2026)",
+        "severity": "error",
+        "suggested_fix": "investigate the listed director(y/ies) directly -- an inode size differing "
+                          "from the rest of the corpus means `du` and a file-byte-sum would disagree "
+                          "by more than the usual per-directory overhead",
+    }]
+
+
 def walk_dataset(dataset_dir: Path, root: Path, expected_gid: int = None, expected_group: str = None) -> dict:
     """One os.walk over dataset_dir; returns {check_name: [findings]} for every
     deep-walk check registered here. Pass expected_gid/expected_group to also get
@@ -136,4 +179,38 @@ def walk_dataset(dataset_dir: Path, root: Path, expected_gid: int = None, expect
             except OSError:
                 continue
 
-    return {CHECK_PERMISSIONS: perm_findings, CHECK_STRAY: stray_findings}
+    # Disk-usage sanity: every directory's own apparent size should be
+    # EXPECTED_DIR_SIZE (see the constant's docstring) -- bucket anomalies by
+    # the label they fall under (mia_annotation tracks per-label) and
+    # separately for the whole dataset (mia_pretraining tracks per-dataset,
+    # since some issues cover a whole multi-crop dataset with no per-crop
+    # issue at all).
+    dataset_anomalies = []
+    label_anomalies = {}
+    for d in all_dirs:
+        try:
+            size = d.stat().st_size
+        except OSError:
+            continue
+        if size == EXPECTED_DIR_SIZE:
+            continue
+        dataset_anomalies.append((d, size))
+        label_root = _owning_label_root(d, dataset_dir)
+        if label_root is not None:
+            label_anomalies.setdefault(label_root, []).append((d, size))
+
+    label_disk_findings = []
+    for label_root, anomalies in label_anomalies.items():
+        label_disk_findings.extend(
+            _disk_usage_finding(CHECK_LABEL_DISK_USAGE, dataset_dir.name, label_root, root, anomalies)
+        )
+    dataset_disk_findings = _disk_usage_finding(
+        CHECK_DATASET_DISK_USAGE, dataset_dir.name, dataset_dir, root, dataset_anomalies
+    )
+
+    return {
+        CHECK_PERMISSIONS: perm_findings,
+        CHECK_STRAY: stray_findings,
+        CHECK_LABEL_DISK_USAGE: label_disk_findings,
+        CHECK_DATASET_DISK_USAGE: dataset_disk_findings,
+    }

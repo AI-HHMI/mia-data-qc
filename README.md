@@ -46,6 +46,8 @@ the Janelia cluster and published as a static-HTML report site.
 | `dataset_orphaned_ingest.py` | Every real dataset has at least one `mia_pretraining` issue referencing it |
 | `divergent_voxel_counts.py` | Two labels of the same class and crop, but different provenance (e.g. `manual_gt` vs `proofread`), have non-zero voxel counts within 10x of each other |
 | `annotated_voxels_sanity.py` | A label's exact non-zero voxel count does not exceed its own declared array shape |
+| `label_disk_usage_sanity.py` | Every directory under a label has the same apparent size (4096 bytes) as every other directory on the corpus |
+| `dataset_disk_usage_sanity.py` | Every directory under a dataset has the same apparent size (4096 bytes) as every other directory on the corpus |
 
 The original design proposal and open questions: [issue #1](https://github.com/AI-HHMI/mia-data-qc/issues/1).
 
@@ -61,11 +63,12 @@ need to decode real pixel data (not just metadata) need `zarr`/`numpy`, pinned i
 (same `zarr>=3.1.1,<4` TensorSwitch uses, since zarr-python 2.x can't open this corpus's zarr v3
 stores). Run those via `pixi run python3 checks/<name>.py ...` instead of bare `python3`.
 
-Checks that walk every file under `data/` (`ownership_permissions.py`, `stray_files.py`) should be
-submitted as an LSF job, never run on a login node — use the matching `submit_*.sh` script, or
-`submit_deep_walk_checks.sh` to run both from a single corpus walk (the real production entry
-point for those two — `run_deep_walk_checks.py`). Shallow checks (naming, pyramid consistency,
-metadata consistency) run in seconds and don't need a cluster job.
+Checks that walk every file under `data/` (`ownership_permissions.py`, `stray_files.py`,
+`label_disk_usage_sanity.py`, `dataset_disk_usage_sanity.py`) should be submitted as an LSF job,
+never run on a login node — use the matching `submit_*.sh` script, or `submit_deep_walk_checks.sh`
+to run all four from a single corpus walk (the real production entry point for those four —
+`run_deep_walk_checks.py`). Shallow checks (naming, pyramid consistency, metadata consistency) run
+in seconds and don't need a cluster job.
 
 **New-check convention**: if a new check needs a deep, file-level walk (visiting every chunk, not
 just dataset/crop/label directories), pair it with the existing deep-walk checks in

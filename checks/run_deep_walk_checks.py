@@ -1,13 +1,15 @@
 #!/usr/bin/env python3
 """Production entry point for every "deep-walk" check (checks that need to visit
 every file/directory under a dataset, not just a top-level listing) -- currently
-ownership_permissions and stray_files. Walks the corpus ONCE per dataset dir and
-writes both checks' reports from that single pass, instead of each check walking
-the whole corpus on its own.
+ownership_permissions, stray_files, label_disk_usage_sanity, and
+dataset_disk_usage_sanity. Walks the corpus ONCE per dataset dir and writes every
+check's report from that single pass, instead of each check walking the whole
+corpus on its own.
 
-Individual check scripts (checks/ownership_permissions.py, checks/stray_files.py)
-still run standalone for development/testing against a scratch directory or a
-single dataset -- this script is for real corpus-wide runs (cron/bsub).
+Individual check scripts (checks/ownership_permissions.py, checks/stray_files.py,
+checks/label_disk_usage_sanity.py, checks/dataset_disk_usage_sanity.py) still run
+standalone for development/testing against a scratch directory or a single
+dataset -- this script is for real corpus-wide runs (cron/bsub).
 """
 import argparse
 import datetime
@@ -19,7 +21,10 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from common.report import write_check_report
 from common.vocab import NON_DATASET_DIRS
-from common.deep_walk import walk_dataset, check_entry_permissions, CHECK_PERMISSIONS, CHECK_STRAY
+from common.deep_walk import (
+    walk_dataset, check_entry_permissions,
+    CHECK_PERMISSIONS, CHECK_STRAY, CHECK_LABEL_DISK_USAGE, CHECK_DATASET_DISK_USAGE,
+)
 
 
 def main():
@@ -50,7 +55,10 @@ def main():
     # date folders -- every write_check_report() call below uses this same date.
     run_date = datetime.date.today().isoformat()
 
-    findings = {CHECK_PERMISSIONS: [], CHECK_STRAY: []}
+    findings = {
+        CHECK_PERMISSIONS: [], CHECK_STRAY: [],
+        CHECK_LABEL_DISK_USAGE: [], CHECK_DATASET_DISK_USAGE: [],
+    }
     done = 0
 
     # Root itself + any files directly under it (not inside any dataset dir) --

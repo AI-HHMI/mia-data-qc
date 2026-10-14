@@ -48,6 +48,8 @@ CHECK_DESCRIPTIONS = {
     "dataset_orphaned_ingest": "Every real dataset has at least one mia_pretraining issue referencing it.",
     "divergent_voxel_counts": "Two labels of the same class and crop, but different provenance, have non-zero voxel counts within 10x of each other.",
     "annotated_voxels_sanity": "A label's exact non-zero voxel count does not exceed its own declared array shape.",
+    "label_disk_usage_sanity": "Every directory under a label has the same apparent size (4096 bytes) as every other directory on the corpus.",
+    "dataset_disk_usage_sanity": "Every directory under a dataset has the same apparent size (4096 bytes) as every other directory on the corpus.",
 }
 
 _STYLE = """
