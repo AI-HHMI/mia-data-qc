@@ -48,6 +48,7 @@ the Janelia cluster and published as a static-HTML report site.
 | `annotated_voxels_sanity.py` | A label's exact non-zero voxel count does not exceed its own declared array shape |
 | `label_disk_usage_sanity.py` | Every directory under a label has the same apparent size (4096 bytes) as every other directory on the corpus |
 | `dataset_disk_usage_sanity.py` | Every directory under a dataset has the same apparent size (4096 bytes) as every other directory on the corpus |
+| `dataset_crop_coverage.py` | Every real crop in a multi-crop dataset has `mia_pretraining` representation, either its own issue or a dataset-level blanket issue |
 
 The original design proposal and open questions: [issue #1](https://github.com/AI-HHMI/mia-data-qc/issues/1).
 
