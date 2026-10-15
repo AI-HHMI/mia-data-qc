@@ -1,10 +1,13 @@
 #!/usr/bin/env python3
 """Run every check in this repo against the real corpus in one pass, writing
 to the same dated reports dir so the dashboard reflects a single coherent
-run. The two deep-walk checks (ownership_permissions, stray_files) go through
-run_deep_walk_checks.py so the corpus is only walked once; every other check
-is shallow and runs directly. This is the one script to submit for a full
-corpus-wide refresh -- see submit_all_checks.sh for the cluster job wrapper.
+run. Four deep-walk checks (ownership_permissions, stray_files,
+label_disk_usage_sanity, dataset_disk_usage_sanity) go through
+run_deep_walk_checks.py so the corpus is only walked once; PIXI_CHECKS need
+real pixel decoding (zarr/numpy, see pixi.toml) so run via `pixi run
+python3`; every other check is shallow metadata/board-only and runs
+directly. This is the one script to submit for a full corpus-wide refresh
+-- see submit_all_checks.sh for the cluster job wrapper.
 
 Crash detection can't rely on exit code alone: every check in this repo uses
 sys.exit(1) for "findings present," the exact same code Python uses by
@@ -17,6 +20,7 @@ import argparse
 import datetime
 import subprocess
 import sys
+import time
 from pathlib import Path
 
 REPO_DIR = Path(__file__).resolve().parent.parent
@@ -38,6 +42,19 @@ SHALLOW_CHECKS = [
     "channel_index_consistency.py",
     "multitimepoint_label_sparsity.py",
     "label_field_drift.py",
+    "label_orphaned_ingest.py",
+    "empty_label_data.py",
+    "freshness.py",
+    "dataset_field_drift.py",
+    "dataset_orphaned_ingest.py",
+    "dataset_crop_coverage.py",
+]
+
+# Need real pixel data (zarr/numpy), not just metadata -- run via `pixi run
+# python3` instead of bare python3 (see pixi.toml).
+PIXI_CHECKS = [
+    "divergent_voxel_counts.py",
+    "annotated_voxels_sanity.py",
 ]
 
 
@@ -55,7 +72,16 @@ def main():
 
     def run(label, cmd):
         print(f"--- {label} ---")
-        result = subprocess.run(cmd, capture_output=True, text=True)
+        # GitHub's secondary (burst) rate limit is transient and has hit this project before
+        # (clears in well under a minute) -- retry a few times before giving up, since this
+        # script runs unattended overnight with nobody around to notice and re-run by hand.
+        for attempt in range(4):
+            result = subprocess.run(cmd, capture_output=True, text=True, cwd=str(REPO_DIR))
+            if "rate limit" in result.stderr.lower() and attempt < 3:
+                print(f"{label}: hit a GitHub rate limit, retrying in 30s (attempt {attempt + 1}/4)", flush=True)
+                time.sleep(30)
+                continue
+            break
         if result.stdout:
             print(result.stdout, end="")
         if result.stderr.strip():
@@ -71,6 +97,12 @@ def main():
     for check in SHALLOW_CHECKS:
         run(check, [
             sys.executable, str(REPO_DIR / "checks" / check),
+            "--root", args.root, "--reports-dir", args.reports_dir,
+        ])
+
+    for check in PIXI_CHECKS:
+        run(check, [
+            "pixi", "run", "python3", str(REPO_DIR / "checks" / check),
             "--root", args.root, "--reports-dir", args.reports_dir,
         ])
 
