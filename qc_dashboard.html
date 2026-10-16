@@ -21,10 +21,14 @@ header.site .wrap { padding:16px 24px; display:flex; align-items:center; justify
 header.site .brand { font-weight:700; font-size:15px; letter-spacing:-.01em; }
 header.site nav a { margin-left:16px; color:var(--muted); font-size:13px; }
 header.site nav a:hover { color:var(--accent); }
+header.site nav .updated { color:var(--muted); font-size:13px; }
 main.wrap { padding-bottom:56px; }
 .nav-back { margin-bottom:14px; display:inline-block; font-size:13px; }
 h1 { margin:0 0 4px; font-size:24px; font-weight:700; letter-spacing:-.02em; }
 .sub { color:var(--muted); margin:0 0 24px; max-width:70ch; }
+.cat-heading { margin:28px 0 10px; font-size:13px; font-weight:700; text-transform:uppercase;
+  letter-spacing:.04em; color:var(--muted); }
+.cat-heading:first-of-type { margin-top:4px; }
 .summary { display:flex; gap:10px; margin-bottom:20px; }
 .stat { background:var(--card); border:1px solid var(--line); border-radius:10px;
   padding:10px 16px; box-shadow:var(--shadow); }
@@ -53,16 +57,13 @@ a.tile:hover { border-color:var(--accent); text-decoration:none; }
 a.tile .name { font-weight:650; font-size:14.5px; overflow-wrap:anywhere; }
 a.tile .desc { color:var(--muted); font-size:12.5px; overflow-wrap:anywhere; }
 a.tile .badge { align-self:flex-start; }
-.tabs a.tile.on { border-color:var(--accent); background:var(--accent-soft); box-shadow:0 0 0 1px var(--accent); }
-.panel[hidden] { display:none; }
-.panel h2 { margin:0 0 4px; font-size:18px; }
 .empty { color:var(--muted); padding:16px; }
 footer.site { color:var(--muted); font-size:12px; padding:24px 0 40px; text-align:center; }
 </style></head>
 <body>
 <header class="site"><div class="wrap">
 <a class="brand" href="qc_dashboard.html">mia-data-qc</a>
-<nav><a href="https://github.com/AI-HHMI/mia-data-qc">GitHub</a></nav>
+<nav><span class="updated">Last refreshed: 2026-10-16 12:30</span><a href="https://github.com/AI-HHMI/mia-data-qc">GitHub</a></nav>
 </div></header>
 <main class="wrap">
 <h1>mia-data-qc</h1>

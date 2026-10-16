@@ -19,36 +19,67 @@ the Janelia cluster and published as a static-HTML report site.
 
 ## Checks implemented so far
 
+Grouped by what each check actually validates (purely a reading aid — every check still runs and
+reports independently; see `common/report.py`'s `CHECK_CATEGORIES` for the single source of truth
+the dashboard uses too).
+
+### Filesystem & permissions
+
 | Check | What it checks |
 |---|---|
 | `ownership_permissions.py` | Every file/dir under `data/` is group `miaai`, group-read, group-execute, no group-write |
-| `dataset_naming.py` | `{modality}-{organism}-{dataset}` against the canonical vocab, PyTC-casing rule |
+| `stray_files.py` | Flags leftover junk (`.DS_Store` files, old job logs) that shouldn't be sitting inside the data folders |
+| `label_disk_usage_sanity.py` | Flags a label's folder if its disk footprint looks abnormal compared to every other folder on the corpus — a sign something's corrupted or unusual |
+| `dataset_disk_usage_sanity.py` | Flags a dataset's folders if their disk footprint looks abnormal compared to every other folder on the corpus — a sign something's corrupted or unusual |
+
+### Naming conventions
+
+| Check | What it checks |
+|---|---|
+| `dataset_naming.py` | Every dataset's folder name follows the standard pattern (modality-organism-dataset) and uses approved terms |
 | `label_naming.py` | `{provenance}-{label_class}-{specific_info}` for every label dir |
-| `crop_naming.py` | `crop-NNN.zarr` or `crop-NNN_descriptor.zarr` |
-| `stray_files.py` | `.DS_Store` anywhere, job-output junk leftover in `labels/` |
+| `crop_naming.py` | Every crop's folder name follows the standard `crop-NNN` pattern |
+| `multitc_naming.py` | A crop with more than one timepoint/channel in its raw array encodes that as `{N}t_{M}c` in its descriptor |
+
+### Zarr structure validity
+
+| Check | What it checks |
+|---|---|
 | `pyramid_consistency.py` | Each zarr.json's `multiscales.datasets` list matches what pyramid levels actually exist on disk |
 | `metadata_consistency.py` | A label's directory-name-derived provenance/label_class agrees with its own stored metadata |
-| `metadata_vocab.py` | A label's segmentation_type/proofreading_status/coverage match the canonical enums |
-| `voxel_size.py` | Raw's voxel size isn't a placeholder; each label's voxel size aligns with raw's pyramid |
-| `metadata_completeness.py` | Every label's zarr.json has all 12 required metadata fields present (label_class, segmentation_type, provenance, proofreading_status, coverage, bbox, source, created, parent_raw, dataset, publication, notes) |
-| `bbox_sanity.py` | A label's bbox has a valid coordinate_order/unit and a structurally sane offset/size |
 | `chunk_shard_sanity.py` | Every sharded array's shard shape is an exact multiple of its own chunk shape |
-| `license_fields.py` | Every crop has a `license` field present on both its root `zarr.json` and `raw/zarr.json` |
-| `multitc_naming.py` | A crop with more than one timepoint/channel in its raw array encodes that as `{N}t_{M}c` in its descriptor |
 | `parent_raw_validity.py` | A label's `parent_raw` field (when present) points to a directory that actually exists |
-| `channel_index_consistency.py` | A label derived from one channel of a multi-channel raw records a valid `source.channel_index` |
-| `multitimepoint_label_sparsity.py` | A label tied to one timepoint is full-T shaped and has real data only at that timepoint |
-| `label_field_drift.py` | A `mia_annotation` label issue's board fields agree with that label's own on-disk metadata (warning only — either side can be stale) |
-| `label_orphaned_ingest.py` | Every real label has a tracking issue and every terminal issue has a real label, in both directions (`mia_annotation`) |
+| `channel_index_consistency.py` | A label pulled from one channel of a multi-channel image correctly records which channel it came from |
+| `multitimepoint_label_sparsity.py` | A single-timepoint label is sized to match the full time series but only has actual content where it's supposed to — at its one timepoint |
 | `empty_label_data.py` | A label with complete metadata actually has chunk data written at its finest pyramid level |
-| `freshness.py` | A label's `created` field parses as a valid date, and superseded-snapshot ranking matches real timestamps |
-| `dataset_field_drift.py` | A `mia_pretraining` issue's `Axis_Order` and `Dtype` fields agree with the crop's own on-disk metadata |
-| `dataset_orphaned_ingest.py` | Every real dataset has at least one `mia_pretraining` issue referencing it |
-| `divergent_voxel_counts.py` | Two labels of the same class and crop, but different provenance (e.g. `manual_gt` vs `proofread`), have non-zero voxel counts within 10x of each other |
-| `annotated_voxels_sanity.py` | A label's exact non-zero voxel count does not exceed its own declared array shape |
-| `label_disk_usage_sanity.py` | Every directory under a label has the same apparent size (4096 bytes) as every other directory on the corpus |
-| `dataset_disk_usage_sanity.py` | Every directory under a dataset has the same apparent size (4096 bytes) as every other directory on the corpus |
-| `dataset_crop_coverage.py` | Every real crop in a multi-crop dataset has `mia_pretraining` representation, either its own issue or a dataset-level blanket issue |
+| `bbox_sanity.py` | A label's bbox has a valid coordinate_order/unit and a structurally sane offset/size |
+
+### Metadata content & vocabulary
+
+| Check | What it checks |
+|---|---|
+| `metadata_vocab.py` | A label's segmentation type, proofreading status, and coverage use only approved, recognized values |
+| `metadata_completeness.py` | Every label's zarr.json has all 12 required metadata fields present (label_class, segmentation_type, provenance, proofreading_status, coverage, bbox, source, created, parent_raw, dataset, publication, notes) |
+| `voxel_size.py` | Raw's voxel size isn't a placeholder; each label's voxel size aligns with raw's pyramid |
+| `license_fields.py` | Every crop has a `license` field present on both its root `zarr.json` and `raw/zarr.json` |
+| `freshness.py` | A label's creation date is valid, and when multiple versions of the same label exist, the one marked "current" really is the newest |
+
+### Board vs. disk (`mia_annotation` / `mia_pretraining`)
+
+| Check | What it checks |
+|---|---|
+| `label_field_drift.py` | A label's tracking issue on GitHub shows the same info as what's actually stored with the label on disk (warning only — either side can be stale) |
+| `dataset_field_drift.py` | A dataset's tracking issue on GitHub shows the same axis order and data type as what's actually on disk |
+| `label_orphaned_ingest.py` | Every real label has a GitHub issue tracking it, and every GitHub issue marked done actually has real data behind it |
+| `dataset_orphaned_ingest.py` | Every real dataset has at least one GitHub issue tracking it |
+| `dataset_crop_coverage.py` | Every crop in a multi-crop dataset is tracked by a GitHub issue — either its own, or one covering the whole dataset |
+
+### Pixel-data sanity
+
+| Check | What it checks |
+|---|---|
+| `divergent_voxel_counts.py` | Two different versions of the same labeled region (e.g. a manual annotation vs. an automated one) have wildly different amounts of annotated data — worth a second look |
+| `annotated_voxels_sanity.py` | A label's annotated data can't be bigger than the image it's supposed to fit inside — flags it if the numbers don't add up |
 
 The original design proposal and open questions: [issue #1](https://github.com/AI-HHMI/mia-data-qc/issues/1).
 

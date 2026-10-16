@@ -24,13 +24,13 @@ REPO_ROOT = Path(__file__).resolve().parent.parent
 # check's own page. Missing entries just show no description -- never required.
 CHECK_DESCRIPTIONS = {
     "ownership_permissions": "Every file/dir under data/ is group miaai, group-read, group-execute, no group-write.",
-    "dataset_naming": "{modality}-{organism}-{dataset} against the canonical vocab, PyTC-casing rule.",
+    "dataset_naming": "Every dataset's folder name follows the standard pattern (modality-organism-dataset) and uses approved terms.",
     "label_naming": "{provenance}-{label_class}-{specific_info} for every label directory.",
-    "crop_naming": "crop-NNN.zarr or crop-NNN_descriptor.zarr for every crop store.",
-    "stray_files": ".DS_Store anywhere, job-output junk leftover in labels/.",
+    "crop_naming": "Every crop's folder name follows the standard crop-NNN pattern.",
+    "stray_files": "Flags leftover junk (.DS_Store files, old job logs) that shouldn't be sitting inside the data folders.",
     "pyramid_consistency": "Each zarr.json's multiscales.datasets list matches pyramid levels that exist on disk.",
     "metadata_consistency": "A label's directory-name-derived provenance/label_class agrees with its stored metadata.",
-    "metadata_vocab": "A label's segmentation_type/proofreading_status/coverage match the canonical enums.",
+    "metadata_vocab": "A label's segmentation type, proofreading status, and coverage use only approved, recognized values.",
     "voxel_size": "Raw's voxel size isn't a placeholder; each label's voxel size aligns with raw's pyramid.",
     "metadata_completeness": "Every label's zarr.json has all 12 required metadata fields present.",
     "bbox_sanity": "A label's bbox has a valid coordinate_order/unit and a structurally sane offset/size.",
@@ -38,20 +38,66 @@ CHECK_DESCRIPTIONS = {
     "license_fields": "Every crop has a license field present on both its root zarr.json and raw/zarr.json.",
     "multitc_naming": "A crop with more than one timepoint/channel in its raw array encodes that as {N}t_{M}c in its descriptor.",
     "parent_raw_validity": "A label's parent_raw field (when present) points to a directory that actually exists.",
-    "channel_index_consistency": "A label derived from one channel of a multi-channel raw records a valid source.channel_index.",
-    "multitimepoint_label_sparsity": "A label tied to one timepoint is full-T shaped and has real data only at that timepoint.",
-    "label_field_drift": "A mia_annotation label issue's board fields agree with that label's own on-disk metadata.",
-    "label_orphaned_ingest": "Every real label has a tracking issue and every terminal issue has a real label, in both directions.",
+    "channel_index_consistency": "A label pulled from one channel of a multi-channel image correctly records which channel it came from.",
+    "multitimepoint_label_sparsity": "A single-timepoint label is sized to match the full time series but only has actual content where it's supposed to -- at its one timepoint.",
+    "label_field_drift": "A label's tracking issue on GitHub shows the same info as what's actually stored with the label on disk.",
+    "label_orphaned_ingest": "Every real label has a GitHub issue tracking it, and every GitHub issue marked done actually has real data behind it.",
     "empty_label_data": "A label with complete metadata actually has chunk data written at its finest pyramid level.",
-    "freshness": "A label's created field parses as a valid date, and superseded-snapshot ranking matches real timestamps.",
-    "dataset_field_drift": "A mia_pretraining issue's Axis_Order and Dtype fields agree with the crop's own on-disk metadata.",
-    "dataset_orphaned_ingest": "Every real dataset has at least one mia_pretraining issue referencing it.",
-    "divergent_voxel_counts": "Two labels of the same class and crop, but different provenance, have non-zero voxel counts within 10x of each other.",
-    "annotated_voxels_sanity": "A label's exact non-zero voxel count does not exceed its own declared array shape.",
-    "label_disk_usage_sanity": "Every directory under a label has the same apparent size (4096 bytes) as every other directory on the corpus.",
-    "dataset_disk_usage_sanity": "Every directory under a dataset has the same apparent size (4096 bytes) as every other directory on the corpus.",
-    "dataset_crop_coverage": "Every real crop in a multi-crop dataset has mia_pretraining representation, either its own issue or a dataset-level blanket issue.",
+    "freshness": "A label's creation date is valid, and when multiple versions of the same label exist, the one marked \"current\" really is the newest.",
+    "dataset_field_drift": "A dataset's tracking issue on GitHub shows the same axis order and data type as what's actually on disk.",
+    "dataset_orphaned_ingest": "Every real dataset has at least one GitHub issue tracking it.",
+    "divergent_voxel_counts": "Two different versions of the same labeled region (e.g. a manual annotation vs. an automated one) have wildly different amounts of annotated data -- worth a second look.",
+    "annotated_voxels_sanity": "A label's annotated data can't be bigger than the image it's supposed to fit inside -- flags it if the numbers don't add up.",
+    "label_disk_usage_sanity": "Flags a label's folder if its disk footprint looks abnormal compared to every other folder on the corpus -- a sign something's corrupted or unusual.",
+    "dataset_disk_usage_sanity": "Flags a dataset's folders if their disk footprint looks abnormal compared to every other folder on the corpus -- a sign something's corrupted or unusual.",
+    "dataset_crop_coverage": "Every crop in a multi-crop dataset is tracked by a GitHub issue -- either its own, or one covering the whole dataset.",
 }
+
+# Groups checks by what they actually validate, for the dashboard and README --
+# purely a display grouping, doesn't change how any check runs. A check not
+# listed here falls into "Uncategorized" rather than silently disappearing
+# from the grouped view (see _UNCATEGORIZED_LABEL below).
+_UNCATEGORIZED_LABEL = "Uncategorized"
+CHECK_CATEGORIES = {
+    "Filesystem & permissions": [
+        "ownership_permissions", "stray_files", "label_disk_usage_sanity", "dataset_disk_usage_sanity",
+    ],
+    "Naming conventions": [
+        "dataset_naming", "label_naming", "crop_naming", "multitc_naming",
+    ],
+    "Zarr structure validity": [
+        "pyramid_consistency", "metadata_consistency", "chunk_shard_sanity", "parent_raw_validity",
+        "channel_index_consistency", "multitimepoint_label_sparsity", "empty_label_data", "bbox_sanity",
+    ],
+    "Metadata content & vocabulary": [
+        "metadata_vocab", "metadata_completeness", "voxel_size", "license_fields", "freshness",
+    ],
+    "Board vs. disk": [
+        "label_field_drift", "dataset_field_drift", "label_orphaned_ingest", "dataset_orphaned_ingest",
+        "dataset_crop_coverage",
+    ],
+    "Pixel-data sanity": [
+        "divergent_voxel_counts", "annotated_voxels_sanity",
+    ],
+}
+
+
+def _grouped_check_names(check_names: list[str]) -> list[tuple[str, list[str]]]:
+    """[(category, [check_name, ...]), ...] covering exactly check_names --
+    category order and within-category order from CHECK_CATEGORIES; anything
+    in check_names but not in CHECK_CATEGORIES lands in one trailing
+    "Uncategorized" group instead of being dropped.
+    """
+    remaining = set(check_names)
+    groups = []
+    for category, names in CHECK_CATEGORIES.items():
+        present = [n for n in names if n in remaining]
+        if present:
+            groups.append((category, present))
+            remaining -= set(present)
+    if remaining:
+        groups.append((_UNCATEGORIZED_LABEL, sorted(remaining)))
+    return groups
 
 _STYLE = """
 :root { --bg:#f6f7f9; --card:#fff; --ink:#14181f; --muted:#5d6675; --line:#e3e6eb;
@@ -73,10 +119,14 @@ header.site .wrap { padding:16px 24px; display:flex; align-items:center; justify
 header.site .brand { font-weight:700; font-size:15px; letter-spacing:-.01em; }
 header.site nav a { margin-left:16px; color:var(--muted); font-size:13px; }
 header.site nav a:hover { color:var(--accent); }
+header.site nav .updated { color:var(--muted); font-size:13px; }
 main.wrap { padding-bottom:56px; }
 .nav-back { margin-bottom:14px; display:inline-block; font-size:13px; }
 h1 { margin:0 0 4px; font-size:24px; font-weight:700; letter-spacing:-.02em; }
 .sub { color:var(--muted); margin:0 0 24px; max-width:70ch; }
+.cat-heading { margin:28px 0 10px; font-size:13px; font-weight:700; text-transform:uppercase;
+  letter-spacing:.04em; color:var(--muted); }
+.cat-heading:first-of-type { margin-top:4px; }
 .summary { display:flex; gap:10px; margin-bottom:20px; }
 .stat { background:var(--card); border:1px solid var(--line); border-radius:10px;
   padding:10px 16px; box-shadow:var(--shadow); }
@@ -105,9 +155,6 @@ a.tile:hover { border-color:var(--accent); text-decoration:none; }
 a.tile .name { font-weight:650; font-size:14.5px; overflow-wrap:anywhere; }
 a.tile .desc { color:var(--muted); font-size:12.5px; overflow-wrap:anywhere; }
 a.tile .badge { align-self:flex-start; }
-.tabs a.tile.on { border-color:var(--accent); background:var(--accent-soft); box-shadow:0 0 0 1px var(--accent); }
-.panel[hidden] { display:none; }
-.panel h2 { margin:0 0 4px; font-size:18px; }
 .empty { color:var(--muted); padding:16px; }
 footer.site { color:var(--muted); font-size:12px; padding:24px 0 40px; text-align:center; }
 """
@@ -132,31 +179,8 @@ document.querySelectorAll('table.sortable').forEach(function (table) {
 });
 """
 
-_TABS_JS = """
-function mdqSelectTab(id) {
-  document.querySelectorAll('.tabs a.tile').forEach(function (t) {
-    t.classList.toggle('on', t.getAttribute('href') === '#' + id);
-  });
-  document.querySelectorAll('.panel').forEach(function (p) { p.hidden = (p.id !== id); });
-}
-document.querySelectorAll('.tabs a.tile').forEach(function (tab) {
-  tab.addEventListener('click', function (e) {
-    e.preventDefault();
-    var id = tab.getAttribute('href').slice(1);
-    mdqSelectTab(id);
-    history.replaceState(null, '', '#' + id);
-  });
-});
-(function () {
-  var first = document.querySelector('.panel');
-  var id = (location.hash || '').slice(1);
-  if (!document.getElementById(id)) { id = first ? first.id : ''; }
-  if (id) { mdqSelectTab(id); }
-})();
-"""
-
-
-def _page(title: str, home_href: str, body: str, script: str = "") -> str:
+def _page(title: str, home_href: str, body: str, script: str = "", last_refreshed: str = "") -> str:
+    updated = f'<span class="updated">Last refreshed: {html.escape(last_refreshed)}</span>' if last_refreshed else ""
     return f"""<!doctype html>
 <html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{html.escape(title)}</title>
@@ -164,7 +188,7 @@ def _page(title: str, home_href: str, body: str, script: str = "") -> str:
 <body>
 <header class="site"><div class="wrap">
 <a class="brand" href="{home_href}">mia-data-qc</a>
-<nav><a href="https://github.com/AI-HHMI/mia-data-qc">GitHub</a></nav>
+<nav>{updated}<a href="https://github.com/AI-HHMI/mia-data-qc">GitHub</a></nav>
 </div></header>
 <main class="wrap">
 {body}
@@ -250,39 +274,40 @@ def _count_findings(json_path: Path) -> int:
 
 
 def _update_date_index(date_dir: Path, date: str) -> None:
+    """Each tile links straight to that check's own standalone page
+    ({name}.html, already written by write_check_report) rather than
+    embedding every check's findings table in this one page -- a check with
+    a huge findings table (ownership_permissions has hit 80+ MB before) used
+    to bloat this index for every visitor even if they wanted a different
+    check. The index itself now only ever holds the small tile grid.
+    """
     check_names = sorted(p.stem for p in date_dir.glob("*.json"))
+    groups = _grouped_check_names(check_names)
 
-    tabs = []
-    panels = []
-    for i, name in enumerate(check_names):
-        findings = _load_findings(date_dir / f"{name}.json")
-        count = len(findings)
-        tabs.append(
-            '<a class="tile" href="#{name}"><span class="name">{name}</span>'
-            '<span class="desc">{desc}</span>'
-            '<span class="badge chip {sev}">{count} finding(s)</span></a>'.format(
-                name=html.escape(name), desc=html.escape(CHECK_DESCRIPTIONS.get(name, "")),
-                count=count, sev="error" if count else "",
+    tab_groups = []
+    for category, names in groups:
+        tiles = []
+        for name in names:
+            count = _count_findings(date_dir / f"{name}.json")
+            tiles.append(
+                '<a class="tile" href="{name}.html"><span class="name">{name}</span>'
+                '<span class="desc">{desc}</span>'
+                '<span class="badge chip {sev}">{count} finding(s)</span></a>'.format(
+                    name=html.escape(name), desc=html.escape(CHECK_DESCRIPTIONS.get(name, "")),
+                    count=count, sev="error" if count else "",
+                )
             )
-        )
-        panels.append(
-            '<section id="{name}" class="panel"{hidden}><h2>{name}</h2>'
-            '<p class="sub">{desc}</p>{section}</section>'.format(
-                name=html.escape(name), hidden="" if i == 0 else " hidden",
-                desc=html.escape(CHECK_DESCRIPTIONS.get(name, "")),
-                section=_render_check_section(name, findings),
-            )
+        tab_groups.append(
+            f'<h3 class="cat-heading">{html.escape(category)}</h3>\n'
+            f'<div class="tabs">\n{chr(10).join(tiles)}\n</div>'
         )
 
     body = f"""<a class="nav-back" href="../../qc_dashboard.html">&larr; all dates</a>
 <h1>QC reports — {date}</h1>
-<p class="sub">Click a check to see its findings below.</p>
-<div class="tabs">
-{chr(10).join(tabs)}
-</div>
-{chr(10).join(panels)}"""
+<p class="sub">Click a check to see its findings on its own page.</p>
+{chr(10).join(tab_groups)}"""
     (date_dir / "index.html").write_text(
-        _page(f"QC reports — {date}", "../../qc_dashboard.html", body, _SORT_JS + _TABS_JS)
+        _page(f"QC reports — {date}", "../../qc_dashboard.html", body)
     )
 
 
@@ -309,4 +334,7 @@ def _update_root_index(reports_dir: Path) -> None:
 <div class="grid">
 {tiles_html}
 </div>"""
-    (reports_dir.parent / "qc_dashboard.html").write_text(_page("mia-data-qc reports", "qc_dashboard.html", body))
+    last_refreshed = datetime.datetime.now().strftime("%Y-%m-%d %H:%M")
+    (reports_dir.parent / "qc_dashboard.html").write_text(
+        _page("mia-data-qc reports", "qc_dashboard.html", body, last_refreshed=last_refreshed)
+    )
