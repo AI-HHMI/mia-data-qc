@@ -45,11 +45,16 @@ def _rate_limit_wait_seconds():
         return None
 
 
-def fetch_project_items(owner: str, number: str, limit: int = 2000, retries: int = 4) -> list[dict]:
+def fetch_project_items(owner: str, number: str, limit: int = 2000, retries: int = 6) -> list[dict]:
     """Return every item (with all board fields) on a GitHub Projects v2 board.
     Retries a transient-looking `gh` failure (rate limit, network hiccup) a
     few times before raising -- a rate-limit failure's backoff is sized from
-    the real live quota (see _rate_limit_wait_seconds), not a flat guess.
+    the real live quota (see _rate_limit_wait_seconds): quota genuinely
+    exhausted waits for the real reset; quota still fine (so it's the
+    secondary/burst limit instead) backs off exponentially (30s, 60s, 120s,
+    ...) rather than a flat 30s -- confirmed on this project that a flat
+    30s x 4 (120s total) isn't always enough for the secondary limit to
+    actually clear.
     """
     last_stderr = ""
     for attempt in range(retries):
@@ -63,7 +68,7 @@ def fetch_project_items(owner: str, number: str, limit: int = 2000, retries: int
         is_last_attempt = attempt == retries - 1
         if not is_last_attempt and _RATE_LIMIT_SUBSTRING in last_stderr.lower():
             wait = _rate_limit_wait_seconds()
-            time.sleep(30 if wait is None else wait)
+            time.sleep(30 * (2 ** attempt) if wait is None else wait)
             continue
         if not is_last_attempt and any(s in last_stderr.lower() for s in _OTHER_TRANSIENT_SUBSTRINGS):
             time.sleep(30)
