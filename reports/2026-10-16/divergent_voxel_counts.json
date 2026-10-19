@@ -1,0 +1,66 @@
+{
+  "check": "divergent_voxel_counts",
+  "date": "2026-10-16",
+  "findings": [
+    {
+      "check": "divergent_voxel_counts",
+      "dataset": "exm-mouse-liconn-DG-20250809_ExPID19-02_2ndGel_C5_Atto488_40XW_002",
+      "path": "exm-mouse-liconn-DG-20250809_ExPID19-02_2ndGel_C5_Atto488_40XW_002/crop-001.zarr/labels (cell)",
+      "field": "divergent_voxel_count",
+      "actual": "auto_pred-cell-LSD_snapshot_10142026=177857352, manual_gt-cell-snap_04142026=8037611",
+      "expected": "non-zero voxel counts within 10.0x of each other",
+      "severity": "error",
+      "suggested_fix": "verify both labels annotate the same region -- a wrong source file/region substitution is a known real cause"
+    },
+    {
+      "check": "divergent_voxel_counts",
+      "dataset": "exm-mouse-liconn-DG-20250809_ExPID19-02_2ndGel_C5_Atto488_40XW_002",
+      "path": "exm-mouse-liconn-DG-20250809_ExPID19-02_2ndGel_C5_Atto488_40XW_002/crop-001.zarr/labels (cell)",
+      "field": "divergent_voxel_count",
+      "actual": "auto_pred-cell-LSD_snapshot_10142026=177857352, manual_gt-cell-snap_04202026=12562733",
+      "expected": "non-zero voxel counts within 10.0x of each other",
+      "severity": "error",
+      "suggested_fix": "verify both labels annotate the same region -- a wrong source file/region substitution is a known real cause"
+    },
+    {
+      "check": "divergent_voxel_counts",
+      "dataset": "exm-mouse-liconn-DG-20250809_ExPID19-02_2ndGel_C5_Atto488_40XW_002",
+      "path": "exm-mouse-liconn-DG-20250809_ExPID19-02_2ndGel_C5_Atto488_40XW_002/crop-001.zarr/labels (cell)",
+      "field": "divergent_voxel_count",
+      "actual": "auto_pred-cell-LSD_snapshot_10142026=177857352, manual_gt-cell-snap_04272026=15301870",
+      "expected": "non-zero voxel counts within 10.0x of each other",
+      "severity": "error",
+      "suggested_fix": "verify both labels annotate the same region -- a wrong source file/region substitution is a known real cause"
+    },
+    {
+      "check": "divergent_voxel_counts",
+      "dataset": "exm-mouse-liconn-DG-20250809_ExPID19-02_2ndGel_C5_Atto488_40XW_002",
+      "path": "exm-mouse-liconn-DG-20250809_ExPID19-02_2ndGel_C5_Atto488_40XW_002/crop-001.zarr/labels (cell)",
+      "field": "divergent_voxel_count",
+      "actual": "auto_pred-cell-LSD_snapshot_10142026=177857352, manual_gt-cell-snap_05052026=15818622",
+      "expected": "non-zero voxel counts within 10.0x of each other",
+      "severity": "error",
+      "suggested_fix": "verify both labels annotate the same region -- a wrong source file/region substitution is a known real cause"
+    },
+    {
+      "check": "divergent_voxel_counts",
+      "dataset": "exm-mouse-liconn-ExPID82-1",
+      "path": "exm-mouse-liconn-ExPID82-1/crop-002_sub.zarr/labels (cell)",
+      "field": "divergent_voxel_count",
+      "actual": "manual_gt-cell-agglom-JJ-paintera=4844998, proofread-cell-agglom-dense-v20240123=4574938325",
+      "expected": "non-zero voxel counts within 10.0x of each other",
+      "severity": "error",
+      "suggested_fix": "verify both labels annotate the same region -- a wrong source file/region substitution is a known real cause"
+    },
+    {
+      "check": "divergent_voxel_counts",
+      "dataset": "exm-mouse-liconn-ExPID82-1",
+      "path": "exm-mouse-liconn-ExPID82-1/crop-002_sub.zarr/labels (cell)",
+      "field": "divergent_voxel_count",
+      "actual": "manual_gt-cell-agglom-JJ-paintera=4844998, proofread-cell-agglom-v20240123=4574938325",
+      "expected": "non-zero voxel counts within 10.0x of each other",
+      "severity": "error",
+      "suggested_fix": "verify both labels annotate the same region -- a wrong source file/region substitution is a known real cause"
+    }
+  ]
+}

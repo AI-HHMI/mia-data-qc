@@ -1,0 +1,100 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>multitimepoint_label_sparsity — 2026-10-16</title>
+<style>
+:root { --bg:#f6f7f9; --card:#fff; --ink:#14181f; --muted:#5d6675; --line:#e3e6eb;
+  --head:#f1f3f6; --hover:#f5f8ff; --accent:#2557d6; --accent-soft:#e8eefc;
+  --err:#b00020; --err-soft:#fbe9e9; --warn:#9a6400; --warn-soft:#fff4e0;
+  --shadow:0 1px 2px rgba(16,24,40,.06), 0 1px 3px rgba(16,24,40,.08); }
+@media (prefers-color-scheme: dark) { :root { --bg:#0e1116; --card:#161b22; --ink:#e6e9ee;
+  --muted:#9aa4b2; --line:#262d38; --head:#1b212b; --hover:#1a2230; --accent:#7aa2ff;
+  --accent-soft:#1b2842; --err:#ff6b6b; --err-soft:#3a1f1f; --warn:#ffb86b; --warn-soft:#3a2e1a;
+  --shadow:none; } }
+* { box-sizing:border-box; }
+body { margin:0; background:var(--bg); color:var(--ink);
+  font:14px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,sans-serif;
+  -webkit-font-smoothing:antialiased; }
+a { color:var(--accent); text-decoration:none; } a:hover { text-decoration:underline; }
+.wrap { max-width:1400px; margin:0 auto; padding:0 24px; }
+header.site { background:var(--card); border-bottom:1px solid var(--line); margin-bottom:28px; }
+header.site .wrap { padding:16px 24px; display:flex; align-items:center; justify-content:space-between; }
+header.site .brand { font-weight:700; font-size:15px; letter-spacing:-.01em; }
+header.site nav a { margin-left:16px; color:var(--muted); font-size:13px; }
+header.site nav a:hover { color:var(--accent); }
+header.site nav .updated { color:var(--muted); font-size:13px; }
+main.wrap { padding-bottom:56px; }
+.nav-back { margin-bottom:14px; display:inline-block; font-size:13px; }
+h1 { margin:0 0 4px; font-size:24px; font-weight:700; letter-spacing:-.02em; }
+.sub { color:var(--muted); margin:0 0 24px; max-width:70ch; }
+.cat-heading { margin:28px 0 10px; font-size:13px; font-weight:700; text-transform:uppercase;
+  letter-spacing:.04em; color:var(--muted); }
+.cat-heading:first-of-type { margin-top:4px; }
+.summary { display:flex; gap:10px; margin-bottom:20px; }
+.stat { background:var(--card); border:1px solid var(--line); border-radius:10px;
+  padding:10px 16px; box-shadow:var(--shadow); }
+.stat .n { font-size:20px; font-weight:700; }
+.stat .l { color:var(--muted); font-size:12px; }
+.stat.error .n { color:var(--err); }
+.stat.warning .n { color:var(--warn); }
+.card { background:var(--card); border:1px solid var(--line); border-radius:12px; box-shadow:var(--shadow); }
+.scroll { overflow:auto; max-height:75vh; border-radius:12px; }
+table { border-collapse:separate; border-spacing:0; width:100%; }
+th, td { padding:10px 14px; text-align:left; border-bottom:1px solid var(--line); white-space:nowrap; }
+th { position:sticky; top:0; z-index:1; background:var(--head); color:var(--muted);
+  font-size:12px; font-weight:600; letter-spacing:.02em; cursor:pointer; user-select:none; }
+th:hover { color:var(--ink); }
+th.asc::after { content:" \25B2"; font-size:9px; }
+th.desc::after { content:" \25BC"; font-size:9px; }
+tbody tr:hover td { background:var(--hover); }
+tbody tr:last-child td { border-bottom:0; }
+.chip { display:inline-block; padding:2px 9px; border-radius:999px; font-size:12px; font-weight:600; }
+.chip.error { color:var(--err); background:var(--err-soft); }
+.chip.warning { color:var(--warn); background:var(--warn-soft); }
+.grid, .tabs { display:grid; grid-template-columns:repeat(auto-fill, minmax(260px, 1fr)); gap:12px; margin-bottom:20px; }
+a.tile { display:flex; flex-direction:column; gap:6px; padding:14px 16px; border:1px solid var(--line);
+  border-radius:12px; background:var(--card); color:var(--ink); box-shadow:var(--shadow); }
+a.tile:hover { border-color:var(--accent); text-decoration:none; }
+a.tile .name { font-weight:650; font-size:14.5px; overflow-wrap:anywhere; }
+a.tile .desc { color:var(--muted); font-size:12.5px; overflow-wrap:anywhere; }
+a.tile .badge { align-self:flex-start; }
+.empty { color:var(--muted); padding:16px; }
+footer.site { color:var(--muted); font-size:12px; padding:24px 0 40px; text-align:center; }
+</style></head>
+<body>
+<header class="site"><div class="wrap">
+<a class="brand" href="../../qc_dashboard.html">mia-data-qc</a>
+<nav><a href="https://github.com/AI-HHMI/mia-data-qc">GitHub</a></nav>
+</div></header>
+<main class="wrap">
+<a class="nav-back" href="index.html">&larr; 2026-10-16</a>
+<h1>multitimepoint_label_sparsity</h1>
+<p class="sub">A single-timepoint label is sized to match the full time series but only has actual content where it&#x27;s supposed to -- at its one timepoint.</p>
+<div class="summary"><div class="stat error"><div class="n">1</div><div class="l">error</div></div></div>
+<div class="card scroll">
+<table class="sortable"><thead><tr><th>Dataset</th><th>Path</th><th>Field</th><th>Actual</th>
+<th>Expected</th><th>Severity</th><th>Suggested fix</th></tr></thead>
+<tbody>
+<tr><td>lm-zebrafish-Betzig-mosaic-20251001_20250324_mem-histone_fish3_24hpf_roi1</td><td><a href="https://fileglancer.int.janelia.org/browse/groups_miaai_miaai/lmd-v0.0.1/data/lm-zebrafish-Betzig-mosaic-20251001_20250324_mem-histone_fish3_24hpf_roi1/crop-010_000x_003y_000z_288t_2c.zarr/labels/auto_pred-cell-ch0_cellpose_hk4_ft_t01-10-25_min35299" target="_blank" rel="noopener">lm-zebrafish-Betzig-mosaic-20251001_20250324_mem-histone_fish3_24hpf_roi1/crop-010_000x_003y_000z_288t_2c.zarr/labels/auto_pred-cell-ch0_cellpose_hk4_ft_t01-10-25_min35299</a></td><td>timepoint_data_present</td><td>chunk data also stored at timepoint chunk index(es) [0, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147, 148, 149, 150, 151, 152, 153, 154, 155, 156, 157, 158, 159, 160, 161, 162, 163, 164, 165, 166, 167, 168, 169, 170, 171, 172, 173, 174, 175, 176, 177, 178, 179, 180, 181, 182, 183, 184, 185, 186, 187, 188, 189, 190, 191, 192, 193, 194, 195, 196, 197, 198, 199, 200, 201, 202, 203, 204, 205, 206, 207, 208, 209, 210, 211, 212, 213, 214, 215, 216, 217, 218, 219, 220, 221, 222, 223, 224, 225, 226, 227, 228, 229, 230, 231, 232, 233, 234, 235, 236, 237, 238, 239, 240, 241, 242, 243, 244, 245, 246, 247, 248, 249, 250, 251, 252, 253, 254, 255, 256, 257, 258, 259, 260, 261, 262, 263, 264, 265, 266, 267, 268, 269, 270, 271, 272, 273, 274, 275, 276, 277, 278, 279, 280, 281, 282, 283, 284, 285, 286, 287]</td><td>data only at timepoint 1 (zeros/no chunks elsewhere)</td><td><span class="chip error">error</span></td><td>remove chunks written outside the declared timepoint_index, or correct the declared index</td></tr>
+</tbody></table></div>
+</main>
+<footer class="site">mia-data-qc &middot; automated QC for the LMD corpus</footer>
+<script>
+document.querySelectorAll('table.sortable').forEach(function (table) {
+  table.querySelectorAll('th').forEach(function (th, idx) {
+    th.addEventListener('click', function () {
+      var tbody = table.querySelector('tbody');
+      var rows = Array.prototype.slice.call(tbody.querySelectorAll('tr'));
+      var asc = !th.classList.contains('asc');
+      table.querySelectorAll('th').forEach(function (h) { h.classList.remove('asc', 'desc'); });
+      th.classList.add(asc ? 'asc' : 'desc');
+      rows.sort(function (a, b) {
+        var av = a.children[idx].innerText, bv = b.children[idx].innerText;
+        return asc ? av.localeCompare(bv, undefined, {numeric: true})
+                    : bv.localeCompare(av, undefined, {numeric: true});
+      });
+      rows.forEach(function (r) { tbody.appendChild(r); });
+    });
+  });
+});
+</script>
+</body></html>

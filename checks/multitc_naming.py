@@ -1,14 +1,27 @@
 #!/usr/bin/env python3
-"""Check: every crop whose raw array actually has more than one timepoint
-and/or more than one channel (read from its own ome.multiscales axes + the
-finest pyramid level's real shape, not assumed from the name) encodes that
-as the canonical `{N}t_{M}c` shorthand somewhere in its crop descriptor --
-total timepoint count, then total channel count, in that order, both always
-present even when one side is 1 (e.g. `crop-001_dsr_timeseries_48t_1c.zarr`
-for 48 timepoints / 1 channel). This is for a crop that keeps every
-timepoint/channel together in one store; it's unrelated to the `tN`/`chN`
-suffix used on a label that's already been split out to a single timepoint
-or channel.
+"""Check: every crop whose raw array actually has more than one timepoint,
+channel, and/or TensorSwitch non-spatial `s` axis value (read from its own
+ome.multiscales axes + the finest pyramid level's real shape, not assumed
+from the name) encodes that in its crop descriptor using the canonical
+`t`/`c`/`s` shorthand, in that fixed order -- each included only if that
+axis is actually *present* in the raw array's own axes list. A present
+axis always gets its count spelled out even when it's 1 (e.g.
+`crop-001_dsr_timeseries_48t_1c.zarr` for 48 timepoints / 1 channel is
+unaffected by a future single-timepoint crop also needing `1t_2c` if it
+genuinely has a `t` axis) -- but a crop whose raw array has no `t` axis at
+all (e.g. plain `czyx`, not `tczyx`) only ever needs its channel count
+(`2c`), never a fabricated `1t_` prefix for an axis that doesn't exist. `s`
+(TensorSwitch's non-spatial axis, added there but not yet used by any real
+crop on this corpus as of Oct 16 2026) follows the identical presence-based
+rule, ready for whenever a real `s`-axis crop lands.
+Found and fixed Oct 16 2026 after a real false positive: a genuinely 4D
+`czyx` crop (`exm-drosophila-flyliconn-FlyID45-1-flybrain-synapse-2ch-
+20260624/crop-001_...`) was flagged for missing `1t_2c` despite having no
+time axis whatsoever -- the original version treated "no t axis" the same
+as "t axis present with count 1," which are different real situations.
+This is for a crop that keeps every timepoint/channel/s-value together in
+one store; it's unrelated to the `tN`/`chN` suffix used on a label that's
+already been split out to a single timepoint or channel.
 
 Real corpus survey (Oct 7 2026) found 97 crops with T>1 or C>1 on disk, and
 only one already uses this shorthand correctly -- the rest spell it out
@@ -38,10 +51,21 @@ from common.zarr_meta import get_multiscale, read_array_meta, read_group_attrs
 
 CHECK_NAME = "multitc_naming"
 
-_SHORTHAND_RE = re.compile(r"(?:^|_)(\d+)t_(\d+)c(?:_|\.|$)")
+# Non-spatial axes this corpus's naming convention encodes, in the fixed
+# order they appear in a crop descriptor (t, then c, then s). "s" is
+# TensorSwitch's own non-spatial axis -- not used by any real crop on this
+# corpus yet, included so the check is ready the moment one lands.
+_AXIS_ORDER = ["t", "c", "s"]
+_AXIS_LABEL = {"t": "timepoint(s)", "c": "channel(s)", "s": "s-value(s)"}
 
 
-def _real_t_c_counts(crop_dir: Path):
+def _real_nonspatial_counts(crop_dir: Path):
+    """{axis: count} for each of _AXIS_ORDER present in the raw array's own
+    axes -- an axis missing from this dict is absent from the schema
+    entirely, which is not the same as being present with count 1 (a crop
+    can be genuinely 4D czyx, with no t axis whatsoever, vs. tczyx with a
+    real but size-1 t axis).
+    """
     raw_dir = crop_dir / "raw" if (crop_dir / "raw").is_dir() else crop_dir
     attrs = read_group_attrs(raw_dir)
     multiscale = get_multiscale(attrs)
@@ -60,33 +84,33 @@ def _real_t_c_counts(crop_dir: Path):
     if shape is None or len(shape) != len(axis_names):
         return None
 
-    t_count = shape[axis_names.index("t")] if "t" in axis_names else 1
-    c_count = shape[axis_names.index("c")] if "c" in axis_names else 1
-    return t_count, c_count
+    return {ax: shape[axis_names.index(ax)] for ax in _AXIS_ORDER if ax in axis_names}
 
 
 def check_crop(crop_dir: Path, root: Path, dataset: str) -> list[dict]:
-    counts = _real_t_c_counts(crop_dir)
+    counts = _real_nonspatial_counts(crop_dir)
     if counts is None:
         return []
-    t_count, c_count = counts
-    if t_count <= 1 and c_count <= 1:
+    present = [ax for ax in _AXIS_ORDER if ax in counts]
+    if not present or all(counts[ax] <= 1 for ax in present):
         return []
 
     name = crop_dir.name
-    match = _SHORTHAND_RE.search(name)
-    expected = f"{t_count}t_{c_count}c"
-    if match and (int(match.group(1)), int(match.group(2))) == (t_count, c_count):
+    expected = "_".join(f"{counts[ax]}{ax}" for ax in present)
+    pattern = r"(?:^|_)" + "_".join(rf"(\d+){ax}" for ax in present) + r"(?:_|\.|$)"
+    match = re.search(pattern, name)
+    if match and tuple(int(g) for g in match.groups()) == tuple(counts[ax] for ax in present):
         return []
 
     rel = str(crop_dir.relative_to(root))
+    shape_desc = ", ".join(f"{counts[ax]} {_AXIS_LABEL[ax]}" for ax in present)
     return [{
         "check": CHECK_NAME,
         "dataset": dataset,
         "path": rel,
         "field": "crop_name",
         "actual": name,
-        "expected": f"crop descriptor contains `{expected}` (real raw shape: {t_count} timepoint(s), {c_count} channel(s))",
+        "expected": f"crop descriptor contains `{expected}` (real raw shape: {shape_desc})",
         "severity": "error",
         "suggested_fix": f"rename crop directory to include `{expected}` in its descriptor",
     }]

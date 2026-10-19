@@ -16,7 +16,41 @@ import collections
 import datetime
 import html
 import json
+import os.path
 from pathlib import Path
+from urllib.parse import quote
+
+# Fileglancer's `/browse/<path>` URLs are plain path-based (unlike its
+# auth-gated `/files/<key>/` proxied kind) -- this is the one literal zone
+# prefix every real board Fileglancer_Path on this corpus uses, confirmed by
+# survey, so it's reconstructible directly from a finding's own relative
+# path with no API call.
+FILEGLANCER_PREFIX = "https://fileglancer.int.janelia.org/browse/groups_miaai_miaai/lmd-v0.0.1/data/"
+
+
+def _fileglancer_url(rel_path: str) -> str:
+    return FILEGLANCER_PREFIX + quote(rel_path)
+
+
+def _looks_like_folder(rel_path: str) -> bool:
+    """True unless rel_path's last real segment looks like a file (has a
+    "." extension and isn't itself a .zarr store, which is a directory
+    despite the dot) -- used to decide whether a path is worth a
+    Fileglancer link at all (individual files aren't, folders are). A path
+    carrying trailing prose (e.g. "... (label_class)", seen on
+    divergent_voxel_counts's grouped path) isn't a real filesystem path
+    either, so it's excluded the same way.
+    """
+    if not rel_path or " (" in rel_path:
+        return False
+    last = rel_path.rstrip("/").rsplit("/", 1)[-1]
+    return "." not in last or last.endswith(".zarr")
+
+
+def _fileglancer_link(rel_path: str, label_html: str) -> str:
+    if not _looks_like_folder(rel_path):
+        return label_html
+    return f'<a href="{html.escape(_fileglancer_url(rel_path))}" target="_blank" rel="noopener">{label_html}</a>'
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 
@@ -216,6 +250,31 @@ def write_check_report(check_name: str, findings: list[dict], reports_dir: Path 
     return html_path
 
 
+def _row_html(dataset: str, path_html: str, field: str, actual: str, expected: str,
+               severity: str, fix: str) -> str:
+    return (
+        "<tr><td>{dataset}</td><td>{path}</td><td>{field}</td><td>{actual}</td>"
+        "<td>{expected}</td><td><span class=\"chip {severity}\">{severity}</span></td><td>{fix}</td></tr>"
+    ).format(
+        dataset=html.escape(dataset), path=path_html, field=html.escape(field),
+        actual=html.escape(actual), expected=html.escape(expected),
+        severity=html.escape(severity), fix=html.escape(fix),
+    )
+
+
+# A table row collapses a group of findings into one when 3+ share an
+# identical "story" (same dataset/field/actual/expected, differing only by
+# path and possibly the fix text -- e.g. ownership_permissions bakes the
+# literal path into its own suggested_fix, so that's never part of the group
+# key) -- e.g. 557 ownership_permissions findings that are really just 4
+# distinct incidents. This is purely a rendering choice: the underlying
+# JSON stays one entry per real violation, every path is still listed (in
+# the row's expandable detail, each linked to Fileglancer), and a check's
+# own scan logic is completely unaffected -- it still finds and records
+# everything.
+_GROUP_MIN_SIZE = 3
+
+
 def _render_check_section(check_name: str, findings: list[dict]) -> str:
     """The summary stats + table for one check -- shared by the standalone
     per-check page and the tabbed panel embedded in the date index.
@@ -227,24 +286,61 @@ def _render_check_section(check_name: str, findings: list[dict]) -> str:
     ) or '<div class="stat"><div class="n">0</div><div class="l">findings</div></div>'
 
     if findings:
-        rows = "\n".join(
-            "<tr><td>{dataset}</td><td>{path}</td><td>{field}</td><td>{actual}</td>"
-            "<td>{expected}</td><td><span class=\"chip {severity}\">{severity}</span></td><td>{fix}</td></tr>".format(
-                dataset=html.escape(str(f.get("dataset", ""))),
-                path=html.escape(str(f.get("path", ""))),
-                field=html.escape(str(f.get("field", ""))),
-                actual=html.escape(str(f.get("actual", ""))),
-                expected=html.escape(str(f.get("expected", ""))),
-                severity=html.escape(str(f.get("severity", "error"))),
-                fix=html.escape(str(f.get("suggested_fix", ""))),
+        groups = {}
+        order = []
+        for f in findings:
+            key = (
+                str(f.get("dataset", "")), str(f.get("field", "")),
+                str(f.get("actual", "")), str(f.get("expected", "")),
             )
-            for f in findings
-        )
+            if key not in groups:
+                groups[key] = []
+                order.append(key)
+            groups[key].append(f)
+
+        row_htmls = []
+        for key in order:
+            dataset, field, actual, expected = key
+            members = groups[key]
+            severity = str(members[0].get("severity", "error"))
+            fixes = {str(m.get("suggested_fix", "")) for m in members}
+
+            if len(members) >= _GROUP_MIN_SIZE:
+                paths = [str(m.get("path", "")) for m in members]
+                try:
+                    common = os.path.commonpath(paths)
+                except ValueError:
+                    common = dataset
+                if len(fixes) == 1:
+                    fix = next(iter(fixes))
+                    items = "".join(
+                        f"<li>{_fileglancer_link(p, html.escape(p))}</li>" for p in paths
+                    )
+                else:
+                    fix = f"{len(fixes)} different fixes -- see each path below"
+                    items = "".join(
+                        f"<li>{_fileglancer_link(p, html.escape(p))} &mdash; "
+                        f"{html.escape(str(m.get('suggested_fix', '')))}</li>"
+                        for p, m in zip(paths, members)
+                    )
+                common_link = _fileglancer_link(common, f"<code>{html.escape(common)}</code>")
+                path_html = (
+                    f'<details><summary>{len(members)} paths under {common_link}</summary>'
+                    f'<ul>{items}</ul></details>'
+                )
+                row_htmls.append(_row_html(dataset, path_html, field, actual, expected, severity, fix))
+            else:
+                for m in members:
+                    path_str = str(m.get("path", ""))
+                    path_html = _fileglancer_link(path_str, html.escape(path_str))
+                    fix = str(m.get("suggested_fix", ""))
+                    row_htmls.append(_row_html(dataset, path_html, field, actual, expected, severity, fix))
+
         table = f"""<div class="card scroll">
 <table class="sortable"><thead><tr><th>Dataset</th><th>Path</th><th>Field</th><th>Actual</th>
 <th>Expected</th><th>Severity</th><th>Suggested fix</th></tr></thead>
 <tbody>
-{rows}
+{chr(10).join(row_htmls)}
 </tbody></table></div>"""
     else:
         table = '<div class="card empty">No findings.</div>'
