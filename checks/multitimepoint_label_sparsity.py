@@ -3,11 +3,18 @@
 crop's raw array genuinely has more than one timepoint (real 't' axis, T>1 --
 read from axes/shape, not assumed) must be stored as a full-T array matching
 raw's own T dimension, with real data written only at that one timepoint and
-nothing at any other -- read directly off which top-level chunk directories
-actually exist on disk, not inferred from metadata alone. Only handles a
-plain (unsharded), regular chunk-grid array with the default chunk-key
-encoding and a 't' axis first (every real example on this corpus is shaped
-this way); anything else is skipped rather than guessed at.
+nothing at any other -- read directly off which timepoint directories
+actually contain real chunk files on disk, not inferred from metadata alone,
+and not just whether the directory itself exists (a directory can exist as
+an empty placeholder -- e.g. to keep the label array's full-T shape aligned
+with raw's own T/C axes for layering -- without any chunk data written into
+it; found as a real false positive on
+`lm-zebrafish-Betzig-mosaic-20251001_..._fish3_24hpf_roi1/crop-010_..._288t_2c.zarr`,
+Oct 20 2026, where all 288 per-timepoint directories exist but only t=1's
+actually contains chunk files). Only handles a plain (unsharded), regular
+chunk-grid array with the default chunk-key encoding and a 't' axis first
+(every real example on this corpus is shaped this way); anything else is
+skipped rather than guessed at.
 
 Real corpus survey (Oct 8 2026): 9 labels have bbox.timepoint_index set, but
 6 of them (`em-zebrafish-fish2`, all 6 crops) have a timepoint_index despite
@@ -33,6 +40,7 @@ every chunk path with `c/`. Both are handled.
 """
 import argparse
 import datetime
+import os
 import sys
 from pathlib import Path
 
@@ -42,6 +50,21 @@ from common.vocab import NON_DATASET_DIRS
 from common.zarr_meta import get_multiscale, group_exists, read_array_meta, read_group_attrs
 
 CHECK_NAME = "multitimepoint_label_sparsity"
+
+
+def _dir_has_file(d: Path) -> bool:
+    """True if any real file (chunk data) exists anywhere under d. A real
+    ingest can pre-create an empty placeholder directory per timepoint (so a
+    sparse label's array still spans the full T range the raw image does,
+    for layering purposes) without writing chunk data into most of them --
+    the directory alone existing isn't evidence a timepoint has real data.
+    """
+    for entry in os.scandir(d):
+        if entry.is_file():
+            return True
+        if entry.is_dir() and _dir_has_file(entry.path):
+            return True
+    return False
 
 
 def _raw_t_count(crop_dir: Path):
@@ -124,7 +147,7 @@ def check_label(label_dir: Path, root: Path, dataset: str, raw_t_count: int) -> 
     present = set()
     if t_chunk_parent.is_dir():
         for p in t_chunk_parent.iterdir():
-            if p.is_dir() and p.name.isdigit():
+            if p.is_dir() and p.name.isdigit() and _dir_has_file(p):
                 present.add(int(p.name))
 
     if expected_chunk_idx not in present:
