@@ -79,14 +79,14 @@ footer.site { color:var(--muted); font-size:12px; padding:24px 0 40px; text-alig
 <h3 class="cat-heading">Naming conventions</h3>
 <div class="tabs">
 <a class="tile" href="dataset_naming.html"><span class="name">dataset_naming</span><span class="desc">Every dataset&#x27;s folder name follows the standard pattern (modality-organism-dataset) and uses approved terms.</span><span class="badge chip ">0 finding(s)</span></a>
-<a class="tile" href="label_naming.html"><span class="name">label_naming</span><span class="desc">{provenance}-{label_class}-{specific_info} for every label directory.</span><span class="badge chip error">51 finding(s)</span></a>
+<a class="tile" href="label_naming.html"><span class="name">label_naming</span><span class="desc">{provenance}-{label_class}-{specific_info} for every label directory.</span><span class="badge chip error">49 finding(s)</span></a>
 <a class="tile" href="crop_naming.html"><span class="name">crop_naming</span><span class="desc">Every crop&#x27;s folder name follows the standard crop-NNN pattern.</span><span class="badge chip ">0 finding(s)</span></a>
 <a class="tile" href="multitc_naming.html"><span class="name">multitc_naming</span><span class="desc">A crop with more than one timepoint/channel in its raw array encodes that as {N}t_{M}c in its descriptor.</span><span class="badge chip ">0 finding(s)</span></a>
 </div>
 <h3 class="cat-heading">Zarr structure validity</h3>
 <div class="tabs">
 <a class="tile" href="pyramid_consistency.html"><span class="name">pyramid_consistency</span><span class="desc">Each zarr.json&#x27;s multiscales.datasets list matches pyramid levels that exist on disk.</span><span class="badge chip ">0 finding(s)</span></a>
-<a class="tile" href="metadata_consistency.html"><span class="name">metadata_consistency</span><span class="desc">A label&#x27;s directory-name-derived provenance/label_class agrees with its stored metadata.</span><span class="badge chip error">2 finding(s)</span></a>
+<a class="tile" href="metadata_consistency.html"><span class="name">metadata_consistency</span><span class="desc">A label&#x27;s directory-name-derived provenance/label_class agrees with its stored metadata.</span><span class="badge chip ">0 finding(s)</span></a>
 <a class="tile" href="chunk_shard_sanity.html"><span class="name">chunk_shard_sanity</span><span class="desc">Every sharded array&#x27;s shard shape is an exact multiple of its own chunk shape.</span><span class="badge chip ">0 finding(s)</span></a>
 <a class="tile" href="parent_raw_validity.html"><span class="name">parent_raw_validity</span><span class="desc">A label&#x27;s parent_raw field (when present) points to a directory that actually exists.</span><span class="badge chip error">68 finding(s)</span></a>
 <a class="tile" href="channel_index_consistency.html"><span class="name">channel_index_consistency</span><span class="desc">A label pulled from one channel of a multi-channel image correctly records which channel it came from.</span><span class="badge chip error">4 finding(s)</span></a>
