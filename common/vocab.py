@@ -49,10 +49,15 @@ LABEL_CLASSES = (
 
 # Label metadata schema -- stored zarr.json attributes, not directory-name
 # components. Confirmed against real corpus usage Oct 6, 2026: segmentation_type
-# and coverage match this vocab exactly; proofreading_status has 3 real values
-# in use on disk (n/a, complete, none) that aren't in this 4-value canonical
-# list -- left as genuine findings for metadata_vocab.py to surface, not added
-# here silently.
+# and coverage match this vocab exactly; proofreading_status had 3 real
+# non-canonical values in use on disk (n/a, complete, none), resolved Oct 20
+# 2026 by checking what each one actually meant on its real labels rather than
+# just picking a spelling: "complete" (`proofread`-provenance fish2 labels) was
+# a spelling variant of `full`; "none" (`auto_pred`-provenance H01-cortex
+# labels, zero review done) duplicated `unreviewed`'s existing meaning; "n/a"
+# (`public_gt`-provenance synapsenet labels, externally published GT) was a
+# genuinely distinct concept -- proofreading doesn't apply to GT at all, not
+# merely "unreviewed" -- so `not_applicable` was added as a real 5th value.
 SEGMENTATION_TYPES = {"semantic", "instance", "point"}
-PROOFREADING_STATUSES = {"unreviewed", "partial", "full", "expert_reviewed"}
+PROOFREADING_STATUSES = {"unreviewed", "partial", "full", "expert_reviewed", "not_applicable"}
 COVERAGES = {"dense_volume", "full_volume", "sparse_crop", "sparse_points"}
