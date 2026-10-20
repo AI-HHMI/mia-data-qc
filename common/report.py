@@ -32,16 +32,24 @@ def _fileglancer_url(rel_path: str) -> str:
     return FILEGLANCER_PREFIX + quote(rel_path)
 
 
+def _strip_trailing_prose(rel_path: str) -> str:
+    """Strip a trailing " (...)" annotation (e.g. divergent_voxel_counts's
+    grouped path "crop-001.zarr/labels (cell)") -- the real filesystem path
+    is everything before it, still worth a Fileglancer link even though the
+    full string isn't a literal path.
+    """
+    idx = rel_path.find(" (")
+    return rel_path[:idx] if idx != -1 else rel_path
+
+
 def _looks_like_folder(rel_path: str) -> bool:
     """True unless rel_path's last real segment looks like a file (has a
     "." extension and isn't itself a .zarr store, which is a directory
     despite the dot) -- used to decide whether a path is worth a
-    Fileglancer link at all (individual files aren't, folders are). A path
-    carrying trailing prose (e.g. "... (label_class)", seen on
-    divergent_voxel_counts's grouped path) isn't a real filesystem path
-    either, so it's excluded the same way.
+    Fileglancer link at all (individual files aren't, folders are).
     """
-    if not rel_path or " (" in rel_path:
+    rel_path = _strip_trailing_prose(rel_path)
+    if not rel_path:
         return False
     last = rel_path.rstrip("/").rsplit("/", 1)[-1]
     return "." not in last or last.endswith(".zarr")
@@ -50,7 +58,8 @@ def _looks_like_folder(rel_path: str) -> bool:
 def _fileglancer_link(rel_path: str, label_html: str) -> str:
     if not _looks_like_folder(rel_path):
         return label_html
-    return f'<a href="{html.escape(_fileglancer_url(rel_path))}" target="_blank" rel="noopener">{label_html}</a>'
+    clean_path = _strip_trailing_prose(rel_path)
+    return f'<a href="{html.escape(_fileglancer_url(clean_path))}" target="_blank" rel="noopener">{label_html}</a>'
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 
