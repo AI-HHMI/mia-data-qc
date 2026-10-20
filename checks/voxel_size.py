@@ -1,13 +1,54 @@
 #!/usr/bin/env python3
 """Check: (1) raw's voxel size isn't a placeholder (all spatial axes exactly
 1.0 -- the documented Betzig incident, metadata sat at [1,1,1,1,1] nm instead
-of the real value for months), and (2) each label's own declared voxel size
-matches one of raw's actual pyramid levels (not necessarily raw's finest level
--- a label can legitimately be computed at a coarser resolution than raw's s0,
-confirmed on real data: H01's auto_pred-cells-c2_seg is [8,8,33] nm, matching
-raw's s1 exactly, not s0's [4,4,33]). A label's scale matching *none* of raw's
-levels is the real FlyLICONN-style bug (#19, two separate incidents): a voxel
-size that doesn't correspond to any real resolution at all.
+of the real value for months), and (2) each label's own declared voxel size,
+axis by axis, matches some real resolution raw's own pyramid actually has for
+that axis -- not necessarily all axes from the identical raw level (confirmed
+on real data: H01's auto_pred-cell-c2_seg is [8,8,33] nm, matching raw's s1
+exactly, not s0's [4,4,33], an identical-level match; but a genuinely
+anisotropic label can validly mix axes from *different* raw levels -- see
+below). A label axis matching *no* real raw value at all, on any level, is the
+real FlyLICONN-style bug (#19, two separate incidents): a voxel size that
+doesn't correspond to any real resolution at all.
+
+Per-axis (not same-level) matching added Oct 20 2026, after investigating 15
+real `voxel_size_mismatch` findings across 4 datasets (FANC-vnc, banc,
+PYR-ca3-hippocampus, fish2) that turned out not to be bugs: TensorSwitch's
+anisotropic pyramid rule (skip downsampling an axis once it's already >=2x
+coarser than the others, until the ratio closes, only then downsample all
+axes together -- `v2_downsampling_explained.md`) is applied independently
+starting from each array's *own* native resolution. raw and a label built
+from an already-downsampled input (e.g. a nucleus-detection network fed
+XY-downsampled-but-Z-untouched data for speed) each hit their own
+anisotropic-skip point at a different place, so the label's per-axis values
+land on a different level index than raw's -- even though every individual
+axis value is still real (confirmed via each array's own stored shape, not
+just its declared scale: e.g. FANC-vnc's label has real Z=45nm data at a
+genuinely-downsampled-to-level-4 XY resolution raw itself never materialized
+in that exact combination). Requiring one shared level index for every axis
+was stricter than reality -- fixed to match each axis independently against
+the full set of real per-axis values anywhere in raw's own pyramid.
+
+A label carrying its own `independent_resolution: true` is skipped entirely
+-- added Oct 20 2026 for a separate, genuinely different real case: a label
+that's deliberately *never* resampled onto raw's grid at all (not even
+per-axis), because it's a not-yet-finalized stage of a prediction/proofreading
+lifecycle (a raw segmentation-pipeline prediction, or a one-off "let me look
+at progress" snapshot of an in-progress Paintera session) kept at its own
+native acquisition resolution x this dataset's real expansion factor -- found
+on 4 real labels (`em-mouse-liconn-DG/cortex/hippocampus`'s
+`auto_pred-cell-LSD_snapshot_10142026`, FlyID49's
+`auto_pred-neuron-LSD_sws_b4_msd20`) that all reduce to ~9nm native resolution
+when divided by their own stated `expansion_microscopy.expansion_factor`, but
+have no relationship to raw's pyramid at all since raw was never resampled
+*from* that same native resolution either. Confirmed visually aligned in
+Neuroglancer -- genuinely correct data, just outside what this check was ever
+meant to validate. Deliberately a real metadata field (not a hardcoded
+per-label exception list) so any future label of this same kind self-declares
+it at ingest time instead of requiring another QC investigation -- the same
+lifecycle-aware reasoning as `freshness.py`'s superseded-snapshot tracking:
+expect this flag to come off (or the label to be superseded) once a final,
+grid-resampled `manual_gt` export replaces it.
 
 Same no-raw-subgroup layout handling as pyramid_consistency.py: some crops
 keep pyramid levels directly under the crop root with no raw/ subgroup.
@@ -43,13 +84,19 @@ def _load_multiscales(group_dir: Path):
     return get_multiscale(read_group_attrs(group_dir))
 
 
-def _matches(a: dict, b: dict, rel_tol: float = 1e-6) -> bool:
-    if not a or not b:
-        return False
-    common = set(a) & set(b)
-    if not common:
-        return False
-    return all(math.isclose(a[k], b[k], rel_tol=rel_tol) for k in common)
+def _per_axis_values(levels: list) -> dict:
+    """{axis_name: set of every real scale value that axis takes across all
+    given levels} -- the pool of individually-real values a label's own axis
+    can be checked against, independent of which level index each came from.
+    """
+    values = {}
+    for level in levels:
+        for axis, v in level.items():
+            values.setdefault(axis, set()).add(v)
+    return values
+
+def _axis_matches(value: float, candidates: set, rel_tol: float = 1e-6) -> bool:
+    return any(math.isclose(value, c, rel_tol=rel_tol) for c in candidates)
 
 
 def check_crop(crop_dir: Path, root: Path, dataset: str) -> list[dict]:
@@ -88,31 +135,40 @@ def check_crop(crop_dir: Path, root: Path, dataset: str) -> list[dict]:
             "suggested_fix": "patch coordinateTransformations with the real voxel size",
         })
 
+    raw_axis_values = _per_axis_values(raw_levels)
+
     labels_dir = crop_dir / "labels"
     if not labels_dir.is_dir():
         return findings
 
     for label_dir in sorted(p for p in labels_dir.iterdir() if p.is_dir()):
-        label_ms = _load_multiscales(label_dir)
+        label_attrs = read_group_attrs(label_dir)
+        if label_attrs is not None and label_attrs.get("independent_resolution"):
+            continue  # explicitly not resampled onto raw's grid -- not this check's concern
+        label_ms = get_multiscale(label_attrs)
         if label_ms is None:
             continue
         label_s0 = _spatial_scale(label_ms, 0)
         if not label_s0:
             continue
-        if not any(_matches(label_s0, raw_level) for raw_level in raw_levels):
+        bad_axes = {
+            axis: v for axis, v in label_s0.items()
+            if axis not in raw_axis_values or not _axis_matches(v, raw_axis_values[axis])
+        }
+        if bad_axes:
             findings.append({
                 "check": CHECK_NAME,
                 "dataset": dataset,
                 "path": str(label_dir.relative_to(root)),
                 "field": "voxel_size_mismatch",
                 "actual": label_s0,
-                "expected": f"one of raw's pyramid levels: {raw_levels}",
+                "expected": f"every axis matching a real raw value: {raw_axis_values}",
                 "severity": "error",
                 "suggested_fix": (
-                    "doesn't align with raw's pyramid on a consistent per-axis basis -- verify "
-                    "against the original source whether this label's declared voxel size is "
-                    "wrong, or different axes are drifting onto different pyramid levels "
-                    "(the documented anisotropic-mismatch bug class)"
+                    f"axis/axes {sorted(bad_axes)} don't match any real resolution raw's own "
+                    "pyramid has for that axis at all -- verify against the original source "
+                    "whether this label's declared voxel size is simply wrong (the documented "
+                    "FlyLICONN-style bug class), not just on a different pyramid level than raw"
                 ),
             })
 
