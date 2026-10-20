@@ -14,6 +14,26 @@
     },
     {
       "check": "label_naming",
+      "dataset": "em-human-H01-cortex",
+      "path": "em-human-H01-cortex/crop-001.zarr/labels/auto_pred-cells-c2_seg",
+      "field": "label_class",
+      "actual": "cells",
+      "expected": "see common/vocab.py:LABEL_CLASSES",
+      "severity": "error",
+      "suggested_fix": "rename label_class to match existing 'cell' (looks like a spelling variant)"
+    },
+    {
+      "check": "label_naming",
+      "dataset": "em-human-H01-cortex",
+      "path": "em-human-H01-cortex/crop-001.zarr/labels/auto_pred-cells-c3_seg",
+      "field": "label_class",
+      "actual": "cells",
+      "expected": "see common/vocab.py:LABEL_CLASSES",
+      "severity": "error",
+      "suggested_fix": "rename label_class to match existing 'cell' (looks like a spelling variant)"
+    },
+    {
+      "check": "label_naming",
       "dataset": "em-mouse-PyTC-synapsenet-hippocampus",
       "path": "em-mouse-PyTC-synapsenet-hippocampus/crop-001_az-test-chemfix-20171006_05_MS.zarr/labels/public_gt-active_zone-synapsenet",
       "field": "label_class",
@@ -455,7 +475,7 @@
     {
       "check": "label_naming",
       "dataset": "lm-zebrafish-Betzig-mosaic-example_annotations_Thayer",
-      "path": "lm-zebrafish-Betzig-mosaic-example_annotations_Thayer/crop-002_example_annotations_Thayer_2channels_2c.zarr/labels/initial_labels",
+      "path": "lm-zebrafish-Betzig-mosaic-example_annotations_Thayer/crop-002_example_annotations_Thayer_2channels.zarr/labels/initial_labels",
       "field": "label_name",
       "actual": "initial_labels",
       "expected": "{provenance}-{label_class}-{specific_info}",
@@ -465,7 +485,7 @@
     {
       "check": "label_naming",
       "dataset": "lm-zebrafish-Betzig-mosaic-example_annotations_Thayer",
-      "path": "lm-zebrafish-Betzig-mosaic-example_annotations_Thayer/crop-002_example_annotations_Thayer_2channels_2c.zarr/labels/postprocessed_labels",
+      "path": "lm-zebrafish-Betzig-mosaic-example_annotations_Thayer/crop-002_example_annotations_Thayer_2channels.zarr/labels/postprocessed_labels",
       "field": "label_name",
       "actual": "postprocessed_labels",
       "expected": "{provenance}-{label_class}-{specific_info}",
@@ -475,7 +495,7 @@
     {
       "check": "label_naming",
       "dataset": "lm-zebrafish-Betzig-mosaic-example_annotations_Thayer",
-      "path": "lm-zebrafish-Betzig-mosaic-example_annotations_Thayer/crop-002_example_annotations_Thayer_2channels_2c.zarr/labels/proofread_refined_labels",
+      "path": "lm-zebrafish-Betzig-mosaic-example_annotations_Thayer/crop-002_example_annotations_Thayer_2channels.zarr/labels/proofread_refined_labels",
       "field": "label_name",
       "actual": "proofread_refined_labels",
       "expected": "{provenance}-{label_class}-{specific_info}",
@@ -485,7 +505,7 @@
     {
       "check": "label_naming",
       "dataset": "lm-zebrafish-Betzig-mosaic-example_annotations_Thayer",
-      "path": "lm-zebrafish-Betzig-mosaic-example_annotations_Thayer/crop-002_example_annotations_Thayer_2channels_2c.zarr/labels/refined_labels",
+      "path": "lm-zebrafish-Betzig-mosaic-example_annotations_Thayer/crop-002_example_annotations_Thayer_2channels.zarr/labels/refined_labels",
       "field": "label_name",
       "actual": "refined_labels",
       "expected": "{provenance}-{label_class}-{specific_info}",

@@ -1,5 +1,16 @@
 {
   "check": "dataset_orphaned_ingest",
   "date": "2026-10-16",
-  "findings": []
+  "findings": [
+    {
+      "check": "dataset_orphaned_ingest",
+      "dataset": "exm-mouse-liconn-RID19-retina-confocal",
+      "path": "exm-mouse-liconn-RID19-retina-confocal",
+      "field": "untracked_dataset",
+      "actual": "no mia_pretraining issue references this dataset",
+      "expected": "a mia_pretraining issue tracking this dataset",
+      "severity": "error",
+      "suggested_fix": "create a mia_pretraining issue for this dataset (not automated -- flag only)"
+    }
+  ]
 }
