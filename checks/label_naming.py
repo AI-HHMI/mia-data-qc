@@ -1,8 +1,22 @@
 #!/usr/bin/env python3
 """Check: every label directory under data/{dataset}/crop-*.zarr/labels/ matches
-{provenance}-{label_class}-{specific_info} -- provenance is one of the 4
+{provenance}-{label_class}[-{specific_info}] -- provenance is one of the 4
 controlled values (manual_gt/auto_pred/proofread/public_gt), label_class is
-checked against the canonical set in common/vocab.py.
+checked against the canonical set in common/vocab.py. A trailing
+{specific_info} is optional (added Oct 21 2026) -- a bare
+{provenance}-{label_class} is a real, valid name too (e.g. em-zebrafish-fish1's
+`manual_gt-synapse`/`proofread-synapse`, 12 real labels with nothing further
+to disambiguate); only provenance/label_class are actually controlled
+vocabulary, so only their presence/validity is required.
+
+A label carrying its own `legacy_naming: true` is skipped entirely -- added
+Oct 21 2026 for 10 pre-convention labels on
+`lm-zebrafish-Betzig-mosaic-example_annotations_Thayer` (ad-hoc pipeline/
+experiment names like `cellpose_t10_denseEX_pp`/`initial_labels`, predating
+this naming rule and deeply cross-referenced by name elsewhere -- renaming
+them was judged not worth the risk). A real metadata field, not a hardcoded
+path list, so any *new* label added to this same dataset is still checked
+normally -- only these specific grandfathered labels are exempt.
 
 Only directories that look like real labels are checked (has a rung subdir like
 s0/) -- a stray non-label file/dir in labels/ (leftover scripts, logs) is a
@@ -18,6 +32,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from common.report import write_check_report
 from common.vocab import LABEL_CLASSES, NON_DATASET_DIRS, PROVENANCE
+from common.zarr_meta import read_group_attrs
 
 CHECK_NAME = "label_naming"
 _RUNG_RE = re.compile(r"^s\d+$")
@@ -34,20 +49,20 @@ def check_label(name: str, dataset: str, rel_path: str) -> list[dict]:
     findings = []
     parts = name.split("-", 2)
 
-    if len(parts) < 3 or not parts[1] or not parts[2]:
+    if len(parts) < 2 or not parts[0] or not parts[1]:
         findings.append({
             "check": CHECK_NAME,
             "dataset": dataset,
             "path": rel_path,
             "field": "label_name",
             "actual": name,
-            "expected": "{provenance}-{label_class}-{specific_info}",
+            "expected": "{provenance}-{label_class}[-{specific_info}]",
             "severity": "error",
-            "suggested_fix": "rename to match {provenance}-{label_class}-{specific_info}",
+            "suggested_fix": "rename to match {provenance}-{label_class}[-{specific_info}]",
         })
         return findings
 
-    provenance, label_class, _specific_info = parts
+    provenance, label_class = parts[0], parts[1]
 
     if provenance not in PROVENANCE:
         findings.append({
@@ -107,6 +122,9 @@ def main():
     findings = []
     n_labels = 0
     for dataset_name, label_dir in iter_label_dirs(root):
+        attrs = read_group_attrs(label_dir)
+        if attrs is not None and attrs.get("legacy_naming"):
+            continue  # grandfathered pre-convention name -- new labels still get checked
         n_labels += 1
         rel_path = str(label_dir.relative_to(root))
         findings.extend(check_label(label_dir.name, dataset_name, rel_path))

@@ -3,8 +3,8 @@
 real crop -- a `.tmp`-suffixed staging dir with only preview images doesn't
 count) has at least one `mia_pretraining` issue whose `HHMI_Path` resolves
 somewhere inside it. The `mia_pretraining`-side sibling of
-`label_orphaned_ingest.py`, scoped to the *dataset* level on purpose (Diyi,
-Oct 12 2026) -- `mia_pretraining` issues routinely cover a whole multi-crop
+`label_orphaned_ingest.py`, scoped to the *dataset* level on purpose
+(Oct 12 2026) -- `mia_pretraining` issues routinely cover a whole multi-crop
 dataset with one path, so per-crop coverage isn't the right granularity
 here the way it is for `mia_annotation`'s per-label tracking.
 
@@ -27,7 +27,7 @@ datasets; 137 have at least one real crop (the other 2,
 `exm-drosophila-flyliconn-FlyID30-mirrorscope-S5-20260326-unstitched.tmp`
 and `...FlyID48-mirrorscope-20260630-unstitched.tmp`, hold only preview
 images -- not-yet-ingested staging material, already tracked and documented
-as on-hold on their own issues per Diyi). All 137 real datasets resolve to
+as on-hold on their own issues). All 137 real datasets resolve to
 at least one `mia_pretraining` issue -- **0 findings**, validates going
 forward.
 """

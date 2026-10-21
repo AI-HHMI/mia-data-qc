@@ -57,7 +57,7 @@ declared shape routinely spans the whole parent volume while only a small
 sub-box carries real annotation. Even so, a label is skipped (not
 guessed at) if it's too large on disk (>2GB), too large decompressed
 (>800GB), or spans too many chunks (>200K) -- the same three gates
-Emin's `measure_labels.py` uses, so this stays affordable even on a label
+`measure_labels.py` uses, so this stays affordable even on a label
 whose declared shape is huge. A whole group is skipped before any exact
 counting if every label in it shares one provenance (no cross-provenance
 pair is even possible) -- this is what makes CellMap's 18-label

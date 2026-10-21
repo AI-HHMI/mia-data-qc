@@ -5,7 +5,7 @@ algorithm, not reimplemented differently. Needs `zarr`/`numpy`
 dependency stays scoped to the one or two checks that actually need real
 pixel data, not the other ~20 metadata-only checks.
 
-Cost-gated the same way Emin's pipeline gates it: only attempt an exact
+Cost-gated the same way that pipeline gates it: only attempt an exact
 read when the label is small enough on disk, small enough decompressed,
 and spans few enough chunks -- a label's declared shape can vastly
 overstate its real size (zarr never writes an all-empty chunk), so

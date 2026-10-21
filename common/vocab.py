@@ -27,9 +27,13 @@ NON_DATASET_DIRS = {"source_tmp"}
 # Label directory naming: {provenance}-{label_class}-{specific_info}
 PROVENANCE = {"manual_gt", "auto_pred", "proofread", "public_gt"}
 
+# `neuron` added Oct 21 2026 -- a deliberate choice (FlyID49's `auto_pred-neuron-LSD_sws_b4_msd20`,
+# Oct 15 2026) never added to this list; a real gap, not a naming mistake.
+# `active_zone` added Oct 21 2026 -- a real, correct biological term (presynaptic active zones,
+# `em-mouse-PyTC-synapsenet-hippocampus`'s SynapseNet-derived labels), same pattern as `spine`.
 LABEL_CLASS_CORE = {
     "cell", "neurite", "nucleus", "mitochondria", "synapse", "vesicle", "myelin",
-    "blood_vessel", "spine",
+    "blood_vessel", "spine", "neuron", "active_zone",
 }
 LABEL_CLASS_CELLMAP = {
     "cytoplasm", "plasma_membrane", "extracellular_space", "endoplasmic_reticulum",

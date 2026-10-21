@@ -10,8 +10,8 @@ fires for a multi-crop dataset tracked *entirely* through per-crop issues,
 where one crop can silently have no issue at all while its siblings do.
 
 Found as a TODO while building dataset_field_drift.py (Oct 12 2026), logged
-and confirmed with Diyi as a separate follow-up, not folded into that
-check. The `label_orphaned_ingest.py` pattern, one level finer for the
+as a separate follow-up, not folded into that check. The
+`label_orphaned_ingest.py` pattern, one level finer for the
 `mia_pretraining` side.
 
 Resolution reuses dataset_orphaned_ingest.py's path-handling (strip a
