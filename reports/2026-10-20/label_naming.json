@@ -455,7 +455,7 @@
     {
       "check": "label_naming",
       "dataset": "lm-zebrafish-Betzig-mosaic-example_annotations_Thayer",
-      "path": "lm-zebrafish-Betzig-mosaic-example_annotations_Thayer/crop-002_example_annotations_Thayer_2channels_2c.zarr/labels/initial_labels",
+      "path": "lm-zebrafish-Betzig-mosaic-example_annotations_Thayer/crop-002_example_annotations_Thayer_2c.zarr/labels/initial_labels",
       "field": "label_name",
       "actual": "initial_labels",
       "expected": "{provenance}-{label_class}-{specific_info}",
@@ -465,7 +465,7 @@
     {
       "check": "label_naming",
       "dataset": "lm-zebrafish-Betzig-mosaic-example_annotations_Thayer",
-      "path": "lm-zebrafish-Betzig-mosaic-example_annotations_Thayer/crop-002_example_annotations_Thayer_2channels_2c.zarr/labels/postprocessed_labels",
+      "path": "lm-zebrafish-Betzig-mosaic-example_annotations_Thayer/crop-002_example_annotations_Thayer_2c.zarr/labels/postprocessed_labels",
       "field": "label_name",
       "actual": "postprocessed_labels",
       "expected": "{provenance}-{label_class}-{specific_info}",
@@ -475,7 +475,7 @@
     {
       "check": "label_naming",
       "dataset": "lm-zebrafish-Betzig-mosaic-example_annotations_Thayer",
-      "path": "lm-zebrafish-Betzig-mosaic-example_annotations_Thayer/crop-002_example_annotations_Thayer_2channels_2c.zarr/labels/proofread_refined_labels",
+      "path": "lm-zebrafish-Betzig-mosaic-example_annotations_Thayer/crop-002_example_annotations_Thayer_2c.zarr/labels/proofread_refined_labels",
       "field": "label_name",
       "actual": "proofread_refined_labels",
       "expected": "{provenance}-{label_class}-{specific_info}",
@@ -485,7 +485,7 @@
     {
       "check": "label_naming",
       "dataset": "lm-zebrafish-Betzig-mosaic-example_annotations_Thayer",
-      "path": "lm-zebrafish-Betzig-mosaic-example_annotations_Thayer/crop-002_example_annotations_Thayer_2channels_2c.zarr/labels/refined_labels",
+      "path": "lm-zebrafish-Betzig-mosaic-example_annotations_Thayer/crop-002_example_annotations_Thayer_2c.zarr/labels/refined_labels",
       "field": "label_name",
       "actual": "refined_labels",
       "expected": "{provenance}-{label_class}-{specific_info}",

@@ -1,0 +1,5 @@
+{
+  "check": "dataset_disk_usage_sanity",
+  "date": "2026-10-20",
+  "findings": []
+}
