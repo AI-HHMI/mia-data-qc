@@ -11,10 +11,18 @@ of `source_Image_Path`, which turned out to resolve every case that
 
 Four distinct outcomes, flagged separately so each can be handled differently:
 - `untracked_label` (error): a real label with no issue at all referencing it.
-- `untracked_snapshot` (warning): a real label matching the superseded-snapshot
-  naming pattern (`-snap_MMDDYYYY`) with no dedicated issue -- likely
-  intentional (only the current/final snapshot in a weekly export series
-  gets tracked), lower urgency, flagged for visibility only.
+- `untracked_snapshot` (warning): a real label matching an informal-snapshot
+  naming pattern -- `{...}snap(shot)?_MMDDYYYY` at the end of the name, an
+  optional model/tool token (e.g. `LSD`, `cellpose`) and either spelling of
+  snap(shot) both allowed, generalized Oct 21 2026 so a future model name
+  doesn't need its own regex -- with no dedicated issue. Likely intentional
+  (only the current/final snapshot in a weekly export series, or a one-off
+  "let me look at progress" export of an in-progress pipeline, gets tracked),
+  lower urgency, flagged for visibility only. The same bucket also catches
+  an inter-annotator `_assessment_{name}` label (two or more independent
+  small assessments on one crop, by design never individually tracked --
+  the umbrella issue stays at a pre-ingest board status since it's an
+  assessment pass, not full annotation).
 - `title_format_mismatch` (error): a terminal-status issue whose title uses
   the old slash-separated format (`dataset/crop/label`) instead of the
   current underscore-joined 3-component convention -- the issue does track a
@@ -37,6 +45,20 @@ index: 5 are category trackers (correctly excluded), 2 are the known
 slash-titled Thayer t10/t25 issues (title_format_mismatch) -- these 2 are
 deliberately not also counted as `untracked_label` on the real-label side,
 since they're tracked, just under the wrong title format.
+
+Oct 21 2026: resolved real findings from the Oct 9 survey -- the 3 slash-
+titled Thayer t10/t25/t40 issues renamed to the 3-component convention
+(title_format_mismatch 0); generalized `_SNAPSHOT_RE` beyond the single
+`-snap_MMDDYYYY` spelling (it missed `exm-mouse-liconn-*`'s
+`_LSD_snapshot_MMDDYYYY` labels -- a different pipeline's own informal
+one-off-export convention, not previously recognized) and added
+`_ASSESSMENT_RE` for the `exm-drosophila-rubinlab-30X_lobeTm1_...`
+inter-annotator `_assessment_{name}` pair -- both moved from `untracked_label`
+(error) to `untracked_snapshot` (informational warning), matching documented
+team intent in both cases, not a real tracking gap. Also reused
+`label_naming.py`'s `legacy_naming: true` metadata field (not a new
+mechanism) for the same 10 `example_annotations_Thayer` pre-convention
+labels -- same reasoning, informational not error.
 """
 import argparse
 import datetime
@@ -48,14 +70,15 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from common.github import fetch_project_items, MIA_ANNOTATION_PROJECT
 from common.report import write_check_report
 from common.vocab import NON_DATASET_DIRS
-from common.zarr_meta import group_exists
+from common.zarr_meta import group_exists, read_group_attrs
 
 CHECK_NAME = "label_orphaned_ingest"
 
 TERMINAL_STATUSES = {
     "manual_gt_ingested", "public_gt_ingested", "proofread_ingested", "auto_pred_ingested",
 }
-_SNAPSHOT_RE = re.compile(r"-snap_\d{8}$")
+_SNAPSHOT_RE = re.compile(r"[-_](?:[A-Za-z0-9]+_)*snap(?:shot)?_\d{8}$")
+_ASSESSMENT_RE = re.compile(r"[-_]assessment_\w+$")
 _CROP_TOKEN_RE = re.compile(r"crop-\d{3}")
 
 
@@ -126,7 +149,9 @@ def check_labels(canonical: dict, terminal_titles: set, format_mismatch_keys: se
             continue  # tracked, just under the old title format -- already reported on the issue side
 
         rel = str(label_dir.relative_to(root))
-        if _SNAPSHOT_RE.search(title):
+        attrs = read_group_attrs(label_dir)
+        is_legacy = attrs is not None and attrs.get("legacy_naming")
+        if _SNAPSHOT_RE.search(title) or _ASSESSMENT_RE.search(title) or is_legacy:
             findings.append({
                 "check": CHECK_NAME, "dataset": dataset_name, "path": rel,
                 "field": "untracked_snapshot",
