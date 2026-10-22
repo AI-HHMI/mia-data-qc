@@ -1,34 +1,5 @@
 {
   "check": "voxel_size",
   "date": "2026-10-21",
-  "findings": [
-    {
-      "check": "voxel_size",
-      "dataset": "exm-mouse-liconn-cortex-20250822_ExPID09_2ndGel_30percentSucrose-Glycerol_40XW_003",
-      "path": "exm-mouse-liconn-cortex-20250822_ExPID09_2ndGel_30percentSucrose-Glycerol_40XW_003/crop-001.zarr/labels/auto_pred-cell-LSD_snapshot_10212026",
-      "field": "voxel_size_mismatch",
-      "actual": {
-        "x": 144.0,
-        "y": 144.0,
-        "z": 144.0
-      },
-      "expected": "every axis matching a real raw value: {'x': {159.989, 319.978, 639.956, 79.9945, 1279.912}, 'y': {159.989, 319.978, 639.956, 79.9945, 1279.912}, 'z': {400.0, 800.0, 1600.0}}",
-      "severity": "error",
-      "suggested_fix": "axis/axes ['x', 'y', 'z'] don't match any real resolution raw's own pyramid has for that axis at all -- verify against the original source whether this label's declared voxel size is simply wrong (the documented FlyLICONN-style bug class), not just on a different pyramid level than raw"
-    },
-    {
-      "check": "voxel_size",
-      "dataset": "exm-mouse-liconn-hippocampus-202507013_ExPID10-02_2percentAA_S2_Atto488_40XW_004",
-      "path": "exm-mouse-liconn-hippocampus-202507013_ExPID10-02_2percentAA_S2_Atto488_40XW_004/crop-001.zarr/labels/auto_pred-cell-LSD_snapshot_10212026",
-      "field": "voxel_size_mismatch",
-      "actual": {
-        "x": 144.0,
-        "y": 144.0,
-        "z": 144.0
-      },
-      "expected": "every axis matching a real raw value: {'x': {159.989, 1279.912, 319.978, 639.956, 79.9945, 2559.824}, 'y': {159.989, 1279.912, 319.978, 639.956, 79.9945, 2559.824}, 'z': {400.0, 800.0, 1600.0, 3200.0}}",
-      "severity": "error",
-      "suggested_fix": "axis/axes ['x', 'y', 'z'] don't match any real resolution raw's own pyramid has for that axis at all -- verify against the original source whether this label's declared voxel size is simply wrong (the documented FlyLICONN-style bug class), not just on a different pyramid level than raw"
-    }
-  ]
+  "findings": []
 }

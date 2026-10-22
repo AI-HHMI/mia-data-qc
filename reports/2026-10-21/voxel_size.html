@@ -69,14 +69,8 @@ footer.site { color:var(--muted); font-size:12px; padding:24px 0 40px; text-alig
 <a class="nav-back" href="index.html">&larr; 2026-10-21</a>
 <h1>voxel_size</h1>
 <p class="sub">Raw&#x27;s voxel size isn&#x27;t a placeholder; each label&#x27;s voxel size aligns with raw&#x27;s pyramid.</p>
-<div class="summary"><div class="stat error"><div class="n">2</div><div class="l">error</div></div></div>
-<div class="card scroll">
-<table class="sortable"><thead><tr><th>Dataset</th><th>Path</th><th>Field</th><th>Actual</th>
-<th>Expected</th><th>Severity</th><th>Suggested fix</th></tr></thead>
-<tbody>
-<tr><td>exm-mouse-liconn-cortex-20250822_ExPID09_2ndGel_30percentSucrose-Glycerol_40XW_003</td><td><a href="https://fileglancer.int.janelia.org/browse/groups_miaai_miaai/lmd-v0.0.1/data/exm-mouse-liconn-cortex-20250822_ExPID09_2ndGel_30percentSucrose-Glycerol_40XW_003/crop-001.zarr/labels/auto_pred-cell-LSD_snapshot_10212026" target="_blank" rel="noopener">exm-mouse-liconn-cortex-20250822_ExPID09_2ndGel_30percentSucrose-Glycerol_40XW_003/crop-001.zarr/labels/auto_pred-cell-LSD_snapshot_10212026</a></td><td>voxel_size_mismatch</td><td>{&#x27;x&#x27;: 144.0, &#x27;y&#x27;: 144.0, &#x27;z&#x27;: 144.0}</td><td>every axis matching a real raw value: {&#x27;x&#x27;: {159.989, 319.978, 639.956, 79.9945, 1279.912}, &#x27;y&#x27;: {159.989, 319.978, 639.956, 79.9945, 1279.912}, &#x27;z&#x27;: {400.0, 800.0, 1600.0}}</td><td><span class="chip error">error</span></td><td>axis/axes [&#x27;x&#x27;, &#x27;y&#x27;, &#x27;z&#x27;] don&#x27;t match any real resolution raw&#x27;s own pyramid has for that axis at all -- verify against the original source whether this label&#x27;s declared voxel size is simply wrong (the documented FlyLICONN-style bug class), not just on a different pyramid level than raw</td></tr>
-<tr><td>exm-mouse-liconn-hippocampus-202507013_ExPID10-02_2percentAA_S2_Atto488_40XW_004</td><td><a href="https://fileglancer.int.janelia.org/browse/groups_miaai_miaai/lmd-v0.0.1/data/exm-mouse-liconn-hippocampus-202507013_ExPID10-02_2percentAA_S2_Atto488_40XW_004/crop-001.zarr/labels/auto_pred-cell-LSD_snapshot_10212026" target="_blank" rel="noopener">exm-mouse-liconn-hippocampus-202507013_ExPID10-02_2percentAA_S2_Atto488_40XW_004/crop-001.zarr/labels/auto_pred-cell-LSD_snapshot_10212026</a></td><td>voxel_size_mismatch</td><td>{&#x27;x&#x27;: 144.0, &#x27;y&#x27;: 144.0, &#x27;z&#x27;: 144.0}</td><td>every axis matching a real raw value: {&#x27;x&#x27;: {159.989, 1279.912, 319.978, 639.956, 79.9945, 2559.824}, &#x27;y&#x27;: {159.989, 1279.912, 319.978, 639.956, 79.9945, 2559.824}, &#x27;z&#x27;: {400.0, 800.0, 1600.0, 3200.0}}</td><td><span class="chip error">error</span></td><td>axis/axes [&#x27;x&#x27;, &#x27;y&#x27;, &#x27;z&#x27;] don&#x27;t match any real resolution raw&#x27;s own pyramid has for that axis at all -- verify against the original source whether this label&#x27;s declared voxel size is simply wrong (the documented FlyLICONN-style bug class), not just on a different pyramid level than raw</td></tr>
-</tbody></table></div>
+<div class="summary"><div class="stat"><div class="n">0</div><div class="l">findings</div></div></div>
+<div class="card empty">No findings.</div>
 </main>
 <footer class="site">mia-data-qc &middot; automated QC for the LMD corpus</footer>
 <script>
