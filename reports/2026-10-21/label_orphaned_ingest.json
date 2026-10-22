@@ -621,46 +621,6 @@
       "expected": "expected for a superseded snapshot in a weekly-export series (informational)",
       "severity": "warning",
       "suggested_fix": "no action needed unless this snapshot should have its own issue"
-    },
-    {
-      "check": "label_orphaned_ingest",
-      "dataset": "lm-zebrafish-Betzig-mosaic-example_annotations_Thayer",
-      "path": "lm-zebrafish-Betzig-mosaic-example_annotations_Thayer/crop-002_example_annotations_Thayer_2c.zarr/labels/initial_labels",
-      "field": "untracked_snapshot",
-      "actual": "no mia_annotation issue references this label",
-      "expected": "expected for a superseded snapshot in a weekly-export series (informational)",
-      "severity": "warning",
-      "suggested_fix": "no action needed unless this snapshot should have its own issue"
-    },
-    {
-      "check": "label_orphaned_ingest",
-      "dataset": "lm-zebrafish-Betzig-mosaic-example_annotations_Thayer",
-      "path": "lm-zebrafish-Betzig-mosaic-example_annotations_Thayer/crop-002_example_annotations_Thayer_2c.zarr/labels/postprocessed_labels",
-      "field": "untracked_snapshot",
-      "actual": "no mia_annotation issue references this label",
-      "expected": "expected for a superseded snapshot in a weekly-export series (informational)",
-      "severity": "warning",
-      "suggested_fix": "no action needed unless this snapshot should have its own issue"
-    },
-    {
-      "check": "label_orphaned_ingest",
-      "dataset": "lm-zebrafish-Betzig-mosaic-example_annotations_Thayer",
-      "path": "lm-zebrafish-Betzig-mosaic-example_annotations_Thayer/crop-002_example_annotations_Thayer_2c.zarr/labels/proofread_refined_labels",
-      "field": "untracked_snapshot",
-      "actual": "no mia_annotation issue references this label",
-      "expected": "expected for a superseded snapshot in a weekly-export series (informational)",
-      "severity": "warning",
-      "suggested_fix": "no action needed unless this snapshot should have its own issue"
-    },
-    {
-      "check": "label_orphaned_ingest",
-      "dataset": "lm-zebrafish-Betzig-mosaic-example_annotations_Thayer",
-      "path": "lm-zebrafish-Betzig-mosaic-example_annotations_Thayer/crop-002_example_annotations_Thayer_2c.zarr/labels/refined_labels",
-      "field": "untracked_snapshot",
-      "actual": "no mia_annotation issue references this label",
-      "expected": "expected for a superseded snapshot in a weekly-export series (informational)",
-      "severity": "warning",
-      "suggested_fix": "no action needed unless this snapshot should have its own issue"
     }
   ]
 }
