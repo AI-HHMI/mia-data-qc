@@ -81,7 +81,6 @@ at, not explained away by any naming/format convention found so far.
 """
 import argparse
 import datetime
-import math
 import sys
 from pathlib import Path
 
@@ -89,7 +88,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from common.report import write_check_report
 from common.vocab import NON_DATASET_DIRS
 from common.voxel_count import exact_nonzero_count
-from common.zarr_meta import get_multiscale, read_array_meta, read_group_attrs
+from common.zarr_meta import ranges_match, read_group_attrs, spatial_range
 
 CHECK_NAME = "divergent_voxel_counts"
 RATIO_THRESHOLD = 10.0
@@ -99,58 +98,10 @@ RATIO_THRESHOLD = 10.0
 # (plus a small absolute floor) absorbs legitimate voxel-rounding/pixel-center
 # differences between pipelines without accepting a genuinely different
 # region. Real false positives on this corpus are 20-1000x off, nowhere near
-# this threshold.
+# this threshold. (`spatial_range`/`ranges_match` themselves moved to
+# common/zarr_meta.py Oct 22 2026 once label_orphaned_ingest.py needed the
+# same region comparison.)
 RANGE_REL_TOL = 0.05
-
-
-def _spatial_range(label_dir: Path):
-    """{axis_name: (start_nm, end_nm)} for a label's own s0 level, from its
-    real shape + scale + translation -- not the (often absent/empty)
-    `bbox` metadata field, which isn't populated on every label (e.g. the
-    legacy same-shape-as-raw labels on this corpus carry no bbox at all).
-    """
-    attrs = read_group_attrs(label_dir)
-    ms = get_multiscale(attrs)
-    if ms is None:
-        return None
-    axes = ms.get("axes", [])
-    datasets = ms.get("datasets", [])
-    if not axes or not datasets:
-        return None
-    cts = datasets[0].get("coordinateTransformations", [])
-    scale = next((ct["scale"] for ct in cts if ct["type"] == "scale"), None)
-    translation = next((ct["translation"] for ct in cts if ct["type"] == "translation"), None)
-    if scale is None:
-        return None
-    if translation is None:
-        translation = [0.0] * len(scale)
-    array_meta = read_array_meta(label_dir / datasets[0].get("path", "s0"))
-    if array_meta is None or array_meta["shape"] is None:
-        return None
-    shape = array_meta["shape"]
-    if len(shape) != len(axes):
-        return None
-    ranges = {}
-    for ax, sh, sc, tr in zip(axes, shape, scale, translation):
-        if ax.get("type") != "space":
-            continue
-        start = tr
-        end = tr + sh * sc
-        ranges[ax["name"]] = (start, end)
-    return ranges
-
-
-def _ranges_match(a: dict, b: dict) -> bool:
-    common = set(a) & set(b)
-    if not common or common != set(a) or common != set(b):
-        return False  # different axis sets entirely -- not the same kind of region
-    for axis in common:
-        (a_start, a_end), (b_start, b_end) = a[axis], b[axis]
-        extent = max(a_end - a_start, b_end - b_start, 1.0)
-        tol = max(extent * RANGE_REL_TOL, 1.0)
-        if abs(a_start - b_start) > tol or abs(a_end - b_end) > tol:
-            return False
-    return True
 
 
 def parse_label_class(label_name: str):
@@ -187,7 +138,7 @@ def iter_crop_label_groups(root: Path):
 
 def check_group(dataset: str, crop_dir: Path, label_class: str, label_dirs: list, root: Path) -> list[dict]:
     provenance = {d: (read_group_attrs(d) or {}).get("provenance") for d in label_dirs}
-    ranges = {d: _spatial_range(d) for d in label_dirs}
+    ranges = {d: spatial_range(d) for d in label_dirs}
 
     # Only a pair with different provenance AND the same declared physical
     # region is even a candidate -- determine this from cheap metadata alone
@@ -201,7 +152,7 @@ def check_group(dataset: str, crop_dir: Path, label_class: str, label_dirs: list
             a, b = dirs[i], dirs[j]
             if provenance[a] == provenance[b]:
                 continue
-            if ranges[a] is None or ranges[b] is None or not _ranges_match(ranges[a], ranges[b]):
+            if ranges[a] is None or ranges[b] is None or not ranges_match(ranges[a], ranges[b], RANGE_REL_TOL):
                 continue
             comparable_pairs.append((a, b))
     if not comparable_pairs:

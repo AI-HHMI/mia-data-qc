@@ -59,6 +59,19 @@ team intent in both cases, not a real tracking gap. Also reused
 `label_naming.py`'s `legacy_naming: true` metadata field (not a new
 mechanism) for the same 10 `example_annotations_Thayer` pre-convention
 labels -- same reasoning, informational not error.
+
+Oct 22 2026: an informal-snapshot/legacy-named label is now excluded
+entirely (not even `untracked_snapshot`) if a `-final`-named sibling in the
+same crop covers the *same real physical region* (`common.zarr_meta.
+spatial_range()`/`ranges_match()`, the same region-comparison already used
+by `divergent_voxel_counts.py`) -- genuinely done, not worth a warning at
+all. Deliberately region-matched, not just "any final exists in this crop":
+a dataset can run two independent rounds at once over two different
+regions (e.g. DG/cortex/hippocampus's legacy whole-crop `manual_gt-cell-*`
+snapshot series, already closed out by its own whole-crop `-final`, running
+alongside a brand new sub-region `auto_pred-cell-LSD_snapshot_*`
+prediction/proofreading round with no final yet) -- only the round with a
+region-matching final is actually finished.
 """
 import argparse
 import datetime
@@ -70,7 +83,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from common.github import fetch_project_items, MIA_ANNOTATION_PROJECT
 from common.report import write_check_report
 from common.vocab import NON_DATASET_DIRS
-from common.zarr_meta import group_exists, read_group_attrs
+from common.zarr_meta import group_exists, ranges_match, read_group_attrs, spatial_range
 
 CHECK_NAME = "label_orphaned_ingest"
 
@@ -80,6 +93,30 @@ TERMINAL_STATUSES = {
 _SNAPSHOT_RE = re.compile(r"[-_](?:[A-Za-z0-9]+_)*snap(?:shot)?_\d{8}$")
 _ASSESSMENT_RE = re.compile(r"[-_]assessment_\w+$")
 _CROP_TOKEN_RE = re.compile(r"crop-\d{3}")
+_FINAL_RE = re.compile(r"-final$")
+
+
+def _has_matching_final(label_dir: Path) -> bool:
+    """True if a `-final`-named sibling exists in the same crop covering the
+    *same real physical region* (not just the same crop) -- a dataset can
+    genuinely run two independent rounds over two different regions at once
+    (e.g. the legacy whole-crop manual_gt series, already closed out by its
+    own `-final`, alongside a brand new sub-region prediction/proofreading
+    round with no final yet); only a region-matching final means this
+    specific snapshot is truly done, not just "some final exists somewhere
+    in this crop."
+    """
+    this_range = spatial_range(label_dir)
+    if this_range is None:
+        return False
+    labels_dir = label_dir.parent
+    for sibling in labels_dir.iterdir():
+        if sibling == label_dir or not sibling.is_dir() or not _FINAL_RE.search(sibling.name):
+            continue
+        final_range = spatial_range(sibling)
+        if final_range is not None and ranges_match(this_range, final_range):
+            return True
+    return False
 
 
 def build_canonical_index(root: Path):
@@ -151,7 +188,10 @@ def check_labels(canonical: dict, terminal_titles: set, format_mismatch_keys: se
         rel = str(label_dir.relative_to(root))
         attrs = read_group_attrs(label_dir)
         is_legacy = attrs is not None and attrs.get("legacy_naming")
-        if _SNAPSHOT_RE.search(title) or _ASSESSMENT_RE.search(title) or is_legacy:
+        is_informal = _SNAPSHOT_RE.search(title) or _ASSESSMENT_RE.search(title) or is_legacy
+        if is_informal and _has_matching_final(label_dir):
+            continue  # a -final sibling already covers this exact region -- genuinely done, not even worth a warning
+        if is_informal:
             findings.append({
                 "check": CHECK_NAME, "dataset": dataset_name, "path": rel,
                 "field": "untracked_snapshot",

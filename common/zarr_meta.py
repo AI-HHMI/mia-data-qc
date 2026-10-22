@@ -152,3 +152,61 @@ def written_chunk_bounds(array_dir: Path):
         hi = min(max(i[d] for i in indices) * file_chunk_shape[d] + file_chunk_shape[d], shape[d])
         elem_bounds.append((lo, hi))
     return {"elem_bounds": elem_bounds}
+
+
+def spatial_range(group_dir: Path):
+    """{axis_name: (start_nm, end_nm)} for a group's own s0 level, from its
+    real shape + scale + translation -- not the (often absent/empty) `bbox`
+    metadata field, which isn't populated on every label (e.g. the legacy
+    same-shape-as-raw labels on this corpus carry no bbox at all). Shared by
+    any check comparing two groups' real physical regions (moved out of
+    divergent_voxel_counts.py Oct 22 2026 once label_orphaned_ingest.py
+    needed the same comparison, to avoid one check importing another).
+    """
+    attrs = read_group_attrs(group_dir)
+    ms = get_multiscale(attrs)
+    if ms is None:
+        return None
+    axes = ms.get("axes", [])
+    datasets = ms.get("datasets", [])
+    if not axes or not datasets:
+        return None
+    cts = datasets[0].get("coordinateTransformations", [])
+    scale = next((ct["scale"] for ct in cts if ct["type"] == "scale"), None)
+    translation = next((ct["translation"] for ct in cts if ct["type"] == "translation"), None)
+    if scale is None:
+        return None
+    if translation is None:
+        translation = [0.0] * len(scale)
+    array_meta = read_array_meta(group_dir / datasets[0].get("path", "s0"))
+    if array_meta is None or array_meta["shape"] is None:
+        return None
+    shape = array_meta["shape"]
+    if len(shape) != len(axes):
+        return None
+    ranges = {}
+    for ax, sh, sc, tr in zip(axes, shape, scale, translation):
+        if ax.get("type") != "space":
+            continue
+        start = tr
+        end = tr + sh * sc
+        ranges[ax["name"]] = (start, end)
+    return ranges
+
+
+def ranges_match(a: dict, b: dict, rel_tol: float = 0.05) -> bool:
+    """True if two `spatial_range()` results describe the same real region,
+    within a generous relative tolerance (absorbs legitimate voxel-rounding/
+    pixel-center differences between pipelines without accepting a
+    genuinely different region) -- not exact-equality.
+    """
+    common = set(a) & set(b)
+    if not common or common != set(a) or common != set(b):
+        return False  # different axis sets entirely -- not the same kind of region
+    for axis in common:
+        (a_start, a_end), (b_start, b_end) = a[axis], b[axis]
+        extent = max(a_end - a_start, b_end - b_start, 1.0)
+        tol = max(extent * rel_tol, 1.0)
+        if abs(a_start - b_start) > tol or abs(a_end - b_end) > tol:
+            return False
+    return True
