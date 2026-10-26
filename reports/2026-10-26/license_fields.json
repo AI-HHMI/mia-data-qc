@@ -7,7 +7,7 @@
       "dataset": "em-drosophila-FANC-vnc",
       "path": "em-drosophila-FANC-vnc/crop-001.zarr",
       "field": "license_unresolved",
-      "actual": "UNKNOWN -- searched the Lee Lab's own project page (lee.hms.harvard.edu), the Phelps et al. 2021 Cell and Azevedo et al. 2024 Nature papers, virtualflybrain.org, GitHub (FANC_auto_recon is GPL-3.0, but that covers the analysis code, not the data), and BossDB -- no license is stated anywhere for the EM data itself, only 'open access'/'freely available' language.",
+      "actual": "UNKNOWN -- searched the Lee Lab's own project page (lee.hms.harvard.edu), the Phelps et al. 2021 Cell and Azevedo et al. 2024 Nature papers, virtualflybrain.org (including its FANC-CATMAID viewer page and its general data-licensing policy page, which says a license is shown on a dataset's own Term Info page when one exists), Harvard's own connectomics FANC page (connectomics.hsites.harvard.edu), GitHub (FANC_auto_recon is GPL-3.0, but that covers the analysis code, not the data), and BossDB -- no license is stated anywhere for the EM data itself, only 'open access'/'freely available' language.",
       "expected": "a real license value -- this dataset's source(s) were checked and no license was found",
       "severity": "warning",
       "suggested_fix": "revisit periodically in case the source publishes a license later; not an open task right now"
@@ -17,7 +17,7 @@
       "dataset": "em-drosophila-FANC-vnc",
       "path": "em-drosophila-FANC-vnc/crop-001.zarr/raw",
       "field": "license_unresolved",
-      "actual": "UNKNOWN -- searched the Lee Lab's own project page (lee.hms.harvard.edu), the Phelps et al. 2021 Cell and Azevedo et al. 2024 Nature papers, virtualflybrain.org, GitHub (FANC_auto_recon is GPL-3.0, but that covers the analysis code, not the data), and BossDB -- no license is stated anywhere for the EM data itself, only 'open access'/'freely available' language.",
+      "actual": "UNKNOWN -- searched the Lee Lab's own project page (lee.hms.harvard.edu), the Phelps et al. 2021 Cell and Azevedo et al. 2024 Nature papers, virtualflybrain.org (including its FANC-CATMAID viewer page and its general data-licensing policy page, which says a license is shown on a dataset's own Term Info page when one exists), Harvard's own connectomics FANC page (connectomics.hsites.harvard.edu), GitHub (FANC_auto_recon is GPL-3.0, but that covers the analysis code, not the data), and BossDB -- no license is stated anywhere for the EM data itself, only 'open access'/'freely available' language.",
       "expected": "a real license value -- this dataset's source(s) were checked and no license was found",
       "severity": "warning",
       "suggested_fix": "revisit periodically in case the source publishes a license later; not an open task right now"
@@ -27,7 +27,7 @@
       "dataset": "em-drosophila-FANC-vnc",
       "path": "em-drosophila-FANC-vnc/crop-002.zarr",
       "field": "license_unresolved",
-      "actual": "UNKNOWN -- searched the Lee Lab's own project page (lee.hms.harvard.edu), the Phelps et al. 2021 Cell and Azevedo et al. 2024 Nature papers, virtualflybrain.org, GitHub (FANC_auto_recon is GPL-3.0, but that covers the analysis code, not the data), and BossDB -- no license is stated anywhere for the EM data itself, only 'open access'/'freely available' language.",
+      "actual": "UNKNOWN -- searched the Lee Lab's own project page (lee.hms.harvard.edu), the Phelps et al. 2021 Cell and Azevedo et al. 2024 Nature papers, virtualflybrain.org (including its FANC-CATMAID viewer page and its general data-licensing policy page, which says a license is shown on a dataset's own Term Info page when one exists), Harvard's own connectomics FANC page (connectomics.hsites.harvard.edu), GitHub (FANC_auto_recon is GPL-3.0, but that covers the analysis code, not the data), and BossDB -- no license is stated anywhere for the EM data itself, only 'open access'/'freely available' language.",
       "expected": "a real license value -- this dataset's source(s) were checked and no license was found",
       "severity": "warning",
       "suggested_fix": "revisit periodically in case the source publishes a license later; not an open task right now"
@@ -37,7 +37,7 @@
       "dataset": "em-drosophila-FANC-vnc",
       "path": "em-drosophila-FANC-vnc/crop-002.zarr/raw",
       "field": "license_unresolved",
-      "actual": "UNKNOWN -- searched the Lee Lab's own project page (lee.hms.harvard.edu), the Phelps et al. 2021 Cell and Azevedo et al. 2024 Nature papers, virtualflybrain.org, GitHub (FANC_auto_recon is GPL-3.0, but that covers the analysis code, not the data), and BossDB -- no license is stated anywhere for the EM data itself, only 'open access'/'freely available' language.",
+      "actual": "UNKNOWN -- searched the Lee Lab's own project page (lee.hms.harvard.edu), the Phelps et al. 2021 Cell and Azevedo et al. 2024 Nature papers, virtualflybrain.org (including its FANC-CATMAID viewer page and its general data-licensing policy page, which says a license is shown on a dataset's own Term Info page when one exists), Harvard's own connectomics FANC page (connectomics.hsites.harvard.edu), GitHub (FANC_auto_recon is GPL-3.0, but that covers the analysis code, not the data), and BossDB -- no license is stated anywhere for the EM data itself, only 'open access'/'freely available' language.",
       "expected": "a real license value -- this dataset's source(s) were checked and no license was found",
       "severity": "warning",
       "suggested_fix": "revisit periodically in case the source publishes a license later; not an open task right now"
