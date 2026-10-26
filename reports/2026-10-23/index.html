@@ -69,9 +69,51 @@ footer.site { color:var(--muted); font-size:12px; padding:24px 0 40px; text-alig
 <a class="nav-back" href="../../qc_dashboard.html">&larr; all dates</a>
 <h1>QC reports — 2026-10-23</h1>
 <p class="sub">Click a check to see its findings on its own page.</p>
+<h3 class="cat-heading">Filesystem &amp; permissions</h3>
+<div class="tabs">
+<a class="tile" href="ownership_permissions.html"><span class="name">ownership_permissions</span><span class="desc">Every file/dir under data/ is group miaai, group-read, group-execute, no group-write.</span><span class="badge chip ">0 finding(s)</span></a>
+<a class="tile" href="stray_files.html"><span class="name">stray_files</span><span class="desc">Flags leftover junk (.DS_Store files, old job logs) that shouldn&#x27;t be sitting inside the data folders.</span><span class="badge chip ">0 finding(s)</span></a>
+<a class="tile" href="label_disk_usage_sanity.html"><span class="name">label_disk_usage_sanity</span><span class="desc">Flags a label&#x27;s folder if its disk footprint looks abnormal compared to every other folder on the corpus -- a sign something&#x27;s corrupted or unusual.</span><span class="badge chip ">0 finding(s)</span></a>
+<a class="tile" href="dataset_disk_usage_sanity.html"><span class="name">dataset_disk_usage_sanity</span><span class="desc">Flags a dataset&#x27;s folders if their disk footprint looks abnormal compared to every other folder on the corpus -- a sign something&#x27;s corrupted or unusual.</span><span class="badge chip ">0 finding(s)</span></a>
+</div>
+<h3 class="cat-heading">Naming conventions</h3>
+<div class="tabs">
+<a class="tile" href="dataset_naming.html"><span class="name">dataset_naming</span><span class="desc">Every dataset&#x27;s folder name follows the standard pattern (modality-organism-dataset) and uses approved terms.</span><span class="badge chip ">0 finding(s)</span></a>
+<a class="tile" href="label_naming.html"><span class="name">label_naming</span><span class="desc">{provenance}-{label_class}-{specific_info} for every label directory.</span><span class="badge chip ">0 finding(s)</span></a>
+<a class="tile" href="crop_naming.html"><span class="name">crop_naming</span><span class="desc">Every crop&#x27;s folder name follows the standard crop-NNN pattern.</span><span class="badge chip ">0 finding(s)</span></a>
+<a class="tile" href="multitc_naming.html"><span class="name">multitc_naming</span><span class="desc">A crop with more than one timepoint/channel in its raw array encodes that as {N}t_{M}c in its descriptor.</span><span class="badge chip ">0 finding(s)</span></a>
+</div>
+<h3 class="cat-heading">Zarr structure validity</h3>
+<div class="tabs">
+<a class="tile" href="pyramid_consistency.html"><span class="name">pyramid_consistency</span><span class="desc">Each zarr.json&#x27;s multiscales.datasets list matches pyramid levels that exist on disk.</span><span class="badge chip ">0 finding(s)</span></a>
+<a class="tile" href="metadata_consistency.html"><span class="name">metadata_consistency</span><span class="desc">A label&#x27;s directory-name-derived provenance/label_class agrees with its stored metadata.</span><span class="badge chip ">0 finding(s)</span></a>
+<a class="tile" href="chunk_shard_sanity.html"><span class="name">chunk_shard_sanity</span><span class="desc">Every sharded array&#x27;s shard shape is an exact multiple of its own chunk shape.</span><span class="badge chip ">0 finding(s)</span></a>
+<a class="tile" href="parent_raw_validity.html"><span class="name">parent_raw_validity</span><span class="desc">A label&#x27;s parent_raw field (when present) points to a directory that actually exists.</span><span class="badge chip ">0 finding(s)</span></a>
+<a class="tile" href="channel_index_consistency.html"><span class="name">channel_index_consistency</span><span class="desc">A label pulled from one channel of a multi-channel image correctly records which channel it came from.</span><span class="badge chip ">0 finding(s)</span></a>
+<a class="tile" href="multitimepoint_label_sparsity.html"><span class="name">multitimepoint_label_sparsity</span><span class="desc">A single-timepoint label is sized to match the full time series but only has actual content where it&#x27;s supposed to -- at its one timepoint.</span><span class="badge chip ">0 finding(s)</span></a>
+<a class="tile" href="empty_label_data.html"><span class="name">empty_label_data</span><span class="desc">A label with complete metadata actually has chunk data written at its finest pyramid level.</span><span class="badge chip ">0 finding(s)</span></a>
+<a class="tile" href="bbox_sanity.html"><span class="name">bbox_sanity</span><span class="desc">A label&#x27;s bbox has a valid coordinate_order/unit and a structurally sane offset/size.</span><span class="badge chip ">0 finding(s)</span></a>
+</div>
 <h3 class="cat-heading">Metadata content &amp; vocabulary</h3>
 <div class="tabs">
+<a class="tile" href="metadata_vocab.html"><span class="name">metadata_vocab</span><span class="desc">A label&#x27;s segmentation type, proofreading status, and coverage use only approved, recognized values.</span><span class="badge chip ">0 finding(s)</span></a>
+<a class="tile" href="metadata_completeness.html"><span class="name">metadata_completeness</span><span class="desc">Every label&#x27;s zarr.json has all 12 required metadata fields present.</span><span class="badge chip ">0 finding(s)</span></a>
+<a class="tile" href="voxel_size.html"><span class="name">voxel_size</span><span class="desc">Raw&#x27;s voxel size isn&#x27;t a placeholder; each label&#x27;s voxel size aligns with raw&#x27;s pyramid.</span><span class="badge chip ">0 finding(s)</span></a>
 <a class="tile" href="license_fields.html"><span class="name">license_fields</span><span class="desc">Every crop has a license field present on both its root zarr.json and raw/zarr.json.</span><span class="badge chip error">68 finding(s)</span></a>
+<a class="tile" href="freshness.html"><span class="name">freshness</span><span class="desc">A label&#x27;s creation date is valid, and when multiple versions of the same label exist, the one marked &quot;current&quot; really is the newest.</span><span class="badge chip ">0 finding(s)</span></a>
+</div>
+<h3 class="cat-heading">Board vs. disk</h3>
+<div class="tabs">
+<a class="tile" href="label_field_drift.html"><span class="name">label_field_drift</span><span class="desc">A label&#x27;s tracking issue on GitHub shows the same info as what&#x27;s actually stored with the label on disk.</span><span class="badge chip ">0 finding(s)</span></a>
+<a class="tile" href="dataset_field_drift.html"><span class="name">dataset_field_drift</span><span class="desc">A dataset&#x27;s tracking issue on GitHub shows the same axis order and data type as what&#x27;s actually on disk.</span><span class="badge chip ">0 finding(s)</span></a>
+<a class="tile" href="label_orphaned_ingest.html"><span class="name">label_orphaned_ingest</span><span class="desc">Every real label has a GitHub issue tracking it, and every GitHub issue marked done actually has real data behind it.</span><span class="badge chip error">19 finding(s)</span></a>
+<a class="tile" href="dataset_orphaned_ingest.html"><span class="name">dataset_orphaned_ingest</span><span class="desc">Every real dataset has at least one GitHub issue tracking it.</span><span class="badge chip ">0 finding(s)</span></a>
+<a class="tile" href="dataset_crop_coverage.html"><span class="name">dataset_crop_coverage</span><span class="desc">Every crop in a multi-crop dataset is tracked by a GitHub issue -- either its own, or one covering the whole dataset.</span><span class="badge chip ">0 finding(s)</span></a>
+</div>
+<h3 class="cat-heading">Pixel-data sanity</h3>
+<div class="tabs">
+<a class="tile" href="divergent_voxel_counts.html"><span class="name">divergent_voxel_counts</span><span class="desc">Two different versions of the same labeled region (e.g. a manual annotation vs. an automated one) have wildly different amounts of annotated data -- worth a second look.</span><span class="badge chip ">0 finding(s)</span></a>
+<a class="tile" href="annotated_voxels_sanity.html"><span class="name">annotated_voxels_sanity</span><span class="desc">A label&#x27;s annotated data can&#x27;t be bigger than the image it&#x27;s supposed to fit inside -- flags it if the numbers don&#x27;t add up.</span><span class="badge chip ">0 finding(s)</span></a>
 </div>
 </main>
 <footer class="site">mia-data-qc &middot; automated QC for the LMD corpus</footer>
