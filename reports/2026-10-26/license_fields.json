@@ -284,46 +284,6 @@
     },
     {
       "check": "license_fields",
-      "dataset": "em-mosquito-bao2025-antennallobe",
-      "path": "em-mosquito-bao2025-antennallobe/crop-001_x114369_y44359_z3105.zarr",
-      "field": "license_unresolved",
-      "actual": "UNKNOWN -- BossDB's own metadata API returns real collection metadata for 'bao_alford2025' (name, public flag, experiments) but no license field; BossDB's project/about pages are JS-rendered and returned no usable license text via automated fetch.",
-      "expected": "a real license value -- this dataset's source(s) were checked and no license was found",
-      "severity": "warning",
-      "suggested_fix": "revisit periodically in case the source publishes a license later; not an open task right now"
-    },
-    {
-      "check": "license_fields",
-      "dataset": "em-mosquito-bao2025-antennallobe",
-      "path": "em-mosquito-bao2025-antennallobe/crop-001_x114369_y44359_z3105.zarr/raw",
-      "field": "license_unresolved",
-      "actual": "UNKNOWN -- BossDB's own metadata API returns real collection metadata for 'bao_alford2025' (name, public flag, experiments) but no license field; BossDB's project/about pages are JS-rendered and returned no usable license text via automated fetch.",
-      "expected": "a real license value -- this dataset's source(s) were checked and no license was found",
-      "severity": "warning",
-      "suggested_fix": "revisit periodically in case the source publishes a license later; not an open task right now"
-    },
-    {
-      "check": "license_fields",
-      "dataset": "em-mosquito-bao2025-antennallobe",
-      "path": "em-mosquito-bao2025-antennallobe/crop-002_x38748_y49136_z3426.zarr",
-      "field": "license_unresolved",
-      "actual": "UNKNOWN -- BossDB's own metadata API returns real collection metadata for 'bao_alford2025' (name, public flag, experiments) but no license field; BossDB's project/about pages are JS-rendered and returned no usable license text via automated fetch.",
-      "expected": "a real license value -- this dataset's source(s) were checked and no license was found",
-      "severity": "warning",
-      "suggested_fix": "revisit periodically in case the source publishes a license later; not an open task right now"
-    },
-    {
-      "check": "license_fields",
-      "dataset": "em-mosquito-bao2025-antennallobe",
-      "path": "em-mosquito-bao2025-antennallobe/crop-002_x38748_y49136_z3426.zarr/raw",
-      "field": "license_unresolved",
-      "actual": "UNKNOWN -- BossDB's own metadata API returns real collection metadata for 'bao_alford2025' (name, public flag, experiments) but no license field; BossDB's project/about pages are JS-rendered and returned no usable license text via automated fetch.",
-      "expected": "a real license value -- this dataset's source(s) were checked and no license was found",
-      "severity": "warning",
-      "suggested_fix": "revisit periodically in case the source publishes a license later; not an open task right now"
-    },
-    {
-      "check": "license_fields",
       "dataset": "em-mouse-MitoVerse-muller21-pancreas",
       "path": "em-mouse-MitoVerse-muller21-pancreas/crop-001_highglucose_cell1.zarr",
       "field": "license_unresolved",
