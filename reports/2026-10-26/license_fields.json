@@ -224,66 +224,6 @@
     },
     {
       "check": "license_fields",
-      "dataset": "em-hydra-zhang2025",
-      "path": "em-hydra-zhang2025/crop-001_x106212_y65861_z226.zarr",
-      "field": "license_unresolved",
-      "actual": "UNKNOWN -- the Current Biology publisher page (doi:10.1016/j.cub.2025.10.001) returned 403 Forbidden on direct access; an NSF PAR search did not resolve to this paper's actual record. No license confirmed from any source reached so far.",
-      "expected": "a real license value -- this dataset's source(s) were checked and no license was found",
-      "severity": "warning",
-      "suggested_fix": "revisit periodically in case the source publishes a license later; not an open task right now"
-    },
-    {
-      "check": "license_fields",
-      "dataset": "em-hydra-zhang2025",
-      "path": "em-hydra-zhang2025/crop-001_x106212_y65861_z226.zarr/raw",
-      "field": "license_unresolved",
-      "actual": "UNKNOWN -- the Current Biology publisher page (doi:10.1016/j.cub.2025.10.001) returned 403 Forbidden on direct access; an NSF PAR search did not resolve to this paper's actual record. No license confirmed from any source reached so far.",
-      "expected": "a real license value -- this dataset's source(s) were checked and no license was found",
-      "severity": "warning",
-      "suggested_fix": "revisit periodically in case the source publishes a license later; not an open task right now"
-    },
-    {
-      "check": "license_fields",
-      "dataset": "em-hydra-zhang2025",
-      "path": "em-hydra-zhang2025/crop-002_x33815_y86408_z95.zarr",
-      "field": "license_unresolved",
-      "actual": "UNKNOWN -- the Current Biology publisher page (doi:10.1016/j.cub.2025.10.001) returned 403 Forbidden on direct access; an NSF PAR search did not resolve to this paper's actual record. No license confirmed from any source reached so far.",
-      "expected": "a real license value -- this dataset's source(s) were checked and no license was found",
-      "severity": "warning",
-      "suggested_fix": "revisit periodically in case the source publishes a license later; not an open task right now"
-    },
-    {
-      "check": "license_fields",
-      "dataset": "em-hydra-zhang2025",
-      "path": "em-hydra-zhang2025/crop-002_x33815_y86408_z95.zarr/raw",
-      "field": "license_unresolved",
-      "actual": "UNKNOWN -- the Current Biology publisher page (doi:10.1016/j.cub.2025.10.001) returned 403 Forbidden on direct access; an NSF PAR search did not resolve to this paper's actual record. No license confirmed from any source reached so far.",
-      "expected": "a real license value -- this dataset's source(s) were checked and no license was found",
-      "severity": "warning",
-      "suggested_fix": "revisit periodically in case the source publishes a license later; not an open task right now"
-    },
-    {
-      "check": "license_fields",
-      "dataset": "em-hydra-zhang2025",
-      "path": "em-hydra-zhang2025/crop-003_x114198_y54198_z0.zarr",
-      "field": "license_unresolved",
-      "actual": "UNKNOWN -- the Current Biology publisher page (doi:10.1016/j.cub.2025.10.001) returned 403 Forbidden on direct access; an NSF PAR search did not resolve to this paper's actual record. No license confirmed from any source reached so far.",
-      "expected": "a real license value -- this dataset's source(s) were checked and no license was found",
-      "severity": "warning",
-      "suggested_fix": "revisit periodically in case the source publishes a license later; not an open task right now"
-    },
-    {
-      "check": "license_fields",
-      "dataset": "em-hydra-zhang2025",
-      "path": "em-hydra-zhang2025/crop-003_x114198_y54198_z0.zarr/raw",
-      "field": "license_unresolved",
-      "actual": "UNKNOWN -- the Current Biology publisher page (doi:10.1016/j.cub.2025.10.001) returned 403 Forbidden on direct access; an NSF PAR search did not resolve to this paper's actual record. No license confirmed from any source reached so far.",
-      "expected": "a real license value -- this dataset's source(s) were checked and no license was found",
-      "severity": "warning",
-      "suggested_fix": "revisit periodically in case the source publishes a license later; not an open task right now"
-    },
-    {
-      "check": "license_fields",
       "dataset": "em-mouse-MitoVerse-muller21-pancreas",
       "path": "em-mouse-MitoVerse-muller21-pancreas/crop-001_highglucose_cell1.zarr",
       "field": "license_unresolved",
