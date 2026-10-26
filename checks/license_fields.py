@@ -11,16 +11,24 @@ Real corpus survey (Oct 7 2026, zarr v3 only): root has the field present on
 686 (counts don't need to add to the same total -- a crop can be missing one
 or both files entirely). Retrofitting zarr v2 support (Oct 8 2026) added 117
 more crops, all missing `license` on both root and raw -- 844/802 missing
-totals. Some stored values are
-themselves warnings about license status (e.g. explicit "DO NOT REDISTRIBUTE",
-"RESTRICTED -- HOLD", "UNKNOWN -- NO LICENCE IS STATED ANYWHERE" notes) --
-this check only flags the field missing outright, not those cases, since
-distinguishing "stated as unknown" from "a real license string" is a human
-judgment call, not a structural one.
+totals.
 
 Checks zarr v2 crops (`.zattrs`) as well as zarr v3 (`zarr.json`) -- retrofitted
 Oct 8 2026, see metadata_completeness.py's docstring for why (117 whole crops
 on this corpus are zarr v2, previously entirely unscanned by this check).
+
+Oct 23 2026: a `license` value can now itself say the search was done and came
+up empty -- any value starting with `UNKNOWN -- ` (a real research outcome,
+written only after actually checking the primary source(s), never a guess)
+is reported separately as `license_unresolved` (warning), distinct from the
+field being entirely absent (`license`, error, still means nobody has looked
+yet). This matters because "missing" and "looked and found nothing" are not
+the same state -- a missing field is still open work, an `UNKNOWN -- ` value
+is a dead end already investigated and shouldn't keep nagging the same way.
+Any other non-empty value (a real license, or a different free-text note like
+"DO NOT REDISTRIBUTE"/"RESTRICTED -- HOLD") still resolves the check
+entirely, same as before -- distinguishing those from a real license string
+stays a human judgment call, not something this check tries to parse.
 """
 import argparse
 import datetime
@@ -33,24 +41,41 @@ from common.vocab import NON_DATASET_DIRS
 from common.zarr_meta import group_exists, read_group_attrs
 
 CHECK_NAME = "license_fields"
+_UNKNOWN_PREFIX = "UNKNOWN -- "
 
 
 def _check_group(group_dir: Path, root: Path, dataset: str, label: str) -> list[dict]:
     attrs = read_group_attrs(group_dir)
-    if attrs is None or "license" in attrs:
-        return []
+    if attrs is None or "license" not in attrs:
+        if attrs is None:
+            return []
+        rel = str(group_dir.relative_to(root))
+        return [{
+            "check": CHECK_NAME,
+            "dataset": dataset,
+            "path": rel,
+            "field": "license",
+            "actual": "missing",
+            "expected": f"present on {label}'s own metadata (value may be null, but the key must exist)",
+            "severity": "error",
+            "suggested_fix": f"add the 'license' field to this crop's {label} metadata attributes",
+        }]
 
-    rel = str(group_dir.relative_to(root))
-    return [{
-        "check": CHECK_NAME,
-        "dataset": dataset,
-        "path": rel,
-        "field": "license",
-        "actual": "missing",
-        "expected": f"present on {label}'s own metadata (value may be null, but the key must exist)",
-        "severity": "error",
-        "suggested_fix": f"add the 'license' field to this crop's {label} metadata attributes",
-    }]
+    value = attrs["license"]
+    if isinstance(value, str) and value.startswith(_UNKNOWN_PREFIX):
+        rel = str(group_dir.relative_to(root))
+        return [{
+            "check": CHECK_NAME,
+            "dataset": dataset,
+            "path": rel,
+            "field": "license_unresolved",
+            "actual": value,
+            "expected": "a real license value -- this dataset's source(s) were checked and no license was found",
+            "severity": "warning",
+            "suggested_fix": "revisit periodically in case the source publishes a license later; not an open task right now",
+        }]
+
+    return []
 
 
 def check_crop(crop_dir: Path, root: Path, dataset: str) -> list[dict]:
