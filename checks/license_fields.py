@@ -29,6 +29,21 @@ Any other non-empty value (a real license, or a different free-text note like
 "DO NOT REDISTRIBUTE"/"RESTRICTED -- HOLD") still resolves the check
 entirely, same as before -- distinguishing those from a real license string
 stays a human judgment call, not something this check tries to parse.
+
+Oct 27 2026: a real `license` value went out with a person's name in it
+(internal Slack-discussion detail, "per HHMI/Janelia's data licensing
+guidance (Mary Lay, HHMI Data Management Specialist, Slack, 2026-10-22)..."),
+caught only when Konrad Rokicki happened to see it via a Fileglancer bug --
+this field is real metadata that can become externally visible at any time,
+and should never carry a person's name, a Slack/email quote, or any other
+internal-discussion trail (the `UNKNOWN -- ` convention above is the one
+exception that's allowed to be long, and even that must stay confined to
+checked sources/outcomes, never names of the people involved in checking).
+Fixed by hand across the corpus (see worklog); **not automated as a check**
+-- a general "does this field contain a person's name" rule doesn't hold
+corpus-wide (annotator/contributor names are legitimate and expected in
+plenty of other fields, e.g. label `notes`/`Label_Description`), so this
+stays a manual audit for now rather than a new automated finding type.
 """
 import argparse
 import datetime
