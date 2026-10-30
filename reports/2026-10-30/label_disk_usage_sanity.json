@@ -1,0 +1,5 @@
+{
+  "check": "label_disk_usage_sanity",
+  "date": "2026-10-30",
+  "findings": []
+}
