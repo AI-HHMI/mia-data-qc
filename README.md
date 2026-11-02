@@ -54,6 +54,7 @@ the dashboard uses too).
 | `empty_label_data.py` | A label with complete metadata actually has chunk data written at its finest pyramid level |
 | `bbox_sanity.py` | A label's bbox has a valid coordinate_order/unit and a structurally sane offset/size |
 | `label_grid_offset.py` | A label on a different voxel grid than its raw image carries the half-voxel offset needed to stay aligned, not just the pyramid shift |
+| `label_manifest_consistency.py` | A crop's `labels/zarr.json` manifest lists exactly the label directories that actually exist, with no stale or missing entries |
 
 ### Metadata content & vocabulary
 

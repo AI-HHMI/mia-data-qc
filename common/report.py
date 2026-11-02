@@ -95,6 +95,7 @@ CHECK_DESCRIPTIONS = {
     "dataset_disk_usage_sanity": "Flags a dataset's folders if their disk footprint looks abnormal compared to every other folder on the corpus -- a sign something's corrupted or unusual.",
     "dataset_crop_coverage": "Every crop in a multi-crop dataset is tracked by a GitHub issue -- either its own, or one covering the whole dataset.",
     "label_grid_offset": "A label on a different voxel grid than its raw image carries the half-voxel offset needed to stay aligned, not just the pyramid shift.",
+    "label_manifest_consistency": "A crop's labels/zarr.json manifest lists exactly the label directories that actually exist, with no stale or missing entries.",
 }
 
 # Groups checks by what they actually validate, for the dashboard and README --
@@ -112,7 +113,7 @@ CHECK_CATEGORIES = {
     "Zarr structure validity": [
         "pyramid_consistency", "metadata_consistency", "chunk_shard_sanity", "parent_raw_validity",
         "channel_index_consistency", "multitimepoint_label_sparsity", "empty_label_data", "bbox_sanity",
-        "label_grid_offset",
+        "label_grid_offset", "label_manifest_consistency",
     ],
     "Metadata content & vocabulary": [
         "metadata_vocab", "metadata_completeness", "voxel_size", "license_fields", "freshness",

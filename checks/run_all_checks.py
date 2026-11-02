@@ -49,6 +49,7 @@ SHALLOW_CHECKS = [
     "dataset_orphaned_ingest.py",
     "dataset_crop_coverage.py",
     "label_grid_offset.py",
+    "label_manifest_consistency.py",
 ]
 
 # Need real pixel data (zarr/numpy), not just metadata -- run via `pixi run
