@@ -53,6 +53,7 @@ the dashboard uses too).
 | `multitimepoint_label_sparsity.py` | A single-timepoint label is sized to match the full time series but only has actual content where it's supposed to — at its one timepoint |
 | `empty_label_data.py` | A label with complete metadata actually has chunk data written at its finest pyramid level |
 | `bbox_sanity.py` | A label's bbox has a valid coordinate_order/unit and a structurally sane offset/size |
+| `label_grid_offset.py` | A label on a different voxel grid than its raw image carries the half-voxel offset needed to stay aligned, not just the pyramid shift |
 
 ### Metadata content & vocabulary
 
