@@ -78,6 +78,20 @@ real findings remain, both the same underlying pair on
 JJ-paintera` vs two `proofread-cell-agglom-*` siblings) -- a genuine
 ~944x disagreement (4.8M vs 4.57B non-zero voxels) worth a human looking
 at, not explained away by any naming/format convention found so far.
+
+Timepoint-comparability precondition added Nov 9 2026, same shape as the
+spatial-extent gate but along the time axis, which `spatial_range` never
+looks at (it only considers `type: "space"` axes): a Betzig multi-timepoint
+crop's full-timeseries `auto_pred` prediction (`bbox.timepoint_index: null`,
+covers all 96 timepoints, ~5.85B voxels total) was flagged against a
+same-region `proofread` snapshot of just one timepoint
+(`bbox.timepoint_index: 5`, ~92M voxels) -- spatially identical (same crop,
+same shape), but comparing "everything" to "one specific timepoint of that
+same everything" was never a fair test, same reasoning as the spatial case.
+Two labels are only timepoint-comparable when their `bbox.timepoint_index`
+values are equal (`None == None` also matches, correctly treating a
+single-timepoint crop -- where the field is universally absent or null --
+as always comparable, since there's no timepoint axis to diverge on there).
 """
 import argparse
 import datetime
@@ -102,6 +116,12 @@ RATIO_THRESHOLD = 10.0
 # common/zarr_meta.py Oct 22 2026 once label_orphaned_ingest.py needed the
 # same region comparison.)
 RANGE_REL_TOL = 0.05
+
+
+def _timepoint_index(label_dir: Path):
+    attrs = read_group_attrs(label_dir) or {}
+    bbox = attrs.get("bbox") or {}
+    return bbox.get("timepoint_index")
 
 
 def parse_label_class(label_name: str):
@@ -139,12 +159,14 @@ def iter_crop_label_groups(root: Path):
 def check_group(dataset: str, crop_dir: Path, label_class: str, label_dirs: list, root: Path) -> list[dict]:
     provenance = {d: (read_group_attrs(d) or {}).get("provenance") for d in label_dirs}
     ranges = {d: spatial_range(d) for d in label_dirs}
+    timepoints = {d: _timepoint_index(d) for d in label_dirs}
 
-    # Only a pair with different provenance AND the same declared physical
-    # region is even a candidate -- determine this from cheap metadata alone
-    # before ever decoding pixel data, same spirit as the same-provenance
-    # skip above (and the same real efficiency win: a group with no
-    # comparable pair at all never touches exact_nonzero_count).
+    # Only a pair with different provenance, the same declared physical
+    # region, AND the same timepoint scope is even a candidate -- determine
+    # this from cheap metadata alone before ever decoding pixel data, same
+    # spirit as the same-provenance skip above (and the same real efficiency
+    # win: a group with no comparable pair at all never touches
+    # exact_nonzero_count).
     comparable_pairs = []
     dirs = sorted(label_dirs)
     for i in range(len(dirs)):
@@ -153,6 +175,8 @@ def check_group(dataset: str, crop_dir: Path, label_class: str, label_dirs: list
             if provenance[a] == provenance[b]:
                 continue
             if ranges[a] is None or ranges[b] is None or not ranges_match(ranges[a], ranges[b], RANGE_REL_TOL):
+                continue
+            if timepoints[a] != timepoints[b]:
                 continue
             comparable_pairs.append((a, b))
     if not comparable_pairs:
