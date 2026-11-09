@@ -69,13 +69,8 @@ footer.site { color:var(--muted); font-size:12px; padding:24px 0 40px; text-alig
 <a class="nav-back" href="index.html">&larr; 2026-11-09</a>
 <h1>label_grid_offset</h1>
 <p class="sub">A label on a different voxel grid than its raw image carries the half-voxel offset needed to stay aligned, not just the pyramid shift.</p>
-<div class="summary"><div class="stat error"><div class="n">1</div><div class="l">error</div></div></div>
-<div class="card scroll">
-<table class="sortable"><thead><tr><th>Dataset</th><th>Path</th><th>Field</th><th>Actual</th>
-<th>Expected</th><th>Severity</th><th>Suggested fix</th></tr></thead>
-<tbody>
-<tr><td>em-celegans-funceworm-jrc-20250414</td><td><a href="https://fileglancer.int.janelia.org/browse/groups_miaai_miaai/lmd-v0.0.1/data/em-celegans-funceworm-jrc-20250414/crop-001.zarr/labels/manual_gt-all_organelles-cellmap_crop1086_all" target="_blank" rel="noopener">em-celegans-funceworm-jrc-20250414/crop-001.zarr/labels/manual_gt-all_organelles-cellmap_crop1086_all</a></td><td>grid_offset_error</td><td>{&#x27;z&#x27;: {&#x27;raw_scale&#x27;: 6.0, &#x27;raw_translation&#x27;: 0.0, &#x27;label_scale&#x27;: 6.0, &#x27;label_translation&#x27;: 34203.0, &#x27;computed_voxel_offset&#x27;: 5700.5}, &#x27;y&#x27;: {&#x27;raw_scale&#x27;: 6.0, &#x27;raw_translation&#x27;: 0.0, &#x27;label_scale&#x27;: 6.0, &#x27;label_translation&#x27;: 15003.0, &#x27;computed_voxel_offset&#x27;: 2500.5}, &#x27;x&#x27;: {&#x27;raw_scale&#x27;: 6.0, &#x27;raw_translation&#x27;: 0.0, &#x27;label_scale&#x27;: 6.0, &#x27;label_translation&#x27;: 15603.0, &#x27;computed_voxel_offset&#x27;: 2600.5}}</td><td>(label_translation - raw_translation - (label_scale - raw_scale)/2) / raw_scale must be a whole number on every axis</td><td><span class="chip error">error</span></td><td>run scripts/lmvd/fix_label_grid_offset.py (dry run first, verify by hand before --apply) -- or, if this is a genuine independent-grid label, confirm and set independent_resolution: true instead of fixing</td></tr>
-</tbody></table></div>
+<div class="summary"><div class="stat"><div class="n">0</div><div class="l">findings</div></div></div>
+<div class="card empty">No findings.</div>
 </main>
 <footer class="site">mia-data-qc &middot; automated QC for the LMD corpus</footer>
 <script>
