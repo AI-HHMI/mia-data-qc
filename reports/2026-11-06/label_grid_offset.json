@@ -1,0 +1,202 @@
+{
+  "check": "label_grid_offset",
+  "date": "2026-11-06",
+  "findings": [
+    {
+      "check": "label_grid_offset",
+      "dataset": "em-celegans-CellMap-jrc-dauer-larva",
+      "path": "em-celegans-CellMap-jrc-dauer-larva/crop-001.zarr/labels/manual_gt-nucleus-seg_crop001",
+      "field": "grid_offset_error",
+      "actual": {
+        "y": {
+          "raw_scale": 4.0,
+          "raw_translation": 0.0,
+          "label_scale": 40.0,
+          "label_translation": 40.0,
+          "computed_voxel_offset": 5.5
+        },
+        "x": {
+          "raw_scale": 4.0,
+          "raw_translation": 0.0,
+          "label_scale": 40.0,
+          "label_translation": 28.0,
+          "computed_voxel_offset": 2.5
+        }
+      },
+      "expected": "(label_translation - raw_translation - (label_scale - raw_scale)/2) / raw_scale must be a whole number on every axis",
+      "severity": "error",
+      "suggested_fix": "run scripts/lmvd/fix_label_grid_offset.py (dry run first, verify by hand before --apply) -- or, if this is a genuine independent-grid label, confirm and set independent_resolution: true instead of fixing"
+    },
+    {
+      "check": "label_grid_offset",
+      "dataset": "em-celegans-CellMap-jrc-dauer-larva",
+      "path": "em-celegans-CellMap-jrc-dauer-larva/crop-002.zarr/labels/manual_gt-nucleus-seg_crop002",
+      "field": "grid_offset_error",
+      "actual": {
+        "y": {
+          "raw_scale": 4.0,
+          "raw_translation": 0.0,
+          "label_scale": 40.0,
+          "label_translation": 52.0,
+          "computed_voxel_offset": 8.5
+        },
+        "x": {
+          "raw_scale": 4.0,
+          "raw_translation": 0.0,
+          "label_scale": 40.0,
+          "label_translation": 24.0,
+          "computed_voxel_offset": 1.5
+        }
+      },
+      "expected": "(label_translation - raw_translation - (label_scale - raw_scale)/2) / raw_scale must be a whole number on every axis",
+      "severity": "error",
+      "suggested_fix": "run scripts/lmvd/fix_label_grid_offset.py (dry run first, verify by hand before --apply) -- or, if this is a genuine independent-grid label, confirm and set independent_resolution: true instead of fixing"
+    },
+    {
+      "check": "label_grid_offset",
+      "dataset": "em-celegans-CellMap-jrc-dauer-larva",
+      "path": "em-celegans-CellMap-jrc-dauer-larva/crop-003.zarr/labels/manual_gt-nucleus-seg_crop003",
+      "field": "grid_offset_error",
+      "actual": {
+        "y": {
+          "raw_scale": 4.0,
+          "raw_translation": 0.0,
+          "label_scale": 40.0,
+          "label_translation": 44.0,
+          "computed_voxel_offset": 6.5
+        },
+        "x": {
+          "raw_scale": 4.0,
+          "raw_translation": 0.0,
+          "label_scale": 40.0,
+          "label_translation": 24.0,
+          "computed_voxel_offset": 1.5
+        }
+      },
+      "expected": "(label_translation - raw_translation - (label_scale - raw_scale)/2) / raw_scale must be a whole number on every axis",
+      "severity": "error",
+      "suggested_fix": "run scripts/lmvd/fix_label_grid_offset.py (dry run first, verify by hand before --apply) -- or, if this is a genuine independent-grid label, confirm and set independent_resolution: true instead of fixing"
+    },
+    {
+      "check": "label_grid_offset",
+      "dataset": "em-celegans-CellMap-jrc-dauer-larva",
+      "path": "em-celegans-CellMap-jrc-dauer-larva/crop-004.zarr/labels/manual_gt-nucleus-seg_crop004",
+      "field": "grid_offset_error",
+      "actual": {
+        "y": {
+          "raw_scale": 4.0,
+          "raw_translation": 0.0,
+          "label_scale": 40.0,
+          "label_translation": 40.0,
+          "computed_voxel_offset": 5.5
+        },
+        "x": {
+          "raw_scale": 4.0,
+          "raw_translation": 0.0,
+          "label_scale": 40.0,
+          "label_translation": 24.0,
+          "computed_voxel_offset": 1.5
+        }
+      },
+      "expected": "(label_translation - raw_translation - (label_scale - raw_scale)/2) / raw_scale must be a whole number on every axis",
+      "severity": "error",
+      "suggested_fix": "run scripts/lmvd/fix_label_grid_offset.py (dry run first, verify by hand before --apply) -- or, if this is a genuine independent-grid label, confirm and set independent_resolution: true instead of fixing"
+    },
+    {
+      "check": "label_grid_offset",
+      "dataset": "em-celegans-funceworm-jrc-20250414",
+      "path": "em-celegans-funceworm-jrc-20250414/crop-001.zarr/labels/manual_gt-all_organelles-cellmap_crop1086_all",
+      "field": "grid_offset_error",
+      "actual": {
+        "z": {
+          "raw_scale": 6.0,
+          "raw_translation": 0.0,
+          "label_scale": 6.0,
+          "label_translation": 34203.0,
+          "computed_voxel_offset": 5700.5
+        },
+        "y": {
+          "raw_scale": 6.0,
+          "raw_translation": 0.0,
+          "label_scale": 6.0,
+          "label_translation": 15003.0,
+          "computed_voxel_offset": 2500.5
+        },
+        "x": {
+          "raw_scale": 6.0,
+          "raw_translation": 0.0,
+          "label_scale": 6.0,
+          "label_translation": 15603.0,
+          "computed_voxel_offset": 2600.5
+        }
+      },
+      "expected": "(label_translation - raw_translation - (label_scale - raw_scale)/2) / raw_scale must be a whole number on every axis",
+      "severity": "error",
+      "suggested_fix": "run scripts/lmvd/fix_label_grid_offset.py (dry run first, verify by hand before --apply) -- or, if this is a genuine independent-grid label, confirm and set independent_resolution: true instead of fixing"
+    },
+    {
+      "check": "label_grid_offset",
+      "dataset": "em-drosophila-CellMap-jrc-fly-mb-z0419-20",
+      "path": "em-drosophila-CellMap-jrc-fly-mb-z0419-20/crop-001.zarr/labels/manual_gt-nucleus-seg_crop001",
+      "field": "grid_offset_error",
+      "actual": {
+        "z": {
+          "raw_scale": 4.0,
+          "raw_translation": 0.0,
+          "label_scale": 128.0,
+          "label_translation": 64.0,
+          "computed_voxel_offset": 0.5
+        },
+        "y": {
+          "raw_scale": 4.0,
+          "raw_translation": 0.0,
+          "label_scale": 128.0,
+          "label_translation": 104.0,
+          "computed_voxel_offset": 10.5
+        },
+        "x": {
+          "raw_scale": 4.0,
+          "raw_translation": 0.0,
+          "label_scale": 128.0,
+          "label_translation": 64.0,
+          "computed_voxel_offset": 0.5
+        }
+      },
+      "expected": "(label_translation - raw_translation - (label_scale - raw_scale)/2) / raw_scale must be a whole number on every axis",
+      "severity": "error",
+      "suggested_fix": "run scripts/lmvd/fix_label_grid_offset.py (dry run first, verify by hand before --apply) -- or, if this is a genuine independent-grid label, confirm and set independent_resolution: true instead of fixing"
+    },
+    {
+      "check": "label_grid_offset",
+      "dataset": "em-drosophila-CellMap-jrc-fly-mb-z0419-20",
+      "path": "em-drosophila-CellMap-jrc-fly-mb-z0419-20/crop-002.zarr/labels/manual_gt-nucleus-seg_crop002",
+      "field": "grid_offset_error",
+      "actual": {
+        "z": {
+          "raw_scale": 4.0,
+          "raw_translation": 0.0,
+          "label_scale": 128.0,
+          "label_translation": 152.0,
+          "computed_voxel_offset": 22.5
+        },
+        "y": {
+          "raw_scale": 4.0,
+          "raw_translation": 0.0,
+          "label_scale": 128.0,
+          "label_translation": 76.0,
+          "computed_voxel_offset": 3.5
+        },
+        "x": {
+          "raw_scale": 4.0,
+          "raw_translation": 0.0,
+          "label_scale": 128.0,
+          "label_translation": 108.0,
+          "computed_voxel_offset": 11.5
+        }
+      },
+      "expected": "(label_translation - raw_translation - (label_scale - raw_scale)/2) / raw_scale must be a whole number on every axis",
+      "severity": "error",
+      "suggested_fix": "run scripts/lmvd/fix_label_grid_offset.py (dry run first, verify by hand before --apply) -- or, if this is a genuine independent-grid label, confirm and set independent_resolution: true instead of fixing"
+    }
+  ]
+}

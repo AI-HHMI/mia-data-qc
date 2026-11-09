@@ -1,0 +1,16 @@
+{
+  "check": "metadata_completeness",
+  "date": "2026-11-06",
+  "findings": [
+    {
+      "check": "metadata_completeness",
+      "dataset": "lm-zebrafish-Betzig-mosaic-20251001_20250324_mem-histone_fish1_72hpf_roi1",
+      "path": "lm-zebrafish-Betzig-mosaic-20251001_20250324_mem-histone_fish1_72hpf_roi1/crop-001_000x_000y_000z_96t_2c.zarr/labels/proofread-cell-t5_snapshot_11032026",
+      "field": "publication",
+      "actual": "missing",
+      "expected": "present (value may be null, but the key must exist)",
+      "severity": "error",
+      "suggested_fix": "add the 'publication' field to this label's zarr.json attributes"
+    }
+  ]
+}

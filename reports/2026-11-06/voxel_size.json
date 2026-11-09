@@ -1,0 +1,76 @@
+{
+  "check": "voxel_size",
+  "date": "2026-11-06",
+  "findings": [
+    {
+      "check": "voxel_size",
+      "dataset": "em-celegans-CellMap-jrc-dauer-larva",
+      "path": "em-celegans-CellMap-jrc-dauer-larva/crop-001.zarr/labels/manual_gt-nucleus-seg_crop001",
+      "field": "voxel_size_mismatch",
+      "actual": {
+        "z": 70.0,
+        "y": 40.0,
+        "x": 40.0
+      },
+      "expected": "every axis matching a real raw value: {'z': {280.0, 140.0, 70.0}, 'y': {32.0, 64.0, 128.0, 256.0, 4.0, 2.0, 8.0, 16.0}, 'x': {32.0, 64.0, 128.0, 256.0, 4.0, 2.0, 8.0, 16.0}}",
+      "severity": "error",
+      "suggested_fix": "axis/axes ['x', 'y'] don't match any real resolution raw's own pyramid has for that axis at all -- verify against the original source whether this label's declared voxel size is simply wrong (the documented FlyLICONN-style bug class), not just on a different pyramid level than raw"
+    },
+    {
+      "check": "voxel_size",
+      "dataset": "em-celegans-CellMap-jrc-dauer-larva",
+      "path": "em-celegans-CellMap-jrc-dauer-larva/crop-002.zarr/labels/manual_gt-nucleus-seg_crop002",
+      "field": "voxel_size_mismatch",
+      "actual": {
+        "z": 70.0,
+        "y": 40.0,
+        "x": 40.0
+      },
+      "expected": "every axis matching a real raw value: {'z': {280.0, 140.0, 70.0}, 'y': {32.0, 64.0, 128.0, 256.0, 4.0, 2.0, 8.0, 16.0}, 'x': {32.0, 64.0, 128.0, 256.0, 4.0, 2.0, 8.0, 16.0}}",
+      "severity": "error",
+      "suggested_fix": "axis/axes ['x', 'y'] don't match any real resolution raw's own pyramid has for that axis at all -- verify against the original source whether this label's declared voxel size is simply wrong (the documented FlyLICONN-style bug class), not just on a different pyramid level than raw"
+    },
+    {
+      "check": "voxel_size",
+      "dataset": "em-celegans-CellMap-jrc-dauer-larva",
+      "path": "em-celegans-CellMap-jrc-dauer-larva/crop-003.zarr/labels/manual_gt-nucleus-seg_crop003",
+      "field": "voxel_size_mismatch",
+      "actual": {
+        "z": 70.0,
+        "y": 40.0,
+        "x": 40.0
+      },
+      "expected": "every axis matching a real raw value: {'z': {280.0, 140.0, 70.0}, 'y': {32.0, 64.0, 128.0, 256.0, 4.0, 2.0, 8.0, 16.0}, 'x': {32.0, 64.0, 128.0, 256.0, 4.0, 2.0, 8.0, 16.0}}",
+      "severity": "error",
+      "suggested_fix": "axis/axes ['x', 'y'] don't match any real resolution raw's own pyramid has for that axis at all -- verify against the original source whether this label's declared voxel size is simply wrong (the documented FlyLICONN-style bug class), not just on a different pyramid level than raw"
+    },
+    {
+      "check": "voxel_size",
+      "dataset": "em-celegans-CellMap-jrc-dauer-larva",
+      "path": "em-celegans-CellMap-jrc-dauer-larva/crop-004.zarr/labels/manual_gt-nucleus-seg_crop004",
+      "field": "voxel_size_mismatch",
+      "actual": {
+        "z": 70.0,
+        "y": 40.0,
+        "x": 40.0
+      },
+      "expected": "every axis matching a real raw value: {'z': {280.0, 140.0, 70.0}, 'y': {32.0, 64.0, 128.0, 256.0, 4.0, 2.0, 8.0, 16.0}, 'x': {32.0, 64.0, 128.0, 256.0, 4.0, 2.0, 8.0, 16.0}}",
+      "severity": "error",
+      "suggested_fix": "axis/axes ['x', 'y'] don't match any real resolution raw's own pyramid has for that axis at all -- verify against the original source whether this label's declared voxel size is simply wrong (the documented FlyLICONN-style bug class), not just on a different pyramid level than raw"
+    },
+    {
+      "check": "voxel_size",
+      "dataset": "em-human-CellMap-aic-desmosome-3",
+      "path": "em-human-CellMap-aic-desmosome-3/crop-001.zarr/labels/manual_gt-nucleus-seg_crop001",
+      "field": "voxel_size_mismatch",
+      "actual": {
+        "z": 32.0,
+        "y": 32.0,
+        "x": 32.0
+      },
+      "expected": "every axis matching a real raw value: {'z': {8.0, 16.0, 2.0, 4.0}, 'y': {8.0, 16.0, 2.0, 4.0}, 'x': {8.0, 16.0, 2.0, 4.0}}",
+      "severity": "error",
+      "suggested_fix": "axis/axes ['x', 'y', 'z'] don't match any real resolution raw's own pyramid has for that axis at all -- verify against the original source whether this label's declared voxel size is simply wrong (the documented FlyLICONN-style bug class), not just on a different pyramid level than raw"
+    }
+  ]
+}
