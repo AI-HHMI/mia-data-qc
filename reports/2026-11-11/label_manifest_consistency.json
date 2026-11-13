@@ -1,0 +1,21 @@
+{
+  "check": "label_manifest_consistency",
+  "date": "2026-11-11",
+  "findings": [
+    {
+      "check": "label_manifest_consistency",
+      "dataset": "exm-drosophila-flyliconn-FlyID49-2ndgel-BIS-40XW002-20260625",
+      "path": "exm-drosophila-flyliconn-FlyID49-2ndgel-BIS-40XW002-20260625/crop-001_fullvol.zarr/labels",
+      "field": "label_manifest_mismatch",
+      "actual": {
+        "manifest_only": [],
+        "disk_only": [
+          "auto_pred-mitochondria-sam_vit_l_prob"
+        ]
+      },
+      "expected": "labels/zarr.json's ome.labels list matches the real label directory names exactly",
+      "severity": "error",
+      "suggested_fix": "update the ome.labels list to match the real directory names -- likely a label was renamed (e.g. a label_naming.py fix) without this group-level manifest being updated to match"
+    }
+  ]
+}

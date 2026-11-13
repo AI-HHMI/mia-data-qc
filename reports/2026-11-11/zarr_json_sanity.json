@@ -1,0 +1,5 @@
+{
+  "check": "zarr_json_sanity",
+  "date": "2026-11-11",
+  "findings": []
+}

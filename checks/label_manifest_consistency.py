@@ -26,6 +26,22 @@ A crop with no `labels/` directory, no manifest file, or a manifest with no
 metadata, not every crop populates it, and this check has nothing to say
 about a crop that simply doesn't declare one.
 
+Nov 11 2026: a real-looking "disk_only" (present on disk, missing from the
+manifest) finding on `exm-drosophila-flyliconn-FlyID49-2ndgel-BIS-40XW002-
+20260625` turned out to be correct as-is, not a bug -- `auto_pred-
+mitochondria-sam_vit_l_prob` is a float32 probability map that Jakob's Nov
+10 2026 policy deliberately keeps off this manifest: OME-Zarr label pixels
+must be integers, and Neuroglancer/Fileglancer open every manifest entry as
+a segmentation layer, so listing a float array there breaks the whole crop
+(`manual_gt`-style thresholded masks are the real label; the probability
+map is a reference image that happens to live under `labels/`). A
+`disk_only` directory whose `s0` array is float-typed is therefore excluded
+from this check entirely, by the same principled rule the policy itself
+states -- not a one-off name exception list, since any future float-typed
+auxiliary array under `labels/` should be exempt the same way. A `manifest_only`
+(listed but missing from disk) entry is never exempt -- that's always a real
+stale reference regardless of dtype.
+
 Checks zarr v2 crops (`.zattrs`) as well as zarr v3 (`zarr.json`) via
 `common.zarr_meta`, consistent with every other check here.
 """
@@ -37,9 +53,17 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from common.report import write_check_report
 from common.vocab import NON_DATASET_DIRS
-from common.zarr_meta import read_group_attrs
+from common.zarr_meta import read_array_meta, read_group_attrs
 
 CHECK_NAME = "label_manifest_consistency"
+FLOAT_DTYPES = {"float32", "float64", "<f4", "<f8", ">f4", ">f8"}
+
+
+def _is_float_label(label_dir: Path) -> bool:
+    meta = read_array_meta(label_dir / "s0")
+    if meta is None:
+        return False
+    return meta.get("dtype") in FLOAT_DTYPES
 
 
 def check_crop(crop_dir: Path, root: Path, dataset: str) -> list[dict]:
@@ -63,7 +87,12 @@ def check_crop(crop_dir: Path, root: Path, dataset: str) -> list[dict]:
         return []
 
     stale = sorted(listed_set - real)
-    unlisted = sorted(real - listed_set)
+    unlisted = sorted(
+        name for name in (real - listed_set)
+        if not _is_float_label(labels_dir / name)
+    )
+    if not stale and not unlisted:
+        return []
     return [{
         "check": CHECK_NAME,
         "dataset": dataset,
